@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\ColorCircle.png" />
+    <None Remove="Images\ColorPalette.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ColorCircle.png" />
+    <Resource Include="Images\ColorPalette.png" />
+    <Resource Include="Images\SwapArrows.png" />
+    <Resource Include="Images\transparentbg_mini.png" />
+  </ItemGroup>
+
+</Project>
