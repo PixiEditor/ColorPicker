@@ -3,11 +3,24 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Krzysztof Krysiński</Authors>
+    <Company>PixiEditor</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>WPF Color picker</Description>
+    <Copyright>PixiEditor © 2020</Copyright>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
+    <RootNamespace>ColorPicker</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Images\ColorCircle.png" />
     <None Remove="Images\ColorPalette.png" />
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
