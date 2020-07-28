@@ -51,11 +51,6 @@ namespace ColorPicker.Behaviors
             KeyboardFocusChangedEventArgs e)
         {
             AssociatedObject.SelectAll();
-            if (FillSize)
-            {
-                _valueConverted = false;
-                _oldText = AssociatedObject.Text; //Sets old value when keyboard is focused on object
-            }
         }
 
         private void AssociatedObjectGotMouseCapture(object sender,
