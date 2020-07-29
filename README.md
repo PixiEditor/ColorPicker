@@ -1,3 +1,5 @@
+[![Download](https://img.shields.io/badge/nuget-download-blue)](https://www.nuget.org/packages/PixiEditor.ColorPicker/)
+
 # About
 
 A WPF Color picker made for [PixiEditor](https://github.com/PixiEditor/PixiEditor). Available to use for anyone, anywhere!
