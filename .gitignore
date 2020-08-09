@@ -349,3 +349,5 @@ healthchecksdb
 MigrationBackup/
 
 nuget.config
+
+.vscode/
