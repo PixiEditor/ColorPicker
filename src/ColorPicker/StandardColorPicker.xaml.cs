@@ -102,6 +102,7 @@ namespace ColorPicker
         private void colorPalette_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture((Image)sender);
+            PickColor((Image)sender, e);
         }
 
         private void colorPalette_MouseUp(object sender, MouseButtonEventArgs e)
@@ -117,7 +118,12 @@ namespace ColorPicker
                 return;
             }
 
-            Point point = e.GetPosition((Image)sender);
+            PickColor((Image)sender);
+        }
+
+        private void PickColor(Image palettte, MouseEventArgs e)
+        {
+            Point point = e.GetPosition(palettte);
             CalculateColor(point);
         }
     }
