@@ -16,6 +16,8 @@
     <PackageTags>color color-picker graphics wpf</PackageTags>
     <Description>A WPF Color picker built primarily for PixiEditor. Contains Static color picker and portable (dropdown) color picker.</Description>
     <Title>A WPF Color Picker</Title>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

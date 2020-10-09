@@ -118,7 +118,7 @@ namespace ColorPicker
                 return;
             }
 
-            PickColor((Image)sender);
+            PickColor((Image)sender, e);
         }
 
         private void PickColor(Image palettte, MouseEventArgs e)
