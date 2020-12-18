@@ -7,77 +7,142 @@ namespace ColorPicker.Models
 {
     public class NotifyableColor : NotifyableObject
     {
-        public byte A
+        public double A
         {
             get => _a;
             set
             {
+                if (value == _a)
+                    return;
                 _a = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("A");
             }
         }
 
-        public byte R
+        public double R
         {
             get => _r;
             set
             {
+                if (value == _r)
+                    return;
                 _r = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("R");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
             }
         }
 
-        public byte G
+        public double G
         {
             get => _g;
             set
             {
+                if (value == _g)
+                    return;
                 _g = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("G");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
             }
         }
 
-        public byte B
+        public double B
         {
             get => _b;
             set
             {
+                if (value == _b)
+                    return;
                 _b = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("B");
+                RaisePropertyChanged("H");
+                RaisePropertyChanged("S");
+                RaisePropertyChanged("V");
             }
         }
 
-        private byte _a;
+        public double H
+        {
+            get => HsvConverter.RgbToHsv(_r, _g, _b).Item1;
+            set
+            {
+                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvConverter.HsvToRgb(value, curS, curV);
+                ColorChanged?.Invoke(this, EventArgs.Empty);
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
+                RaisePropertyChanged("H");
+            }
+        }
 
-        private byte _b;
+        public double S
+        {
+            get => HsvConverter.RgbToHsv(_r, _g, _b).Item2;
+            set
+            {
+                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvConverter.HsvToRgb(curH, value, curV);
+                ColorChanged?.Invoke(this, EventArgs.Empty);
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
+                RaisePropertyChanged("S");
+            }
+        }
 
+        public double V
+        {
+            get => HsvConverter.RgbToHsv(_r, _g, _b).Item3;
+            set
+            {
+                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvConverter.HsvToRgb(curH, curS, value);
+                ColorChanged?.Invoke(this, EventArgs.Empty);
+                RaisePropertyChanged("R");
+                RaisePropertyChanged("G");
+                RaisePropertyChanged("B");
+                RaisePropertyChanged("V");
+            }
+        }
 
-        private byte _g;
+        private double _a;
 
-        private byte _r;
+        private double _b;
+
+        private double _g;
+
+        private double _r;
 
         public NotifyableColor(Color color)
         {
-            A = color.A;
-            R = color.R;
-            G = color.G;
-            B = color.B;
+            A = color.A / 255.0;
+            R = color.R / 255.0;
+            G = color.G / 255.0;
+            B = color.B / 255.0;
         }
 
         public NotifyableColor() { }
 
         public event EventHandler ColorChanged;
-
+        
         public void SetArgb(byte a, byte r, byte g, byte b)
         {
-            A = a;
-            R = r;
-            G = g;
-            B = b;
+            if ((byte)(A*255) != a)
+                A = a / 255.0;
+            if ((byte)(R * 255) != r)
+                R = r / 255.0;
+            if ((byte)(G * 255) != g)
+                G = g / 255.0;
+            if ((byte)(B * 255) != b)
+                B = b / 255.0;
         }
     }
 }

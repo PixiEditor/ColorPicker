@@ -33,7 +33,7 @@ namespace ColorPicker
             InitializeComponent();
             _colorPalette = FindName("colorPalette") as Image;
             NotifyableColor = new NotifyableColor(SelectedColor);
-            NotifyableColor.ColorChanged += SelectedColor_ColorChanged;
+            NotifyableColor.ColorChanged += OnNotifyableColorChange;
         }
 
         public NotifyableColor NotifyableColor
@@ -61,9 +61,9 @@ namespace ColorPicker
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void SelectedColor_ColorChanged(object sender, EventArgs e)
+        private void OnNotifyableColorChange(object sender, EventArgs e)
         {
-            SelectedColor = Color.FromArgb(NotifyableColor.A, NotifyableColor.R, NotifyableColor.G, NotifyableColor.B);
+            SelectedColor = Color.FromArgb((byte)(NotifyableColor.A * 255), (byte)(NotifyableColor.R * 255), (byte)(NotifyableColor.G * 255), (byte)(NotifyableColor.B * 255));
         }
 
         private void SwapColors()
