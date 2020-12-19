@@ -70,11 +70,11 @@ namespace ColorPicker.Models
 
         public double H
         {
-            get => HsvConverter.RgbToHsv(_r, _g, _b).Item1;
+            get => HsvHelper.RgbToHsv(_r, _g, _b).Item1;
             set
             {
-                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
-                (_r, _g, _b) = HsvConverter.HsvToRgb(value, curS, curV);
+                var (curH, curS, curV) = HsvHelper.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvHelper.HsvToRgb(value, curS, curV);
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("R");
                 RaisePropertyChanged("G");
@@ -85,11 +85,11 @@ namespace ColorPicker.Models
 
         public double S
         {
-            get => HsvConverter.RgbToHsv(_r, _g, _b).Item2;
+            get => HsvHelper.RgbToHsv(_r, _g, _b).Item2;
             set
             {
-                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
-                (_r, _g, _b) = HsvConverter.HsvToRgb(curH, value, curV);
+                var (curH, curS, curV) = HsvHelper.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvHelper.HsvToRgb(curH, value, curV);
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("R");
                 RaisePropertyChanged("G");
@@ -100,11 +100,11 @@ namespace ColorPicker.Models
 
         public double V
         {
-            get => HsvConverter.RgbToHsv(_r, _g, _b).Item3;
+            get => HsvHelper.RgbToHsv(_r, _g, _b).Item3;
             set
             {
-                var (curH, curS, curV) = HsvConverter.RgbToHsv(_r, _g, _b);
-                (_r, _g, _b) = HsvConverter.HsvToRgb(curH, curS, value);
+                var (curH, curS, curV) = HsvHelper.RgbToHsv(_r, _g, _b);
+                (_r, _g, _b) = HsvHelper.HsvToRgb(curH, curS, value);
                 ColorChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged("R");
                 RaisePropertyChanged("G");

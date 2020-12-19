@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace ColorPicker.Models
 {
-    public static class HslConverter
+    public static class HslHelper
     {
         /// <summary>
         ///     Converts RGB to HSL

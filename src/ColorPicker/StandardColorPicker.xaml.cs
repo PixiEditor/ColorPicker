@@ -86,7 +86,7 @@ namespace ColorPicker
             int h = (int) (pos.X * 360f / _colorPalette.ActualWidth);
             float l = (float) (pos.Y * 100f / _colorPalette.ActualHeight);
 
-            SelectedColor = HslConverter.HslToRGB(h, 100, l);
+            SelectedColor = HslHelper.HslToRGB(h, 100, l);
         }
 
         private void RaisePropertyChanged(string property)

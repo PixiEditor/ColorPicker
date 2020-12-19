@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+            <converters:HexToColorConverter x:Key="HexToColorConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
                 <ResourceDictionary Source="Styles/ImageButtonStyle.xaml"/>
@@ -160,7 +161,7 @@
                         Height="26">
                 <Label Content="Hex" Foreground="White" />
                 <TextBox VerticalAlignment="Center" Style="{StaticResource DarkTextBoxStyle}" Width="70"
-                         Text="{Binding Path=SelectedColor, ElementName=uc}">
+                         Text="{Binding Path=SelectedColor, Converter={StaticResource HexToColorConverter}, ElementName=uc}">
                     <i:Interaction.Behaviors>
                         <behaviours:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>

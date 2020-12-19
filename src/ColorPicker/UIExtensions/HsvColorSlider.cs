@@ -44,22 +44,22 @@ namespace ColorPicker.UIExtensions
 
         private Color GetColorForSelectedArgb(int value)
         {
-            var (h, s, v) = HsvConverter.RgbToHsv(CurrentColor.R / 255.0, CurrentColor.G / 255.0, CurrentColor.B / 255.0);
+            var (h, s, v) = HsvHelper.RgbToHsv(CurrentColor.R / 255.0, CurrentColor.G / 255.0, CurrentColor.B / 255.0);
             switch (SliderHsvType)
             {
                 case "H":
                     {
-                        var (r, g, b) = HsvConverter.HsvToRgb(value, s, v);
+                        var (r, g, b) = HsvHelper.HsvToRgb(value, s, v);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "S":
                     {
-                        var (r, g, b) = HsvConverter.HsvToRgb(h, value / 255.0, v);
+                        var (r, g, b) = HsvHelper.HsvToRgb(h, value / 255.0, v);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "V":
                     {
-                        var (r, g, b) = HsvConverter.HsvToRgb(h, s, value / 255.0);
+                        var (r, g, b) = HsvHelper.HsvToRgb(h, s, value / 255.0);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 default:
