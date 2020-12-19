@@ -24,26 +24,39 @@ namespace ColorPicker
         private readonly Image _colorPalette;
 
 
-        private NotifyableColor _notifyableColor;
+        private NotifyableColorRgba _notifyableColorRgba;
+        private NotifyableColorHsv _notifyableColorHsv;
+
 
         public StandardColorPicker()
         {
             InitializeComponent();
             _colorPalette = FindName("colorPalette") as Image;
-            NotifyableColor = new NotifyableColor(SelectedColor);
-            NotifyableColor.ColorChanged += OnNotifyableColorChange;
+            NotifyableColorRgba = new NotifyableColorRgba(SelectedColor);
+            NotifyableColorHsv = new NotifyableColorHsv(SelectedColor);
+            NotifyableColorRgba.ColorChanged += OnNotifyableColorRgbChange;
+            NotifyableColorHsv.ColorChanged += OnNotifyableColorHsvChange;
         }
 
-        public NotifyableColor NotifyableColor
+        public NotifyableColorRgba NotifyableColorRgba
         {
-            get => _notifyableColor;
+            get => _notifyableColorRgba;
             set
             {
-                _notifyableColor = value;
-                RaisePropertyChanged("NotifyableColor");
+                _notifyableColorRgba = value;
+                RaisePropertyChanged("NotifyableColorRgba");
             }
         }
 
+        public NotifyableColorHsv NotifyableColorHsv
+        {
+            get => _notifyableColorHsv;
+            set
+            {
+                _notifyableColorHsv = value;
+                RaisePropertyChanged("NotifyableColorHsv");
+            }
+        }
 
         public Color SelectedColor
         {
@@ -59,9 +72,23 @@ namespace ColorPicker
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void OnNotifyableColorChange(object sender, EventArgs e)
+        private void OnNotifyableColorRgbChange(object sender, EventArgs e)
         {
-            SelectedColor = Color.FromArgb((byte)(NotifyableColor.A * 255), (byte)(NotifyableColor.R * 255), (byte)(NotifyableColor.G * 255), (byte)(NotifyableColor.B * 255));
+            SelectedColor = Color.FromArgb((byte)(NotifyableColorRgba.A * 255), (byte)(NotifyableColorRgba.R * 255), (byte)(NotifyableColorRgba.G * 255), (byte)(NotifyableColorRgba.B * 255));
+            NotifyableColorHsv.SetRgbQuietly(NotifyableColorRgba.R, NotifyableColorRgba.G, NotifyableColorRgba.B);
+        }
+
+        private void OnNotifyableColorHsvChange(object sender, EventArgs e)
+        {
+            var (r, g, b) = HsvHelper.HsvToRgb(NotifyableColorHsv.H, NotifyableColorHsv.S, NotifyableColorHsv.V);
+            NotifyableColorRgba.SetRgbQuietly(r, g, b);
+            SelectedColor = Color.FromArgb((byte)(NotifyableColorRgba.A * 255), (byte)(NotifyableColorRgba.R * 255), (byte)(NotifyableColorRgba.G * 255), (byte)(NotifyableColorRgba.B * 255));
+        }
+
+        private static void OnSelectedColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Color color = (Color)e.NewValue;
+            ((StandardColorPicker)d).NotifyableColorRgba.SetArgb(color.A, color.R, color.G, color.B);
         }
 
         private void SwapColors()
@@ -69,12 +96,6 @@ namespace ColorPicker
             Color tmp = SecondaryColor;
             SecondaryColor = SelectedColor;
             SelectedColor = tmp;
-        }
-
-        private static void OnSelectedColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            Color color = (Color) e.NewValue;
-            ((StandardColorPicker) d).NotifyableColor.SetArgb(color.A, color.R, color.G, color.B);
         }
 
         private void CalculateColor(Point pos)

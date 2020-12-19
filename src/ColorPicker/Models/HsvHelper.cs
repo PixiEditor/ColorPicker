@@ -12,7 +12,7 @@ namespace ColorPicker.Models
         /// <param name="r">Red channel</param>
         /// <param name="g">Green channel</param>
         /// <param name="b">Blue channel</param>
-        /// <returns>Values in order: Hue (0-360), Saturation (0-1), Value (0-1)</returns>
+        /// <returns>Values in order: Hue (0-360 or -1), Saturation (0-1 or -1), Value (0-1)</returns>
         public static (double, double, double) RgbToHsv(double r, double g, double b)
         {
             double min, max, delta;
@@ -27,8 +27,8 @@ namespace ColorPicker.Models
             else
             {
                 //pure black
-                s = 0;
-                h = 0;
+                s = -1;
+                h = -1;
                 return (h, s, v);
             }
             if (r == max)
@@ -41,7 +41,7 @@ namespace ColorPicker.Models
             if (h < 0)
                 h += 360;
             if (Double.IsNaN(h)) //delta == 0, case of pure gray
-                h = 0;
+                h = -1;
 
             return (h, s, v);
         }

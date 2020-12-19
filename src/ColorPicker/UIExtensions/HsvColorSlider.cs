@@ -11,12 +11,32 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register("SliderHsvType", typeof(string), typeof(HsvColorSlider),
                 new PropertyMetadata(""));
 
+        public static readonly DependencyProperty CurrentHueProperty =
+            DependencyProperty.Register("CurrentHue", typeof(double), typeof(HsvColorSlider),
+                new PropertyMetadata(0.0, ColorChangedCallback));
+
+        public static readonly DependencyProperty CurrentSaturationProperty =
+            DependencyProperty.Register("CurrentSaturation", typeof(double), typeof(HsvColorSlider),
+                new PropertyMetadata(0.0, ColorChangedCallback));
+
         public HsvColorSlider() : base() { }
 
         public string SliderHsvType
         {
             get => (string)GetValue(SliderHsvTypeProperty);
             set => SetValue(SliderHsvTypeProperty, value);
+        }
+
+        public double CurrentHue
+        {
+            get => (double)GetValue(CurrentHueProperty);
+            set => SetValue(CurrentHueProperty, value);
+        }
+
+        public double CurrentSaturation
+        {
+            get => (double)GetValue(CurrentSaturationProperty);
+            set => SetValue(CurrentSaturationProperty, value);
         }
 
         protected override void GenerateBackground()
@@ -49,17 +69,17 @@ namespace ColorPicker.UIExtensions
             {
                 case "H":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(value, s, v);
+                        var (r, g, b) = HsvHelper.HsvToRgb(value, CurrentSaturation, v);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "S":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(h, value / 255.0, v);
+                        var (r, g, b) = HsvHelper.HsvToRgb(CurrentHue, value / 255.0, v);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "V":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(h, s, value / 255.0);
+                        var (r, g, b) = HsvHelper.HsvToRgb(CurrentHue, CurrentSaturation, value / 255.0);
                         return Color.FromArgb(CurrentColor.A, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 default:

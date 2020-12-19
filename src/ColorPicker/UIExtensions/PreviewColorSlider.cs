@@ -34,7 +34,7 @@ namespace ColorPicker.UIExtensions
 
         protected abstract void GenerateBackground();
 
-        private static void ColorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        protected static void ColorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PreviewColorSlider slider = (PreviewColorSlider)d;
             slider.GenerateBackground();
