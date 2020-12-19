@@ -37,7 +37,7 @@ namespace ColorPicker.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!double.TryParse((string)value, out double result))
+            if (!double.TryParse(((string)value).Replace(',','.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
                 return DependencyProperty.UnsetValue;
             return Math.Clamp(result, Min, Max);
         }
