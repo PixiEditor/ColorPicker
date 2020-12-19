@@ -8,7 +8,7 @@ namespace ColorPicker.UIExtensions
     public class RgbColorSlider : PreviewColorSlider
     {
         public static readonly DependencyProperty SliderArgbTypeProperty =
-            DependencyProperty.Register("SliderArgbType", typeof(string), typeof(RgbColorSlider),
+            DependencyProperty.Register(nameof(SliderArgbType), typeof(string), typeof(RgbColorSlider),
                 new PropertyMetadata(""));
 
         public RgbColorSlider() : base() {}

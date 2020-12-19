@@ -11,11 +11,11 @@ namespace ColorPicker.Converters
     class RangeConstrainedDoubleToDoubleConverter : DependencyObject, IValueConverter
     {
         public static DependencyProperty MinProperty = 
-            DependencyProperty.Register("Min", typeof(double), typeof(RangeConstrainedDoubleToDoubleConverter), 
+            DependencyProperty.Register(nameof(Min), typeof(double), typeof(RangeConstrainedDoubleToDoubleConverter), 
                 new PropertyMetadata(0.0));
 
         public static DependencyProperty MaxProperty =
-            DependencyProperty.Register("Max", typeof(double), typeof(RangeConstrainedDoubleToDoubleConverter),
+            DependencyProperty.Register(nameof(Max), typeof(double), typeof(RangeConstrainedDoubleToDoubleConverter),
                 new PropertyMetadata(1.0));
 
         public double Min

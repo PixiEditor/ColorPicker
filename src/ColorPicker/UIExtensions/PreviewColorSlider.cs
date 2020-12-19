@@ -8,7 +8,7 @@ namespace ColorPicker.UIExtensions
     public abstract class PreviewColorSlider : Slider
     {
         public static readonly DependencyProperty CurrentColorProperty =
-            DependencyProperty.Register("CurrentColor", typeof(Color), typeof(PreviewColorSlider),
+            DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(PreviewColorSlider),
                 new PropertyMetadata(Colors.Black, ColorChangedCallback));
 
         public PreviewColorSlider()

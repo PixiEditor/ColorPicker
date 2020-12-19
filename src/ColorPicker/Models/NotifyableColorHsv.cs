@@ -16,7 +16,7 @@ namespace ColorPicker.Models
                     return;
                 _h = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("H");
+                RaisePropertyChanged(nameof(H));
             }
         }
 
@@ -29,7 +29,7 @@ namespace ColorPicker.Models
                     return;
                 _s = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("S");
+                RaisePropertyChanged(nameof(S));
             }
         }
 
@@ -40,7 +40,7 @@ namespace ColorPicker.Models
             {
                 _v = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("V");
+                RaisePropertyChanged(nameof(V));
             }
         }
 
@@ -65,15 +65,15 @@ namespace ColorPicker.Models
             if (curH != -1)
             {
                 _h = curH;
-                RaisePropertyChanged("H");
+                RaisePropertyChanged(nameof(H));
             }
             if (curS != -1)
             {
                 _s = curS;
-                RaisePropertyChanged("S");
+                RaisePropertyChanged(nameof(S));
             }
             _v = curV;
-            RaisePropertyChanged("V");
+            RaisePropertyChanged(nameof(V));
         }
     }
 }

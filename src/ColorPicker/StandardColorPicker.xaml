@@ -61,7 +61,7 @@
                MouseDown="colorPalette_MouseDown" MouseMove="colorPalette_MouseMove"  Stretch="Fill" VerticalAlignment="Center" Height="50" />
         <TabControl Grid.Row="2"  Background="#2d2d30" BorderThickness="0">
             <TabItem Header="HSV" Style="{StaticResource DarkTabItemStyle}">
-                <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Center" Width="232">
+                <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Center" Width="235">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="H" Width="18" Foreground="White" Padding="5,0,5,0" />
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"

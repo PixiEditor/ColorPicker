@@ -8,15 +8,15 @@ namespace ColorPicker.UIExtensions
     public class HsvColorSlider : PreviewColorSlider
     {
         public static readonly DependencyProperty SliderHsvTypeProperty =
-            DependencyProperty.Register("SliderHsvType", typeof(string), typeof(HsvColorSlider),
+            DependencyProperty.Register(nameof(SliderHsvType), typeof(string), typeof(HsvColorSlider),
                 new PropertyMetadata(""));
 
         public static readonly DependencyProperty CurrentHueProperty =
-            DependencyProperty.Register("CurrentHue", typeof(double), typeof(HsvColorSlider),
+            DependencyProperty.Register(nameof(CurrentHue), typeof(double), typeof(HsvColorSlider),
                 new PropertyMetadata(0.0, ColorChangedCallback));
 
         public static readonly DependencyProperty CurrentSaturationProperty =
-            DependencyProperty.Register("CurrentSaturation", typeof(double), typeof(HsvColorSlider),
+            DependencyProperty.Register(nameof(CurrentSaturation), typeof(double), typeof(HsvColorSlider),
                 new PropertyMetadata(0.0, ColorChangedCallback));
 
         public HsvColorSlider() : base() { }

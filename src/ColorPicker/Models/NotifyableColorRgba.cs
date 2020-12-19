@@ -16,7 +16,7 @@ namespace ColorPicker.Models
                     return;
                 _a = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("A");
+                RaisePropertyChanged(nameof(A));
             }
         }
 
@@ -29,7 +29,7 @@ namespace ColorPicker.Models
                     return;
                 _r = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("R");
+                RaisePropertyChanged(nameof(R));
             }
         }
 
@@ -42,7 +42,7 @@ namespace ColorPicker.Models
                     return;
                 _g = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("G");
+                RaisePropertyChanged(nameof(G));
             }
         }
 
@@ -55,7 +55,7 @@ namespace ColorPicker.Models
                     return;
                 _b = value;
                 ColorChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged("B");
+                RaisePropertyChanged(nameof(B));
             }
         }
 
@@ -91,11 +91,11 @@ namespace ColorPicker.Models
         public void SetRgbQuietly(double r, double g, double b)
         {
             _r = r;
-            RaisePropertyChanged("R");
+            RaisePropertyChanged(nameof(R));
             _g = g;
-            RaisePropertyChanged("G");
+            RaisePropertyChanged(nameof(G));
             _b = b;
-            RaisePropertyChanged("B");
+            RaisePropertyChanged(nameof(B));
         }
     }
 }

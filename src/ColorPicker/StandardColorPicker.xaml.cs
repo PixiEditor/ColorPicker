@@ -14,11 +14,11 @@ namespace ColorPicker
     public partial class StandardColorPicker : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register("SelectedColor", typeof(Color), typeof(StandardColorPicker),
+            DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.Black, OnSelectedColorChanged));
 
         public static readonly DependencyProperty SecondaryColorProperty =
-            DependencyProperty.Register("SecondaryColor", typeof(Color), typeof(StandardColorPicker),
+            DependencyProperty.Register(nameof(SecondaryColor), typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.White));
 
         private readonly Image _colorPalette;
@@ -44,7 +44,7 @@ namespace ColorPicker
             set
             {
                 _notifyableColorRgba = value;
-                RaisePropertyChanged("NotifyableColorRgba");
+                RaisePropertyChanged(nameof(NotifyableColorRgba));
             }
         }
 
@@ -54,7 +54,7 @@ namespace ColorPicker
             set
             {
                 _notifyableColorHsv = value;
-                RaisePropertyChanged("NotifyableColorHsv");
+                RaisePropertyChanged(nameof(NotifyableColorHsv));
             }
         }
 
