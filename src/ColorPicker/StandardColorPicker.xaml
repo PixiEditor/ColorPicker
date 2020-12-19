@@ -61,8 +61,8 @@
                 <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Center" Width="232">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="H" Width="18" Foreground="White" Padding="5,0,5,0" />
-                        <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="H"
+                        <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="H"
                                        Maximum="359" IsMoveToPointEnabled="True" SmallChange="3.6" LargeChange="36"
                                        Value="{Binding Path=NotifyableColor.H, Mode=TwoWay, ElementName=uc}" />
                         <local:NumberInput Min="0" Max="359" Margin="5,0,0,0" Width="40"
@@ -70,8 +70,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="S" Width="18" Foreground="White" Padding="5,0,5,0" />
-                        <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="S"
+                        <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="S"
                                        Maximum="1" IsMoveToPointEnabled="True" SmallChange="0.01" LargeChange="10"
                                        Value="{Binding Path=NotifyableColor.S, Mode=TwoWay, ElementName=uc}" />
                         <local:NumberInput Min="0" Max="1" Margin="5,0,0,0" Width="40"
@@ -79,8 +79,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="V" Width="18" Foreground="White" Padding="5,0,5,0" />
-                        <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="V"
+                        <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="V"
                                        Maximum="1" IsMoveToPointEnabled="True" SmallChange="0.01" LargeChange="0.1"
                                        Value="{Binding Path=NotifyableColor.V, Mode=TwoWay, ElementName=uc}" />
                         <local:NumberInput Min="0" Max="1" Margin="5,0,0,0" Width="40"
