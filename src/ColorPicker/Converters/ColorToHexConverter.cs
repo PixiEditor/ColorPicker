@@ -9,9 +9,13 @@ using System.Windows.Media;
 
 namespace ColorPicker.Converters
 {
-    [ValueConversion(typeof(string), typeof(Color))]
-    class HexToColorConverter : IValueConverter
+    [ValueConversion(typeof(Color), typeof(string))]
+    class ColorToHexConverter : IValueConverter
     {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((Color)value).ToString();
+        }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string text = (string)value;
@@ -37,11 +41,6 @@ namespace ColorPicker.Converters
             {
                 return DependencyProperty.UnsetValue;
             }
-        }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((Color)value).ToString();
         }
     }
 }

@@ -13,12 +13,10 @@ namespace ColorPicker
     /// </summary>
     public partial class StandardColorPicker : UserControl, INotifyPropertyChanged
     {
-        // Using a DependencyProperty as the backing store for SelectedColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedColorProperty =
             DependencyProperty.Register("SelectedColor", typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.Black, OnSelectedColorChanged));
 
-        // Using a DependencyProperty as the backing store for SecondaryColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SecondaryColorProperty =
             DependencyProperty.Register("SecondaryColor", typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.White));
