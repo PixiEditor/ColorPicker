@@ -23,7 +23,6 @@
   <ItemGroup>
     <None Remove="Images\CircularHueGradient.png" />
     <None Remove="Images\ColorCircle.png" />
-    <None Remove="Images\ColorPalette.png" />
     <Resource Include="Images\CircularHueGradient.png" />
     <None Include="..\..\LICENSE.md">
       <Pack>True</Pack>
@@ -37,7 +36,6 @@
 
   <ItemGroup>
     <Resource Include="Images\ColorCircle.png" />
-    <Resource Include="Images\ColorPalette.png" />
     <Resource Include="Images\SwapArrows.png" />
     <Resource Include="Images\transparentbg_mini.png" />
   </ItemGroup>

@@ -21,9 +21,6 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(SecondaryColor), typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.White));
 
-        private readonly Image _colorPalette;
-
-
         private NotifyableColorRgba _notifyableColorRgba;
         private NotifyableColorHsv _notifyableColorHsv;
 
@@ -31,7 +28,6 @@ namespace ColorPicker
         public StandardColorPicker()
         {
             InitializeComponent();
-            _colorPalette = FindName("colorPalette") as Image;
             NotifyableColorRgba = new NotifyableColorRgba(SelectedColor);
             NotifyableColorHsv = new NotifyableColorHsv(SelectedColor);
             NotifyableColorRgba.ColorChanged += OnNotifyableColorRgbChange;
@@ -98,16 +94,6 @@ namespace ColorPicker
             SelectedColor = tmp;
         }
 
-        private void CalculateColor(Point pos)
-        {
-            pos.X = Math.Clamp(pos.X, 0, _colorPalette.ActualWidth);
-            pos.Y = Math.Abs(Math.Clamp(pos.Y, 0, _colorPalette.ActualHeight) - _colorPalette.ActualHeight);
-            int h = (int) (pos.X * 360f / _colorPalette.ActualWidth);
-            float l = (float) (pos.Y * 100f / _colorPalette.ActualHeight);
-
-            SelectedColor = HslHelper.HslToRGB(h, 100, l);
-        }
-
         private void RaisePropertyChanged(string property)
         {
             if (property != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
@@ -116,34 +102,6 @@ namespace ColorPicker
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SwapColors();
-        }
-
-        private void colorPalette_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.Capture((Image)sender);
-            PickColor((Image)sender, e);
-        }
-
-        private void colorPalette_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            ((Image)sender).ReleaseMouseCapture();
-        }
-
-        private void colorPalette_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Released)
-            {
-                ((Image)sender).ReleaseMouseCapture();
-                return;
-            }
-
-            PickColor((Image)sender, e);
-        }
-
-        private void PickColor(Image palettte, MouseEventArgs e)
-        {
-            Point point = e.GetPosition(palettte);
-            CalculateColor(point);
         }
     }
 }
