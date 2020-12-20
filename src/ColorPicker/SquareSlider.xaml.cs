@@ -29,7 +29,8 @@ namespace ColorPicker
         public double HeadX
         {
             get => (double)GetValue(HeadXProperty);
-            set {
+            set
+            {
                 SetValue(HeadXProperty, value);
                 RaisePropertyChanged(nameof(HeadX));
             }
@@ -37,7 +38,8 @@ namespace ColorPicker
         public double HeadY
         {
             get => (double)GetValue(HeadYProperty);
-            set {
+            set
+            {
                 SetValue(HeadYProperty, value);
                 RaisePropertyChanged(nameof(HeadX));
             }
@@ -51,7 +53,8 @@ namespace ColorPicker
 
         private WriteableBitmap _gradientBitmap;
 
-        public WriteableBitmap GradientBitmap {
+        public WriteableBitmap GradientBitmap
+        {
             get => _gradientBitmap;
             set
             {
@@ -67,17 +70,17 @@ namespace ColorPicker
             double hue = Hue;
             byte[] pixels = new byte[w * h * 3];
             for (int j = 0; j < h; j++)
-            { 
+            {
                 for (int i = 0; i < w; i++)
                 {
-                    var (r, g, b) = HsvHelper.HsvToRgb(hue, i / (double)(w-1), ((h-1)-j) / (double)(h-1));
-                    int pos = (j * h + i)*3;
+                    var (r, g, b) = HsvHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+                    int pos = (j * h + i) * 3;
                     pixels[pos] = (byte)(r * 255);
-                    pixels[pos+1] = (byte)(g * 255);
-                    pixels[pos+2] = (byte)(b * 255);
+                    pixels[pos + 1] = (byte)(g * 255);
+                    pixels[pos + 2] = (byte)(b * 255);
                 }
             }
-            GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w*3, 0);
+            GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
         }
         private static void OnHueChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
@@ -87,23 +90,26 @@ namespace ColorPicker
         {
             SquareSlider sender = (SquareSlider)d;
             Canvas.SetLeft(sender.head, sender.HeadX * (sender.ActualWidth - 1));
-            Canvas.SetTop(sender.head, (1-sender.HeadY) * (sender.ActualHeight - 1));
+            Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.ActualHeight - 1));
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             ((UIElement)sender).CaptureMouse();
+            UpdatePos(e.GetPosition(this));
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             Grid grid = (Grid)sender;
             if (grid.IsMouseCaptured)
-            {
-                Point pos = e.GetPosition(this);
-                HeadX = Math.Clamp(pos.X / (ActualWidth-1), 0, 1);
-                HeadY = 1-Math.Clamp(pos.Y / (ActualHeight-1), 0, 1);
-            }
+                UpdatePos(e.GetPosition(this));
+        }
+
+        private void UpdatePos(Point pos)
+        {
+            HeadX = Math.Clamp(pos.X / (ActualWidth - 1), 0, 1);
+            HeadY = 1 - Math.Clamp(pos.Y / (ActualHeight - 1), 0, 1);
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)

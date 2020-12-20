@@ -43,6 +43,9 @@ namespace ColorPicker
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             ((UIElement)sender).CaptureMouse();
+            Path circle = (Path)sender;
+            Point mousePos = e.GetPosition(circle);
+            UpdateValue(mousePos, circle.ActualWidth, circle.ActualHeight);
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -56,8 +59,13 @@ namespace ColorPicker
                 return;
             Path circle = (Path)sender;
             Point mousePos = e.GetPosition(circle);
-            double x = mousePos.X / (circle.ActualWidth * 2);
-            double y = mousePos.Y / (circle.ActualHeight * 2);
+            UpdateValue(mousePos, circle.ActualWidth, circle.ActualHeight);
+        }
+
+        private void UpdateValue(Point mousePos, double width, double height)
+        {
+            double x = mousePos.X / (width * 2);
+            double y = mousePos.Y / (height * 2);
 
             double length = Math.Sqrt(x * x + y * y);
             if (length == 0)
