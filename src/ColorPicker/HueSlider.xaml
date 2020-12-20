@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ColorPicker"
              mc:Ignorable="d" 
              Width="260" Height="260"
+             x:ClassModifier="internal"
              x:Name="uc">
     <Grid>
         <Image Source="/ColorPicker;component/Images/CircularHueGradient.png" Stretch="Fill"

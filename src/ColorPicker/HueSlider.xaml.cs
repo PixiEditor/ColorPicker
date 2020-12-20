@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace ColorPicker
 {
-    public partial class HueSlider : UserControl, INotifyPropertyChanged
+    internal partial class HueSlider : UserControl
     {
         public static readonly DependencyProperty ValueProperty = 
             DependencyProperty.Register(nameof(Value), typeof(double), typeof(HueSlider), 
@@ -23,22 +23,12 @@ namespace ColorPicker
         public double Value
         {
             get => (double)GetValue(ValueProperty);
-            set
-            {
-                SetValue(ValueProperty, value);
-                RaisePropertyChanged(nameof(Value));
-            }
+            set => SetValue(ValueProperty, value);
         }
         public HueSlider()
         {
             InitializeComponent();
         }
-        private void RaisePropertyChanged(string property)
-        {
-            if (property != null) PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {

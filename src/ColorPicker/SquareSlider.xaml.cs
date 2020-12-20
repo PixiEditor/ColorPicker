@@ -29,20 +29,12 @@ namespace ColorPicker
         public double HeadX
         {
             get => (double)GetValue(HeadXProperty);
-            set
-            {
-                SetValue(HeadXProperty, value);
-                RaisePropertyChanged(nameof(HeadX));
-            }
+            set => SetValue(HeadXProperty, value);
         }
         public double HeadY
         {
             get => (double)GetValue(HeadYProperty);
-            set
-            {
-                SetValue(HeadYProperty, value);
-                RaisePropertyChanged(nameof(HeadX));
-            }
+            set => SetValue(HeadYProperty, value);
         }
         public SquareSlider()
         {
