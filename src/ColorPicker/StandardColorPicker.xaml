@@ -32,11 +32,12 @@
             <RowDefinition Height="159" />
             <RowDefinition Height="88" />
         </Grid.RowDefinitions>
-        <StackPanel VerticalAlignment="Center">
-            <local:SquareSlider Hue="{Binding ElementName=uc, Path=NotifyableColorHsv.H}" Width="200" Height="200" Margin="10"
+        <Grid>
+            <local:HueSlider Width="260" Height="260" Value="{Binding ElementName=uc, Path=NotifyableColorHsv.H, Mode=TwoWay}"/>
+            <local:SquareSlider Hue="{Binding ElementName=uc, Path=NotifyableColorHsv.H}" Width="145" Height="145"
                                 HeadX="{Binding ElementName=uc, Path=NotifyableColorHsv.S, Mode=TwoWay}"
                                 HeadY="{Binding ElementName=uc, Path=NotifyableColorHsv.V, Mode=TwoWay}"/>
-        </StackPanel>
+        </Grid>
         <Image Grid.Row="1" Source="/ColorPicker;component/Images/ColorPalette.png" Name="colorPalette" MouseUp="colorPalette_MouseUp"
                MouseDown="colorPalette_MouseDown" MouseMove="colorPalette_MouseMove"  Stretch="Fill" VerticalAlignment="Center" Height="50" />
         <TabControl Grid.Row="2"  Background="#2d2d30" BorderThickness="0">
@@ -182,6 +183,7 @@
                         <behaviours:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
                 </TextBox>
+                
             </StackPanel>
             <Grid HorizontalAlignment="Right" Margin="20,0,20,0" Width="70" Height="70" Grid.Column="2">
                 <Button Opacity="0.3" ToolTip="Swap colors (X)" Click="Button_Click" Width="25" Height="25"
