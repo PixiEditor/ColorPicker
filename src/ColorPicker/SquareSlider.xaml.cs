@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace ColorPicker
 {
-    public partial class SquareSlider : UserControl, INotifyPropertyChanged
+    internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty HueProperty = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHueChanged));
         public static readonly DependencyProperty HeadXProperty = DependencyProperty.Register(nameof(HeadX), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHeadPosChanged));

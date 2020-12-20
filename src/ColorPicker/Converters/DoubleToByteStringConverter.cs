@@ -9,7 +9,7 @@ using System.Windows.Data;
 namespace ColorPicker.Converters
 {
     [ValueConversion(typeof(double), typeof(string))]
-    class DoubleToByteStringConverter : DependencyObject, IValueConverter
+    internal class DoubleToByteStringConverter : DependencyObject, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

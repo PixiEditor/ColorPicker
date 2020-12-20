@@ -8,7 +8,7 @@ using System.Windows.Data;
 namespace ColorPicker.Converters
 {
     [ValueConversion(typeof(double),typeof(string))]
-    class RangeConstrainedDoubleToDoubleConverter : DependencyObject, IValueConverter
+    internal class RangeConstrainedDoubleToDoubleConverter : DependencyObject, IValueConverter
     {
         public static DependencyProperty MinProperty = 
             DependencyProperty.Register(nameof(Min), typeof(double), typeof(RangeConstrainedDoubleToDoubleConverter), 

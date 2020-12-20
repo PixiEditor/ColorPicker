@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ColorPicker.Models
 {
-    public static class HsvHelper
+    internal static class HsvHelper
     {
         /// <summary>
         /// Converts RGB to HSV, return -1 for undefined channels

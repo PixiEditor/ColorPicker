@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ColorPicker"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="400"
+             x:ClassModifier="internal"
              x:Name="uc">
     <Grid MouseDown="OnMouseDown" MouseMove="OnMouseMove" MouseUp="OnMouseUp">
         <Image 

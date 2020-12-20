@@ -27,12 +27,12 @@
         <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                  Stroke="#aa000000" StrokeThickness="2"  IsHitTestVisible="False" Width="220" Height="220"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
-            <Rectangle Height="15" Width="26" Stroke="#2d2d30" StrokeThickness="3" IsHitTestVisible="False"/>
-            <Rectangle Height="11" Width="22" Stroke="Snow" StrokeThickness="2" IsHitTestVisible="False"/>
+            <Rectangle Height="15" Width="24" Stroke="#2d2d30" StrokeThickness="3" IsHitTestVisible="False"/>
+            <Rectangle Height="11" Width="20" Stroke="Snow" StrokeThickness="2" IsHitTestVisible="False"/>
             <Grid.RenderTransform>
                 <TransformGroup>
-                    <RotateTransform Angle="{Binding ElementName=uc, Path=Value}" CenterY="7.5" CenterX="133" />
-                    <TranslateTransform X="-120"/>
+                    <RotateTransform Angle="{Binding ElementName=uc, Path=Value}" CenterX="131" CenterY="7.5" />
+                    <TranslateTransform X="-119"/>
                 </TransformGroup>
             </Grid.RenderTransform>
         </Grid>

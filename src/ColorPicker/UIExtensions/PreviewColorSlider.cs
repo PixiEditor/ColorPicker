@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
 {
-    public abstract class PreviewColorSlider : Slider
+    internal abstract class PreviewColorSlider : Slider
     {
         public static readonly DependencyProperty CurrentColorProperty =
             DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(PreviewColorSlider),

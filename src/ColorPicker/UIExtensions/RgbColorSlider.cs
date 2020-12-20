@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
 {
-    public class RgbColorSlider : PreviewColorSlider
+    internal class RgbColorSlider : PreviewColorSlider
     {
         public static readonly DependencyProperty SliderArgbTypeProperty =
             DependencyProperty.Register(nameof(SliderArgbType), typeof(string), typeof(RgbColorSlider),

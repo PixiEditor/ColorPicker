@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace ColorPicker.Converters
 {
     [ValueConversion(typeof(Color), typeof(string))]
-    class ColorToHexConverter : IValueConverter
+    internal class ColorToHexConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
