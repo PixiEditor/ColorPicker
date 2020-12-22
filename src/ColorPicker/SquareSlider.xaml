@@ -16,7 +16,7 @@
             Stretch="Fill">
             
         </Image>
-        <Canvas>
+        <Canvas Background="Transparent">
             <Grid x:Name="head">
                 <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12" />
                 <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="2" Width="14" Height="14" />
