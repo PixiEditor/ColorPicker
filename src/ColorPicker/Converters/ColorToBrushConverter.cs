@@ -5,7 +5,8 @@ using System.Windows.Media;
 
 namespace ColorPicker.Converters
 {
-    public class ColorToBrushConverter : IValueConverter
+    [ValueConversion(typeof(Color),typeof(SolidColorBrush))]
+    internal class ColorToBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

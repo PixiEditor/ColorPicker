@@ -85,7 +85,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="RgbColorSliderTemplate1" TargetType="{x:Type Slider}">
+    <ControlTemplate x:Key="PreviewColorSliderTemplate" TargetType="{x:Type Slider}">
         <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}"
                 BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                 SnapsToDevicePixels="True">
@@ -148,7 +148,10 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <Style TargetType="{x:Type ui:HsvColorSlider}">
+        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
+    </Style>
     <Style TargetType="{x:Type ui:RgbColorSlider}">
-        <Setter Property="Template" Value="{StaticResource RgbColorSliderTemplate1}" />
+        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
     </Style>
 </ResourceDictionary>

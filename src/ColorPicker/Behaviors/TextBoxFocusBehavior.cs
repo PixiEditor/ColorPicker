@@ -10,7 +10,6 @@ namespace ColorPicker.Behaviors
 {
     internal class TextBoxFocusBehavior : Behavior<TextBox>
     {
-        // Using a DependencyProperty as the backing store for FillSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillSizeProperty =
             DependencyProperty.Register("FillSize", typeof(bool), typeof(TextBoxFocusBehavior),
                 new PropertyMetadata(false));

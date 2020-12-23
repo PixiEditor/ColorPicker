@@ -6,7 +6,8 @@ using System.Windows.Data;
 
 namespace ColorPicker.Converters
 {
-    public class BoolToInvertedBoolConverter : IValueConverter
+    [ValueConversion(typeof(bool), typeof(bool))]
+    internal class BoolToInvertedBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
