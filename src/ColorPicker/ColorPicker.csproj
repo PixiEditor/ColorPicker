@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Authors>Krzysztof Krysiński</Authors>
+    <Authors>Krzysztof Krysiński, Egor Mozgovoy</Authors>
     <Company>PixiEditor</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>PixiEditor © 2020</Copyright>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
     <RootNamespace>ColorPicker</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <PackageId>PixiEditor.ColorPicker</PackageId>
     <PackageTags>color color-picker graphics wpf</PackageTags>
     <Description>A WPF Color picker built primarily for PixiEditor. Contains Static color picker and portable (dropdown) color picker.</Description>
