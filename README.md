@@ -30,10 +30,12 @@ and add either StandardColorPicker or PortableColorPicker controls
 ```
 Currently selected and secondary colors are stored inside `SelectedColor` and `SecondaryColor` dependency properties.
 
-#Styling
+# Styling
 
 Out of the box, the color picker uses the default WPF look:
+
 ![Default ColorPicker look](https://i.imgur.com/N2sSQ9X.png)
+
 You have an option to use the included dark theme by loading a resource dictionary:
 ```
 <Window.Resources>
