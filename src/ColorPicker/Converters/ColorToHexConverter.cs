@@ -33,6 +33,10 @@ namespace ColorPicker.Converters
             {
                 final.Append("#FF").Append(text);
             }
+            else
+            {
+                final.Append("#").Append(text);
+            }
             try
             {
                 return ColorConverter.ConvertFromString(final.ToString());
