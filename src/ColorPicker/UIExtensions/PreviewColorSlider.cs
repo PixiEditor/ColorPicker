@@ -1,6 +1,8 @@
 ﻿using ColorPicker.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
@@ -18,6 +20,7 @@ namespace ColorPicker.UIExtensions
             SmallChange = 1;
             LargeChange = 10;
             MinHeight = 12;
+            PreviewMouseWheel += OnPreviewMouseWheel;
         }
 
         public Color CurrentColor
@@ -38,6 +41,12 @@ namespace ColorPicker.UIExtensions
         {
             PreviewColorSlider slider = (PreviewColorSlider)d;
             slider.GenerateBackground();
+        }
+
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
+        {
+            Value = Math.Clamp(Value + SmallChange * args.Delta / 120, Minimum, Maximum);
+            args.Handled = true;
         }
     }
 }
