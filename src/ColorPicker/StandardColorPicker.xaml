@@ -77,7 +77,7 @@
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="H"
                                        CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" 
-                                       Maximum="359" IsMoveToPointEnabled="True" SmallChange="2" LargeChange="20"
+                                       Maximum="359" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=HueSmallChange, ElementName=uc}" LargeChange="20"
                                        Value="{Binding Path=NotifyableColorHsv.H, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorHsv.H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
@@ -91,7 +91,7 @@
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
                                        CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="S"
-                                       Maximum="1" IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorHsv.S, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorHsv.S, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
@@ -105,7 +105,7 @@
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
                                        CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="V"
-                                       Maximum="1" IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorHsv.V, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorHsv.V, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
@@ -118,7 +118,7 @@
                         <TextBlock Text="A" Width="18" Foreground="White" Padding="4,0,5,0" />
                         <Grid Width="170" Height="12">
                             <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
-                                           IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                           IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                            Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
                             <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
                                 <Border.Background>
@@ -141,7 +141,7 @@
                         <TextBlock Text="R" Width="18" Foreground="White" Padding="5,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="R"
-                                       Maximum="1" IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.R, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorRgba.R, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
@@ -154,7 +154,7 @@
                         <TextBlock Text="G" Width="18" Foreground="White" Padding="4,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="G"
-                                       IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                       IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.G, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorRgba.G, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
@@ -167,7 +167,7 @@
                         <TextBlock Text="B" Width="18" Foreground="White" Padding="5,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
                                        CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="B"
-                                       IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                       IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.B, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
                          Text="{Binding Path=NotifyableColorRgba.B, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
@@ -180,7 +180,7 @@
                         <TextBlock Text="A" Width="18" Foreground="White" Padding="4,0,5,0" />
                         <Grid Width="170" Height="12">
                             <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
-                                           IsMoveToPointEnabled="True" SmallChange="0.00781" LargeChange="0.07812"
+                                           IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                            Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
                             <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
                                 <Border.Background>

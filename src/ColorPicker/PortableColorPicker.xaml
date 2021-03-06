@@ -43,7 +43,9 @@
             <Border BorderThickness="1" BorderBrush="Black" Background="White">
                 <local:StandardColorPicker x:Name="colorPicker"
                                    SelectedColor="{Binding ElementName=uc, Path=SelectedColor, Mode=TwoWay}"
-                                   SecondaryColor="{Binding ElementName=uc, Path=SecondaryColor, Mode=TwoWay}" />
+                                   SecondaryColor="{Binding ElementName=uc, Path=SecondaryColor, Mode=TwoWay}" 
+                                   HueSmallChange="{Binding ElementName=uc, Path=HueSmallChange}"
+                                   SmallChange="{Binding ElementName=uc, Path=SmallChange}"/>
             </Border>
         </Popup>
     </Grid>
