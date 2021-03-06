@@ -18,8 +18,8 @@ namespace ColorPicker
     internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty HueProperty = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHueChanged));
-        public static readonly DependencyProperty HeadXProperty = DependencyProperty.Register(nameof(HeadX), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHeadPosChanged));
-        public static readonly DependencyProperty HeadYProperty = DependencyProperty.Register(nameof(HeadY), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHeadPosChanged));
+        public static readonly DependencyProperty HeadXProperty = DependencyProperty.Register(nameof(HeadX), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0));
+        public static readonly DependencyProperty HeadYProperty = DependencyProperty.Register(nameof(HeadY), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0));
 
         public double Hue
         {
@@ -80,9 +80,9 @@ namespace ColorPicker
         }
         private static void OnHeadPosChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
-            SquareSlider sender = (SquareSlider)d;
-            Canvas.SetLeft(sender.head, sender.HeadX * (sender.Width - 1));
-            Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.Height - 1));
+            //SquareSlider sender = (SquareSlider)d;
+            //Canvas.SetLeft(sender.head, sender.HeadX * (sender.ActualWidth - 1));
+            //Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.ActualHeight - 1));
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
