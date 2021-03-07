@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ColorPicker.PortableColorPicker"
+﻿<local:DualPickerControlBase x:Class="ColorPicker.PortableColorPicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ColorPicker"
              xmlns:converters="clr-namespace:ColorPicker.Converters"
              mc:Ignorable="d"
-             d:DesignHeight="20" d:DesignWidth="40" x:Name="uc">
+             d:DesignHeight="380" d:DesignWidth="200" x:Name="uc">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:BoolToInvertedBoolConverter x:Key="BoolToInvertedBoolConverter" />
@@ -32,25 +32,19 @@
                     </ImageBrush.RelativeTransform>
                 </ImageBrush>
             </Border.Background>
-            <!--<ToggleButton Style="{StaticResource ColorToggleButtonStyle}" Padding="0" Margin="0" Height="20" Width="40"
+            <ToggleButton Style="{StaticResource ColorToggleButtonStyle}" Padding="0" Margin="0" Height="20" Width="40"
                           IsEnabled="{Binding Path=IsOpen, ElementName=popup, Converter={StaticResource BoolToInvertedBoolConverter}}"
                           x:Name="toggleButton" BorderThickness="0" Panel.ZIndex="1"
-                          -->
-            <!--Background="{Binding Path=SelectedColor, ElementName=colorPicker, Converter={StaticResource ColorToBrushConverter}}"-->
-            <!-->
+                          Background="{Binding Path=Color.RGBAColor, ElementName=uc, Converter={StaticResource ColorToBrushConverter}}">
                 <Border Height="20" Width="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" />
-            </ToggleButton>-->
+            </ToggleButton>
         </Border>
         <Popup Name="popup" StaysOpen="False" IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
             <Border BorderThickness="1" BorderBrush="Black" Background="White">
-                <!--<local:StandardColorPicker x:Name="colorPicker"
-                                   -->
-                <!--SelectedColor="{Binding ElementName=uc, Path=SelectedColor, Mode=TwoWay}"
-                                   SecondaryColor="{Binding ElementName=uc, Path=SecondaryColor, Mode=TwoWay}" 
-                                   HueSmallChange="{Binding ElementName=uc, Path=HueSmallChange}"-->
-                <!--
-                                   SmallChange="{Binding ElementName=uc, Path=SmallChange}"/>-->
+                <local:StandardColorPicker ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}" x:Name="test"
+                                           SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}" 
+                                           SmallChange="{Binding ElementName=uc, Path=SmallChange}" Width="200" Height="380"/>
             </Border>
         </Popup>
     </Grid>
-</UserControl>
+</local:DualPickerControlBase>
