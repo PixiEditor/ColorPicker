@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:ColorPicker"
              xmlns:conv="clr-namespace:ColorPicker.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="500"
+             MinWidth="100"
+             MinHeight="100"
+             d:DesignHeight="100" d:DesignWidth="500"
              x:Name="uc"
              Background="AliceBlue">
     <UserControl.Resources>
