@@ -8,8 +8,8 @@ namespace ColorPicker.UserControls
 {
     internal partial class HueSlider : UserControl
     {
-        public static readonly DependencyProperty ValueProperty = 
-            DependencyProperty.Register(nameof(Value), typeof(double), typeof(HueSlider), 
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register(nameof(Value), typeof(double), typeof(HueSlider),
                 new PropertyMetadata(0.0));
 
         public double Value

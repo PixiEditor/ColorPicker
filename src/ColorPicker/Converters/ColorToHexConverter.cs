@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -40,7 +39,7 @@ namespace ColorPicker.Converters
             try
             {
                 return ColorConverter.ConvertFromString(final.ToString());
-            } 
+            }
             catch (Exception)
             {
                 return DependencyProperty.UnsetValue;

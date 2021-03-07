@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <Resource Include="Images\ColorCircle.png" />
-    <Resource Include="Images\SwapArrows.png" />
     <Resource Include="Images\transparentbg_mini.png" />
   </ItemGroup>
 
