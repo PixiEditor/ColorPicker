@@ -77,8 +77,6 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="H" Width="18" Padding="5,0,5,0" />
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="H"
-                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" 
                                        Maximum="359" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=HueSmallChange, ElementName=uc}" LargeChange="20"
                                        Value="{Binding Path=NotifyableColorHsv.H, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -91,8 +89,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="S" Width="18" Padding="5,0,5,0" />
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
-                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="S"
+                                           SliderHsvType="S"
                                        Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorHsv.S, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -105,8 +102,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="V" Width="18" Padding="5,0,5,0" />
                         <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
-                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="V"
+                                       SliderHsvType="V"
                                        Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorHsv.V, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -119,7 +115,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="A" Width="18" Padding="4,0,5,0" />
                         <Grid Width="170" Height="12">
-                            <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
+                            <ui:RgbColorSlider SliderArgbType="A" Maximum="1"
                                            IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                            Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
                             <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
@@ -142,7 +138,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="R" Width="18" Padding="5,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="R"
+                                       SliderArgbType="R"
                                        Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.R, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -155,7 +151,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="G" Width="18" Padding="4,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="G"
+                                       SliderArgbType="G"
                                        IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.G, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -168,7 +164,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="B" Width="18" Padding="5,0,5,0" />
                         <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
-                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="B"
+                                       SliderArgbType="B"
                                        IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                        Value="{Binding Path=NotifyableColorRgba.B, Mode=TwoWay, ElementName=uc}" />
                         <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
@@ -181,7 +177,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="A" Width="18" Padding="4,0,5,0" />
                         <Grid Width="170" Height="12">
-                            <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
+                            <ui:RgbColorSlider SliderArgbType="A" Maximum="1"
                                            IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
                                            Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
                             <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">

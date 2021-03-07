@@ -16,6 +16,17 @@ namespace ColorPicker.Models
         double _HSV_S;
         double _HSV_V;
 
+        public ColorState(double rGB_R, double rGB_G, double rGB_B, double a, double hSV_H, double hSV_S, double hSV_V)
+        {
+            _RGB_R = rGB_R;
+            _RGB_G = rGB_G;
+            _RGB_B = rGB_B;
+            _A = a;
+            _HSV_H = hSV_H;
+            _HSV_S = hSV_S;
+            _HSV_V = hSV_V;
+        }
+
         public double A
         {
             get => _A;

@@ -20,7 +20,7 @@ namespace ColorPicker
     {
         public static DependencyProperty ColorStateProperty = 
             DependencyProperty.Register(nameof(ColorState), typeof(ColorState), typeof(ColorSliders), 
-                new PropertyMetadata(OnColorStatePropertyChange));
+                new PropertyMetadata(new ColorState(0,0,0,1,0,0,0), OnColorStatePropertyChange));
         
         public ColorState ColorState
         {

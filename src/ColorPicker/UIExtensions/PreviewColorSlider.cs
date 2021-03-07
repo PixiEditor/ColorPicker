@@ -9,9 +9,10 @@ namespace ColorPicker.UIExtensions
 {
     internal abstract class PreviewColorSlider : Slider
     {
-        public static readonly DependencyProperty CurrentColorProperty =
-            DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(PreviewColorSlider),
-                new PropertyMetadata(Colors.Black, ColorChangedCallback));
+
+        public static readonly DependencyProperty CurrentColorStateProperty =
+            DependencyProperty.Register(nameof(CurrentColorState), typeof(ColorState), typeof(PreviewColorSlider),
+                new PropertyMetadata(ColorStateChangedCallback));
 
         public static readonly DependencyProperty SmallChangeBindableProperty =
             DependencyProperty.Register(nameof(SmallChangeBindable), typeof(double), typeof(PreviewColorSlider),
@@ -33,10 +34,10 @@ namespace ColorPicker.UIExtensions
             set => SetValue(SmallChangeBindableProperty, value);
         }
 
-        public Color CurrentColor
+        public ColorState CurrentColorState
         {
-            get => (Color)GetValue(CurrentColorProperty);
-            set => SetValue(CurrentColorProperty, value);
+            get => (ColorState)GetValue(CurrentColorStateProperty);
+            set => SetValue(CurrentColorStateProperty, value);
         }
 
         public override void EndInit()
@@ -46,8 +47,7 @@ namespace ColorPicker.UIExtensions
         }
 
         protected abstract void GenerateBackground();
-
-        protected static void ColorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        protected static void ColorStateChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PreviewColorSlider slider = (PreviewColorSlider)d;
             slider.GenerateBackground();
