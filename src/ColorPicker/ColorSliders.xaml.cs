@@ -18,9 +18,9 @@ namespace ColorPicker
 {
     public partial class ColorSliders : UserControl, IColorStateStorage
     {
-        public DependencyProperty ColorStateProperty = 
+        public static DependencyProperty ColorStateProperty = 
             DependencyProperty.Register(nameof(ColorState), typeof(ColorState), typeof(ColorSliders), 
-                new PropertyMetadata());
+                new PropertyMetadata(OnColorStatePropertyChange));
         
         public ColorState ColorState
         {
@@ -28,7 +28,10 @@ namespace ColorPicker
             set => SetValue(ColorStateProperty, value);
         }
 
-        public NotifyableColor Color { get; set; }
+        public NotifyableColor Color { 
+            get; 
+            set; 
+        }
 
         public ColorSliders()
         {
@@ -36,6 +39,14 @@ namespace ColorPicker
             InitializeComponent();
         }
 
-        
+        private static void OnColorStatePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs args)
+        {
+            ((ColorSliders)d).Color.UpdateEverything((ColorState)args.OldValue);
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

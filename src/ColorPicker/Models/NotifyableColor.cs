@@ -14,6 +14,20 @@ namespace ColorPicker.Models
             storage = colorStateStorage;
         }
 
+        public void UpdateEverything(ColorState oldValue)
+        {
+            ColorState currentValue = storage.ColorState;
+            if (currentValue.A != oldValue.A) RaisePropertyChanged(nameof(A));
+
+            if (currentValue.RGB_R != oldValue.RGB_R) RaisePropertyChanged(nameof(RGB_R));
+            if (currentValue.RGB_G != oldValue.RGB_G) RaisePropertyChanged(nameof(RGB_G));
+            if (currentValue.RGB_B != oldValue.RGB_B) RaisePropertyChanged(nameof(RGB_B));
+
+            if (currentValue.HSV_H != oldValue.HSV_H) RaisePropertyChanged(nameof(HSV_H));
+            if (currentValue.HSV_S != oldValue.HSV_S) RaisePropertyChanged(nameof(HSV_S));
+            if (currentValue.HSV_V != oldValue.HSV_V) RaisePropertyChanged(nameof(HSV_V));
+        }
+
         public double A
         {
             get => storage.ColorState.A * 255;
@@ -22,7 +36,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.A = value / 255;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(A));
             }
         }
 
@@ -34,11 +47,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.RGB_R = value / 255;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(RGB_R));
-
-                RaisePropertyChanged(nameof(HSV_H));
-                RaisePropertyChanged(nameof(HSV_S));
-                RaisePropertyChanged(nameof(HSV_V));
             }
         }
 
@@ -50,11 +58,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.RGB_G = value / 255;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(RGB_G));
-
-                RaisePropertyChanged(nameof(HSV_H));
-                RaisePropertyChanged(nameof(HSV_S));
-                RaisePropertyChanged(nameof(HSV_V));
             }
         }
 
@@ -66,11 +69,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.RGB_B = value / 255;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(RGB_B));
-
-                RaisePropertyChanged(nameof(HSV_H));
-                RaisePropertyChanged(nameof(HSV_S));
-                RaisePropertyChanged(nameof(HSV_V));
             }
         }
 
@@ -82,11 +80,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.HSV_H = value;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(HSV_H));
-
-                RaisePropertyChanged(nameof(RGB_R));
-                RaisePropertyChanged(nameof(RGB_G));
-                RaisePropertyChanged(nameof(RGB_B));
             }
         }
 
@@ -98,11 +91,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.HSV_S = value / 100;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(HSV_S));
-
-                RaisePropertyChanged(nameof(RGB_R));
-                RaisePropertyChanged(nameof(RGB_G));
-                RaisePropertyChanged(nameof(RGB_B));
             }
         }
 
@@ -114,11 +102,6 @@ namespace ColorPicker.Models
                 var state = storage.ColorState;
                 state.HSV_V = value / 100;
                 storage.ColorState = state;
-                RaisePropertyChanged(nameof(HSV_V));
-
-                RaisePropertyChanged(nameof(RGB_R));
-                RaisePropertyChanged(nameof(RGB_G));
-                RaisePropertyChanged(nameof(RGB_B));
             }
         }
     }
