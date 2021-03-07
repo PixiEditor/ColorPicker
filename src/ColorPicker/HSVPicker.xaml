@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ColorPicker"
+             xmlns:controls="clr-namespace:ColorPicker.UserControls"
              xmlns:conv="clr-namespace:ColorPicker.Converters"
              mc:Ignorable="d" 
              MinWidth="100"
@@ -39,8 +40,8 @@
             <ColumnDefinition Width="0.56*"/>
             <ColumnDefinition Width="0.22*"/>
         </Grid.ColumnDefinitions>
-        <local:SquareSlider Grid.Row="1" Grid.Column="1" />
-        <local:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"  />
+        <controls:SquareSlider Grid.Row="1" Grid.Column="1" />
+        <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"  />
 
     </Grid>
 </UserControl>

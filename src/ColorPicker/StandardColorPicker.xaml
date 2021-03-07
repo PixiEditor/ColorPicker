@@ -6,6 +6,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:converters="clr-namespace:ColorPicker.Converters"
              xmlns:behaviours="clr-namespace:ColorPicker.Behaviors"
+             xmlns:controls="clr-namespace:ColorPicker.UserControls"
              xmlns:ui="clr-namespace:ColorPicker.UIExtensions" xmlns:local="clr-namespace:ColorPicker"
              mc:Ignorable="d"
              Width="270" Name="uc"
@@ -24,8 +25,8 @@
     </UserControl.Resources>
     <Canvas HorizontalAlignment="Stretch" Height="470">
         <Grid>
-            <local:HueSlider Width="260" Height="260" Value="{Binding ElementName=uc, Path=NotifyableColorHsv.H, Mode=TwoWay}" Margin="5"/>
-            <local:SquareSlider Hue="{Binding ElementName=uc, Path=NotifyableColorHsv.H}" Width="145" Height="145"
+            <controls:HueSlider Width="260" Height="260" Value="{Binding ElementName=uc, Path=NotifyableColorHsv.H, Mode=TwoWay}" Margin="5"/>
+            <controls:SquareSlider Hue="{Binding ElementName=uc, Path=NotifyableColorHsv.H}" Width="145" Height="145"
                                     HeadX="{Binding ElementName=uc, Path=NotifyableColorHsv.S, Mode=TwoWay}"
                                     HeadY="{Binding ElementName=uc, Path=NotifyableColorHsv.V, Mode=TwoWay}"/>
         </Grid>

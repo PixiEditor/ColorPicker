@@ -14,13 +14,10 @@
              d:DesignHeight="150" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
-            <conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-            <conv:ColorToHexConverter x:Key="HexToColorConverter" />
             <conv:DoubleToByteStringConverter x:Key="ByteChannelConverter" />
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0" Max="359"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ColorSliderStyle.xaml" />
-                <ResourceDictionary Source="Styles/ImageButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
