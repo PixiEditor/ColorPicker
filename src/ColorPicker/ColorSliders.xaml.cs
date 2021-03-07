@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColorPicker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,26 @@ using System.Windows.Shapes;
 
 namespace ColorPicker
 {
-    /// <summary>
-    /// Логика взаимодействия для ColorSliders.xaml
-    /// </summary>
-    public partial class ColorSliders : UserControl
+    public partial class ColorSliders : UserControl, IColorStateStorage
     {
+        public DependencyProperty ColorStateProperty = 
+            DependencyProperty.Register(nameof(ColorState), typeof(ColorState), typeof(ColorSliders), 
+                new PropertyMetadata());
+        
+        public ColorState ColorState
+        {
+            get => (ColorState)GetValue(ColorStateProperty);
+            set => SetValue(ColorStateProperty, value);
+        }
+
+        public NotifyableColor Color { get; set; }
+
         public ColorSliders()
         {
+            Color = new NotifyableColor(this);
             InitializeComponent();
         }
+
+        
     }
 }

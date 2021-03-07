@@ -10,8 +10,7 @@
              MinWidth="100"
              MinHeight="100"
              d:DesignHeight="100" d:DesignWidth="500"
-             x:Name="uc"
-             Background="AliceBlue">
+             x:Name="uc">
     <UserControl.Resources>
         <ResourceDictionary>
             <conv:MinConverter x:Key="MinConverter"/>

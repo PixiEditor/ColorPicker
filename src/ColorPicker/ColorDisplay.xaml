@@ -44,7 +44,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Viewbox Grid.Row="2">
+            <Viewbox Grid.Row="2" Margin="1">
                 <Button ToolTip="Swap colors" Width="28" Height="28"
                                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Style="{StaticResource ImageButtonStyle}">

@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ColorPicker.Models
+{
+    public struct ColorState
+    {
+        double _RGB_R;
+        double _RGB_G;
+        double _RGB_B;
+        double _A;
+        double _HSV_H;
+        double _HSV_S;
+        double _HSV_V;
+
+        public double A
+        {
+            get => _A;
+            set
+            {
+                _A = value;
+            }
+        }
+
+        public double RGB_R
+        {
+            get => _RGB_R;
+            set
+            {
+                _RGB_R = value;
+                RecalculateHSV();
+            }
+        }
+
+        public double RGB_G
+        {
+            get => _RGB_G;
+            set
+            {
+                _RGB_G = value;
+                RecalculateHSV();
+            }
+        }
+
+        public double RGB_B
+        {
+            get => _RGB_B;
+            set
+            {
+                _RGB_B = value;
+                RecalculateHSV();
+            }
+        }
+
+        public double HSV_H
+        {
+            get => _HSV_H;
+            set
+            {
+                _HSV_H = value;
+                RecalculateRGB();
+            }
+        }
+
+        public double HSV_S
+        {
+            get => _HSV_S;
+            set
+            {
+                _HSV_S = value;
+                RecalculateRGB();
+            }
+        }
+
+        public double HSV_V
+        {
+            get => _HSV_V;
+            set
+            {
+                _HSV_V = value;
+                RecalculateRGB();
+            }
+        }
+
+        private void RecalculateHSV()
+        {
+            var (h, s, v) = HsvHelper.RgbToHsv(_RGB_R, _RGB_G, _RGB_B);
+            if (h != -1)
+                _HSV_H = h;
+            if (s != -1)
+                _HSV_S = s;
+            _HSV_V = v;
+        }
+
+        private void RecalculateRGB()
+        {
+            (_RGB_R, _RGB_G, _RGB_B) = HsvHelper.HsvToRgb(_HSV_H, _HSV_S, _HSV_V);
+        }
+    }
+}

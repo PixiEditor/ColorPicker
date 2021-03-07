@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ColorPicker.HexColorTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorPicker"
+             xmlns:conv="clr-namespace:ColorPicker.Converters"
+             xmlns:behav="clr-namespace:ColorPicker.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:ColorToHexConverter x:Key="HexToColorConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <TextBox VerticalAlignment="Center" Width="70"
+                                     Text="{Binding Path=SelectedColor, Converter={StaticResource HexToColorConverter}, ElementName=uc}">
+        <i:Interaction.Behaviors>
+            <behav:TextBoxFocusBehavior />
+        </i:Interaction.Behaviors>
+    </TextBox>
+</UserControl>
