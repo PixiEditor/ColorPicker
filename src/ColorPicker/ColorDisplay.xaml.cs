@@ -1,28 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ColorPicker.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ColorPicker
 {
-    /// <summary>
-    /// Логика взаимодействия для ColorDisplay.xaml
-    /// </summary>
-    public partial class ColorDisplay : UserControl
+    public partial class ColorDisplay : PickerControlBase
     {
-        public ColorDisplay()
+        public static readonly DependencyProperty SecondColorStateProperty =
+            DependencyProperty.Register(nameof(SecondColorState), typeof(ColorState), typeof(ColorDisplay),
+                new PropertyMetadata(new ColorState(1, 1, 1, 1, 0, 0, 1), OnSecondColorStatePropertyChange));
+        private SecondColorDecorator secondColorDecorator;
+        public ColorState SecondColorState
         {
+            get => (ColorState)GetValue(SecondColorStateProperty);
+            set => SetValue(SecondColorStateProperty, value);
+        }
+
+        public NotifyableColor SecondColor
+        {
+            get;
+            set;
+        }
+        public ColorDisplay() : base()
+        {
+            secondColorDecorator = new SecondColorDecorator(this);
+            SecondColor = new NotifyableColor(secondColorDecorator);
             InitializeComponent();
+        }
+
+        private void SwapButton_Click(object sender, RoutedEventArgs e)
+        {
+            var temp = ColorState;
+            ColorState = SecondColorState;
+            SecondColorState = temp;
+        }
+        private static void OnSecondColorStatePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs args)
+        {
+            ((ColorDisplay)d).SecondColor.UpdateEverything((ColorState)args.OldValue);
         }
     }
 }
