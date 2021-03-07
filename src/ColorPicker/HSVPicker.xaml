@@ -39,12 +39,13 @@
             <ColumnDefinition Width="0.56*"/>
             <ColumnDefinition Width="0.22*"/>
         </Grid.ColumnDefinitions>
+
+        <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}"/>
         <controls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
                                HeadX="{Binding ElementName=uc, Path=Color.HSV_S, Mode=TwoWay}"
                                HeadY="{Binding ElementName=uc, Path=Color.HSV_V, Mode=TwoWay}"
                                Hue="{Binding ElementName=uc, Path=Color.HSV_H}"/>
-        <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
-                            Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}"/>
 
     </Grid>
 </local:PickerControlBase>

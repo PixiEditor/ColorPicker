@@ -12,8 +12,12 @@
                 <Style TargetType="Label">
                     <Setter Property="Foreground" Value="Snow" />
                 </Style>
-                <Style TargetType="Canvas">
-                    <Setter Property="Background" Value="#252525" />
+                <Style TargetType="Grid" >
+                    <Style.Triggers>
+                        <Trigger Property="Name" Value="MainGrid">
+                            <Setter Property="Background" Value="#252525" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ResourceDictionary>
         </Style.Resources>

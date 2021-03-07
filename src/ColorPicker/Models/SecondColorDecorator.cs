@@ -4,13 +4,13 @@
     {
         public ColorState ColorState
         {
-            get => display.SecondColorState;
-            set => display.SecondColorState = value;
+            get => storage.SecondColorState;
+            set => storage.SecondColorState = value;
         }
-        private ColorDisplay display;
-        public SecondColorDecorator(ColorDisplay display)
+        private ISecondColorStorage storage;
+        public SecondColorDecorator(ISecondColorStorage storage)
         {
-            this.display = display;
+            this.storage = storage;
         }
     }
 }
