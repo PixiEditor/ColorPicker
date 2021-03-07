@@ -7,8 +7,6 @@ A WPF Color picker made for [PixiEditor](https://github.com/PixiEditor/PixiEdito
 
 ![screenshot](https://i.imgur.com/C6m5YWI.png)
 
-Read about the theory behind it on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
-
 # Controls
 
 There are two controls avaliable: `StandardColorPicker` (shown on the screenshot above) and `PortableColorPicker`. PortableColorPicker is an expandable version of StandardColorPicker.
@@ -51,3 +49,5 @@ and referencing DefaultColorPickerStyle in the style attribute of the control:
 <colorpicker:StandardColorPicker Style="{StaticResource DefaultColorPickerStyle}" />
 ```
 You may also define your own styles, see [DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml) for reference.
+
+Read about the theory behind version 1 it on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
