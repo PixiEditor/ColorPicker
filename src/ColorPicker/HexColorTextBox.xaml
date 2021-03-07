@@ -14,10 +14,10 @@
             <conv:ColorToHexConverter x:Key="HexToColorConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <TextBox VerticalAlignment="Center" Width="70"
+    <!--<TextBox VerticalAlignment="Center" Width="70"
                                      Text="{Binding Path=SelectedColor, Converter={StaticResource HexToColorConverter}, ElementName=uc}">
-        <i:Interaction.Behaviors>
-            <behav:TextBoxFocusBehavior />
-        </i:Interaction.Behaviors>
-    </TextBox>
+    <i:Interaction.Behaviors>
+        <behav:TextBoxFocusBehavior />
+    </i:Interaction.Behaviors>
+    </TextBox>-->
 </UserControl>

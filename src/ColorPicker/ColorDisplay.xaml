@@ -55,7 +55,7 @@
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
                 <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="1">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding SecondaryColor, ElementName=uc}" />
+                        <SolidColorBrush/>
                     </Rectangle.Fill>
                 </Rectangle>
                 <Image Source="/ColorPicker;component/Images/transparentbg_mini.png" Panel.ZIndex="0" Stretch="None" />
@@ -63,7 +63,7 @@
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="3">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding Path=SelectedColor, ElementName=uc}" />
+                        <SolidColorBrush />
                     </Rectangle.Fill>
                 </Rectangle>
                 <Image Source="/ColorPicker;component/Images/transparentbg_mini.png" Panel.ZIndex="2" Stretch="None" />

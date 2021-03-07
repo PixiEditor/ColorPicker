@@ -30,6 +30,26 @@ namespace ColorPicker.UserControls
             get => (double)GetValue(HeadYProperty);
             set => SetValue(HeadYProperty, value);
         }
+        private double _rangeX;
+        public double RangeX
+        {
+            get => _rangeX;
+            set
+            {
+                _rangeX = value;
+                RaisePropertyChanged(nameof(RangeX));
+            }
+        }
+        private double _rangeY;
+        public double RangeY
+        {
+            get => _rangeY;
+            set
+            {
+                _rangeY = value;
+                RaisePropertyChanged(nameof(RangeY));
+            }
+        }
         public SquareSlider()
         {
             GradientBitmap = new WriteableBitmap(32, 32, 96, 96, PixelFormats.Rgb24, null);
@@ -72,12 +92,6 @@ namespace ColorPicker.UserControls
         {
             ((SquareSlider)d).RecalculateGradient();
         }
-        private static void OnHeadPosChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
-        {
-            //SquareSlider sender = (SquareSlider)d;
-            //Canvas.SetLeft(sender.head, sender.HeadX * (sender.ActualWidth - 1));
-            //Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.ActualHeight - 1));
-        }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -94,8 +108,8 @@ namespace ColorPicker.UserControls
 
         private void UpdatePos(Point pos)
         {
-            HeadX = Math.Clamp(pos.X / (ActualWidth - 1), 0, 1);
-            HeadY = 1 - Math.Clamp(pos.Y / (ActualHeight - 1), 0, 1);
+            HeadX = Math.Clamp(pos.X / ActualWidth, 0, 1) * RangeX;
+            HeadY = (1 - Math.Clamp(pos.Y / ActualHeight, 0, 1)) * RangeY;
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)

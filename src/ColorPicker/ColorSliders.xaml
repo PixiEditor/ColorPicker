@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ColorPicker.ColorSliders"
+﻿<local:PickerControlBase x:Class="ColorPicker.ColorSliders"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -45,7 +45,7 @@
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
                 <ui:HsvColorSlider Height="12" Grid.Row="0" Grid.Column="1"
-                                       SliderHsvType="H" Minimum="0" Maximum="359" IsMoveToPointEnabled="True"
+                                       SliderHsvType="H" Minimum="0" Maximum="360" IsMoveToPointEnabled="True"
                                        Value="{Binding Path=Color.HSV_H, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
                 <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
                          Text="{Binding Path=Color.HSV_H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
@@ -160,4 +160,4 @@
             </Grid>
         </TabItem>
     </TabControl>
-</UserControl>
+</local:PickerControlBase>
