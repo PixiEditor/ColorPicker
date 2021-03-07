@@ -21,6 +21,14 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(SecondaryColor), typeof(Color), typeof(StandardColorPicker),
                 new PropertyMetadata(Colors.White));
 
+        public static readonly DependencyProperty HueSmallChangeProperty =
+            DependencyProperty.Register(nameof(HueSmallChange), typeof(double), typeof(StandardColorPicker),
+                new PropertyMetadata(1.0));
+
+        public static readonly DependencyProperty SmallChangeProperty =
+            DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(StandardColorPicker),
+                new PropertyMetadata(0.00390625));
+
         private NotifyableColorRgba _notifyableColorRgba;
         private NotifyableColorHsv _notifyableColorHsv;
 
@@ -52,6 +60,18 @@ namespace ColorPicker
                 _notifyableColorHsv = value;
                 RaisePropertyChanged(nameof(NotifyableColorHsv));
             }
+        }
+
+        public double SmallChange
+        {
+            get => (double)GetValue(SmallChangeProperty);
+            set => SetValue(SmallChangeProperty, value);
+        }
+
+        public double HueSmallChange
+        {
+            get => (double)GetValue(HueSmallChangeProperty);
+            set => SetValue(HueSmallChangeProperty, value);
         }
 
         public Color SelectedColor

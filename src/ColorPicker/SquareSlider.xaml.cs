@@ -81,8 +81,8 @@ namespace ColorPicker
         private static void OnHeadPosChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             SquareSlider sender = (SquareSlider)d;
-            Canvas.SetLeft(sender.head, sender.HeadX * (sender.ActualWidth - 1));
-            Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.ActualHeight - 1));
+            Canvas.SetLeft(sender.head, sender.HeadX * (sender.Width - 1));
+            Canvas.SetTop(sender.head, (1 - sender.HeadY) * (sender.Height - 1));
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)

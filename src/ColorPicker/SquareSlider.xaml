@@ -14,10 +14,10 @@
             Height="{Binding ElementName=uc, Path=Height}"
             Source="{Binding ElementName=uc, Path=GradientBitmap}"
             Stretch="Fill">
-            
+
         </Image>
         <Canvas Background="Transparent">
-            <Grid x:Name="head">
+            <Grid x:Name="head" Canvas.Bottom="-14">
                 <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12" />
                 <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="2" Width="14" Height="14" />
                 <Grid.RenderTransform>

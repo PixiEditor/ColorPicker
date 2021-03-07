@@ -1,6 +1,8 @@
 ﻿using ColorPicker.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
@@ -11,6 +13,10 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register(nameof(CurrentColor), typeof(Color), typeof(PreviewColorSlider),
                 new PropertyMetadata(Colors.Black, ColorChangedCallback));
 
+        public static readonly DependencyProperty SmallChangeBindableProperty =
+            DependencyProperty.Register(nameof(SmallChangeBindable), typeof(double), typeof(PreviewColorSlider),
+                new PropertyMetadata(1.0, SmallChangeBindableChangedCallback));
+
         public PreviewColorSlider()
         {
             Minimum = 0;
@@ -18,6 +24,13 @@ namespace ColorPicker.UIExtensions
             SmallChange = 1;
             LargeChange = 10;
             MinHeight = 12;
+            PreviewMouseWheel += OnPreviewMouseWheel;
+        }
+
+        public double SmallChangeBindable
+        {
+            get => (double)GetValue(SmallChangeBindableProperty);
+            set => SetValue(SmallChangeBindableProperty, value);
         }
 
         public Color CurrentColor
@@ -38,6 +51,17 @@ namespace ColorPicker.UIExtensions
         {
             PreviewColorSlider slider = (PreviewColorSlider)d;
             slider.GenerateBackground();
+        }
+
+        private static void SmallChangeBindableChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((PreviewColorSlider)d).SmallChange = (double)e.NewValue;
+        }
+
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
+        {
+            Value = Math.Clamp(Value + SmallChange * args.Delta / 120, Minimum, Maximum);
+            args.Handled = true;
         }
     }
 }
