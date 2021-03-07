@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ColorPicker.Models
+﻿namespace ColorPicker.Models
 {
     public struct ColorState
     {
@@ -27,6 +21,14 @@ namespace ColorPicker.Models
             _HSV_V = hSV_V;
         }
 
+        public void SetARGB(double a, double r, double g, double b)
+        {
+            _A = a;
+            _RGB_R = r;
+            _RGB_G = g;
+            _RGB_B = b;
+            RecalculateHSV();
+        }
         public double A
         {
             get => _A;

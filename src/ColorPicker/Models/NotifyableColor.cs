@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Media;
 
 namespace ColorPicker.Models
 {
@@ -19,6 +15,9 @@ namespace ColorPicker.Models
             ColorState currentValue = storage.ColorState;
             if (currentValue.A != oldValue.A) RaisePropertyChanged(nameof(A));
 
+            if (currentValue.A != oldValue.A || currentValue.RGB_R != oldValue.RGB_R || currentValue.RGB_G != oldValue.RGB_G || currentValue.RGB_B != oldValue.RGB_B)
+                RaisePropertyChanged(nameof(RGBAColor));
+
             if (currentValue.RGB_R != oldValue.RGB_R) RaisePropertyChanged(nameof(RGB_R));
             if (currentValue.RGB_G != oldValue.RGB_G) RaisePropertyChanged(nameof(RGB_G));
             if (currentValue.RGB_B != oldValue.RGB_B) RaisePropertyChanged(nameof(RGB_B));
@@ -28,6 +27,16 @@ namespace ColorPicker.Models
             if (currentValue.HSV_V != oldValue.HSV_V) RaisePropertyChanged(nameof(HSV_V));
         }
 
+        public Color RGBAColor
+        {
+            get => Color.FromArgb((byte)(storage.ColorState.A * 255), (byte)(storage.ColorState.RGB_R * 255), (byte)(storage.ColorState.RGB_G * 255), (byte)(storage.ColorState.RGB_B * 255));
+            set
+            {
+                var state = storage.ColorState;
+                state.SetARGB(value.A / 255.0, value.R / 255.0, value.G / 255.0, value.B / 255.0);
+                storage.ColorState = state;
+            }
+        }
         public double A
         {
             get => storage.ColorState.A * 255;
