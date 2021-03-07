@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="ColorPicker.ColorSliders"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:ColorPicker"
+             xmlns:conv="clr-namespace:ColorPicker.Converters"
+             xmlns:ui="clr-namespace:ColorPicker.UIExtensions"
+             xmlns:behaviors="clr-namespace:ColorPicker.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+            <conv:ColorToHexConverter x:Key="HexToColorConverter" />
+            <conv:DoubleToByteStringConverter x:Key="ByteChannelConverter" />
+            <conv:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0" Max="359"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ColorSliderStyle.xaml" />
+                <ResourceDictionary Source="Styles/ImageButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <TabControl Canvas.Top="290" Margin="10" MaxHeight="155">
+        <TabControl.Resources>
+            <Style TargetType="TabPanel">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+        </TabControl.Resources>
+        <TabItem Header="HSV">
+            <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Center" Width="235">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="H" Width="18" Foreground="White" Padding="5,0,5,0" />
+                    <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderHsvType="H"
+                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" 
+                                       Maximum="359" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=HueSmallChange, ElementName=uc}" LargeChange="20"
+                                       Value="{Binding Path=NotifyableColorHsv.H, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorHsv.H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="S" Width="18" Foreground="White" Padding="5,0,5,0" />
+                    <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
+                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="S"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding Path=SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                       Value="{Binding Path=NotifyableColorHsv.S, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorHsv.S, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="V" Width="18" Foreground="White" Padding="5,0,5,0" />
+                    <ui:HsvColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" CurrentHue="{Binding Path=NotifyableColorHsv.H, ElementName=uc}" 
+                                       CurrentSaturation="{Binding Path=NotifyableColorHsv.S, ElementName=uc}" SliderHsvType="V"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                       Value="{Binding Path=NotifyableColorHsv.V, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorHsv.V, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="A" Width="18" Foreground="White" Padding="4,0,5,0" />
+                    <Grid Width="170" Height="12">
+                        <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
+                                           IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                           Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
+                        <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorRgba.A, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="RGB">
+            <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Center" Width="235">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="R" Width="18" Foreground="White" Padding="5,0,5,0" />
+                    <ui:RgbColorSlider Height="12" Width="170" Minimum="0"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="R"
+                                       Maximum="1" IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                       Value="{Binding Path=NotifyableColorRgba.R, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorRgba.R, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="G" Width="18" Foreground="White" Padding="4,0,5,0" />
+                    <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="G"
+                                       IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                       Value="{Binding Path=NotifyableColorRgba.G, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorRgba.G, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="B" Width="18" Foreground="White" Padding="5,0,5,0" />
+                    <ui:RgbColorSlider Height="12" Width="170" Minimum="0" Maximum="1"
+                                       CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="B"
+                                       IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                       Value="{Binding Path=NotifyableColorRgba.B, Mode=TwoWay, ElementName=uc}" />
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorRgba.B, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="A" Width="18" Foreground="White" Padding="4,0,5,0" />
+                    <Grid Width="170" Height="12">
+                        <ui:RgbColorSlider CurrentColor="{Binding Path=SelectedColor, ElementName=uc}" SliderArgbType="A" Maximum="1"
+                                           IsMoveToPointEnabled="True" SmallChangeBindable="{Binding SmallChange, ElementName=uc}" LargeChange="0.07812"
+                                           Value="{Binding Path=NotifyableColorRgba.A, Mode=TwoWay, ElementName=uc}" />
+                        <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                    <TextBox TextAlignment="Center" Width="40" Margin="5,0,0,0"
+                         Text="{Binding Path=NotifyableColorRgba.A, Converter={StaticResource ByteChannelConverter}, ElementName=uc}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>
