@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ColorPickerDemo"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1500">
+        Title="MainWindow" Height="680" Width="900"
+        Background="LightGray">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,37 +17,65 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="240"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <colorpicker:PortableColorPicker Grid.Column="0" Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
+
+        <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+            <StackPanel>
+                <Label>Portable Color Picker, default look</Label>
+                <colorpicker:PortableColorPicker Grid.Row="0"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+                <Label Grid.Row="1">Portable Color Picker, styled</Label>
+                <colorpicker:PortableColorPicker Grid.Row="1" Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+            </StackPanel>
+        </Border>
 
-        <colorpicker:PortableColorPicker Grid.Row="1"
-                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
-                                         SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+            <StackPanel>
+                <Label>
+                    <TextBlock>Standard Color Picker, default look<LineBreak/>Size constrained to minimal,<LineBreak/>Sliders change by 5 when scrolled over</TextBlock>
+                </Label>
+                <colorpicker:StandardColorPicker Width="200" Height="380"
+                                             SmallChange="5" 
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+            </StackPanel>
+        </Border>
 
+        <Label Grid.Column="1">Color sliders</Label>
+        <colorpicker:ColorSliders Grid.Row="0" Grid.Column="1" 
+                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"/>
 
-        <colorpicker:ColorDisplay Grid.Row="0" Grid.Column="1" x:Name="maindisplay"/>
-        <colorpicker:HSVPicker Grid.Row="1" Grid.Column="1" ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
-        <colorpicker:ColorSliders Grid.Row="2" Grid.Column="1" x:Name="second" ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"/>
+        <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
+        <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay"/>
+
+        <Label Grid.Row="2" Grid.Column="1">HSV Color Picker</Label>
+        <colorpicker:HSVPicker Grid.Row="2" Grid.Column="1" Margin="5" 
+                               ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
+
+        <Label Grid.Row="3" Grid.Column="1">Color as argb hex</Label>
         <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1" ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
 
-        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Style="{StaticResource DefaultColorPickerStyle}"
+
+        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
+        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0"
+                                         Style="{StaticResource DefaultColorPickerStyle}"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
-        <colorpicker:StandardColorPicker Grid.Column="3" Grid.RowSpan="4" SmallChange="5" Width="200" Height="380"
-                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
-                                         SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+
+        <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right">Try resizing the window to see controls stretching</Label>
     </Grid>
 </Window>
