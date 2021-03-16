@@ -55,9 +55,10 @@
             </StackPanel>
         </Border>
 
-        <Label Grid.Column="1">Color sliders</Label>
+        <Label Grid.Column="1">Color sliders, alpha hidden</Label>
         <colorpicker:ColorSliders Grid.Row="0" Grid.Column="1" 
-                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"/>
+                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                  ShowAlpha="False"/>
 
         <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
         <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay"/>

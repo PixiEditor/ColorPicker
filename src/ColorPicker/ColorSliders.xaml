@@ -40,7 +40,18 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="RowDefinition">
+                                <Setter Property="Height" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
+                                        <Setter Property="Height" Value="0" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
@@ -109,7 +120,18 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="RowDefinition">
+                                <Setter Property="Height" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
+                                        <Setter Property="Height" Value="0" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="R" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
