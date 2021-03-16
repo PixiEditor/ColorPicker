@@ -65,7 +65,8 @@ Those are present on controls that have a secondary color.
 - `SmallChange` lets you change SmallChange of sliders, which is used as sensitivity for when the user
 turns scroll wheel with the curson over the sliders. Present on controls that contain color sliders 
 (excluding circular hue slider).
-
+- `ShowAlpha` lets you hide the alpha channel on various controls. 
+Present on all controls containing either an alpha slider or a hex color textbox.
 
 # Styling<a name="styling">
 
