@@ -43,7 +43,8 @@
             <Border BorderThickness="1" BorderBrush="Black" Background="White">
                 <local:StandardColorPicker ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}" x:Name="test"
                                            SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}" 
-                                           SmallChange="{Binding ElementName=uc, Path=SmallChange}" Width="200" Height="380"/>
+                                           SmallChange="{Binding ElementName=uc, Path=SmallChange}" Width="200" Height="380"
+                                           ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"/>
             </Border>
         </Popup>
     </Grid>

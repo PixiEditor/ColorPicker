@@ -33,10 +33,12 @@
                             SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}"/>
         <DockPanel Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0">
             <Label>Hex</Label>
-            <local:HexColorTextBox ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"/>
+            <local:HexColorTextBox ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
+                                   ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"/>
         </DockPanel>
         <local:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3"
                             ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
-                            SmallChange="{Binding ElementName=uc, Path=SmallChange}"/>
+                            SmallChange="{Binding ElementName=uc, Path=SmallChange}"
+                            ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"/>
     </Grid>
 </local:DualPickerControlBase>
