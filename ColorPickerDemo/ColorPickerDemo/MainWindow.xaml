@@ -25,7 +25,7 @@
             <RowDefinition Height="150"/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
@@ -67,8 +67,8 @@
         <colorpicker:HSVPicker Grid.Row="2" Grid.Column="1" Margin="5" 
                                ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
 
-        <Label Grid.Row="3" Grid.Column="1">Color as argb hex</Label>
-        <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1" ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
+        <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
+        <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1" ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" ShowAlpha="False"/>
 
 
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
