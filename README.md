@@ -32,7 +32,7 @@ See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/Colo
 
 **Basic usage:**
 
-Install the NuGet package, insert a reference to ColorPicker namespace
+Install the NuGet package, insert a reference to the ColorPicker namespace
 ```
 <Window ...
 xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
@@ -47,10 +47,10 @@ Add the controls
 
 # Properties<a name="properties">
 
-Each control is inherited from PickerControlBase class and shares these common properies:
+Each control is inherited from PickerControlBase class and shares these common properties:
 
-- `ColorState` Dependency Property, it contains all info about the current state of the control. Use this property to bind controls together.
-- `Color`, which contains nested properties you may bind to or use to retrive the color in code-behind:
+- `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together.
+- `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
     - `Color.RGBAColor`: Current color as System.Windows.Media.Color
     - `Color.A`: Current Alpha, a double ranging from 0 to 255
     - `Color.RGB_R`, `Color.RGB_G`, `Color.RGB_B`: Dimensions of the RGB color space, each is a 0-255 double
@@ -63,7 +63,7 @@ Apart from those, some controls have unique properties:
 - `SecondColorState` and `SecondColor` are functionally identical to `ColorState` and `Color`. 
 Those are present on controls that have a secondary color.
 - `SmallChange` lets you change SmallChange of sliders, which is used as sensitivity for when the user
-turns scroll wheel with the curson over the sliders. Present on controls that contain color sliders 
+turns the scroll wheel with the cursor over the sliders. Present on controls that contain color sliders 
 (excluding circular hue slider).
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
 Present on all controls containing either an alpha slider or a hex color textbox.
@@ -74,7 +74,7 @@ Out of the box, the color picker uses the default WPF look:
 
 ![Default ColorPicker look](https://i.imgur.com/N2sSQ9X.png)
 
-You may use the included dark theme by loading a resource dictionary:
+You may use the included dark theme by loading a resource dictionary in XAML:
 ```
 <Window.Resources>
     <ResourceDictionary>
@@ -88,6 +88,20 @@ and referencing DefaultColorPickerStyle in the style attribute of a control:
 ```
 <colorpicker:StandardColorPicker Style="{StaticResource DefaultColorPickerStyle}" />
 ```
+
+As an alternative, the same can be achieved programmatically:
+```
+var resourceDictionary = new ResourceDictionary();
+resourceDictionary.Source = new System.Uri(
+    "pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml",
+    System.UriKind.RelativeOrAbsolute);
+
+StandardColorPicker picker = new StandardColorPicker()
+{
+    Style = (Style)resourceDictionary["DefaultColorPickerStyle"]
+};
+```
+
 You may define your own styles, see 
 [DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml) 
 for reference.
