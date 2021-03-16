@@ -28,7 +28,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 # Example Usage<a name="example">
 
-See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/3-0-0/ColorPickerDemo) for an example project.
+See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
 
 **Basic usage:**
 
