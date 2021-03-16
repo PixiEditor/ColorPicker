@@ -3,17 +3,34 @@
 
 # About
 
-A WPF Color picker made for [PixiEditor](https://github.com/PixiEditor/PixiEditor). Available to use for anyone, anywhere!
+A collection of WPF/.NET 5 controls the let users choose colors in various ways. 
+Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/C6m5YWI.png)
 
-Read about the theory behind it on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
+1. [Included Controls](#controls)
+1. [Example Usage](#example)
+1. [Properties](#properties)
+1. [Styling](#styling)
+1. [Other](#other)
 
-# Controls
+# Included Controls<a name="controls">
 
-There are two controls avaliable: `StandardColorPicker` (shown on the screenshot above) and `PortableColorPicker`. PortableColorPicker is an expandable version of StandardColorPicker.
+- `HSVPicker`: A HSV Color Picker, consisting of a circular hue slider and HV/HL square.
+- `ColorSliders`: A set of HSV/RGB + Alpha sliders
+- `HexColorTextBox`: An RGBA Hex text field
+- `ColorDisplay`: A Primary/Secondary Color display with a swap button
 
-# Usage
+**Additionally, two more controls are included for convenience**
+
+- `StandardColorPicker` which combines everything listed above in one control
+- `PortableColorPicker`, a collapsible version of StandardColorPicker
+
+# Example Usage<a name="example">
+
+See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/3-0-0/ColorPickerDemo) for an example project.
+
+**Basic usage:**
 
 Install the NuGet package, insert a reference to ColorPicker namespace
 ```
@@ -21,22 +38,42 @@ Install the NuGet package, insert a reference to ColorPicker namespace
 xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
 ...>
 ```
-and add either StandardColorPicker or PortableColorPicker controls
+Add the controls
 ```
-<StackPanel>
-	<colorpicker:StandardColorPicker />
-	<colorpicker:PortableColorPicker />
-</StackPanel>
+<colorpicker:StandardColorPicker x:Name="main" />
+<colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>
 ```
-Currently selected and secondary colors are stored inside `SelectedColor` and `SecondaryColor` dependency properties.
 
-# Styling
+
+# Properties<a name="properties">
+
+Each control is inherited from PickerControlBase class and shares these common properies:
+
+- `ColorState` Dependency Property, it contains all info about the current state of the control. Use this property to bind controls together.
+- `Color`, which contains nested properties you may bind to or use to retrive the color in code-behind:
+    - `Color.RGBAColor`: Current color as System.Windows.Media.Color
+    - `Color.A`: Current Alpha, a double ranging from 0 to 255
+    - `Color.RGB_R`, `Color.RGB_G`, `Color.RGB_B`: Dimensions of the RGB color space, each is a 0-255 double
+    - `Color.HSV_H`: Hue in HSV color space, a 0-360 double 
+    - `Color.HSV_S`: Saturation in HSV color space, a 0-100 double
+    - `Color.HSV_V`: Value in HSV color space, a 0-100 double
+
+Apart from those, some controls have unique properties:
+
+- `SecondColorState` and `SecondColor` are functionally identical to `ColorState` and `Color`. 
+Those are present on controls that have a secondary color.
+- `SmallChange` lets you change SmallChange of sliders, which is used as sensitivity for when the user
+turns scroll wheel with the curson over the sliders. Present on controls that contain color sliders 
+(excluding circular hue slider).
+
+
+# Styling<a name="styling">
 
 Out of the box, the color picker uses the default WPF look:
 
 ![Default ColorPicker look](https://i.imgur.com/N2sSQ9X.png)
 
-You have an option to use the included dark theme by loading a resource dictionary:
+You may use the included dark theme by loading a resource dictionary:
 ```
 <Window.Resources>
     <ResourceDictionary>
@@ -46,8 +83,14 @@ You have an option to use the included dark theme by loading a resource dictiona
     </ResourceDictionary>
 </Window.Resources>
 ```
-and referencing DefaultColorPickerStyle in the style attribute of the control:
+and referencing DefaultColorPickerStyle in the style attribute of a control:
 ```
 <colorpicker:StandardColorPicker Style="{StaticResource DefaultColorPickerStyle}" />
 ```
-You may also define your own styles, see [DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml) for reference.
+You may define your own styles, see 
+[DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml) 
+for reference.
+
+# Other<a name="other">
+
+Read flabbet's article on the theory behind the first version of this project on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
