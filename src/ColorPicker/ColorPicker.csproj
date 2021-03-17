@@ -6,7 +6,7 @@
     <Authors>Krzysztof Krysiński, Egor Mozgovoy</Authors>
     <Company>PixiEditor</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>PixiEditor © 2020</Copyright>
+    <Copyright>PixiEditor</Copyright>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
@@ -18,11 +18,16 @@
     <Title>A WPF Color Picker</Title>
     <AssemblyVersion>3.0.1.0</AssemblyVersion>
     <FileVersion>3.0.1.0</FileVersion>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Images\CircularHueGradient.png" />
     <None Remove="Images\ColorCircle.png" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <Resource Include="Images\CircularHueGradient.png" />
     <None Include="..\..\LICENSE.md">
       <Pack>True</Pack>
