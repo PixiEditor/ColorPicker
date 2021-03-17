@@ -12,21 +12,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-            <conv:ColorToLongHexConverter x:Key="ColorToLongHexConverter" />
-            <conv:ColorToShortHexConverter x:Key="ColorToShortHexConverter" />
-            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" Invert="False" />
-            <conv:BoolToVisibilityConverter x:Key="BoolToInvertedVisibilityConverter" Invert="True" />
+            <conv:ColorToHexConverter x:Key="ColorToHexConverter" ShowAlpha="{Binding Source={x:Reference uc}, Path=ShowAlpha}" OnShowAlphaChange="ColorToHexConverter_OnShowAlphaChange"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TextBox VerticalAlignment="Center" Width="70" Visibility="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource BoolToVisibilityConverter}}"
-                                            Text="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToLongHexConverter}, ElementName=uc}">
-            <i:Interaction.Behaviors>
-                <behav:TextBoxFocusBehavior />
-            </i:Interaction.Behaviors>
-        </TextBox>
-        <TextBox VerticalAlignment="Center" Width="70" Visibility="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource BoolToInvertedVisibilityConverter}}"
-                                            Text="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToShortHexConverter}, ElementName=uc}">
+        <TextBox VerticalAlignment="Center" Width="70"
+                 Text="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToHexConverter}, ElementName=uc}">
             <i:Interaction.Behaviors>
                 <behav:TextBoxFocusBehavior />
             </i:Interaction.Behaviors>

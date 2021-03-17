@@ -22,9 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icon.png" />
     <None Remove="Images\CircularHueGradient.png" />
     <None Remove="Images\ColorCircle.png" />
-    <None Include="..\..\icon.png">
+    <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
