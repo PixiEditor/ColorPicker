@@ -14,21 +14,22 @@
         <ResourceDictionary>
             <conv:ColorToLongHexConverter x:Key="ColorToLongHexConverter" />
             <conv:ColorToShortHexConverter x:Key="ColorToShortHexConverter" />
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" Invert="False" />
+            <conv:BoolToVisibilityConverter x:Key="BoolToInvertedVisibilityConverter" Invert="True" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <TextBox VerticalAlignment="Center" Width="70">
-        <TextBox.Style>
-            <Style TargetType="TextBox">
-                <Setter Property="Text" Value="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToLongHexConverter}, ElementName=uc}"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
-                        <Setter Property="Text" Value="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToShortHexConverter}, ElementName=uc}" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </TextBox.Style>
-        <i:Interaction.Behaviors>
-            <behav:TextBoxFocusBehavior />
-        </i:Interaction.Behaviors>
-    </TextBox>
+    <Grid>
+        <TextBox VerticalAlignment="Center" Width="70" Visibility="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            Text="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToLongHexConverter}, ElementName=uc}">
+            <i:Interaction.Behaviors>
+                <behav:TextBoxFocusBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <TextBox VerticalAlignment="Center" Width="70" Visibility="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource BoolToInvertedVisibilityConverter}}"
+                                            Text="{Binding Path=Color.RGBAColor, Converter={StaticResource ColorToShortHexConverter}, ElementName=uc}">
+            <i:Interaction.Behaviors>
+                <behav:TextBoxFocusBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+    </Grid>
 </local:PickerControlBase>
