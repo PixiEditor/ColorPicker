@@ -72,7 +72,7 @@ Present on all controls containing either an alpha slider or a hex color textbox
 
 Out of the box, the color picker uses the default WPF look:
 
-![Default ColorPicker look](https://i.imgur.com/N2sSQ9X.png)
+![Default ColorPicker look](https://i.imgur.com/NiYFpiV.png)
 
 You may use the included dark theme by loading a resource dictionary in XAML:
 ```
