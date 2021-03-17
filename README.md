@@ -47,7 +47,7 @@ Add the controls
 
 # Properties<a name="properties">
 
-Each control is inherited from PickerControlBase class and shares these common properties:
+All controls share these properties:
 
 - `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together.
 - `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
