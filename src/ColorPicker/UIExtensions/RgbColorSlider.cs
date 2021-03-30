@@ -18,11 +18,15 @@ namespace ColorPicker.UIExtensions
         }
         protected override void GenerateBackground()
         {
-            Background = new LinearGradientBrush(new GradientStopCollection
+            var colorStart = GetColorForSelectedArgb(0);
+            var colorEnd = GetColorForSelectedArgb(255);
+            LeftCapColor.Color = colorStart;
+            RightCapColor.Color = colorEnd;
+            BackgroundGradient = new GradientStopCollection
             {
-                new GradientStop(GetColorForSelectedArgb(0), 0.0),
-                new GradientStop(GetColorForSelectedArgb(255), 1)
-            });
+                new GradientStop(colorStart, 0.0),
+                new GradientStop(colorEnd, 1)
+            };
         }
 
         private Color GetColorForSelectedArgb(int value)

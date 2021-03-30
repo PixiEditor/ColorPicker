@@ -1,12 +1,14 @@
 ﻿using ColorPicker.Models;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
 {
-    internal abstract class PreviewColorSlider : Slider
+    internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
     {
 
         public static readonly DependencyProperty CurrentColorStateProperty =
@@ -16,6 +18,8 @@ namespace ColorPicker.UIExtensions
         public static readonly DependencyProperty SmallChangeBindableProperty =
             DependencyProperty.Register(nameof(SmallChangeBindable), typeof(double), typeof(PreviewColorSlider),
                 new PropertyMetadata(1.0, SmallChangeBindableChangedCallback));
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PreviewColorSlider()
         {
@@ -39,9 +43,39 @@ namespace ColorPicker.UIExtensions
             set => SetValue(CurrentColorStateProperty, value);
         }
 
+        private LinearGradientBrush backgroundBrush = new LinearGradientBrush();
+        public GradientStopCollection BackgroundGradient
+        {
+            get => backgroundBrush.GradientStops;
+            set => backgroundBrush.GradientStops = value;
+        }
+
+        private SolidColorBrush _leftCapColor = new SolidColorBrush();
+        public SolidColorBrush LeftCapColor
+        {
+            get => _leftCapColor;
+            set
+            {
+                _leftCapColor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LeftCapColor)));
+            }
+        }
+
+        private SolidColorBrush _rightCapColor = new SolidColorBrush();
+        public SolidColorBrush RightCapColor
+        {
+            get => _rightCapColor;
+            set
+            {
+                _rightCapColor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RightCapColor)));
+            }
+        }
+
         public override void EndInit()
         {
             base.EndInit();
+            Background = backgroundBrush;
             GenerateBackground();
         }
 

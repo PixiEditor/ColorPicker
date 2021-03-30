@@ -22,23 +22,33 @@ namespace ColorPicker.UIExtensions
         {
             if (SliderHsvType == "H")
             {
-                Background = new LinearGradientBrush(new GradientStopCollection
+                var colorStart = GetColorForSelectedArgb(0);
+                var colorEnd = GetColorForSelectedArgb(360);
+                LeftCapColor.Color = colorStart;
+                RightCapColor.Color = colorEnd;
+                BackgroundGradient = new GradientStopCollection()
                 {
-                    new GradientStop(GetColorForSelectedArgb(0), 0),
+                    new GradientStop(colorStart, 0),
                     new GradientStop(GetColorForSelectedArgb(60), 1/6.0),
                     new GradientStop(GetColorForSelectedArgb(120), 2/6.0),
                     new GradientStop(GetColorForSelectedArgb(180), 0.5),
                     new GradientStop(GetColorForSelectedArgb(240), 4/6.0),
                     new GradientStop(GetColorForSelectedArgb(300), 5/6.0),
-                    new GradientStop(GetColorForSelectedArgb(360), 1)
-                });
+                    new GradientStop(colorEnd, 1)
+                };
                 return;
             }
-            Background = new LinearGradientBrush(new GradientStopCollection
             {
-                new GradientStop(GetColorForSelectedArgb(0), 0.0),
-                new GradientStop(GetColorForSelectedArgb(255), 1)
-            });
+                var colorStart = GetColorForSelectedArgb(0);
+                var colorEnd = GetColorForSelectedArgb(255);
+                LeftCapColor.Color = colorStart;
+                RightCapColor.Color = colorEnd;
+                BackgroundGradient = new GradientStopCollection
+                {
+                    new GradientStop(colorStart, 0.0),
+                    new GradientStop(colorEnd, 1)
+                };
+            }
         }
 
         private Color GetColorForSelectedArgb(int value)

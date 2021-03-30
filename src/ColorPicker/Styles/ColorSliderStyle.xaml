@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ui="clr-namespace:ColorPicker.UIExtensions">
+                    xmlns:ui="clr-namespace:ColorPicker.UIExtensions"
+                    xmlns:local="clr-namespace:ColorPicker.UIExtensions">
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Background" Value="Transparent" />
@@ -85,8 +86,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="PreviewColorSliderTemplate" TargetType="{x:Type Slider}">
-        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}"
+    <ControlTemplate x:Key="PreviewColorSliderTemplate" TargetType="{x:Type local:PreviewColorSlider}">
+        <Border x:Name="border" CornerRadius="5" 
                 BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                 SnapsToDevicePixels="True">
             <Grid>
@@ -95,6 +96,13 @@
                     <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+                <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="6" Height="12" 
+                        Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=LeftCapColor}"/>
+                <Border HorizontalAlignment="Right" CornerRadius="0,5,5,0" Grid.RowSpan="3" Width="6" Height="12" 
+                        Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=RightCapColor}"/>
+                <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" Margin="6,0"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                </Border>
                 <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2"
                          Placement="Top" Grid.Row="0" Visibility="Collapsed" />
                 <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0"
