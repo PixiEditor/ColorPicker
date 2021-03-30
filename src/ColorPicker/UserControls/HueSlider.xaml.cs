@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColorPicker.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -56,7 +57,7 @@ namespace ColorPicker.UserControls
             if (y < 0)
                 angle = -angle;
             angle = angle * 360 / (Math.PI * 2) + 180;
-            Value = Math.Clamp(angle, 0, 360);
+            Value = MathHelper.Clamp(angle, 0, 360);
         }
     }
 }

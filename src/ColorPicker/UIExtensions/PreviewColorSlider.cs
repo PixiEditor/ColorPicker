@@ -1,5 +1,4 @@
 ﻿using ColorPicker.Models;
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,7 +92,7 @@ namespace ColorPicker.UIExtensions
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
         {
-            Value = Math.Clamp(Value + SmallChange * args.Delta / 120, Minimum, Maximum);
+            Value = MathHelper.Clamp(Value + SmallChange * args.Delta / 120, Minimum, Maximum);
             args.Handled = true;
         }
     }

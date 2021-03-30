@@ -1,5 +1,4 @@
 ﻿using ColorPicker.Models;
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -79,7 +78,8 @@ namespace ColorPicker.UserControls
             {
                 for (int i = 0; i < w; i++)
                 {
-                    var (r, g, b) = HsvHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+                    var rgbtuple = HsvHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+                    double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                     int pos = (j * h + i) * 3;
                     pixels[pos] = (byte)(r * 255);
                     pixels[pos + 1] = (byte)(g * 255);
@@ -108,8 +108,8 @@ namespace ColorPicker.UserControls
 
         private void UpdatePos(Point pos)
         {
-            HeadX = Math.Clamp(pos.X / ActualWidth, 0, 1) * RangeX;
-            HeadY = (1 - Math.Clamp(pos.Y / ActualHeight, 0, 1)) * RangeY;
+            HeadX = MathHelper.Clamp(pos.X / ActualWidth, 0, 1) * RangeX;
+            HeadY = (1 - MathHelper.Clamp(pos.Y / ActualHeight, 0, 1)) * RangeY;
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)

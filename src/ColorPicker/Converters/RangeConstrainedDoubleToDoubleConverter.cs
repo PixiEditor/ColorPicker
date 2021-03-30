@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColorPicker.Models;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -37,7 +38,7 @@ namespace ColorPicker.Converters
         {
             if (!double.TryParse(((string)value).Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
                 return DependencyProperty.UnsetValue;
-            return Math.Clamp(result, Min, Max);
+            return MathHelper.Clamp(result, Min, Max);
         }
     }
 }

@@ -57,17 +57,20 @@ namespace ColorPicker.UIExtensions
             {
                 case "H":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(value, CurrentColorState.HSV_S, CurrentColorState.HSV_V);
+                        var rgbtuple = HsvHelper.HsvToRgb(value, CurrentColorState.HSV_S, CurrentColorState.HSV_V);
+                        double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "S":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(CurrentColorState.HSV_H, value / 255.0, CurrentColorState.HSV_V);
+                        var rgbtuple = HsvHelper.HsvToRgb(CurrentColorState.HSV_H, value / 255.0, CurrentColorState.HSV_V);
+                        double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "V":
                     {
-                        var (r, g, b) = HsvHelper.HsvToRgb(CurrentColorState.HSV_H, CurrentColorState.HSV_S, value / 255.0);
+                        var rgbtuple = HsvHelper.HsvToRgb(CurrentColorState.HSV_H, CurrentColorState.HSV_S, value / 255.0);
+                        double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 default:

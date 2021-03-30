@@ -2,6 +2,6 @@
 {
     public interface IColorStateStorage
     {
-        public ColorState ColorState { get; set; }
+        ColorState ColorState { get; set; }
     }
 }

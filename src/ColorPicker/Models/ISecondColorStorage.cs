@@ -2,6 +2,6 @@
 {
     interface ISecondColorStorage
     {
-        public ColorState SecondColorState { get; set; }
+        ColorState SecondColorState { get; set; }
     }
 }

@@ -35,13 +35,13 @@ namespace ColorPicker.UIExtensions
             byte r = (byte)(CurrentColorState.RGB_R * 255);
             byte g = (byte)(CurrentColorState.RGB_G * 255);
             byte b = (byte)(CurrentColorState.RGB_B * 255);
-            return SliderArgbType switch
+            switch (SliderArgbType)
             {
-                "A" => Color.FromArgb((byte)value, r, g, b),
-                "R" => Color.FromArgb(a, (byte)value, g, b),
-                "G" => Color.FromArgb(a, r, (byte)value, b),
-                "B" => Color.FromArgb(a, r, g, (byte)value),
-                _ => Color.FromArgb(a, r, g, b),
+                case "A": return Color.FromArgb((byte)value, r, g, b);
+                case "R": return Color.FromArgb(a, (byte)value, g, b);
+                case "G": return Color.FromArgb(a, r, (byte)value, b);
+                case "B": return Color.FromArgb(a, r, g, (byte)value);
+                default: return Color.FromArgb(a, r, g, b);
             };
         }
     }

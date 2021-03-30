@@ -11,7 +11,7 @@ namespace ColorPicker.Models
         /// <param name="g">Green channel</param>
         /// <param name="b">Blue channel</param>
         /// <returns>Values in order: Hue (0-360 or -1), Saturation (0-1 or -1), Value (0-1)</returns>
-        public static (double, double, double) RgbToHsv(double r, double g, double b)
+        public static Tuple<double, double, double> RgbToHsv(double r, double g, double b)
         {
             double min, max, delta;
             double h, s, v;
@@ -27,7 +27,7 @@ namespace ColorPicker.Models
                 //pure black
                 s = -1;
                 h = -1;
-                return (h, s, v);
+                return new Tuple<double, double, double>(h, s, v);
             }
             if (r == max)
                 h = (g - b) / delta;       // between yellow & magenta
@@ -41,7 +41,7 @@ namespace ColorPicker.Models
             if (Double.IsNaN(h)) //delta == 0, case of pure gray
                 h = -1;
 
-            return (h, s, v);
+            return new Tuple<double, double, double>(h, s, v);
         }
 
         /// <summary>
@@ -51,12 +51,12 @@ namespace ColorPicker.Models
         /// <param name="s">Saturation, 0-1</param>
         /// <param name="v">Value, 0-1</param>
         /// <returns>Values (0-1) in order: R, G, B</returns>
-        public static (double, double, double) HsvToRgb(double h, double s, double v)
+        public static Tuple<double, double, double> HsvToRgb(double h, double s, double v)
         {
             if (s == 0)
             {
                 // achromatic (grey)
-                return (v, v, v);
+                return new Tuple<double, double, double>(v, v, v);
             }
             if (h >= 360.0)
                 h = 0;
@@ -66,15 +66,25 @@ namespace ColorPicker.Models
             double p = (v * (1 - s));
             double q = (v * (1 - s * f));
             double t = (v * (1 - s * (1 - f)));
-
+            /*
             return i switch
             {
-                0 => (v, t, p),
-                1 => (q, v, p),
-                2 => (p, v, t),
-                3 => (p, q, v),
-                4 => (t, p, v),
-                _ => (v, p, q)
+                0 => new Tuple<double, double, double>(v, t, p),
+                1 => new Tuple<double, double, double>(q, v, p),
+                2 => new Tuple<double, double, double>(p, v, t),
+                3 => new Tuple<double, double, double>(p, q, v),
+                4 => new Tuple<double, double, double>(t, p, v),
+                _ => new Tuple<double, double, double>(v, p, q)
+            };*/
+
+            switch (i)
+            {
+                case 0: return new Tuple<double, double, double>(v, t, p);
+                case 1: return new Tuple<double, double, double>(q, v, p);
+                case 2: return new Tuple<double, double, double>(p, v, t);
+                case 3: return new Tuple<double, double, double>(p, q, v);
+                case 4: return new Tuple<double, double, double>(t, p, v);
+                default: return new Tuple<double, double, double>(v, p, q);
             };
         }
     }
