@@ -3,8 +3,9 @@
 
 # About
 
-A collection of WPF/.NET 5 controls the let users choose colors in various ways. 
-Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
+A collection of WPF controls the let users choose colors in various ways. 
+Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor). 
+Supports .NET Framework 4.5+ and .NET Core 3.1+
 
 ![screenshot](https://i.imgur.com/C6m5YWI.png)
 
@@ -43,7 +44,8 @@ Add the controls
 <colorpicker:StandardColorPicker x:Name="main" />
 <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>
 ```
-
+Note: in some configurations such as using the package in .NET Framework 4.7 XAML designer breaks and doesn't show the control.
+In my testing that did not affect the build process.
 
 # Properties<a name="properties">
 
