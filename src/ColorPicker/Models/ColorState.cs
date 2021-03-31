@@ -100,7 +100,7 @@
 
         private void RecalculateHSV()
         {
-            var hsvtuple = HsvHelper.RgbToHsv(_RGB_R, _RGB_G, _RGB_B);
+            var hsvtuple = ColorSpaceHelper.RgbToHsv(_RGB_R, _RGB_G, _RGB_B);
             double h = hsvtuple.Item1, s = hsvtuple.Item2, v = hsvtuple.Item3;
             if (h != -1)
                 _HSV_H = h;
@@ -111,7 +111,7 @@
 
         private void RecalculateRGB()
         {
-            var rgbtuple = HsvHelper.HsvToRgb(_HSV_H, _HSV_S, _HSV_V);
+            var rgbtuple = ColorSpaceHelper.HsvToRgb(_HSV_H, _HSV_S, _HSV_V);
             _RGB_R = rgbtuple.Item1;
             _RGB_G = rgbtuple.Item2;
             _RGB_B = rgbtuple.Item3;

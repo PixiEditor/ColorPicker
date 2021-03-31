@@ -1,4 +1,5 @@
 ﻿using ColorPicker.Models;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,11 +9,33 @@ using System.Windows.Media.Imaging;
 
 namespace ColorPicker.UserControls
 {
+    public enum PickerType
+    {
+        HSV, HSL
+    }
+    public enum PickerShape
+    {
+        Square, Triangle
+    }
     internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
-        public static readonly DependencyProperty HueProperty = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0, OnHueChanged));
-        public static readonly DependencyProperty HeadXProperty = DependencyProperty.Register(nameof(HeadX), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0));
-        public static readonly DependencyProperty HeadYProperty = DependencyProperty.Register(nameof(HeadY), typeof(double), typeof(SquareSlider), new PropertyMetadata(0.0));
+        public static readonly DependencyProperty HueProperty
+            = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SquareSlider),
+                new PropertyMetadata(0.0, OnHueChanged));
+
+        public static readonly DependencyProperty HeadXProperty
+            = DependencyProperty.Register(nameof(HeadX), typeof(double), typeof(SquareSlider),
+                new PropertyMetadata(0.0));
+        public static readonly DependencyProperty HeadYProperty
+            = DependencyProperty.Register(nameof(HeadY), typeof(double), typeof(SquareSlider),
+                new PropertyMetadata(0.0));
+
+        public static readonly DependencyProperty PickerTypeProperty
+            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(SquareSlider),
+                new PropertyMetadata(PickerType.HSV, OnColorSpaceChanged));
+        public static readonly DependencyProperty PickerShapeProperty
+            = DependencyProperty.Register(nameof(PickerShape), typeof(PickerShape), typeof(SquareSlider),
+                new PropertyMetadata(PickerShape.Square));
 
         public double Hue
         {
@@ -28,6 +51,16 @@ namespace ColorPicker.UserControls
         {
             get => (double)GetValue(HeadYProperty);
             set => SetValue(HeadYProperty, value);
+        }
+        public PickerType PickerType
+        {
+            get => (PickerType)GetValue(PickerTypeProperty);
+            set => SetValue(PickerTypeProperty, value);
+        }
+        public PickerShape PickerShape
+        {
+            get => (PickerShape)GetValue(PickerShapeProperty);
+            set => SetValue(PickerShapeProperty, value);
         }
         private double _rangeX;
         public double RangeX
@@ -68,6 +101,8 @@ namespace ColorPicker.UserControls
             }
         }
 
+        private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
+
         private void RecalculateGradient()
         {
             int w = GradientBitmap.PixelWidth;
@@ -78,7 +113,7 @@ namespace ColorPicker.UserControls
             {
                 for (int i = 0; i < w; i++)
                 {
-                    var rgbtuple = HsvHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+                    var rgbtuple = ColorSpaceHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
                     double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                     int pos = (j * h + i) * 3;
                     pixels[pos] = (byte)(r * 255);
@@ -87,6 +122,17 @@ namespace ColorPicker.UserControls
                 }
             }
             GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
+        }
+
+        private static void OnColorSpaceChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
+        {
+            SquareSlider sender = (SquareSlider)d;
+            if ((PickerType)args.NewValue == PickerType.HSV)
+                sender.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
+            else
+                sender.colorSpaceConversionMethod = ColorSpaceHelper.HslToRgb;
+
+            sender.RecalculateGradient();
         }
         private static void OnHueChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
