@@ -14,16 +14,16 @@
              MinWidth="200"
              MinHeight="380"
              d:DesignWidth="268.356" d:DesignHeight="463.308">
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1.4*"/>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1.1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1.1*" MaxHeight="35"/>
+            <RowDefinition Height="4*" MaxHeight="110"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" MaxWidth="100"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <local:HSVPicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5" VerticalAlignment="Stretch" 
@@ -32,7 +32,7 @@
                             ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
                             SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}"/>
         <DockPanel Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0">
-            <Label>Hex</Label>
+            <Label Content="Hex"/>
             <local:HexColorTextBox ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
                                    ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"/>
         </DockPanel>
