@@ -45,40 +45,6 @@ namespace ColorPicker.Models
         }
 
         /// <summary>
-        /// Converts HSV to RGB
-        /// </summary>
-        /// <param name="h">Hue, 0-360</param>
-        /// <param name="s">Saturation, 0-1</param>
-        /// <param name="v">Value, 0-1</param>
-        /// <returns>Values (0-1) in order: R, G, B</returns>
-        public static Tuple<double, double, double> HsvToRgb(double h, double s, double v)
-        {
-            if (s == 0)
-            {
-                // achromatic (grey)
-                return new Tuple<double, double, double>(v, v, v);
-            }
-            if (h >= 360.0)
-                h = 0;
-            h /= 60;
-            int i = (int)h;
-            double f = h - i;
-            double p = (v * (1 - s));
-            double q = (v * (1 - s * f));
-            double t = (v * (1 - s * (1 - f)));
-
-            switch (i)
-            {
-                case 0: return new Tuple<double, double, double>(v, t, p);
-                case 1: return new Tuple<double, double, double>(q, v, p);
-                case 2: return new Tuple<double, double, double>(p, v, t);
-                case 3: return new Tuple<double, double, double>(p, q, v);
-                case 4: return new Tuple<double, double, double>(t, p, v);
-                default: return new Tuple<double, double, double>(v, p, q);
-            };
-        }
-
-        /// <summary>
         /// Converts RGB to HSL, returns -1 for undefined channels
         /// </summary>
         /// <param name="r">Red channel</param>
@@ -127,11 +93,63 @@ namespace ColorPicker.Models
         }
 
         /// <summary>
+        /// Converts HSV to RGB
+        /// </summary>
+        /// <param name="h">Hue, 0-360</param>
+        /// <param name="s">Saturation, 0-1</param>
+        /// <param name="v">Value, 0-1</param>
+        /// <returns>Values (0-1) in order: R, G, B</returns>
+        public static Tuple<double, double, double> HsvToRgb(double h, double s, double v)
+        {
+            if (s == 0)
+            {
+                // achromatic (grey)
+                return new Tuple<double, double, double>(v, v, v);
+            }
+            if (h >= 360.0)
+                h = 0;
+            h /= 60;
+            int i = (int)h;
+            double f = h - i;
+            double p = (v * (1 - s));
+            double q = (v * (1 - s * f));
+            double t = (v * (1 - s * (1 - f)));
+
+            switch (i)
+            {
+                case 0: return new Tuple<double, double, double>(v, t, p);
+                case 1: return new Tuple<double, double, double>(q, v, p);
+                case 2: return new Tuple<double, double, double>(p, v, t);
+                case 3: return new Tuple<double, double, double>(p, q, v);
+                case 4: return new Tuple<double, double, double>(t, p, v);
+                default: return new Tuple<double, double, double>(v, p, q);
+            };
+        }
+
+        /// <summary>
+        /// Converts HSV to HSL
+        /// </summary>
+        /// <param name="h">Hue, 0-360</param>
+        /// <param name="s">Saturation, 0-1</param>
+        /// <param name="v">Value, 0-1</param>
+        /// <returns>Values in order: Hue (same), Saturation (0-1 or -1), Lightness (0-1)</returns>
+        public static Tuple<double, double, double> HsvToHsl(double h, double s, double v)
+        {
+            double hsl_l = v * (1 - s / 2);
+            double hsl_s;
+            if (hsl_l == 0 || hsl_l == 1)
+                hsl_s = -1;
+            else
+                hsl_s = (v - hsl_l) / Math.Min(hsl_l, 1 - hsl_l);
+            return new Tuple<double, double, double>(h, hsl_s, hsl_l);
+        }
+
+        /// <summary>
         /// Converts HSL to RGB
         /// </summary>
         /// <param name="h">Hue, 0-360</param>
         /// <param name="s">Saturation, 0-1</param>
-        /// <param name="v">Lightness, 0-1</param>
+        /// <param name="l">Lightness, 0-1</param>
         /// <returns>Values (0-1) in order: R, G, B</returns>
         public static Tuple<double, double, double> HslToRgb(double h, double s, double l)
         {
@@ -151,6 +169,24 @@ namespace ColorPicker.Models
                 case 4: return new Tuple<double, double, double>(delta * circleSegmentFraction + minRGB, minRGB, maxRGB); //blue-purple
                 default: return new Tuple<double, double, double>(maxRGB, minRGB, delta * (1 - circleSegmentFraction) + minRGB); //purple-red and invalid values
             }
+        }
+
+        /// <summary>
+        /// Converts HSL to HSV
+        /// </summary>
+        /// <param name="h">Hue, 0-360</param>
+        /// <param name="s">Saturation, 0-1</param>
+        /// <param name="l">Lightness, 0-1</param>
+        /// <returns>Values in order: Hue (same), Saturation (0-1 or -1), Value (0-1)</returns>
+        public static Tuple<double, double, double> HslToHsv(double h, double s, double l)
+        {
+            double hsv_v = l + s * Math.Min(l, 1 - l);
+            double hsv_s;
+            if (hsv_v == 0)
+                hsv_s = -1;
+            else
+                hsv_s = 2 * (1 - l / hsv_v);
+            return new Tuple<double, double, double>(h, hsv_s, hsv_v);
         }
     }
 }

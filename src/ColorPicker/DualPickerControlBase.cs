@@ -7,7 +7,7 @@ namespace ColorPicker
     {
         public static readonly DependencyProperty SecondColorStateProperty =
                 DependencyProperty.Register(nameof(SecondColorState), typeof(ColorState), typeof(DualPickerControlBase),
-                    new PropertyMetadata(new ColorState(1, 1, 1, 1, 0, 0, 1), OnSecondColorStatePropertyChange));
+                    new PropertyMetadata(new ColorState(1, 1, 1, 1, 0, 0, 1, 0, 0, 1), OnSecondColorStatePropertyChange));
         private SecondColorDecorator secondColorDecorator;
         public ColorState SecondColorState
         {

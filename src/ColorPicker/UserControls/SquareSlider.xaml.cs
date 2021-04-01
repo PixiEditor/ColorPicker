@@ -9,13 +9,13 @@ using System.Windows.Media.Imaging;
 
 namespace ColorPicker.UserControls
 {
-    public enum PickerType
+    public enum PickerType : int
     {
-        HSV, HSL
+        HSV = 0, HSL = 1
     }
-    public enum PickerShape
+    public enum PickerShape : int
     {
-        Square, Triangle
+        Square = 0, Triangle = 1
     }
     internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
@@ -113,7 +113,7 @@ namespace ColorPicker.UserControls
             {
                 for (int i = 0; i < w; i++)
                 {
-                    var rgbtuple = ColorSpaceHelper.HsvToRgb(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
+                    var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), ((h - 1) - j) / (double)(h - 1));
                     double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                     int pos = (j * h + i) * 3;
                     pixels[pos] = (byte)(r * 255);

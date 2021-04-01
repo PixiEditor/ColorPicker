@@ -162,4 +162,7 @@
     <Style TargetType="{x:Type ui:RgbColorSlider}">
         <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
     </Style>
+    <Style TargetType="{x:Type ui:HslColorSlider}">
+        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
+    </Style>
 </ResourceDictionary>
