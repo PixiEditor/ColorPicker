@@ -27,7 +27,6 @@ Supports .NET Framework 4.5+ and .NET Core 3.1+</Description>
   <ItemGroup>
     <None Remove="icon.png" />
     <None Remove="Images\CircularHueGradient.png" />
-    <None Remove="Images\ColorCircle.png" />
     <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -45,7 +44,6 @@ Supports .NET Framework 4.5+ and .NET Core 3.1+</Description>
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\ColorCircle.png" />
     <Resource Include="Images\transparentbg_mini.png" />
   </ItemGroup>
 
