@@ -13,10 +13,6 @@ namespace ColorPicker.UserControls
     {
         HSV = 0, HSL = 1
     }
-    public enum PickerShape : int
-    {
-        Square = 0, Triangle = 1
-    }
     internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty HueProperty
@@ -33,9 +29,6 @@ namespace ColorPicker.UserControls
         public static readonly DependencyProperty PickerTypeProperty
             = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(SquareSlider),
                 new PropertyMetadata(PickerType.HSV, OnColorSpaceChanged));
-        public static readonly DependencyProperty PickerShapeProperty
-            = DependencyProperty.Register(nameof(PickerShape), typeof(PickerShape), typeof(SquareSlider),
-                new PropertyMetadata(PickerShape.Square));
 
         public double Hue
         {
@@ -57,11 +50,7 @@ namespace ColorPicker.UserControls
             get => (PickerType)GetValue(PickerTypeProperty);
             set => SetValue(PickerTypeProperty, value);
         }
-        public PickerShape PickerShape
-        {
-            get => (PickerShape)GetValue(PickerShapeProperty);
-            set => SetValue(PickerShapeProperty, value);
-        }
+
         private double _rangeX;
         public double RangeX
         {

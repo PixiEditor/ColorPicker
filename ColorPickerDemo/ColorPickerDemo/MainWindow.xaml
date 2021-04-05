@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ColorPickerDemo"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="680" Width="900"
+        Title="MainWindow" Height="680" Width="920"
         Background="LightGray">
     <Window.Resources>
         <ResourceDictionary>
@@ -65,8 +65,12 @@
         <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
         <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay"/>
 
-        <Label Grid.Row="2" Grid.Column="1">HSV Color Picker</Label>
-        <colorpicker:HSVPicker Grid.Row="2" Grid.Column="1" Margin="5" PickerType="HSL"
+        <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
+        <ComboBox Grid.Row="2" Grid.Column="1" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
+            <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+            <ComboBoxItem>HSL</ComboBoxItem>
+        </ComboBox>
+        <colorpicker:HSVPicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
                                ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
 
         <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>

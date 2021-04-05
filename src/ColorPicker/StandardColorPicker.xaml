@@ -14,7 +14,7 @@
              MinWidth="200"
              MinHeight="380"
              d:DesignWidth="268.356" d:DesignHeight="463.308">
-    <Grid Name="MainGrid" ShowGridLines="True">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1.4*"/>
