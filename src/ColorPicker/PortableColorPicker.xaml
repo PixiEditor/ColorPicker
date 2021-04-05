@@ -35,7 +35,7 @@
             <ToggleButton Style="{StaticResource ColorToggleButtonStyle}" Padding="0" Margin="0" Height="20" Width="40"
                           IsEnabled="{Binding Path=IsOpen, ElementName=popup, Converter={StaticResource BoolToInvertedBoolConverter}}"
                           x:Name="toggleButton" BorderThickness="0" Panel.ZIndex="1"
-                          Background="{Binding Path=Color.RGBAColor, ElementName=uc, Converter={StaticResource ColorToBrushConverter}}">
+                          Background="{Binding Path=SelectedColor, ElementName=uc, Converter={StaticResource ColorToBrushConverter}}">
                 <Border Height="20" Width="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" />
             </ToggleButton>
         </Border>

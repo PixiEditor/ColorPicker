@@ -27,7 +27,7 @@ namespace ColorPicker
 
         private void ColorToHexConverter_OnShowAlphaChange(object sender, System.EventArgs e)
         {
-            Color.RaisePropertyChanged(nameof(Color.RGBAColor));
+            Color.RaisePropertyChanged(nameof(SelectedColor));
         }
     }
 }
