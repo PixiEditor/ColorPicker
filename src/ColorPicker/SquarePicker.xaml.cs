@@ -3,14 +3,14 @@ using System.Windows;
 
 namespace ColorPicker
 {
-    public partial class HSVPicker : PickerControlBase
+    public partial class SquarePicker : PickerControlBase
     {
         public static DependencyProperty PickerTypeProperty
-            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(HSVPicker),
+            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(SquarePicker),
                 new PropertyMetadata(PickerType.HSV));
 
         public static readonly DependencyProperty SmallChangeProperty =
-            DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(HSVPicker),
+            DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(SquarePicker),
                 new PropertyMetadata(1.0));
 
         public PickerType PickerType
@@ -25,7 +25,7 @@ namespace ColorPicker
             set => SetValue(SmallChangeProperty, value);
         }
 
-        public HSVPicker() : base()
+        public SquarePicker() : base()
         {
             InitializeComponent();
         }

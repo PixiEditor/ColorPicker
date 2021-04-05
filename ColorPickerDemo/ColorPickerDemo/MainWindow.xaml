@@ -70,7 +70,7 @@
             <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>
         </ComboBox>
-        <colorpicker:HSVPicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
+        <colorpicker:SquarePicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
                                ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
 
         <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
