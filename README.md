@@ -17,7 +17,7 @@ Supports .NET Framework 4.5+ and .NET Core 3.1+
 
 # Included Controls<a name="controls">
 
-- `ColorPicker`: A HSV/HSL Color Picker, consists of a circular hue slider and HV/HL square.
+- `SquarePicker`: A HSV/HSL Color Picker, consists of a circular hue slider and HV/HL square.
 - `ColorSliders`: A set of HSV/RGB + Alpha sliders
 - `HexColorTextBox`: An RGBA Hex text field
 - `ColorDisplay`: A Primary/Secondary Color display with a swap button
@@ -63,10 +63,11 @@ Apart from those, some controls have unique properties:
 
 - `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor`. 
 Those are present on controls that have a secondary color.
-- `SmallChange` lets you change SmallChange of sliders, which is used as sensitivity for when the user
+- `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
 Present on all controls containing either an alpha slider or a hex color textbox.
+- `PickerType`: HSV or HSL, present on `SquarePicker`.
 
 # Styling<a name="styling">
 
