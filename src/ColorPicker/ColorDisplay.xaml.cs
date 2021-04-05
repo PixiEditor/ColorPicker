@@ -12,9 +12,7 @@ namespace ColorPicker
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)
         {
-            var temp = ColorState;
-            ColorState = SecondColorState;
-            SecondColorState = temp;
+            SwapColors();
         }
     }
 }

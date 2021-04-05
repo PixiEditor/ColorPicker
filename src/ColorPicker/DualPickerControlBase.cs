@@ -32,6 +32,13 @@ namespace ColorPicker
             set => SetValue(SecondaryColorProperty, value);
         }
 
+        public void SwapColors()
+        {
+            var temp = ColorState;
+            ColorState = SecondColorState;
+            SecondColorState = temp;
+        }
+
         private bool ignoreSecondaryColorChange = false;
         private bool ignoreSecondaryColorPropertyChange = false;
         public DualPickerControlBase() : base()
