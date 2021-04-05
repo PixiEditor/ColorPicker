@@ -17,16 +17,14 @@ Supports .NET Framework 4.5+ and .NET Core 3.1+
 
 # Included Controls<a name="controls">
 
-- `HSVPicker`: A HSV Color Picker, consisting of a circular hue slider and HV/HL square.
+- `ColorPicker`: A HSV/HSL Color Picker, consists of a circular hue slider and HV/HL square.
 - `ColorSliders`: A set of HSV/RGB + Alpha sliders
 - `HexColorTextBox`: An RGBA Hex text field
 - `ColorDisplay`: A Primary/Secondary Color display with a swap button
+- `StandardColorPicker`: Combines everything listed above in one control
+- `PortableColorPicker`: A collapsible version of StandardColorPicker
 
-**Additionally, two more controls are included for convenience**
-
-- `StandardColorPicker` which combines everything listed above in one control
-- `PortableColorPicker`, a collapsible version of StandardColorPicker
-
+![demo project](https://i.imgur.com/SUVEPJi.png)
 # Example Usage<a name="example">
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
@@ -53,20 +51,20 @@ All controls share these properties:
 
 - `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together.
 - `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
-    - `Color.RGBAColor`: Current color as System.Windows.Media.Color
     - `Color.A`: Current Alpha, a double ranging from 0 to 255
     - `Color.RGB_R`, `Color.RGB_G`, `Color.RGB_B`: Dimensions of the RGB color space, each is a 0-255 double
     - `Color.HSV_H`: Hue in HSV color space, a 0-360 double 
     - `Color.HSV_S`: Saturation in HSV color space, a 0-100 double
     - `Color.HSV_V`: Value in HSV color space, a 0-100 double
+- `SelectedColor` dependency property stores the current color as System.Windows.Media.Color
+- `ColorChanged`: An event that fires on SelectedColor change.
 
 Apart from those, some controls have unique properties:
 
-- `SecondColorState` and `SecondColor` are functionally identical to `ColorState` and `Color`. 
+- `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor`. 
 Those are present on controls that have a secondary color.
 - `SmallChange` lets you change SmallChange of sliders, which is used as sensitivity for when the user
-turns the scroll wheel with the cursor over the sliders. Present on controls that contain color sliders 
-(excluding circular hue slider).
+turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
 Present on all controls containing either an alpha slider or a hex color textbox.
 
