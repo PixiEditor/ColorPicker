@@ -1,5 +1,4 @@
 ﻿using ColorPicker.Models;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,13 +7,17 @@ namespace ColorPicker
 {
     public class PickerControlBase : UserControl, IColorStateStorage
     {
-        public static DependencyProperty ColorStateProperty =
+        public static readonly DependencyProperty ColorStateProperty =
             DependencyProperty.Register(nameof(ColorState), typeof(ColorState), typeof(PickerControlBase),
                 new PropertyMetadata(new ColorState(0, 0, 0, 1, 0, 0, 0, 0, 0, 0), OnColorStatePropertyChange));
 
-        public static DependencyProperty SelectedColorProperty =
+        public static readonly DependencyProperty SelectedColorProperty =
             DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(PickerControlBase),
                 new PropertyMetadata(Colors.Black, OnSelectedColorPropertyChange));
+
+        public static readonly RoutedEvent ColorChangedEvent =
+            EventManager.RegisterRoutedEvent(nameof(ColorChanged),
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(PickerControlBase));
 
         public ColorState ColorState
         {
@@ -35,21 +38,31 @@ namespace ColorPicker
 
         private bool ignoreColorPropertyChange = false;
         private bool ignoreColorChange = false;
-        public event EventHandler<Color> ColorChanged;
+        private Color previousColor = System.Windows.Media.Color.FromArgb(5, 5, 5, 5);
+        public event RoutedEventHandler ColorChanged
+        {
+            add => AddHandler(ColorChangedEvent, value);
+            remove => RemoveHandler(ColorChangedEvent, value);
+        }
 
         public PickerControlBase()
         {
             Color = new NotifyableColor(this);
             Color.PropertyChanged += (sender, args) =>
             {
-                ColorChanged?.Invoke(this, System.Windows.Media.Color.FromArgb((byte)Color.A, (byte)Color.RGB_R, (byte)Color.RGB_G, (byte)Color.RGB_B));
+                var newColor = System.Windows.Media.Color.FromArgb((byte)Color.A, (byte)Color.RGB_R, (byte)Color.RGB_G, (byte)Color.RGB_B);
+                if (newColor != previousColor)
+                {
+                    RaiseEvent(new ColorRoutedEventArgs(ColorChangedEvent, newColor));
+                    previousColor = newColor;
+                }
             };
             ColorChanged += (sender, newColor) =>
             {
                 if (!ignoreColorChange)
                 {
                     ignoreColorPropertyChange = true;
-                    SelectedColor = newColor;
+                    SelectedColor = ((ColorRoutedEventArgs)newColor).Color;
                     ignoreColorPropertyChange = false;
                 }
             };

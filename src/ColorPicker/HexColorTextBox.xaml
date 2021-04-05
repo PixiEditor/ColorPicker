@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <Grid>
         <TextBox VerticalAlignment="Center" Width="70"
-                 Text="{Binding Path=SelectedColor, Converter={StaticResource ColorToHexConverter}, ElementName=uc}">
+                 Text="{Binding Path=SelectedColor, Converter={StaticResource ColorToHexConverter}, ElementName=uc}" x:Name="textbox">
             <i:Interaction.Behaviors>
                 <behav:TextBoxFocusBehavior />
             </i:Interaction.Behaviors>

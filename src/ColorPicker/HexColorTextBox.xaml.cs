@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace ColorPicker
 {
@@ -6,7 +7,7 @@ namespace ColorPicker
     {
         public static readonly DependencyProperty ShowAlphaProperty =
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(HexColorTextBox),
-                new PropertyMetadata(true, ShowAlphaChangedCallback));
+                new PropertyMetadata(true));
 
         public bool ShowAlpha
         {
@@ -19,15 +20,11 @@ namespace ColorPicker
             InitializeComponent();
         }
 
-        private static void ShowAlphaChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            HexColorTextBox source = (HexColorTextBox)d;
-
-        }
-
         private void ColorToHexConverter_OnShowAlphaChange(object sender, System.EventArgs e)
         {
-            Color.RaisePropertyChanged(nameof(SelectedColor));
+            textbox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            //InvalidateProperty(SelectedColorProperty);
+            //Color.RaisePropertyChanged(nameof(Color.RGB_R));
         }
     }
 }

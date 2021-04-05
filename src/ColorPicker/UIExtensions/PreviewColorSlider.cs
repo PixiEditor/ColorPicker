@@ -42,7 +42,7 @@ namespace ColorPicker.UIExtensions
             set => SetValue(CurrentColorStateProperty, value);
         }
 
-        private LinearGradientBrush backgroundBrush = new LinearGradientBrush();
+        private readonly LinearGradientBrush backgroundBrush = new LinearGradientBrush();
         public GradientStopCollection BackgroundGradient
         {
             get => backgroundBrush.GradientStops;

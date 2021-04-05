@@ -1,5 +1,4 @@
 ﻿using ColorPicker.Models;
-using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -11,11 +10,11 @@ namespace ColorPicker
                 DependencyProperty.Register(nameof(SecondColorState), typeof(ColorState), typeof(DualPickerControlBase),
                     new PropertyMetadata(new ColorState(1, 1, 1, 1, 0, 0, 1, 0, 0, 1), OnSecondColorStatePropertyChange));
 
-        public static DependencyProperty SecondaryColorProperty =
+        public static readonly DependencyProperty SecondaryColorProperty =
             DependencyProperty.Register(nameof(SecondaryColor), typeof(Color), typeof(DualPickerControlBase),
                 new PropertyMetadata(Colors.White, OnSecondaryColorPropertyChange));
 
-        private SecondColorDecorator secondColorDecorator;
+        private readonly SecondColorDecorator secondColorDecorator;
         public ColorState SecondColorState
         {
             get => (ColorState)GetValue(SecondColorStateProperty);
@@ -33,7 +32,6 @@ namespace ColorPicker
             set => SetValue(SecondaryColorProperty, value);
         }
 
-        public event EventHandler<Color> SecondaryColorChanged;
         private bool ignoreSecondaryColorChange = false;
         private bool ignoreSecondaryColorPropertyChange = false;
         public DualPickerControlBase() : base()
@@ -42,14 +40,10 @@ namespace ColorPicker
             SecondColor = new NotifyableColor(secondColorDecorator);
             SecondColor.PropertyChanged += (sender, args) =>
             {
-                SecondaryColorChanged?.Invoke(this, System.Windows.Media.Color.FromArgb((byte)SecondColor.A, (byte)SecondColor.RGB_R, (byte)SecondColor.RGB_G, (byte)SecondColor.RGB_B));
-            };
-            SecondaryColorChanged += (sender, newColor) =>
-            {
                 if (!ignoreSecondaryColorChange)
                 {
                     ignoreSecondaryColorPropertyChange = true;
-                    SecondaryColor = newColor;
+                    SecondaryColor = System.Windows.Media.Color.FromArgb((byte)SecondColor.A, (byte)SecondColor.RGB_R, (byte)SecondColor.RGB_G, (byte)SecondColor.RGB_B);
                     ignoreSecondaryColorPropertyChange = false;
                 }
             };

@@ -2,7 +2,7 @@
 {
     public class NotifyableColor : NotifyableObject
     {
-        IColorStateStorage storage;
+        private readonly IColorStateStorage storage;
         public NotifyableColor(IColorStateStorage colorStateStorage)
         {
             storage = colorStateStorage;
