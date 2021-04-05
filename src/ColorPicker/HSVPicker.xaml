@@ -41,6 +41,7 @@
         </Grid.ColumnDefinitions>
 
         <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            SmallChange="{Binding ElementName=uc, Path=SmallChange}"
                             Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}"/>
         <controls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
                                Hue="{Binding ElementName=uc, Path=Color.HSV_H}"

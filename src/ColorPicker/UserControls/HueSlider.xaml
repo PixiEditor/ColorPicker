@@ -37,7 +37,7 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
             </Grid>
-            <Path Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0.8" MouseDown="OnMouseDown" MouseMove="OnMouseMove" MouseUp="OnMouseUp">
+            <Path Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0.8" MouseDown="OnMouseDown" MouseMove="OnMouseMove" MouseUp="OnMouseUp" PreviewMouseWheel="OnPreviewMouseWheel">
                 <Path.Data>
                     <CombinedGeometry GeometryCombineMode="Exclude">
                         <CombinedGeometry.Geometry1>
