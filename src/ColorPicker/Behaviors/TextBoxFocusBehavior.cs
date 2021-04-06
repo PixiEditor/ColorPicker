@@ -22,7 +22,8 @@ namespace ColorPicker.Behaviors
         {
             if (e.Key != Key.Enter) return;
 
-            AssociatedObject.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+            Keyboard.ClearFocus();
+            FocusManager.SetFocusedElement(FocusManager.GetFocusScope(AssociatedObject), null);
         }
 
         protected override void OnAttached()
