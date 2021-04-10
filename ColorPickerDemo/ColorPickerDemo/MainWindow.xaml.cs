@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ColorPicker.Models;
+using System.Windows;
 
 namespace ColorPickerDemo
 {
@@ -9,7 +10,7 @@ namespace ColorPickerDemo
             InitializeComponent();
             combobox.SelectionChanged += (sender, args) =>
             {
-                square_picker.PickerType = combobox.SelectedIndex == 0 ? ColorPicker.UserControls.PickerType.HSV : ColorPicker.UserControls.PickerType.HSL;
+                square_picker.PickerType = combobox.SelectedIndex == 0 ? PickerType.HSV : PickerType.HSL;
             };
         }
     }

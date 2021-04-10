@@ -14,6 +14,11 @@
              MinWidth="200"
              MinHeight="380"
              d:DesignWidth="268.356" d:DesignHeight="463.308">
+    <local:DualPickerControlBase.Resources>
+        <ResourceDictionary>
+            <converters:PickerTypeToIntConverter x:Key="PickerTypeToStringConverter"/>
+        </ResourceDictionary>
+    </local:DualPickerControlBase.Resources>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
@@ -26,7 +31,16 @@
             <ColumnDefinition Width="1*" MaxWidth="100"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+
+        <ComboBox Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0"
+                  Grid.Row="1" Grid.Column="1"
+                  SelectedIndex="{Binding ElementName=uc, Path=PickerType, Converter={StaticResource PickerTypeToStringConverter}}">
+            <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+            <ComboBoxItem>HSL</ComboBoxItem>
+        </ComboBox>
+
         <local:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5" VerticalAlignment="Stretch" 
+                         PickerType="{Binding ElementName=uc, Path=PickerType}"
                          SmallChange="{Binding ElementName=uc, Path=SmallChange}"
                          ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"/>
         <local:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"

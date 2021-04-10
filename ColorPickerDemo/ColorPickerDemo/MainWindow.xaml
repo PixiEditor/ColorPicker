@@ -49,7 +49,7 @@
                 <Label>
                     <TextBlock>Standard Color Picker, default look<LineBreak/>Size constrained to minimal,<LineBreak/>Sliders change by 5 when scrolled over,<LineBreak/>Alpha hidden</TextBlock>
                 </Label>
-                <colorpicker:StandardColorPicker Width="200" Height="380"
+                <colorpicker:StandardColorPicker Width="200" Height="380" x:Name="portable_picker"
                                              SmallChange="5" ShowAlpha="False"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
@@ -71,7 +71,7 @@
             <ComboBoxItem>HSL</ComboBoxItem>
         </ComboBox>
         <colorpicker:SquarePicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
-                               ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" />
+                               ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}" />
 
         <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
         <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1" 
@@ -79,11 +79,12 @@
 
 
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
-        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0"
+        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
                                          Style="{StaticResource DefaultColorPickerStyle}"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
 
         <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right">Try resizing the window to see controls stretch</Label>
+
     </Grid>
 </Window>

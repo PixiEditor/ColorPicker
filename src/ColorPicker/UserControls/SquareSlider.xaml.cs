@@ -9,10 +9,6 @@ using System.Windows.Media.Imaging;
 
 namespace ColorPicker.UserControls
 {
-    public enum PickerType : int
-    {
-        HSV = 0, HSL = 1
-    }
     internal partial class SquareSlider : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty HueProperty

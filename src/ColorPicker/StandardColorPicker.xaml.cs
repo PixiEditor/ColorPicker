@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ColorPicker.Models;
+using System.Windows;
 
 namespace ColorPicker
 {
@@ -12,6 +13,10 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(StandardColorPicker),
                 new PropertyMetadata(true));
 
+        public static readonly DependencyProperty PickerTypeProperty
+            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(StandardColorPicker),
+                new PropertyMetadata(PickerType.HSV));
+
         public double SmallChange
         {
             get => (double)GetValue(SmallChangeProperty);
@@ -22,6 +27,12 @@ namespace ColorPicker
         {
             get => (bool)GetValue(ShowAlphaProperty);
             set => SetValue(ShowAlphaProperty, value);
+        }
+
+        public PickerType PickerType
+        {
+            get => (PickerType)GetValue(PickerTypeProperty);
+            set => SetValue(PickerTypeProperty, value);
         }
 
         public StandardColorPicker() : base()
