@@ -7,7 +7,7 @@ A collection of WPF controls that let users choose colors in various ways.
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor). 
 Supports .NET Framework 4.5+, .NET Core 3.1+, and .NET 5
 
-![screenshot](https://i.imgur.com/C6m5YWI.png)
+![screenshot](https://i.imgur.com/RGdN0GY.png)
 
 1. [Included Controls](#controls)
 1. [Example Usage](#example)
@@ -24,7 +24,7 @@ Supports .NET Framework 4.5+, .NET Core 3.1+, and .NET 5
 - `StandardColorPicker`: Combines everything listed above in one control
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
 
-![demo project](https://i.imgur.com/SUVEPJi.png)
+![demo project](https://i.imgur.com/cOG7uwM.png)
 # Example Usage<a name="example">
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
@@ -67,13 +67,13 @@ Those are present on controls that have a secondary color.
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
 Present on all controls containing either an alpha slider or a hex color textbox.
-- `PickerType`: HSV or HSL, present on `SquarePicker`.
+- `PickerType`: HSV or HSL, present on `SquarePicker` or controls that contain `SquarePicker`.
 
 # Styling<a name="styling">
 
 Out of the box, the color picker uses the default WPF look:
 
-![Default ColorPicker look](https://i.imgur.com/NiYFpiV.png)
+![Default ColorPicker look](https://i.imgur.com/AyweTmS.png)
 
 You may use the included dark theme by loading a resource dictionary in XAML:
 ```
