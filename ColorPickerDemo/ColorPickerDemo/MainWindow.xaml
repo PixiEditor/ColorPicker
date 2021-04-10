@@ -34,11 +34,11 @@
             <StackPanel>
                 <Label>Portable Color Picker, default look</Label>
                 <colorpicker:PortableColorPicker Grid.Row="0"
-                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
                 <Label Grid.Row="1">Portable Color Picker, styled, alpha hidden</Label>
                 <colorpicker:PortableColorPicker Grid.Row="1" Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
-                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
                                          ShowAlpha="False"/>
             </StackPanel>
@@ -51,7 +51,7 @@
                 </Label>
                 <colorpicker:StandardColorPicker Width="200" Height="380"
                                              SmallChange="5" ShowAlpha="False"
-                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
             </StackPanel>
         </Border>
@@ -59,7 +59,7 @@
         <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
         <colorpicker:ColorSliders Grid.Row="0" Grid.Column="1" 
                                   Style="{StaticResource DefaultColorPickerStyle}"
-                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                   ShowAlpha="False"/>
 
         <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
@@ -75,13 +75,13 @@
 
         <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
         <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1" 
-                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}" ShowAlpha="False"/>
+                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}" ShowAlpha="False"/>
 
 
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
         <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0"
                                          Style="{StaticResource DefaultColorPickerStyle}"
-                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
+                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
 
         <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right">Try resizing the window to see controls stretch</Label>
