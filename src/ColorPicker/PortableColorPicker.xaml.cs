@@ -1,26 +1,21 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using ColorPicker.Models;
+using System.Windows;
 
 namespace ColorPicker
 {
-    public partial class PortableColorPicker : UserControl
+    public partial class PortableColorPicker : DualPickerControlBase
     {
-        public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(PortableColorPicker),
-                new PropertyMetadata(Colors.Black));
-
-        public static readonly DependencyProperty SecondaryColorProperty =
-            DependencyProperty.Register(nameof(SecondaryColor), typeof(Color), typeof(PortableColorPicker),
-                new PropertyMetadata(Colors.White));
-
-        public static readonly DependencyProperty HueSmallChangeProperty =
-            DependencyProperty.Register(nameof(HueSmallChange), typeof(double), typeof(PortableColorPicker),
-                new PropertyMetadata(1.0));
-
         public static readonly DependencyProperty SmallChangeProperty =
             DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(PortableColorPicker),
-                new PropertyMetadata(0.00390625));
+                new PropertyMetadata(1.0));
+
+        public static readonly DependencyProperty ShowAlphaProperty =
+            DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(PortableColorPicker),
+                new PropertyMetadata(true));
+
+        public static readonly DependencyProperty PickerTypeProperty
+            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(PortableColorPicker),
+                new PropertyMetadata(PickerType.HSV));
 
         public double SmallChange
         {
@@ -28,29 +23,20 @@ namespace ColorPicker
             set => SetValue(SmallChangeProperty, value);
         }
 
-        public double HueSmallChange
+        public bool ShowAlpha
         {
-            get => (double)GetValue(HueSmallChangeProperty);
-            set => SetValue(HueSmallChangeProperty, value);
+            get => (bool)GetValue(ShowAlphaProperty);
+            set => SetValue(ShowAlphaProperty, value);
+        }
+        public PickerType PickerType
+        {
+            get => (PickerType)GetValue(PickerTypeProperty);
+            set => SetValue(PickerTypeProperty, value);
         }
 
         public PortableColorPicker()
         {
             InitializeComponent();
-        }
-
-
-        public Color SelectedColor
-        {
-            get => (Color) GetValue(SelectedColorProperty);
-            set => SetValue(SelectedColorProperty, value);
-        }
-
-
-        public Color SecondaryColor
-        {
-            get => (Color) GetValue(SecondaryColorProperty);
-            set => SetValue(SecondaryColorProperty, value);
         }
     }
 }

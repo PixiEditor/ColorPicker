@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xaml.Behaviors;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 
 namespace ColorPicker.Behaviors
 {
@@ -25,7 +22,8 @@ namespace ColorPicker.Behaviors
         {
             if (e.Key != Key.Enter) return;
 
-            AssociatedObject.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+            Keyboard.ClearFocus();
+            FocusManager.SetFocusedElement(FocusManager.GetFocusScope(AssociatedObject), null);
         }
 
         protected override void OnAttached()

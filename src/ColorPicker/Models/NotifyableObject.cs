@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace ColorPicker.Models
 {
@@ -9,7 +7,7 @@ namespace ColorPicker.Models
     {
         [field: NonSerialized] public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        protected void RaisePropertyChanged(string property)
+        public void RaisePropertyChanged(string property)
         {
             if (property != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
         }

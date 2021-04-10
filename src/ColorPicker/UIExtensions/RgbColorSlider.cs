@@ -1,6 +1,4 @@
-﻿using ColorPicker.Models;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
@@ -11,31 +9,39 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register(nameof(SliderArgbType), typeof(string), typeof(RgbColorSlider),
                 new PropertyMetadata(""));
 
-        public RgbColorSlider() : base() {}
+        public RgbColorSlider() : base() { }
 
         public string SliderArgbType
         {
-            get => (string) GetValue(SliderArgbTypeProperty);
+            get => (string)GetValue(SliderArgbTypeProperty);
             set => SetValue(SliderArgbTypeProperty, value);
         }
         protected override void GenerateBackground()
         {
-            Background = new LinearGradientBrush(new GradientStopCollection
+            var colorStart = GetColorForSelectedArgb(0);
+            var colorEnd = GetColorForSelectedArgb(255);
+            LeftCapColor.Color = colorStart;
+            RightCapColor.Color = colorEnd;
+            BackgroundGradient = new GradientStopCollection
             {
-                new GradientStop(GetColorForSelectedArgb(0), 0.0),
-                new GradientStop(GetColorForSelectedArgb(255), 1)
-            });
+                new GradientStop(colorStart, 0.0),
+                new GradientStop(colorEnd, 1)
+            };
         }
 
         private Color GetColorForSelectedArgb(int value)
         {
-            return SliderArgbType switch
+            byte a = (byte)(CurrentColorState.A * 255);
+            byte r = (byte)(CurrentColorState.RGB_R * 255);
+            byte g = (byte)(CurrentColorState.RGB_G * 255);
+            byte b = (byte)(CurrentColorState.RGB_B * 255);
+            switch (SliderArgbType)
             {
-                "A" => Color.FromArgb((byte)value, CurrentColor.R, CurrentColor.G, CurrentColor.B),
-                "R" => Color.FromArgb(CurrentColor.A, (byte)value, CurrentColor.G, CurrentColor.B),
-                "G" => Color.FromArgb(CurrentColor.A, CurrentColor.R, (byte)value, CurrentColor.B),
-                "B" => Color.FromArgb(CurrentColor.A, CurrentColor.R, CurrentColor.G, (byte)value),
-                _ => CurrentColor,
+                case "A": return Color.FromArgb((byte)value, r, g, b);
+                case "R": return Color.FromArgb(a, (byte)value, g, b);
+                case "G": return Color.FromArgb(a, r, (byte)value, b);
+                case "B": return Color.FromArgb(a, r, g, (byte)value);
+                default: return Color.FromArgb(a, r, g, b);
             };
         }
     }

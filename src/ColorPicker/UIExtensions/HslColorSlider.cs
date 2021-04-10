@@ -4,23 +4,23 @@ using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
 {
-    internal class HsvColorSlider : PreviewColorSlider
+    internal class HslColorSlider : PreviewColorSlider
     {
-        public static readonly DependencyProperty SliderHsvTypeProperty =
-            DependencyProperty.Register(nameof(SliderHsvType), typeof(string), typeof(HsvColorSlider),
+        public static readonly DependencyProperty SliderHslTypeProperty =
+            DependencyProperty.Register(nameof(SliderHslType), typeof(string), typeof(HslColorSlider),
                 new PropertyMetadata(""));
 
-        public HsvColorSlider() : base() { }
+        public HslColorSlider() : base() { }
 
-        public string SliderHsvType
+        public string SliderHslType
         {
-            get => (string)GetValue(SliderHsvTypeProperty);
-            set => SetValue(SliderHsvTypeProperty, value);
+            get => (string)GetValue(SliderHslTypeProperty);
+            set => SetValue(SliderHslTypeProperty, value);
         }
 
         protected override void GenerateBackground()
         {
-            if (SliderHsvType == "H")
+            if (SliderHslType == "H")
             {
                 var colorStart = GetColorForSelectedArgb(0);
                 var colorEnd = GetColorForSelectedArgb(360);
@@ -53,23 +53,23 @@ namespace ColorPicker.UIExtensions
 
         private Color GetColorForSelectedArgb(int value)
         {
-            switch (SliderHsvType)
+            switch (SliderHslType)
             {
                 case "H":
                     {
-                        var rgbtuple = ColorSpaceHelper.HsvToRgb(value, CurrentColorState.HSV_S, CurrentColorState.HSV_V);
+                        var rgbtuple = ColorSpaceHelper.HslToRgb(value, CurrentColorState.HSL_S, CurrentColorState.HSL_L);
                         double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
                 case "S":
                     {
-                        var rgbtuple = ColorSpaceHelper.HsvToRgb(CurrentColorState.HSV_H, value / 255.0, CurrentColorState.HSV_V);
+                        var rgbtuple = ColorSpaceHelper.HslToRgb(CurrentColorState.HSL_H, value / 255.0, CurrentColorState.HSL_L);
                         double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
-                case "V":
+                case "L":
                     {
-                        var rgbtuple = ColorSpaceHelper.HsvToRgb(CurrentColorState.HSV_H, CurrentColorState.HSV_S, value / 255.0);
+                        var rgbtuple = ColorSpaceHelper.HslToRgb(CurrentColorState.HSL_H, CurrentColorState.HSL_S, value / 255.0);
                         double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
                         return Color.FromArgb((byte)(CurrentColorState.A * 255), (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
                     }
