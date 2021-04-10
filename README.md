@@ -5,7 +5,7 @@
 
 A collection of WPF controls that let users choose colors in various ways. 
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor). 
-Supports .NET Framework 4.5+ and .NET Core 3.1+
+Supports .NET Framework 4.5+, .NET Core 3.1+, and .NET 5
 
 ![screenshot](https://i.imgur.com/C6m5YWI.png)
 
