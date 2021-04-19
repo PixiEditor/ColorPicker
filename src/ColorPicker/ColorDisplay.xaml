@@ -46,7 +46,7 @@
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="2" Margin="1">
                 <Button ToolTip="Swap colors" Width="28" Height="28" Click="SwapButton_Click"
-                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent"
                                     Style="{StaticResource ImageButtonStyle}" Opacity="0.5">
                     <Path Stroke="#FF252525" Fill="#FFFEFEFE" StrokeThickness="1.5" Data="M 9,1 L 2,8 L 6,8 L 6,22 L 20,22 L 20,26 L 27,19 L 20,12 L 20,16 L 12,16 L 12,8 L 16,8 L 9,1 Z"/>
                 </Button>
