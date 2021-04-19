@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ColorPickerDemo"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="740" Width="920"
+        Title="Color Picker Demo Project" Height="710" Width="920"
         Background="LightGray">
     <Window.Resources>
         <ResourceDictionary>
@@ -27,7 +27,6 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
 
@@ -88,12 +87,12 @@
         </Border>
 
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
-        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="5" Margin="0,25,0,0" x:Name="standard_picker"
+        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
                                          Style="{StaticResource DefaultColorPickerStyle}"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
 
-        <Label Grid.Row="5" Grid.ColumnSpan="3" HorizontalAlignment="Right">Try resizing the window to see the controls stretch</Label>
+        <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">Try resizing the window to see the controls stretch</Label>
 
     </Grid>
 </Window>
