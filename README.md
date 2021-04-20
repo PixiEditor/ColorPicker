@@ -23,8 +23,9 @@ Supports .NET Framework 4.5+, .NET Core 3.1+, and .NET 5
 - `ColorDisplay`: A Primary/Secondary Color display with a swap button
 - `StandardColorPicker`: Combines everything listed above in one control
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
+- `AlphaSlider`: A separate alpha slider control
 
-![demo project](https://i.imgur.com/cOG7uwM.png)
+![demo project](https://i.imgur.com/k5kszWC.png)
 # Example Usage<a name="example">
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
@@ -61,12 +62,12 @@ All controls share these properties:
 
 Apart from those, some controls have unique properties:
 
-- `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor`. 
+- `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
 Those are present on controls that have a secondary color.
 - `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
-Present on all controls containing either an alpha slider or a hex color textbox.
+Present on all controls containing either an alpha slider (apart from the `AlphaSlider` control itself) or a hex color textbox.
 - `PickerType`: HSV or HSL, present on `SquarePicker` or controls that contain `SquarePicker`.
 
 # Styling<a name="styling">
