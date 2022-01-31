@@ -18,25 +18,15 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Border CornerRadius="2" Width="40" Height="20" BorderThickness="1" BorderBrush="Transparent" Panel.ZIndex="0"
-                Padding="0" Margin="0">
+        <Border BorderThickness="1" BorderBrush="Transparent" Panel.ZIndex="0"
+                Padding="0" Margin="0" RenderOptions.BitmapScalingMode="NearestNeighbor">
             <Border.Background>
-                <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill">
-                    <ImageBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="6" ScaleY="6" />
-                            <SkewTransform CenterY="0.5" CenterX="0.5" />
-                            <RotateTransform CenterY="0.5" CenterX="0.5" />
-                            <TranslateTransform />
-                        </TransformGroup>
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
+                <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,8,8"/>
             </Border.Background>
-            <ToggleButton Style="{StaticResource ColorToggleButtonStyle}" Padding="0" Margin="0" Height="20" Width="40"
+            <ToggleButton Style="{StaticResource ColorToggleButtonStyle}" Padding="0" Margin="0"
                           IsEnabled="{Binding Path=IsOpen, ElementName=popup, Converter={StaticResource BoolToInvertedBoolConverter}}"
                           x:Name="toggleButton" BorderThickness="0" Panel.ZIndex="1"
                           Background="{Binding Path=SelectedColor, ElementName=uc, Converter={StaticResource ColorToBrushConverter}}">
-                <Border Height="20" Width="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" />
             </ToggleButton>
         </Border>
         <Popup Name="popup" StaysOpen="False" IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">

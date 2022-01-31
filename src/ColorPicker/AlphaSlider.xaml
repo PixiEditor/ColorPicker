@@ -20,9 +20,9 @@
             <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
                            SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                            Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-            <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+            <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapScalingMode="NearestNeighbor">
                 <Border.Background>
-                    <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                    <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
                 </Border.Background>
             </Border>
         </Grid>
