@@ -41,30 +41,33 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
 ```
 Add the controls
 ```
-<colorpicker:StandardColorPicker x:Name="main" />
-<colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>
+<colorpicker:StandardColorPicker x:Name="main" Width="200" Height="380"/>
+<colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}" Width="40" Height="40"/>
 ```
-Note: in some configurations such as using the package in .NET Framework 4.7 XAML designer breaks and doesn't show the control.
-In my testing that did not affect the build process.
+Note: in some configurations such as using the package in .NET Framework 4.7 the XAML designer tends to break and not show the control.
 
 # Properties<a name="properties">
 
 All controls share these properties:
 
+- `SelectedColor` dependency property stores the current color as System.Windows.Media.Color
+- `ColorChanged`: An event that fires on SelectedColor change.
 - `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together.
 - `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
     - `Color.A`: Current Alpha, a double ranging from 0 to 255
     - `Color.RGB_R`, `Color.RGB_G`, `Color.RGB_B`: Dimensions of the RGB color space, each is a 0-255 double
-    - `Color.HSV_H`: Hue in HSV color space, a 0-360 double 
-    - `Color.HSV_S`: Saturation in HSV color space, a 0-100 double
-    - `Color.HSV_V`: Value in HSV color space, a 0-100 double
-- `SelectedColor` dependency property stores the current color as System.Windows.Media.Color
-- `ColorChanged`: An event that fires on SelectedColor change.
+    - `Color.HSV_H`: Hue in the HSV color space, a 0-360 double 
+    - `Color.HSV_S`: Saturation in the HSV color space, a 0-100 double
+    - `Color.HSV_V`: Value in the HSV color space, a 0-100 double
+    - `Color.HSL_H`: Hue in the HSL color space, a 0-360 double 
+    - `Color.HSL_S`: Saturation in the HSL color space, a 0-100 double
+    - `Color.HSL_L`: Lightness in the HSL color space, a 0-100 double
+
 
 Apart from those, some controls have unique properties:
 
 - `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
-Those are present on controls that have a secondary color.
+These are present on controls that have a secondary color.
 - `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
