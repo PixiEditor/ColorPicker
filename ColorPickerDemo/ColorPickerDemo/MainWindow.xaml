@@ -36,7 +36,7 @@
                 <colorpicker:PortableColorPicker Width="40" Height="20"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
-                <Label Grid.Row="1">Portable Color Picker, styled, alpha hidden</Label>
+                <Label>Portable Color Picker, styled, alpha hidden</Label>
                 <Grid Width="40" Height="40">
                     <colorpicker:PortableColorPicker Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
