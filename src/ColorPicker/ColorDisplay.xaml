@@ -58,7 +58,11 @@
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SecondaryColor}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Image Source="/ColorPicker;component/Images/transparentbg_mini.png" Panel.ZIndex="0" Stretch="None" />
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
+                    </Border.Background>
+                </Border>
             </Grid>
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="3">
@@ -66,7 +70,11 @@
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SelectedColor}" />
                     </Rectangle.Fill>
                 </Rectangle>
-                <Image Source="/ColorPicker;component/Images/transparentbg_mini.png" Panel.ZIndex="2" Stretch="None" />
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
+                    </Border.Background>
+                </Border>
             </Grid>
         </Grid>
     </Grid>

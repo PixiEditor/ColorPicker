@@ -19,7 +19,7 @@
         <TextBox VerticalAlignment="Center" Width="70"
                  Text="{Binding Path=SelectedColor, Converter={StaticResource ColorToHexConverter}, ElementName=uc}" x:Name="textbox">
             <i:Interaction.Behaviors>
-                <behav:TextBoxFocusBehavior />
+                <behav:TextBoxFocusBehavior SelectOnMouseClick="False" ConfirmOnEnter="True" DeselectOnFocusLoss="True" />
             </i:Interaction.Behaviors>
         </TextBox>
     </Grid>

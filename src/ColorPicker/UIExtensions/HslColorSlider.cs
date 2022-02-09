@@ -38,6 +38,20 @@ namespace ColorPicker.UIExtensions
                 };
                 return;
             }
+            if (SliderHslType == "L")
+            {
+                var colorStart = GetColorForSelectedArgb(0);
+                var colorEnd = GetColorForSelectedArgb(255);
+                LeftCapColor.Color = colorStart;
+                RightCapColor.Color = colorEnd;
+                BackgroundGradient = new GradientStopCollection()
+                {
+                    new GradientStop(colorStart, 0),
+                    new GradientStop(GetColorForSelectedArgb(128), 0.5),
+                    new GradientStop(colorEnd, 1)
+                };
+                return;
+            }
             {
                 var colorStart = GetColorForSelectedArgb(0);
                 var colorEnd = GetColorForSelectedArgb(255);

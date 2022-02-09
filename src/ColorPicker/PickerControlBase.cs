@@ -1,4 +1,5 @@
 ﻿using ColorPicker.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -50,7 +51,11 @@ namespace ColorPicker
             Color = new NotifyableColor(this);
             Color.PropertyChanged += (sender, args) =>
             {
-                var newColor = System.Windows.Media.Color.FromArgb((byte)Color.A, (byte)Color.RGB_R, (byte)Color.RGB_G, (byte)Color.RGB_B);
+                var newColor = System.Windows.Media.Color.FromArgb(
+                    (byte)Math.Round(Color.A),
+                    (byte)Math.Round(Color.RGB_R),
+                    (byte)Math.Round(Color.RGB_G),
+                    (byte)Math.Round(Color.RGB_B));
                 if (newColor != previousColor)
                 {
                     RaiseEvent(new ColorRoutedEventArgs(ColorChangedEvent, newColor));

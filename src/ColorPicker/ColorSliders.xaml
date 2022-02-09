@@ -55,11 +55,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                <ui:HsvColorSlider Height="12" Grid.Row="0" Grid.Column="1"
+                <ui:HsvColorSlider Height="12" Grid.Row="0" Grid.Column="1" TabIndex="1"
                                        SliderHsvType="H" Minimum="0" Maximum="360" IsMoveToPointEnabled="True"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.HSV_H, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
                          Text="{Binding Path=Color.HSV_H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -67,11 +67,11 @@
                 </TextBox>
 
                 <TextBlock Text="S" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                <ui:HsvColorSlider Height="12" Grid.Row="1" Grid.Column="1"
+                <ui:HsvColorSlider Height="12" Grid.Row="1" Grid.Column="1" TabIndex="2"
                                    SliderHsvType="S" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSV_S, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
                          Text="{Binding Path=Color.HSV_S, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -79,11 +79,11 @@
                 </TextBox>
 
                 <TextBlock Text="V" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                <ui:HsvColorSlider Height="12" Grid.Row="2" Grid.Column="1"
+                <ui:HsvColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                    SliderHsvType="V" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSV_V, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
                          Text="{Binding Path=Color.HSV_V, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -92,17 +92,17 @@
 
                 <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                 <Grid Height="12" Grid.Row="3" Grid.Column="1">
-                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
+                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True" TabIndex="4"
                                        IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapScalingMode="NearestNeighbor">
                         <Border.Background>
-                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute" />
                         </Border.Background>
                     </Border>
                 </Grid>
-                <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" TabIndex="8"
                          IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                          Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
                     <i:Interaction.Behaviors>
@@ -137,11 +137,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                <ui:HslColorSlider Height="12" Grid.Row="0" Grid.Column="1"
+                <ui:HslColorSlider Height="12" Grid.Row="0" Grid.Column="1" TabIndex="1"
                                        SliderHslType="H" Minimum="0" Maximum="360" IsMoveToPointEnabled="True"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.HSL_H, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
                          Text="{Binding Path=Color.HSL_H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -149,11 +149,11 @@
                 </TextBox>
 
                 <TextBlock Text="S" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                <ui:HslColorSlider Height="12" Grid.Row="1" Grid.Column="1"
+                <ui:HslColorSlider Height="12" Grid.Row="1" Grid.Column="1" TabIndex="2"
                                    SliderHslType="S" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSL_S, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
                          Text="{Binding Path=Color.HSL_S, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -161,11 +161,11 @@
                 </TextBox>
 
                 <TextBlock Text="L" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                <ui:HslColorSlider Height="12" Grid.Row="2" Grid.Column="1"
+                <ui:HslColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                    SliderHslType="L" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSL_L, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
                          Text="{Binding Path=Color.HSL_L, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -174,16 +174,16 @@
 
                 <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                 <Grid Height="12" Grid.Row="3" Grid.Column="1">
-                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True" IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
+                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True" IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}" TabIndex="4"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapScalingMode="NearestNeighbor">
                         <Border.Background>
-                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute" />
                         </Border.Background>
                     </Border>
                 </Grid>
-                <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" TabIndex="8"
                          IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                          Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
                     <i:Interaction.Behaviors>
@@ -218,11 +218,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="R" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                <ui:RgbColorSlider Height="12" Grid.Row="0" Grid.Column="1"
+                <ui:RgbColorSlider Height="12" Grid.Row="0" Grid.Column="1" TabIndex="1"
                                    SliderArgbType="R" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_R, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
                          Text="{Binding Path=Color.RGB_R, Converter={StaticResource TwoFiftyFiveChannelConverter}, StringFormat=N0, ElementName=uc}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -230,11 +230,11 @@
                 </TextBox>
 
                 <TextBlock Text="G" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                <ui:RgbColorSlider Height="12" Grid.Row="1" Grid.Column="1"
+                <ui:RgbColorSlider Height="12" Grid.Row="1" Grid.Column="1" TabIndex="2"
                                    SliderArgbType="G" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_G, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
                          Text="{Binding Path=Color.RGB_G, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -242,11 +242,11 @@
                 </TextBox>
 
                 <TextBlock Text="B" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                <ui:RgbColorSlider Height="12" Grid.Row="2" Grid.Column="1"
+                <ui:RgbColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                    SliderArgbType="B" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_B, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
+                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
                          Text="{Binding Path=Color.RGB_B, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
@@ -255,18 +255,18 @@
 
                 <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                 <Grid Height="12" Grid.Row="3" Grid.Column="1">
-                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
+                    <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True" TabIndex="4"
                                        IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1">
+                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapScalingMode="NearestNeighbor">
                         <Border.Background>
-                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" Stretch="UniformToFill" />
+                            <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute" />
                         </Border.Background>
                     </Border>
                 </Grid>
                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
-                         IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
+                         IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}" TabIndex="8"
                          Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />

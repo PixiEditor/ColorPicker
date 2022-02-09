@@ -33,14 +33,16 @@
         <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
             <StackPanel>
                 <Label>Portable Color Picker, default look</Label>
-                <colorpicker:PortableColorPicker Grid.Row="0"
+                <colorpicker:PortableColorPicker Width="40" Height="20"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
-                <Label Grid.Row="1">Portable Color Picker, styled, alpha hidden</Label>
-                <colorpicker:PortableColorPicker Grid.Row="1" Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
-                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
-                                         SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
-                                         ShowAlpha="False"/>
+                <Label>Portable Color Picker, styled, alpha hidden</Label>
+                <Grid Width="40" Height="40">
+                    <colorpicker:PortableColorPicker Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
+                                             ShowAlpha="False"/>
+                </Grid>
             </StackPanel>
         </Border>
 

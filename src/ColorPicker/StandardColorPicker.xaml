@@ -16,7 +16,7 @@
              d:DesignWidth="268.356" d:DesignHeight="463.308">
     <local:DualPickerControlBase.Resources>
         <ResourceDictionary>
-            <converters:PickerTypeToIntConverter x:Key="PickerTypeToStringConverter"/>
+            <converters:PickerTypeToIntConverter x:Key="PickerTypeToIntConverter"/>
         </ResourceDictionary>
     </local:DualPickerControlBase.Resources>
     <Grid Name="MainGrid">
@@ -34,7 +34,7 @@
 
         <ComboBox Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0"
                   Grid.Row="1" Grid.Column="1"
-                  SelectedIndex="{Binding ElementName=uc, Path=PickerType, Converter={StaticResource PickerTypeToStringConverter}}">
+                  SelectedIndex="{Binding ElementName=uc, Path=PickerType, Converter={StaticResource PickerTypeToIntConverter}}">
             <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>
         </ComboBox>
