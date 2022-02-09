@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace PixiEditor.Helpers.Behaviours
+namespace ColorPicker.Behaviors
 {
     internal class TextBoxFocusBehavior : Behavior<TextBox>
     {
@@ -12,21 +12,21 @@ namespace PixiEditor.Helpers.Behaviours
                 nameof(SelectOnMouseClick),
                 typeof(bool),
                 typeof(TextBoxFocusBehavior),
-                new PropertyMetadata(false));
+                new PropertyMetadata(true));
 
         public static readonly DependencyProperty ConfirmOnEnterProperty =
             DependencyProperty.Register(
                 nameof(ConfirmOnEnter),
                 typeof(bool),
                 typeof(TextBoxFocusBehavior),
-                new PropertyMetadata(false));
+                new PropertyMetadata(true));
 
         public static readonly DependencyProperty DeselectOnFocusLossProperty =
             DependencyProperty.Register(
                 nameof(DeselectOnFocusLoss),
                 typeof(bool),
                 typeof(TextBoxFocusBehavior),
-                new PropertyMetadata(false));
+                new PropertyMetadata(true));
 
         public bool SelectOnMouseClick
         {
@@ -92,7 +92,7 @@ namespace PixiEditor.Helpers.Behaviours
             object sender,
             KeyboardFocusChangedEventArgs e)
         {
-            if (SelectOnMouseClick || e.KeyboardDevice.IsKeyDown(Key.Tab))
+            if (e.KeyboardDevice.IsKeyDown(Key.Tab))
                 AssociatedObject.SelectAll();
         }
 
