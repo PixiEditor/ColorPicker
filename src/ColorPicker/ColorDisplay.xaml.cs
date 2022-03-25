@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace ColorPicker
 {
@@ -13,6 +14,11 @@ namespace ColorPicker
         private void SwapButton_Click(object sender, RoutedEventArgs e)
         {
             SwapColors();
+        }
+
+        private void HintColor_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SetMainColorFromHintColor();
         }
     }
 }

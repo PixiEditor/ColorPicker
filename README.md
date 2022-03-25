@@ -68,6 +68,10 @@ Apart from those, some controls have unique properties:
 
 - `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
 These are present on controls that have a secondary color.
+- `HintColorState`, `HintColor`, and `HintNotifyableColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
+These are present on controls that have a hint color. A hint color is a color field that can be used to apply Primary Color from some external source,
+or from hardcoded color.
+- `UseHintColor` enables hint color or disables it (disabled by default)
 - `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 

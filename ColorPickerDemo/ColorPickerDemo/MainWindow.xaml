@@ -65,7 +65,8 @@
                                   ShowAlpha="False"/>
 
         <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
-        <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay" />
+        <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay" 
+                                         UseHintColor="True" HintColor="CadetBlue"/>
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
         <ComboBox Grid.Row="2" Grid.Column="1" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
@@ -91,6 +92,7 @@
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
         <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
                                          Style="{StaticResource DefaultColorPickerStyle}"
+                                         UseHintColor="True"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
 
