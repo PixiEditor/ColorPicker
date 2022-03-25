@@ -33,7 +33,7 @@
         <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
             <StackPanel>
                 <Label>Portable Color Picker, default look</Label>
-                <colorpicker:PortableColorPicker Width="40" Height="20"
+                <colorpicker:PortableColorPicker Width="40" Height="20" UseHintColor="True" HintColor="Transparent"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
                 <Label>Portable Color Picker, styled, alpha hidden</Label>
