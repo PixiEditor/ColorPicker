@@ -135,7 +135,7 @@ namespace ColorPicker
         {
             var sender = (DualPickerControlBase)d;
             Color newValue = (Color)args.NewValue;
-            if (sender.ignoreSecondaryColorPropertyChange)
+            if (sender.ignoreHintNotifyablePropertyChange)
                 return;
             sender.ignoreHintColorChange = true;
             sender.HintNotifyableColor.A = newValue.A;
