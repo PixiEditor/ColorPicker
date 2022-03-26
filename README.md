@@ -8,7 +8,7 @@ A collection of various WPF controls used to select colors.
 Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 and .NET 6. 
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
-![screenshot](https://i.imgur.com/RGdN0GY.png)
+![screenshot](https://user-images.githubusercontent.com/25402427/160235451-3d66a698-be92-4316-b178-72f1fef85ca0.png)
 
 1. [Included Controls](#controls)
 1. [Example Usage](#example)
