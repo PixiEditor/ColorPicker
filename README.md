@@ -8,7 +8,7 @@ A collection of various WPF controls used to select colors.
 Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 and .NET 6. 
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
-![screenshot](https://i.imgur.com/RGdN0GY.png)
+![screenshot](https://i.imgur.com/4ysN4Fe.png)
 
 1. [Included Controls](#controls)
 1. [Example Usage](#example)
@@ -26,7 +26,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
 - `AlphaSlider`: A separate alpha slider control
 
-![demo project](https://i.imgur.com/4OwI5l0.png)
+![demo project](https://i.imgur.com/wZkkykY.png)
 # Example Usage<a name="example">
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
@@ -68,6 +68,9 @@ Apart from those, some controls have unique properties:
 
 - `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
 These are present on controls that have a secondary color.
+- `HintColorState`, `HintColor`, and `HintNotifyableColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
+These are present on controls that have a hint color. The hint color is a color field that can be used to obtain the primary color from an external source when the user clicks a button.
+- `UseHintColor` enables the hint color or disables it (disabled by default).
 - `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
 turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
 - `ShowAlpha` lets you hide the alpha channel on various controls. 
@@ -80,7 +83,7 @@ Out of the box, the color picker uses the default WPF look:
 
 ![Default ColorPicker look](https://i.imgur.com/AyweTmS.png)
 
-You may use the included dark theme by loading a resource dictionary in XAML:
+You may use the included PixiEditor's dark theme by loading a resource dictionary in XAML:
 ```
 <Window.Resources>
     <ResourceDictionary>

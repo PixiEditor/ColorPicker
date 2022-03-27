@@ -9,6 +9,7 @@
                     <ResourceDictionary Source="DarkTabControlStyle.xaml" />
                     <ResourceDictionary Source="DarkTextBoxStyle.xaml" />
                     <ResourceDictionary Source="DarkComboBoxStyle.xaml" />
+                    <ResourceDictionary Source="RoundedColorDisplayStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label">
                     <Setter Property="Foreground" Value="Snow" />

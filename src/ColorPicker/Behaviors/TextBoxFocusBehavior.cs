@@ -92,7 +92,7 @@ namespace ColorPicker.Behaviors
             object sender,
             KeyboardFocusChangedEventArgs e)
         {
-            if (e.KeyboardDevice.IsKeyDown(Key.Tab))
+            if (SelectOnMouseClick || e.KeyboardDevice.IsKeyDown(Key.Tab))
                 AssociatedObject.SelectAll();
         }
 

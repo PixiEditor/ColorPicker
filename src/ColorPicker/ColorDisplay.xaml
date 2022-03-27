@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ColorPicker"
-             xmlns:conv="clr-namespace:ColorPicker.Converters"
-             mc:Ignorable="d" 
+             xmlns:conv="clr-namespace:ColorPicker.Converters" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                             mc:Ignorable="d" 
              x:Name="uc"
              MaxWidth="250"
              MaxHeight="250"
@@ -15,6 +15,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <conv:MinConverter x:Key="MinConverter"/>
+            <conv:DividedSizeConverter x:Key="DividedSizeConverter"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ImageButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -52,25 +54,90 @@
                 </Button>
             </Viewbox>
 
+            <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2.5"
+                  d:Height="15" d:Width="15" Visibility="{Binding ElementName=uc, Path=UseHintColor, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.Width>
+                    <Binding ElementName="item1" Path="ActualWidth">
+                        <Binding.Converter>
+                            <conv:DividedSizeConverter/>
+                        </Binding.Converter>
+                        <Binding.ConverterParameter>
+                            <sys:Double>2</sys:Double>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </Grid.Width>
+                <Grid.Height>
+                    <Binding ElementName="item1" Path="ActualHeight">
+                        <Binding.Converter>
+                            <conv:DividedSizeConverter/>
+                        </Binding.Converter>
+                        <Binding.ConverterParameter>
+                            <sys:Double>2</sys:Double>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </Grid.Height>
+                <Rectangle Cursor="Hand" Stroke="Black" StrokeThickness="1" Panel.ZIndex="1" MouseLeftButtonDown="HintColor_OnMouseLeftButtonDown">
+                    <Rectangle.RadiusX>
+                        <Binding ElementName="uc" Path="CornerRadius">
+                            <Binding.Converter>
+                                <conv:DividedSizeConverter/>
+                            </Binding.Converter>
+                            <Binding.ConverterParameter>
+                                <sys:Double>2</sys:Double>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </Rectangle.RadiusX>
+                    <Rectangle.RadiusY>
+                        <Binding ElementName="uc" Path="CornerRadius">
+                            <Binding.Converter>
+                                <conv:DividedSizeConverter/>
+                            </Binding.Converter>
+                            <Binding.ConverterParameter>
+                                <sys:Double>2</sys:Double>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </Rectangle.RadiusY>
+                    <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding ElementName=uc, Path=HintColor}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+                <Border HorizontalAlignment="Stretch" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
+                <Border.CornerRadius>
+                        <Binding ElementName="uc" Path="CornerRadius">
+                            <Binding.Converter>
+                                <conv:DividedSizeConverter/>
+                            </Binding.Converter>
+                            <Binding.ConverterParameter>
+                                <sys:Double>2</sys:Double>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                </Border.CornerRadius>
+                    <Border.Background>
+                    <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
+                </Border.Background>
+            </Border>
+            </Grid>
+
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
-                <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="1">
+                <Rectangle Name="item1" Stroke="Black" StrokeThickness="1" Panel.ZIndex="1" RadiusX="{Binding ElementName=uc, Path=CornerRadius}" RadiusY="{Binding ElementName=uc, Path=CornerRadius}">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SecondaryColor}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
+                <Border HorizontalAlignment="Stretch" Margin="0.35" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
                     <Border.Background>
                         <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
                     </Border.Background>
                 </Border>
             </Grid>
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
-                <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="3">
+                <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="3" 
+                           RadiusX="{Binding ElementName=uc, Path=CornerRadius}" RadiusY="{Binding ElementName=uc, Path=CornerRadius}">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SelectedColor}" />
                     </Rectangle.Fill>
                 </Rectangle>
-                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
+                <Border HorizontalAlignment="Stretch" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
                     <Border.Background>
                         <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute"/>
                     </Border.Background>

@@ -39,14 +39,16 @@
             <ComboBoxItem>HSL</ComboBoxItem>
         </ComboBox>
 
-        <local:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5" VerticalAlignment="Stretch" 
+        <local:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15" VerticalAlignment="Stretch" 
                          PickerType="{Binding ElementName=uc, Path=PickerType}"
                          SmallChange="{Binding ElementName=uc, Path=SmallChange}"
                          ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"/>
         <local:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                             ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
-                            SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}"/>
-        <DockPanel Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0">
+                            SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}"
+                            HintColorState="{Binding ElementName=uc, Path=HintColorState, Mode=TwoWay}"
+                            UseHintColor="{Binding ElementName=uc, Path=UseHintColor, Mode=TwoWay}"/>
+        <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0">
             <Label Content="Hex"/>
             <local:HexColorTextBox ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}"
                                    ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"/>

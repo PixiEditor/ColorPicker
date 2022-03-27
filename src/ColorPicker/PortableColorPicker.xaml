@@ -18,7 +18,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Border BorderThickness="1" BorderBrush="Transparent" Panel.ZIndex="0"
+        <Border BorderThickness="1" BorderBrush="Black" Panel.ZIndex="0"
+                CornerRadius="2.5"
                 Padding="0" Margin="0" RenderOptions.BitmapScalingMode="NearestNeighbor">
             <Border.Background>
                 <ImageBrush ImageSource="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,8,8"/>
@@ -32,6 +33,8 @@
         <Popup Name="popup" StaysOpen="False" IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
             <Border BorderThickness="1" BorderBrush="Black" Background="White">
                 <local:StandardColorPicker ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}" x:Name="test"
+                                           UseHintColor="{Binding ElementName=uc, Path=UseHintColor, Mode=TwoWay}"
+                                           HintColorState="{Binding ElementName=uc, Path=HintColorState, Mode=TwoWay}"
                                            SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}" 
                                            SmallChange="{Binding ElementName=uc, Path=SmallChange}" Width="200" Height="380"
                                            ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"

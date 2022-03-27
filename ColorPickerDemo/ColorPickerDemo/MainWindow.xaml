@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ColorPickerDemo"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="Color Picker Demo Project" Height="710" Width="920"
+        Title="Color Picker Demo Project" Height="710" Width="930"
         Background="LightGray">
     <Window.Resources>
         <ResourceDictionary>
@@ -36,12 +36,13 @@
                 <colorpicker:PortableColorPicker Width="40" Height="20"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
-                <Label>Portable Color Picker, styled, alpha hidden</Label>
+                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, styled, alpha hidden, transparent hint color</TextBlock>
                 <Grid Width="40" Height="40">
                     <colorpicker:PortableColorPicker Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
-                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
-                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
-                                             ShowAlpha="False"/>
+                                                     UseHintColor="True" HintColor="Transparent"
+                                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                                     SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
+                                                     ShowAlpha="False"/>
                 </Grid>
             </StackPanel>
         </Border>
@@ -64,8 +65,9 @@
                                   ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                   ShowAlpha="False"/>
 
-        <Label Grid.Row="1" Grid.Column="1">Color Display</Label>
-        <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay" />
+        <Label Grid.Row="1" Grid.Column="1">Color Display, CadetBlue hint color</Label>
+        <colorpicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay" 
+                                         UseHintColor="True" HintColor="CadetBlue"/>
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
         <ComboBox Grid.Row="2" Grid.Column="1" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
@@ -88,9 +90,10 @@
             </StackPanel>
         </Border>
 
-        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable</Label>
+        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable, transparent hint color</Label>
         <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
                                          Style="{StaticResource DefaultColorPickerStyle}"
+                                         UseHintColor="True"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
 
