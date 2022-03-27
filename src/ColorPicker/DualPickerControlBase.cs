@@ -103,7 +103,7 @@ namespace ColorPicker
                 if (!ignoreHintColorChange)
                 {
                     ignoreHintNotifyablePropertyChange = true;
-                    HintColor = System.Windows.Media.Color.FromArgb((byte)SecondColor.A, (byte)SecondColor.RGB_R, (byte)SecondColor.RGB_G, (byte)SecondColor.RGB_B);
+                    HintColor = System.Windows.Media.Color.FromArgb((byte)HintNotifyableColor.A, (byte)HintNotifyableColor.RGB_R, (byte)HintNotifyableColor.RGB_G, (byte)HintNotifyableColor.RGB_B);
                     ignoreHintNotifyablePropertyChange = false;
                 }
             };
