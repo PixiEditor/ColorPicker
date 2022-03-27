@@ -84,7 +84,7 @@ Out of the box, the color picker uses the default WPF look:
 
 ![Default ColorPicker look](https://i.imgur.com/AyweTmS.png)
 
-You may use the included dark theme by loading a resource dictionary in XAML:
+You may use the included PixiEditor's dark theme by loading a resource dictionary in XAML:
 ```
 <Window.Resources>
     <ResourceDictionary>
