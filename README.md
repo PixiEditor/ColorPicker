@@ -8,7 +8,7 @@ A collection of various WPF controls used to select colors.
 Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 and .NET 6. 
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
-![screenshot](https://user-images.githubusercontent.com/25402427/160235451-3d66a698-be92-4316-b178-72f1fef85ca0.png)
+![screenshot](https://i.imgur.com/4ysN4Fe.png)
 
 1. [Included Controls](#controls)
 1. [Example Usage](#example)
@@ -26,7 +26,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
 - `AlphaSlider`: A separate alpha slider control
 
-![demo project](https://i.imgur.com/4OwI5l0.png)
+![demo project](https://i.imgur.com/wZkkykY.png)
 # Example Usage<a name="example">
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
