@@ -68,7 +68,7 @@ Apart from those, some controls have unique properties:
 
 - `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
 These are present on controls that have a secondary color.
-- `HintColorState`, `HintColor`, and `HintNotifyableColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
+- `HintColorState`, `HintNotifyableColor`, and `HintColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. 
 These are present on controls that have a hint color. The hint color is a color field that can be used to obtain the primary color from an external source when the user clicks a button.
 - `UseHintColor` enables the hint color or disables it (disabled by default).
 - `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user

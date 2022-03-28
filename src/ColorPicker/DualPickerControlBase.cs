@@ -39,16 +39,20 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(HintColorState), typeof(ColorState), typeof(DualPickerControlBase),
                 new PropertyMetadata(new ColorState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), OnHintColorStatePropertyChange));
 
-        public NotifyableColor HintNotifyableColor
-        {
-            get;
-            set;
-        }
+        public static readonly DependencyProperty HintColorProperty =
+            DependencyProperty.Register(nameof(HintColor), typeof(Color), typeof(DualPickerControlBase),
+                new PropertyMetadata(Colors.Transparent, OnHintColorPropertyChanged));
 
         public ColorState HintColorState
         {
             get => (ColorState)GetValue(HintColorStateProperty);
             set => SetValue(HintColorStateProperty, value);
+        }
+
+        public NotifyableColor HintNotifyableColor
+        {
+            get;
+            set;
         }
 
         public Color HintColor
@@ -57,22 +61,14 @@ namespace ColorPicker
             set { SetValue(HintColorProperty, value); }
         }
 
+        public static readonly DependencyProperty UseHintColorProperty =
+            DependencyProperty.Register(nameof(UseHintColor), typeof(bool), typeof(DualPickerControlBase), new PropertyMetadata(false));
 
         public bool UseHintColor
         {
             get { return (bool)GetValue(UseHintColorProperty); }
             set { SetValue(UseHintColorProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for UseHintColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty UseHintColorProperty =
-            DependencyProperty.Register("UseHintColor", typeof(bool), typeof(DualPickerControlBase), new PropertyMetadata(false));
-
-
-        // Using a DependencyProperty as the backing store for HintColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HintColorProperty =
-            DependencyProperty.Register("HintColor", typeof(Color), typeof(DualPickerControlBase),
-                new PropertyMetadata(Colors.Transparent, OnHintColorPropertyChanged));
 
 
         private bool ignoreSecondaryColorChange = false;
