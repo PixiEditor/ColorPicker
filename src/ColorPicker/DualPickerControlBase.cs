@@ -1,4 +1,5 @@
 ﻿using ColorPicker.Models;
+using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -74,8 +75,8 @@ namespace ColorPicker
         private bool ignoreSecondaryColorChange = false;
         private bool ignoreSecondaryColorPropertyChange = false;
 
-        private bool ignoreHintColorChange = false;
-        private bool ignoreHintNotifyablePropertyChange = false;
+        private bool ignoreHintNotifyableColorChange = false;
+        private bool ignoreHintColorPropertyChange = false;
 
         public DualPickerControlBase() : base()
         {
@@ -88,7 +89,11 @@ namespace ColorPicker
                 if (!ignoreSecondaryColorChange)
                 {
                     ignoreSecondaryColorPropertyChange = true;
-                    SecondaryColor = System.Windows.Media.Color.FromArgb((byte)SecondColor.A, (byte)SecondColor.RGB_R, (byte)SecondColor.RGB_G, (byte)SecondColor.RGB_B);
+                    SecondaryColor = System.Windows.Media.Color.FromArgb(
+                        (byte)Math.Round(SecondColor.A),
+                        (byte)Math.Round(SecondColor.RGB_R),
+                        (byte)Math.Round(SecondColor.RGB_G),
+                        (byte)Math.Round(SecondColor.RGB_B));
                     ignoreSecondaryColorPropertyChange = false;
                 }
             };
@@ -96,11 +101,15 @@ namespace ColorPicker
             HintNotifyableColor = new NotifyableColor(hintColorDecorator);
             HintNotifyableColor.PropertyChanged += (sender, args) =>
             {
-                if (!ignoreHintColorChange)
+                if (!ignoreHintNotifyableColorChange)
                 {
-                    ignoreHintNotifyablePropertyChange = true;
-                    HintColor = System.Windows.Media.Color.FromArgb((byte)HintNotifyableColor.A, (byte)HintNotifyableColor.RGB_R, (byte)HintNotifyableColor.RGB_G, (byte)HintNotifyableColor.RGB_B);
-                    ignoreHintNotifyablePropertyChange = false;
+                    ignoreHintColorPropertyChange = true;
+                    HintColor = System.Windows.Media.Color.FromArgb(
+                        (byte)Math.Round(HintNotifyableColor.A),
+                        (byte)Math.Round(HintNotifyableColor.RGB_R),
+                        (byte)Math.Round(HintNotifyableColor.RGB_G),
+                        (byte)Math.Round(HintNotifyableColor.RGB_B));
+                    ignoreHintColorPropertyChange = false;
                 }
             };
         }
@@ -131,14 +140,14 @@ namespace ColorPicker
         {
             var sender = (DualPickerControlBase)d;
             Color newValue = (Color)args.NewValue;
-            if (sender.ignoreHintNotifyablePropertyChange)
+            if (sender.ignoreHintColorPropertyChange)
                 return;
-            sender.ignoreHintColorChange = true;
+            sender.ignoreHintNotifyableColorChange = true;
             sender.HintNotifyableColor.A = newValue.A;
             sender.HintNotifyableColor.RGB_R = newValue.R;
             sender.HintNotifyableColor.RGB_G = newValue.G;
             sender.HintNotifyableColor.RGB_B = newValue.B;
-            sender.ignoreHintColorChange = false;
+            sender.ignoreHintNotifyableColorChange = false;
         }
 
         private static void OnSecondaryColorPropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs args)
