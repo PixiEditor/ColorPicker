@@ -58,20 +58,14 @@
             <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2.5"
                   d:Height="15" d:Width="15" Visibility="{Binding ElementName=uc, Path=UseHintColor, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid.Width>
-                    <Binding ElementName="item1" Path="ActualWidth">
-                        <Binding.Converter>
-                            <conv:DividedSizeConverter/>
-                        </Binding.Converter>
+                    <Binding ElementName="item1" Path="ActualWidth" Converter="{StaticResource DividedSizeConverter}">
                         <Binding.ConverterParameter>
                             <sys:Double>2</sys:Double>
                         </Binding.ConverterParameter>
                     </Binding>
                 </Grid.Width>
                 <Grid.Height>
-                    <Binding ElementName="item1" Path="ActualHeight">
-                        <Binding.Converter>
-                            <conv:DividedSizeConverter/>
-                        </Binding.Converter>
+                    <Binding ElementName="item1" Path="ActualHeight" Converter="{StaticResource DividedSizeConverter}">
                         <Binding.ConverterParameter>
                             <sys:Double>2</sys:Double>
                         </Binding.ConverterParameter>
@@ -79,20 +73,14 @@
                 </Grid.Height>
                 <Rectangle Cursor="Hand" Stroke="Black" StrokeThickness="1" Panel.ZIndex="1" MouseLeftButtonDown="HintColor_OnMouseLeftButtonDown">
                     <Rectangle.RadiusX>
-                        <Binding ElementName="uc" Path="CornerRadius">
-                            <Binding.Converter>
-                                <conv:DividedSizeConverter/>
-                            </Binding.Converter>
+                        <Binding ElementName="uc" Path="CornerRadius" Converter="{StaticResource DividedSizeConverter}">
                             <Binding.ConverterParameter>
                                 <sys:Double>2</sys:Double>
                             </Binding.ConverterParameter>
                         </Binding>
                     </Rectangle.RadiusX>
                     <Rectangle.RadiusY>
-                        <Binding ElementName="uc" Path="CornerRadius">
-                            <Binding.Converter>
-                                <conv:DividedSizeConverter/>
-                            </Binding.Converter>
+                        <Binding ElementName="uc" Path="CornerRadius" Converter="{StaticResource DividedSizeConverter}">
                             <Binding.ConverterParameter>
                                 <sys:Double>2</sys:Double>
                             </Binding.ConverterParameter>
@@ -104,10 +92,7 @@
                 </Rectangle>
                 <Border HorizontalAlignment="Stretch" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="0">
                     <Border.CornerRadius>
-                        <Binding ElementName="uc" Path="CornerRadius">
-                            <Binding.Converter>
-                                <conv:DividedSizeConverter/>
-                            </Binding.Converter>
+                        <Binding ElementName="uc" Path="CornerRadius" Converter="{StaticResource DividedSizeConverter}">
                             <Binding.ConverterParameter>
                                 <sys:Double>2</sys:Double>
                             </Binding.ConverterParameter>
