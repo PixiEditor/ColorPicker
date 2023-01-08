@@ -38,9 +38,9 @@ namespace ColorPicker.UIExtensions
             switch (SliderArgbType)
             {
                 case "A": return Color.FromArgb((byte)value, r, g, b);
-                case "R": return Color.FromArgb(a, (byte)value, g, b);
-                case "G": return Color.FromArgb(a, r, (byte)value, b);
-                case "B": return Color.FromArgb(a, r, g, (byte)value);
+                case "R": return Color.FromArgb(255, (byte)value, g, b);
+                case "G": return Color.FromArgb(255, r, (byte)value, b);
+                case "B": return Color.FromArgb(255, r, g, (byte)value);
                 default: return Color.FromArgb(a, r, g, b);
             };
         }
