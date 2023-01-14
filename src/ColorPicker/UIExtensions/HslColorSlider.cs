@@ -10,6 +10,8 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register(nameof(SliderHslType), typeof(string), typeof(HslColorSlider),
                 new PropertyMetadata(""));
 
+        protected override bool RefreshGradient => SliderHslType != "H";
+
         public HslColorSlider() : base() { }
 
         public string SliderHslType
