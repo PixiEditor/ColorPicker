@@ -20,6 +20,8 @@ namespace ColorPicker.UIExtensions
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual bool RefreshGradient => true;
+
         public PreviewColorSlider()
         {
             Minimum = 0;
@@ -82,7 +84,8 @@ namespace ColorPicker.UIExtensions
         protected static void ColorStateChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PreviewColorSlider slider = (PreviewColorSlider)d;
-            slider.GenerateBackground();
+            if (slider.RefreshGradient)
+                slider.GenerateBackground();
         }
 
         private static void SmallChangeBindableChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
