@@ -19,6 +19,7 @@
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0" Max="359"/>
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="HundredChannelConverter" Min="0" Max="100"/>
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="TwoFiftyFiveChannelConverter" Min="0" Max="255"/>
+            <conv:TextBoxTextStringFormatMultiValueConverter x:Key="TextBoxTextStringFormatMultiValueConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ColorSliderStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -60,8 +61,13 @@
                                        SliderHsvType="H" Minimum="0" Maximum="360" IsMoveToPointEnabled="True"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.HSV_H, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
-                         Text="{Binding Path=Color.HSV_H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
+                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSV_H" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HueChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
@@ -72,8 +78,13 @@
                                    SliderHsvType="S" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSV_S, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
-                         Text="{Binding Path=Color.HSV_S, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
+                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSV_S" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
@@ -84,8 +95,13 @@
                                    SliderHsvType="V" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSV_V, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
-                         Text="{Binding Path=Color.HSV_V, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
+                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSV_V" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
@@ -142,8 +158,13 @@
                                        SliderHslType="H" Minimum="0" Maximum="360" IsMoveToPointEnabled="True"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.HSL_H, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
-                         Text="{Binding Path=Color.HSL_H, Converter={StaticResource HueChannelConverter}, StringFormat=N1, ElementName=uc}">
+                <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSL_H" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HueChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
@@ -154,8 +175,13 @@
                                    SliderHslType="S" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSL_S, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
-                         Text="{Binding Path=Color.HSL_S, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
+                <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSL_S" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>
@@ -166,8 +192,13 @@
                                    SliderHslType="L" Minimum="0" Maximum="100" IsMoveToPointEnabled="True"
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.HSL_L, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
-                         Text="{Binding Path=Color.HSL_L, Converter={StaticResource HundredChannelConverter}, ElementName=uc, StringFormat=N1}">
+                <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7">
+                    <TextBox.Text>
+                        <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                            <Binding Path="Color.HSL_L" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
+                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                        </MultiBinding>
+                    </TextBox.Text>
                     <i:Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </i:Interaction.Behaviors>

@@ -12,6 +12,10 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(ColorSliders),
                 new PropertyMetadata(true));
 
+        public static readonly DependencyProperty UseNumericValuesProperty =
+            DependencyProperty.Register(nameof(UseNumericValues), typeof(bool), typeof(ColorSliders),
+                new PropertyMetadata(true));
+
         public double SmallChange
         {
             get => (double)GetValue(SmallChangeProperty);
@@ -22,6 +26,12 @@ namespace ColorPicker
         {
             get => (bool)GetValue(ShowAlphaProperty);
             set => SetValue(ShowAlphaProperty, value);
+        }
+
+        public bool UseNumericValues
+        {
+            get => (bool)GetValue(UseNumericValuesProperty);
+            set => SetValue(UseNumericValuesProperty, value);
         }
 
         public ColorSliders() : base()
