@@ -9,7 +9,6 @@
              mc:Ignorable="d" 
              MinWidth="100"
              MinHeight="100"
-             UseLayoutRounding="False"
              d:DesignHeight="200" d:DesignWidth="200"
              x:Name="uc">
     <UserControl.Resources>
