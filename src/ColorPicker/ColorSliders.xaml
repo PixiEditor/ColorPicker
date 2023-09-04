@@ -11,7 +11,6 @@
              mc:Ignorable="d" 
              MinWidth="200"
              MinHeight="150"
-             UseLayoutRounding="False"
              x:Name="uc"
              d:DesignHeight="150" d:DesignWidth="300">
     <UserControl.Resources>
@@ -65,7 +64,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSV_H" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HueChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>
@@ -82,7 +81,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSV_S" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>
@@ -99,7 +98,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSV_V" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>
@@ -162,7 +161,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSL_H" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HueChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>
@@ -179,7 +178,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSL_S" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>
@@ -196,7 +195,7 @@
                     <TextBox.Text>
                         <MultiBinding Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                             <Binding Path="Color.HSL_L" Mode="TwoWay" ElementName="uc" Converter="{StaticResource HundredChannelConverter}"/>
-                            <Binding Path="UseNumericValues" ElementName="uc"/>
+                            <Binding Path="ShowFractionalPart" ElementName="uc"/>
                         </MultiBinding>
                     </TextBox.Text>
                     <i:Interaction.Behaviors>

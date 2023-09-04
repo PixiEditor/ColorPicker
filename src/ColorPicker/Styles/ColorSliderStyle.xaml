@@ -18,7 +18,7 @@
     </Style>
 
     <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
-        <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse Width="12" Height="12" ClipToBounds="False" Fill="Transparent" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Ellipse Width="10" Height="10" ClipToBounds="False" Fill="Transparent" Stroke="White" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
@@ -26,17 +26,16 @@
 
     <ControlTemplate x:Key="PreviewColorSliderTemplate" TargetType="{x:Type local:PreviewColorSlider}">
         <Border x:Name="border" CornerRadius="5" 
-                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
-                SnapsToDevicePixels="True">
+                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="6" Height="12" 
+                <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="7"
                         Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=LeftCapColor}"/>
-                <Border HorizontalAlignment="Right" CornerRadius="0,5,5,0" Grid.RowSpan="3" Width="6" Height="12" 
+                <Border HorizontalAlignment="Right" CornerRadius="0,5,5,0" Grid.RowSpan="3" Width="7"
                         Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=RightCapColor}"/>
                 <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" Margin="6,0"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -12,8 +12,8 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(ColorSliders),
                 new PropertyMetadata(true));
 
-        public static readonly DependencyProperty UseNumericValuesProperty =
-            DependencyProperty.Register(nameof(UseNumericValues), typeof(bool), typeof(ColorSliders),
+        public static readonly DependencyProperty ShowFractionalPartProperty =
+            DependencyProperty.Register(nameof(ShowFractionalPart), typeof(bool), typeof(ColorSliders),
                 new PropertyMetadata(true));
 
         public double SmallChange
@@ -28,10 +28,10 @@ namespace ColorPicker
             set => SetValue(ShowAlphaProperty, value);
         }
 
-        public bool UseNumericValues
+        public bool ShowFractionalPart
         {
-            get => (bool)GetValue(UseNumericValuesProperty);
-            set => SetValue(UseNumericValuesProperty, value);
+            get => (bool)GetValue(ShowFractionalPartProperty);
+            set => SetValue(ShowFractionalPartProperty, value);
         }
 
         public ColorSliders() : base()

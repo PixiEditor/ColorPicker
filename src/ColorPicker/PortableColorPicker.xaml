@@ -38,7 +38,8 @@
                                            SecondColorState="{Binding ElementName=uc, Path=SecondColorState, Mode=TwoWay}" 
                                            SmallChange="{Binding ElementName=uc, Path=SmallChange}" Width="200" Height="380"
                                            ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"
-                                           PickerType="{Binding ElementName=uc, Path=PickerType}"/>
+                                           PickerType="{Binding ElementName=uc, Path=PickerType}"
+                                           ShowFractionalPart="{Binding ElementName=uc, Path=ShowFractionalPart}"/>
             </Border>
         </Popup>
     </Grid>

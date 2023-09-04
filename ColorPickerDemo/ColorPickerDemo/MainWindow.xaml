@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ColorPickerDemo"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="Color Picker Demo Project" Height="710" Width="930"
+        Title="Color Picker Demo Project" Height="725" Width="930"
         Background="LightGray">
     <Window.Resources>
         <ResourceDictionary>
@@ -22,7 +22,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="165"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition Height="60"/>
@@ -36,12 +36,13 @@
                 <colorpicker:PortableColorPicker Width="40" Height="20"
                                              ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                              SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
-                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, styled, alpha hidden, transparent hint color</TextBlock>
+                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, styled, alpha hidden, transparent hint color, hsv/hsl fractional part hidden</TextBlock>
                 <Grid Width="40" Height="40">
                     <colorpicker:PortableColorPicker Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
                                                      UseHintColor="True" HintColor="Transparent"
                                                      ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                                      SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
+                                                     ShowFractionalPart="False"
                                                      ShowAlpha="False"/>
                 </Grid>
             </StackPanel>
