@@ -10,13 +10,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/4ysN4Fe.png)
 
-1. [Included Controls](#controls)
-1. [Example Usage](#example)
-1. [Properties](#properties)
-1. [Styling](#styling)
-1. [Other](#other)
-
-# Included Controls<a name="controls">
+# Included Controls
 
 - `SquarePicker`: A HSV/HSL Color Picker, consists of a circular hue slider and HV/HL square.
 - `ColorSliders`: A set of HSV/RGB + Alpha sliders
@@ -28,7 +22,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![demo project](https://i.imgur.com/wZkkykY.png)
 
-# Example Usage<a name="example">
+# Example Usage
 
 See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/ColorPickerDemo) for an example project.
 
@@ -51,7 +45,7 @@ Add the controls
 
 Note: in some configurations such as using the package in .NET Framework 4.7 the XAML designer tends to break and not show the control.
 
-# Properties<a name="properties">
+# Properties
 
 All controls share these properties:
 
@@ -83,7 +77,7 @@ Present on all controls containing either an alpha slider (apart from the `Alpha
 Present on `ColorSliders` and on other controls containing `ColorSliders`.
 - `PickerType`: HSV or HSL, present on `SquarePicker` or controls that contain `SquarePicker`.
 
-# Styling<a name="styling">
+# Styling
 
 Out of the box, the color picker uses the default WPF look:
 
@@ -125,6 +119,6 @@ You may define your own styles, see
 [DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml)
 for reference.
 
-# Other<a name="other">
+# Other
 
 Read flabbet's article on the theory behind the first version of this project on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
