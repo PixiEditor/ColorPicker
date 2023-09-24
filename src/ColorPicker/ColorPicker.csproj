@@ -50,4 +50,11 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
 		<Resource Include="Images\transparentbg_mini.png" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
+	</ItemGroup>
+
+
+
 </Project>

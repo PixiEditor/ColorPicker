@@ -2,7 +2,7 @@
 
 namespace ColorPicker.Models
 {
-    internal static class ColorSpaceHelper
+    public static class ColorSpaceHelper
     {
         /// <summary>
         /// Converts RGB to HSV, returns -1 for undefined channels

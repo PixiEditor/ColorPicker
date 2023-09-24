@@ -1,6 +1,6 @@
 ﻿namespace ColorPicker.Models
 {
-    class SecondColorDecorator : IColorStateStorage
+    public class SecondColorDecorator : IColorStateStorage
     {
         public ColorState ColorState
         {

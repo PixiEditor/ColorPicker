@@ -1,6 +1,6 @@
 ﻿namespace ColorPicker.Models
 {
-    interface ISecondColorStorage
+    public interface ISecondColorStorage
     {
         ColorState SecondColorState { get; set; }
     }

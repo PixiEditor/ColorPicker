@@ -1,6 +1,6 @@
 ﻿namespace ColorPicker.Models
 { 
-    class HintColorDecorator : IColorStateStorage
+    public class HintColorDecorator : IColorStateStorage
     {
         public ColorState ColorState
         {
