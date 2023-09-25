@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPicker.Models", "..\sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPicker.AvaloniaUI", "..\src\ColorPicker.AvaloniaUI\ColorPicker.AvaloniaUI.csproj", "{1F231A2D-6CF0-4606-A350-298A68BF48F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPickerDemo.AvaloniaUI", "ColorPickerDemo.AvaloniaUI\ColorPickerDemo.AvaloniaUI\ColorPickerDemo.AvaloniaUI.csproj", "{D41EB94A-722C-464B-A9B0-E9A9876887DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPickerDemo.AvaloniaUI.Desktop", "ColorPickerDemo.AvaloniaUI\ColorPickerDemo.AvaloniaUI.Desktop\ColorPickerDemo.AvaloniaUI.Desktop.csproj", "{C074E432-7004-4231-9D7C-563215DC92B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPickerDemo.AvaloniaUI.Browser", "ColorPickerDemo.AvaloniaUI\ColorPickerDemo.AvaloniaUI.Browser\ColorPickerDemo.AvaloniaUI.Browser.csproj", "{6AA7A3EE-9AE7-4C92-AB23-88C8487772C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,18 @@ Global
 		{1F231A2D-6CF0-4606-A350-298A68BF48F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F231A2D-6CF0-4606-A350-298A68BF48F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F231A2D-6CF0-4606-A350-298A68BF48F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41EB94A-722C-464B-A9B0-E9A9876887DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41EB94A-722C-464B-A9B0-E9A9876887DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41EB94A-722C-464B-A9B0-E9A9876887DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41EB94A-722C-464B-A9B0-E9A9876887DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C074E432-7004-4231-9D7C-563215DC92B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C074E432-7004-4231-9D7C-563215DC92B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C074E432-7004-4231-9D7C-563215DC92B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C074E432-7004-4231-9D7C-563215DC92B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA7A3EE-9AE7-4C92-AB23-88C8487772C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA7A3EE-9AE7-4C92-AB23-88C8487772C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA7A3EE-9AE7-4C92-AB23-88C8487772C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA7A3EE-9AE7-4C92-AB23-88C8487772C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

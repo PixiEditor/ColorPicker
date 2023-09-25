@@ -1,0 +1,102 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ColorPickerDemo.AvaloniaUI.Views.MainView">
+
+  <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="165"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+            <StackPanel>
+                <Label>Portable Color Picker, default look</Label>
+                <colorpicker:PortableColorPicker Width="40" Height="20"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, styled, alpha hidden, transparent hint color, hsv/hsl fractional part hidden</TextBlock>
+                <Grid Width="40" Height="40">
+                    <colorpicker:PortableColorPicker Style="{StaticResource DefaultColorPickerStyle}" SmallChange="5"
+                                                     UseHintColor="True" HintColor="Transparent"
+                                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                                     SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
+                                                     ShowFractionalPart="False"
+                                                     ShowAlpha="False"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+            <StackPanel>
+                <Label>
+                    <TextBlock>Standard Color Picker, default look<LineBreak/>Size constrained to minimal,<LineBreak/>Sliders change by 5 when scrolled over,<LineBreak/>Alpha hidden</TextBlock>
+                </Label>
+                <colorpicker:StandardColorPicker Width="200" Height="380" x:Name="portable_picker"
+                                             SmallChange="5" ShowAlpha="False"
+                                             ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                             SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+            </StackPanel>
+        </Border>
+
+        <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
+        <colorpicker:ColorSliders Grid.Row="0" Grid.Column="1"
+                                  Style="{StaticResource DefaultColorPickerStyle}"
+                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                  ShowAlpha="False"/>
+
+        <Label Grid.Row="1" Grid.Column="1">Color Display, CadetBlue hint color</Label>
+        <colorPicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay"
+                                         UseHintColor="True" HintColor="CadetBlue"/>
+
+        <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
+        <ComboBox Grid.Row="2" Grid.Column="1" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
+            <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+            <ComboBoxItem>HSL</ComboBoxItem>
+        </ComboBox>
+        <colorPicker:SquarePicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
+                               ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}" />
+
+        <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
+        <colorPicker:HexColorTextBox Grid.Row="3" Grid.Column="1"
+                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}" ShowAlpha="False"/>
+
+        <Border Grid.Row="4" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+            <StackPanel>
+                <Label Margin="5,0">Separate alpha slider</Label>
+                <colorPicker:AlphaSlider Width="160" HorizontalAlignment="Left" Margin="12,0" VerticalAlignment="Top"
+                                         SmallChange="5"
+                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"/>
+            </StackPanel>
+        </Border>
+
+        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable, transparent hint color</Label>
+        <colorpicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
+                                         Style="{StaticResource DefaultColorPickerStyle}"
+                                         UseHintColor="True"
+                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                         SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"/>
+
+        <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">Try resizing the window to see the controls stretch</Label>
+
+    </Grid>
+</UserControl>
