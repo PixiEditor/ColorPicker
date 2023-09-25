@@ -1,0 +1,24 @@
+﻿<controls:ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="https://github.com/avaloniaui">
+
+    <ControlTheme TargetType="Button" x:Key="ImageButtonStyle">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="0" Opacity="{TemplateBinding Opacity}" Name="brd"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^ /template/ #brd">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+    </ControlTheme>
+
+</controls:ResourceDictionary>

@@ -4,13 +4,20 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Avalonia" Version="11.0.4" />
+      <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Images\CircularHueGradient.png" />
+      <Resource Include="Images\transparentbg_mini.png" />
     </ItemGroup>
 </Project>

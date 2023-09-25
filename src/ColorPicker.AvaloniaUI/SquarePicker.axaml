@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ColorPicker"
              xmlns:conv="clr-namespace:ColorPicker.Converters"
+             xmlns:userControls="clr-namespace:ColorPicker.UserControls"
              mc:Ignorable="d"
              MinWidth="100"
              MinHeight="100"
@@ -39,24 +40,23 @@
             <ColumnDefinition Width="0.22*"/>
         </Grid.ColumnDefinitions>
 
-        <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
+        <local:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
                             SmallChange="{Binding ElementName=uc, Path=SmallChange}"
                             Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}"/>
-        <controls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
+        <userControls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
                                Hue="{Binding ElementName=uc, Path=Color.HSV_H}"
                                PickerType="{Binding ElementName=uc, Path=PickerType}">
-            <controls:SquareSlider.Style>
-                <Style TargetType="controls:SquareSlider">
+            <userControls:SquareSlider.Styles>
+                <Style Selector="userControls|SquareSlider:hsv">
                     <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.HSV_S, Mode=TwoWay}"/>
                     <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.HSV_V, Mode=TwoWay}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="HSL">
-                            <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.HSL_S, Mode=TwoWay}"/>
-                            <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.HSL_L, Mode=TwoWay}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
                 </Style>
-            </controls:SquareSlider.Style>
-        </controls:SquareSlider>
+
+                <Style Selector="userControls|SquareSlider:hsl">
+                    <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.HSL_S, Mode=TwoWay}"/>
+                    <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.HSL_L, Mode=TwoWay}"/>
+                </Style>
+            </userControls:SquareSlider.Styles>
+        </userControls:SquareSlider>
     </Grid>
 </local:PickerControlBase>
