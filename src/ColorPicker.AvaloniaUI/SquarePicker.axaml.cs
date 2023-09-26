@@ -1,27 +1,26 @@
 ﻿using ColorPicker.Models;
 using System.Windows;
+using Avalonia;
 
 namespace ColorPicker
 {
     public partial class SquarePicker : PickerControlBase
     {
-        public static DependencyProperty PickerTypeProperty
-            = DependencyProperty.Register(nameof(PickerType), typeof(PickerType), typeof(SquarePicker),
-                new PropertyMetadata(PickerType.HSV));
-
-        public static readonly DependencyProperty SmallChangeProperty =
-            DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(SquarePicker),
-                new PropertyMetadata(1.0));
+        public static readonly StyledProperty<PickerType> PickerTypeProperty = AvaloniaProperty.Register<SquarePicker, PickerType>(
+            nameof(PickerType), PickerType.HSV);
 
         public PickerType PickerType
         {
-            get => (PickerType)GetValue(PickerTypeProperty);
+            get => GetValue(PickerTypeProperty);
             set => SetValue(PickerTypeProperty, value);
         }
 
+        public static readonly StyledProperty<double> SmallChangeProperty = AvaloniaProperty.Register<SquarePicker, double>(
+            nameof(SmallChange), 1.0);
+
         public double SmallChange
         {
-            get => (double)GetValue(SmallChangeProperty);
+            get => GetValue(SmallChangeProperty);
             set => SetValue(SmallChangeProperty, value);
         }
 

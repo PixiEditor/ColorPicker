@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="Styles/ColorSliderStyle.xaml" />
+                <MergeResourceInclude Source="Styles/ColorSliderStyle.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -21,9 +21,9 @@
             <uiExtensions:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
                                          SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                          Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-            <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
+            <Border BorderThickness="0" CornerRadius="5" ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
                 <Border.Background>
-                    <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
+                    <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
                 </Border.Background>
             </Border>
         </Grid>

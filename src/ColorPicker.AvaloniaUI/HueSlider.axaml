@@ -9,10 +9,10 @@
              x:Name="uc">
     <Viewbox>
         <Grid>
-            <Image Source="/ColorPicker;component/Images/CircularHueGradient.png" Stretch="Fill"
+            <Image Source="/Images/CircularHueGradient.png" Stretch="Fill"
                    IsHitTestVisible="False">
                 <Image.OpacityMask>
-                    <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" Radius="0.5">
+                    <RadialGradientBrush GradientOrigin="50%,50%" Center="50%, 50%" Radius="0.5">
                         <RadialGradientBrush.GradientStops>
                             <GradientStop Color="Transparent" Offset="0" />
                             <GradientStop Color="Transparent" Offset="0.839" />

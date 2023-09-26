@@ -4,7 +4,6 @@
     xmlns:controls="https://github.com/avaloniaui">
 
     <ControlTheme TargetType="Button" x:Key="ImageButtonStyle">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -16,7 +15,7 @@
             </Setter.Value>
         </Setter>
 
-        <Style Selector="^ /template/ #brd">
+        <Style Selector="^ /template/ Border#brd">
             <Setter Property="Opacity" Value="1"/>
         </Style>
     </ControlTheme>

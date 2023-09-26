@@ -26,14 +26,14 @@
             <Grid x:Name="head">
                 <Canvas.Left>
                     <MultiBinding Converter="{StaticResource ProportionalConverter}">
-                        <Binding ElementName="uc" Path="ActualWidth"/>
+                        <Binding ElementName="uc" Path="Bounds.Width"/>
                         <Binding ElementName="uc" Path="HeadX"/>
                         <Binding ElementName="uc" Path="RangeX"/>
                     </MultiBinding>
                 </Canvas.Left>
                 <Canvas.Bottom>
                     <MultiBinding Converter="{StaticResource ProportionalConverter}">
-                        <Binding ElementName="uc" Path="ActualHeight"/>
+                        <Binding ElementName="uc" Path="Bounds.Height"/>
                         <Binding ElementName="uc" Path="HeadY"/>
                         <Binding ElementName="uc" Path="RangeY"/>
                     </MultiBinding>

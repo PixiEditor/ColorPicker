@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Reactive;
@@ -30,7 +31,8 @@ namespace ColorPicker.UIExtensions
         static PreviewColorSlider()
         {
             CurrentColorStateProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(ColorStateChangedCallback));
-            SmallChangeProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(SmallChangeBindableChangedCallback));
+            SmallChangeBindableProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(SmallChangeBindableChangedCallback));
+
         }
 
         public PreviewColorSlider()

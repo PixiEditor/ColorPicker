@@ -18,17 +18,19 @@
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="HundredChannelConverter" Min="0" Max="100"/>
             <conv:RangeConstrainedDoubleToDoubleConverter x:Key="TwoFiftyFiveChannelConverter" Min="0" Max="255"/>
             <conv:TextBoxTextStringFormatMultiValueConverter x:Key="TextBoxTextStringFormatMultiValueConverter"/>
+            <conv:VisibleToRowHeightConverter x:Key="VisibleToRowHeightConverter"/>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="Styles/ColorSliderStyle.xaml" />
+                <MergeResourceInclude Source="Styles/ColorSliderStyle.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <TabControl Canvas.Top="290" Margin="10" MaxHeight="130" VerticalAlignment="Top">
-        <TabControl.Resources>
-            <Style TargetType="TabPanel">
+        <TabControl.Styles>
+            <!--There was TabPanel instead of TabItem TODO: Validate if it's right-->
+            <Style Selector="TabItem">
                 <Setter Property="HorizontalAlignment" Value="Right" />
             </Style>
-        </TabControl.Resources>
+        </TabControl.Styles>
         <TabItem Header="HSV">
             <Grid Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
@@ -40,18 +42,7 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition>
-                        <RowDefinition.Style>
-                            <Style TargetType="RowDefinition">
-                                <Setter Property="Height" Value="20" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
-                                        <Setter Property="Height" Value="0" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </RowDefinition.Style>
-                    </RowDefinition>
+                    <RowDefinition Height="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
@@ -111,15 +102,15 @@
                                        IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
+                    <Border BorderThickness="0" CornerRadius="5" ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
                         <Border.Background>
-                            <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
+                            <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
                         </Border.Background>
                     </Border>
                 </Grid>
                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" TabIndex="8"
                          IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
-                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
+                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>
@@ -137,18 +128,7 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition>
-                        <RowDefinition.Style>
-                            <Style TargetType="RowDefinition">
-                                <Setter Property="Height" Value="20" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
-                                        <Setter Property="Height" Value="0" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </RowDefinition.Style>
-                    </RowDefinition>
+                    <RowDefinition Height="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
@@ -207,15 +187,15 @@
                     <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}" TabIndex="4"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
+                    <Border BorderThickness="0" CornerRadius="5" ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
                         <Border.Background>
-                            <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
+                            <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
                         </Border.Background>
                     </Border>
                 </Grid>
                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" TabIndex="8"
                          IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
-                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
+                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>
@@ -233,18 +213,7 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="20"/>
-                    <RowDefinition>
-                        <RowDefinition.Style>
-                            <Style TargetType="RowDefinition">
-                                <Setter Property="Height" Value="20" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=uc, Path=ShowAlpha}" Value="False">
-                                        <Setter Property="Height" Value="0" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </RowDefinition.Style>
-                    </RowDefinition>
+                    <RowDefinition Height="{Binding ElementName=uc, Path=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="R" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
@@ -253,7 +222,7 @@
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_R, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
                 <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" TabIndex="5"
-                         Text="{Binding Path=Color.RGB_R, Converter={StaticResource TwoFiftyFiveChannelConverter}, StringFormat=N0, ElementName=uc}">
+                         Text="{Binding Path=Color.RGB_R, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>
@@ -265,7 +234,7 @@
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_G, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
                 <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" TabIndex="6"
-                         Text="{Binding Path=Color.RGB_G, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
+                         Text="{Binding Path=Color.RGB_G, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>
@@ -277,7 +246,7 @@
                                    SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                    Value="{Binding Path=Color.RGB_B, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
                 <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" TabIndex="7"
-                         Text="{Binding Path=Color.RGB_B, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
+                         Text="{Binding Path=Color.RGB_B, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>
@@ -289,15 +258,15 @@
                                        IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}"
                                        SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                        Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
-                    <Border BorderThickness="0" CornerRadius="5" Panel.ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
+                    <Border BorderThickness="0" CornerRadius="5" ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">
                         <Border.Background>
-                            <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
+                            <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
                         </Border.Background>
                     </Border>
                 </Grid>
                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
                          IsEnabled="{Binding ElementName=uc, Path=ShowAlpha}" TabIndex="8"
-                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc, StringFormat=N0}">
+                         Text="{Binding Path=Color.A, Converter={StaticResource TwoFiftyFiveChannelConverter}, ElementName=uc}">
                     <Interaction.Behaviors>
                         <behaviors:TextBoxFocusBehavior />
                     </Interaction.Behaviors>

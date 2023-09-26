@@ -26,14 +26,14 @@
         <Grid>
             <Grid.Width>
                 <MultiBinding Converter="{StaticResource MinConverter}">
-                    <Binding ElementName="uc" Path="ActualWidth"/>
-                    <Binding ElementName="uc" Path="ActualHeight"/>
+                    <Binding ElementName="uc" Path="Bounds.Width"/>
+                    <Binding ElementName="uc" Path="Bounds.Height"/>
                 </MultiBinding>
             </Grid.Width>
             <Grid.Height>
                 <MultiBinding Converter="{StaticResource MinConverter}">
-                    <Binding ElementName="uc" Path="ActualWidth"/>
-                    <Binding ElementName="uc" Path="ActualHeight"/>
+                    <Binding ElementName="uc" Path="Bounds.Width"/>
+                    <Binding ElementName="uc" Path="Bounds.Height"/>
                 </MultiBinding>
             </Grid.Height>
             <Grid.ColumnDefinitions>
@@ -71,7 +71,7 @@
                         </Binding.ConverterParameter>
                     </Binding>
                 </Grid.Height>
-                <Rectangle Cursor="Hand" Stroke="Black" StrokeThickness="1" Panel.ZIndex="1" PointerPressed="HintColor_PointerPressed">
+                <Rectangle Cursor="Hand" Stroke="Black" StrokeThickness="1" ZIndex="1" PointerPressed="HintColor_PointerPressed">
                     <Rectangle.RadiusX>
                         <Binding ElementName="uc" Path="CornerRadius" Converter="{StaticResource DividedSizeConverter}">
                             <Binding.ConverterParameter>
@@ -90,7 +90,7 @@
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=HintColor}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Border HorizontalAlignment="Stretch" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" Panel.ZIndex="0">
+                <Border HorizontalAlignment="Stretch" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" ZIndex="0">
                     <Border.CornerRadius>
                         <Binding ElementName="uc" Path="CornerRadius" Converter="{StaticResource DividedSizeConverter}">
                             <Binding.ConverterParameter>
@@ -99,33 +99,33 @@
                         </Binding>
                     </Border.CornerRadius>
                     <Border.Background>
-                        <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
+                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
                     </Border.Background>
                 </Border>
             </Grid>
 
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
-                <Rectangle Name="item1" Stroke="Black" StrokeThickness="1" Panel.ZIndex="1" RadiusX="{Binding ElementName=uc, Path=CornerRadius}" RadiusY="{Binding ElementName=uc, Path=CornerRadius}">
+                <Rectangle Name="item1" Stroke="Black" StrokeThickness="1" ZIndex="1" RadiusX="{Binding ElementName=uc, Path=CornerRadius}" RadiusY="{Binding ElementName=uc, Path=CornerRadius}">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SecondaryColor}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Border HorizontalAlignment="Stretch" Margin="0.35" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" Panel.ZIndex="0">
+                <Border HorizontalAlignment="Stretch" Margin="0.35" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" ZIndex="0">
                     <Border.Background>
-                        <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
+                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
                     </Border.Background>
                 </Border>
             </Grid>
             <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
-                <Rectangle Stroke="Black" StrokeThickness="1" Panel.ZIndex="3" 
+                <Rectangle Stroke="Black" StrokeThickness="1" ZIndex="3"
                            RadiusX="{Binding ElementName=uc, Path=CornerRadius}" RadiusY="{Binding ElementName=uc, Path=CornerRadius}">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="{Binding ElementName=uc, Path=SelectedColor}" />
                     </Rectangle.Fill>
                 </Rectangle>
-                <Border HorizontalAlignment="Stretch" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" Panel.ZIndex="0">
+                <Border HorizontalAlignment="Stretch" CornerRadius="{Binding ElementName=uc, Path=CornerRadius}" Margin="0.35" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None" ZIndex="0">
                     <Border.Background>
-                        <ImageBrush Source="/ColorPicker;component/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
+                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
                     </Border.Background>
                 </Border>
             </Grid>

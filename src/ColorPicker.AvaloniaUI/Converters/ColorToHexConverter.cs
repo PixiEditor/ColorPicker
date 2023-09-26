@@ -78,7 +78,9 @@ namespace ColorPicker.Converters
 
         public object ConvertNoAlpha(object value)
         {
-            return "#" + ((Color)value).ToString().Substring(3, 6);
+            Color color = (Color)value;
+            string hex = $"#{color.R}{color.G}{color.B}";
+            return hex;
         }
 
         public object ConvertBackNoAlpha(object value)

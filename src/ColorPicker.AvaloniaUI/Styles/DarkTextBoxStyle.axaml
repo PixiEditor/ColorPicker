@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="SelectionColor" Color="#999" />
+    <SolidColorBrush x:Key="MainColor" Color="#2D2D30" />
+    <SolidColorBrush x:Key="SelectionAccentColor" Color="#252525" />
+    <SolidColorBrush x:Key="DarkerAccentColor" Color="#202020" />
+    <SolidColorBrush x:Key="BrighterAccentColor" Color="#3F3F46" />
+    <SolidColorBrush x:Key="AlmostLightModeAccentColor" Color="#4F4F4F" />
+
+    <ControlTheme TargetType="TextBox" x:Key="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="Snow" />
+        <Setter Property="SelectionBrush" Value="{StaticResource SelectionColor}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <ControlTheme.Resources>
+                <Style Selector="Border" x:Key="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ControlTheme.Resources>
+
+        <Style Selector="^ /template/ TextBox">
+            <Setter Property="Background" Value="{StaticResource SelectionAccentColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrighterAccentColor}"/>
+        </Style>
+
+        <Style Selector="^:pointerover /template/ TextBox">
+            <Setter Property="Background" Value="{StaticResource DarkerAccentColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AlmostLightModeAccentColor}"/>
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

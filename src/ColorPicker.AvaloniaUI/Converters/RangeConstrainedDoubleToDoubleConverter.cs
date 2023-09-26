@@ -33,6 +33,7 @@ namespace ColorPicker.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if(value == null) return AvaloniaProperty.UnsetValue;
             if (!double.TryParse(((string)value).Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
                 return AvaloniaProperty.UnsetValue;
             return MathHelper.Clamp(result, Min, Max);

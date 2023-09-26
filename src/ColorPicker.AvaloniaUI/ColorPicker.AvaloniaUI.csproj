@@ -17,7 +17,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Images\CircularHueGradient.png" />
-      <Resource Include="Images\transparentbg_mini.png" />
+      <AvaloniaResource Include="Images\**" />
     </ItemGroup>
 </Project>

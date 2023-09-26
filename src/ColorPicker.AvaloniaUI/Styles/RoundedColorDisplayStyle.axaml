@@ -1,8 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:colorPicker="clr-namespace:ColorPicker">
     
-    <Style TargetType="{x:Type colorPicker:ColorDisplay}">
+    <Style Selector="colorPicker|ColorDisplay" x:Key="{x:Type colorPicker:ColorDisplay}">
         <Setter Property="CornerRadius" Value="5"/>
     </Style>
 
