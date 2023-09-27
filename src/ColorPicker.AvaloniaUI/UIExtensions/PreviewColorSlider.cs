@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Reactive;
@@ -32,7 +33,6 @@ namespace ColorPicker.UIExtensions
         {
             CurrentColorStateProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(ColorStateChangedCallback));
             SmallChangeBindableProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(SmallChangeBindableChangedCallback));
-
         }
 
         public PreviewColorSlider()
@@ -43,6 +43,15 @@ namespace ColorPicker.UIExtensions
             LargeChange = 10;
             MinHeight = 12;
             PointerWheelChanged += OnPreviewMouseWheel;
+        }
+
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
+            base.OnApplyTemplate(e);
+            if (Track != null)
+            {
+                Track.IgnoreThumbDrag = false;
+            }
         }
 
         public ColorState CurrentColorState

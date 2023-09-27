@@ -35,7 +35,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <!-- TODO: MinHeight="{TemplateBinding MinHeight}" below-->
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="7"
@@ -69,15 +70,9 @@
                         <RepeatButton Name="PART_IncreaseButton"
                                       Theme="{StaticResource SliderRepeatTrackTheme}" />
                     </Track.IncreaseButton>
-                    <Thumb Name="thumb"
-                           MinWidth="20"
-                           MinHeight="20">
-                        <Thumb.Template>
-                            <ControlTemplate>
-                                <Border Background="{DynamicResource ThumbBrush}" Width="8" Height="18" CornerRadius="4"/>
-                            </ControlTemplate>
-                        </Thumb.Template>
-                    </Thumb>
+                    <Thumb x:Name="Thumb" Focusable="False" Height="12"
+                           Theme="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center"
+                           Width="12" />
                 </Track>
             </Grid>
         </Border>

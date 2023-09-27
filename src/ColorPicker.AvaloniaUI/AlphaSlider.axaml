@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="Styles/ColorSliderStyle.axaml" />
+                <MergeResourceInclude Source="/Styles/ColorSliderStyle.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -19,6 +19,7 @@
         <Grid Height="12">
             <!--TODO: IsMoveToPointEnabled="True" was here-->
             <uiExtensions:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
+                                         Theme="{StaticResource PreviewColorSliderTemplate}"
                                          SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                          Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}" CurrentColorState="{Binding Path=ColorState, ElementName=uc}"/>
             <Border BorderThickness="0" CornerRadius="5" ZIndex="-1" RenderOptions.BitmapInterpolationMode="None">

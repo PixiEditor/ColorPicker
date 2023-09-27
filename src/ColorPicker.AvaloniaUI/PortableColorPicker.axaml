@@ -32,7 +32,7 @@
                           Background="{Binding Path=SelectedColor, ElementName=uc, Converter={StaticResource ColorToBrushConverter}}">
             </ToggleButton>
         </Border>
-        <Popup Name="popup" IsLightDismissEnabled="False" IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
+        <Popup Name="popup" IsLightDismissEnabled="True" IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
             <Border BorderThickness="1" BorderBrush="Black" Background="White">
                 <local:StandardColorPicker ColorState="{Binding ElementName=uc, Path=ColorState, Mode=TwoWay}" x:Name="test"
                                            UseHintColor="{Binding ElementName=uc, Path=UseHintColor, Mode=TwoWay}"
