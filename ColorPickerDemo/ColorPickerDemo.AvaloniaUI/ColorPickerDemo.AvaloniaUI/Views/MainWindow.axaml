@@ -7,5 +7,5 @@
         x:Class="ColorPickerDemo.AvaloniaUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="ColorPickerDemo.AvaloniaUI">
-        <views:MainView />
+    <views:MainView />
 </Window>

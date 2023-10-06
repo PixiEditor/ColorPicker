@@ -20,8 +20,10 @@
         <Setter Property="Template">
             <ControlTemplate TargetType="{x:Type Thumb}">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Ellipse Width="12" Height="12" ClipToBounds="False" Fill="Transparent" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Ellipse Width="10" Height="10" ClipToBounds="False" Fill="Transparent" Stroke="White" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Ellipse Width="12" Height="12" ClipToBounds="False" Fill="Transparent" Stroke="Black"
+                             StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Ellipse Width="10" Height="10" ClipToBounds="False" Fill="Transparent" Stroke="White"
+                             StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </ControlTemplate>
         </Setter>
@@ -30,59 +32,59 @@
     <ControlTheme TargetType="ui:PreviewColorSlider" x:Key="PreviewColorSliderTemplate">
         <Setter Property="Template">
             <ControlTemplate TargetType="{x:Type local:PreviewColorSlider}">
-        <Border x:Name="border" CornerRadius="5"
-                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <!-- TODO: MinHeight="{TemplateBinding MinHeight}" below-->
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="7"
-                        Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=LeftCapColor}"/>
-                <Border HorizontalAlignment="Right" CornerRadius="0,5,5,0" Grid.RowSpan="3" Width="7"
-                        Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=RightCapColor}"/>
-                <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" Margin="6,0"
-                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border x:Name="border" CornerRadius="5"
+                        BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <!-- TODO: MinHeight="{TemplateBinding MinHeight}" below-->
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border HorizontalAlignment="Left" CornerRadius="5,0,0,5" Grid.RowSpan="3" Width="7"
+                                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=LeftCapColor}" />
+                        <Border HorizontalAlignment="Right" CornerRadius="0,5,5,0" Grid.RowSpan="3" Width="7"
+                                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Path=RightCapColor}" />
+                        <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" Margin="6,0"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2"
+                                 Placement="Top" Grid.Row="0" IsVisible="False" />
+                        <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0"
+                                 Placement="Bottom" Grid.Row="2" IsVisible="False" />
+                        <Border x:Name="TrackBackground" Background="Transparent" BorderThickness="0" Height="0"
+                                Margin="5,0"
+                                Grid.Row="1" VerticalAlignment="Center">
+                            <Canvas Margin="-6,-1">
+                                <Rectangle x:Name="PART_SelectionRange"
+                                           Height="4.0"
+                                           IsVisible="True" />
+                            </Canvas>
+                        </Border>
+                        <Track Name="PART_Track"
+                               Grid.Row="1"
+                               IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                               Orientation="Horizontal">
+                            <Track.DecreaseButton>
+                                <RepeatButton Name="PART_DecreaseButton"
+                                              Theme="{StaticResource SliderRepeatTrackTheme}" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton Name="PART_IncreaseButton"
+                                              Theme="{StaticResource SliderRepeatTrackTheme}" />
+                            </Track.IncreaseButton>
+                            <Thumb x:Name="Thumb" Focusable="False" Height="12"
+                                   Theme="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center"
+                                   Width="12" />
+                        </Track>
+                    </Grid>
                 </Border>
-                <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2"
-                         Placement="Top" Grid.Row="0" IsVisible="False" />
-                <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0"
-                         Placement="Bottom" Grid.Row="2" IsVisible="False" />
-                <Border x:Name="TrackBackground" Background="Transparent" BorderThickness="0" Height="0" Margin="5,0"
-                        Grid.Row="1" VerticalAlignment="Center">
-                    <Canvas Margin="-6,-1">
-                        <Rectangle x:Name="PART_SelectionRange"
-                                   Height="4.0"
-                                   IsVisible="True" />
-                    </Canvas>
-                </Border>
-                <Track Name="PART_Track"
-                       Grid.Row="1"
-                       IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
-                       Orientation="Horizontal">
-                    <Track.DecreaseButton>
-                        <RepeatButton Name="PART_DecreaseButton"
-                                      Theme="{StaticResource SliderRepeatTrackTheme}" />
-                    </Track.DecreaseButton>
-                    <Track.IncreaseButton>
-                        <RepeatButton Name="PART_IncreaseButton"
-                                      Theme="{StaticResource SliderRepeatTrackTheme}" />
-                    </Track.IncreaseButton>
-                    <Thumb x:Name="Thumb" Focusable="False" Height="12"
-                           Theme="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center"
-                           Width="12" />
-                </Track>
-            </Grid>
-        </Border>
-    </ControlTemplate>
+            </ControlTemplate>
         </Setter>
         <!--<Style Selector="^.SelectionRangeEnabled /template/ Rectangle#PART_SelectionRange">
             <Setter Property="IsVisible" Value="True"/>
         </Style>-->
         <Style Selector="^:focus /template/ Thumb">
-            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Foreground" Value="Blue" />
         </Style>
     </ControlTheme>
 

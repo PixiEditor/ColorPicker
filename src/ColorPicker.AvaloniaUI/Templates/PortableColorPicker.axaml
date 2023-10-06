@@ -1,0 +1,49 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:PortableColorPicker" x:Key="{x:Type colorPicker:PortableColorPicker}">
+        <Setter Property="Template">
+            <Grid>
+                <Grid.Styles>
+                    <StyleInclude Source="/Styles/ColorToggleButtonStyle.axaml" />
+                </Grid.Styles>
+                <Grid.Resources>
+                    <ResourceDictionary>
+                        <converters:BoolToInvertedBoolConverter x:Key="BoolToInvertedBoolConverter" />
+                        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+                        <ResourceDictionary.MergedDictionaries>
+                            <MergeResourceInclude Source="/Styles/Colors.axaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Grid.Resources>
+                <Border BorderThickness="1" BorderBrush="Black" ZIndex="0"
+                        CornerRadius="2.5"
+                        Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
+                    <Border.Background>
+                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
+                    </Border.Background>
+                    <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0"
+                                  IsEnabled="{Binding Path=IsOpen, ElementName=popup, Converter={StaticResource BoolToInvertedBoolConverter}}"
+                                  x:Name="toggleButton" BorderThickness="0" ZIndex="1"
+                                  Background="{TemplateBinding SelectedColor, Converter={StaticResource ColorToBrushConverter}}" />
+                </Border>
+                <Popup Name="popup" IsLightDismissEnabled="True"
+                       IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
+                    <Border BorderThickness="1" BorderBrush="Black" Background="White">
+                        <colorPicker:StandardColorPicker ColorState="{TemplateBinding ColorState, Mode=TwoWay}"
+                                                         x:Name="test"
+                                                         UseHintColor="{TemplateBinding UseHintColor, Mode=TwoWay}"
+                                                         HintColorState="{TemplateBinding HintColorState, Mode=TwoWay}"
+                                                         SecondColorState="{TemplateBinding SecondColorState, Mode=TwoWay}"
+                                                         SmallChange="{TemplateBinding SmallChange}" Width="200"
+                                                         Height="380"
+                                                         ShowAlpha="{TemplateBinding ShowAlpha}"
+                                                         PickerType="{TemplateBinding PickerType}"
+                                                         ShowFractionalPart="{TemplateBinding ShowFractionalPart}" />
+                    </Border>
+                </Popup>
+            </Grid>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

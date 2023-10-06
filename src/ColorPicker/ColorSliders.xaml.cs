@@ -16,6 +16,11 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowFractionalPart), typeof(bool), typeof(ColorSliders),
                 new PropertyMetadata(true));
 
+        public ColorSliders()
+        {
+            InitializeComponent();
+        }
+
         public double SmallChange
         {
             get => (double)GetValue(SmallChangeProperty);
@@ -33,11 +38,5 @@ namespace ColorPicker
             get => (bool)GetValue(ShowFractionalPartProperty);
             set => SetValue(ShowFractionalPartProperty, value);
         }
-
-        public ColorSliders() : base()
-        {
-            InitializeComponent();
-        }
-
     }
 }

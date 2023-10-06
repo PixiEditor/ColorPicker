@@ -12,32 +12,32 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="Snow" />
         <Setter Property="SelectionBrush" Value="{StaticResource SelectionColor}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ScrollViewer Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
-            <ControlTheme.Resources>
-                <Style Selector="Border" x:Key="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </ControlTheme.Resources>
+        <ControlTheme.Resources>
+            <Style Selector="Border" x:Key="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+        </ControlTheme.Resources>
 
         <Style Selector="^ /template/ TextBox">
-            <Setter Property="Background" Value="{StaticResource SelectionAccentColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BrighterAccentColor}"/>
+            <Setter Property="Background" Value="{StaticResource SelectionAccentColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BrighterAccentColor}" />
         </Style>
 
         <Style Selector="^:pointerover /template/ TextBox">
-            <Setter Property="Background" Value="{StaticResource DarkerAccentColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource AlmostLightModeAccentColor}"/>
+            <Setter Property="Background" Value="{StaticResource DarkerAccentColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource AlmostLightModeAccentColor}" />
         </Style>
     </ControlTheme>
 

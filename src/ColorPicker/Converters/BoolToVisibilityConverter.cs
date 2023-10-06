@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace ColorPicker.Converters
 {
     [ValueConversion(typeof(bool), typeof(Visibility))]
-    class BoolToVisibilityConverter : DependencyObject, IValueConverter
+    internal class BoolToVisibilityConverter : DependencyObject, IValueConverter
     {
         public static DependencyProperty InvertProperty =
             DependencyProperty.Register(nameof(Invert), typeof(bool), typeof(BoolToVisibilityConverter),
@@ -20,7 +20,7 @@ namespace ColorPicker.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool actualValue = (bool)value ^ Invert;
+            var actualValue = (bool)value ^ Invert;
             return actualValue ? Visibility.Visible : Visibility.Hidden;
         }
 

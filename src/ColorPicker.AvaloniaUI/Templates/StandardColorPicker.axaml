@@ -1,0 +1,60 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:StandardColorPicker" x:Key="{x:Type colorPicker:StandardColorPicker}">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid Name="MainGrid">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <converters:PickerTypeToIntConverter x:Key="PickerTypeToIntConverter" />
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*" />
+                        <RowDefinition Height="1.4*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="1.1*" MaxHeight="35" />
+                        <RowDefinition Height="4*" MaxHeight="110" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" MaxWidth="100" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                              Margin="0,0,10,0"
+                              Grid.Row="1" Grid.Column="1"
+                              SelectedIndex="{TemplateBinding Property=PickerType, Converter={StaticResource PickerTypeToIntConverter}}">
+                        <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+                        <ComboBoxItem>HSL</ComboBoxItem>
+                    </ComboBox>
+
+                    <colorPicker:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15"
+                                              VerticalAlignment="Stretch"
+                                              PickerType="{TemplateBinding Property=PickerType}"
+                                              SmallChange="{TemplateBinding Property=SmallChange}"
+                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}" />
+                    <colorPicker:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80"
+                                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
+                                              SecondColorState="{TemplateBinding Property=SecondColorState, Mode=TwoWay}"
+                                              HintColorState="{TemplateBinding Property=HintColorState, Mode=TwoWay}"
+                                              UseHintColor="{TemplateBinding Property=UseHintColor, Mode=TwoWay}" />
+                    <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
+                               HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <Label Content="Hex" />
+                        <colorPicker:HexColorTextBox ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
+                                                     ShowAlpha="{TemplateBinding Property=ShowAlpha}" />
+                    </DockPanel>
+                    <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
+                                              SmallChange="{TemplateBinding Property=SmallChange}"
+                                              ShowAlpha="{TemplateBinding Property=ShowAlpha}"
+                                              ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

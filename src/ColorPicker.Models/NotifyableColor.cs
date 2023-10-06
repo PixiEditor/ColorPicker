@@ -3,27 +3,10 @@
     public class NotifyableColor : NotifyableObject
     {
         private readonly IColorStateStorage storage;
+
         public NotifyableColor(IColorStateStorage colorStateStorage)
         {
             storage = colorStateStorage;
-        }
-
-        public void UpdateEverything(ColorState oldValue)
-        {
-            ColorState currentValue = storage.ColorState;
-            if (currentValue.A != oldValue.A) RaisePropertyChanged(nameof(A));
-
-            if (currentValue.RGB_R != oldValue.RGB_R) RaisePropertyChanged(nameof(RGB_R));
-            if (currentValue.RGB_G != oldValue.RGB_G) RaisePropertyChanged(nameof(RGB_G));
-            if (currentValue.RGB_B != oldValue.RGB_B) RaisePropertyChanged(nameof(RGB_B));
-
-            if (currentValue.HSV_H != oldValue.HSV_H) RaisePropertyChanged(nameof(HSV_H));
-            if (currentValue.HSV_S != oldValue.HSV_S) RaisePropertyChanged(nameof(HSV_S));
-            if (currentValue.HSV_V != oldValue.HSV_V) RaisePropertyChanged(nameof(HSV_V));
-
-            if (currentValue.HSL_H != oldValue.HSL_H) RaisePropertyChanged(nameof(HSL_H));
-            if (currentValue.HSL_S != oldValue.HSL_S) RaisePropertyChanged(nameof(HSL_S));
-            if (currentValue.HSL_L != oldValue.HSL_L) RaisePropertyChanged(nameof(HSL_L));
         }
 
         public double A
@@ -102,6 +85,7 @@
                 storage.ColorState = state;
             }
         }
+
         public double HSL_H
         {
             get => storage.ColorState.HSL_H;
@@ -133,6 +117,24 @@
                 state.HSL_L = value / 100;
                 storage.ColorState = state;
             }
+        }
+
+        public void UpdateEverything(ColorState oldValue)
+        {
+            var currentValue = storage.ColorState;
+            if (currentValue.A != oldValue.A) RaisePropertyChanged(nameof(A));
+
+            if (currentValue.RGB_R != oldValue.RGB_R) RaisePropertyChanged(nameof(RGB_R));
+            if (currentValue.RGB_G != oldValue.RGB_G) RaisePropertyChanged(nameof(RGB_G));
+            if (currentValue.RGB_B != oldValue.RGB_B) RaisePropertyChanged(nameof(RGB_B));
+
+            if (currentValue.HSV_H != oldValue.HSV_H) RaisePropertyChanged(nameof(HSV_H));
+            if (currentValue.HSV_S != oldValue.HSV_S) RaisePropertyChanged(nameof(HSV_S));
+            if (currentValue.HSV_V != oldValue.HSV_V) RaisePropertyChanged(nameof(HSV_V));
+
+            if (currentValue.HSL_H != oldValue.HSL_H) RaisePropertyChanged(nameof(HSL_H));
+            if (currentValue.HSL_S != oldValue.HSL_S) RaisePropertyChanged(nameof(HSL_S));
+            if (currentValue.HSL_L != oldValue.HSL_L) RaisePropertyChanged(nameof(HSL_L));
         }
     }
 }

@@ -8,15 +8,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Avalonia" Version="11.0.4" />
-      <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
+        <PackageReference Include="Avalonia" Version="11.0.4"/>
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
+        <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <AvaloniaResource Include="Images\**" />
+        <AvaloniaResource Include="Images\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Templates\ColorPickerTheme.axaml.cs">
+            <DependentUpon>ColorPickerTheme.axaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 </Project>

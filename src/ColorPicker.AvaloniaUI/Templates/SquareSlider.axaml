@@ -1,0 +1,50 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:ColorPicker.UserControls"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="userControls:SquareSlider" x:Key="{x:Type userControls:SquareSlider}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <converters:ProportialConverter x:Key="ProportionalConverter" />
+                            </ResourceDictionary>
+                        </Grid.Resources>
+                        <Image
+                            Width="{TemplateBinding Property=Width}"
+                            Height="{TemplateBinding Property=Height}"
+                            Source="{TemplateBinding Property=GradientBitmap}"
+                            Stretch="Fill" />
+                        <Canvas Background="Transparent">
+                            <Grid x:Name="head">
+                                <Canvas.Left>
+                                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                                        <Binding Path="$parent[userControls:SquareSlider].Bounds.Width" />
+                                        <Binding Path="$parent[userControls:SquareSlider].HeadX" />
+                                        <Binding Path="$parent[userControls:SquareSlider].RangeX" />
+                                    </MultiBinding>
+                                </Canvas.Left>
+                                <Canvas.Bottom>
+                                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                                        <Binding Path="$parent[userControls:SquareSlider].Bounds.Height" />
+                                        <Binding Path="$parent[userControls:SquareSlider].HeadY" />
+                                        <Binding Path="$parent[userControls:SquareSlider].RangeY" />
+                                    </MultiBinding>
+                                </Canvas.Bottom>
+                                <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12"
+                                         UseLayoutRounding="False" />
+                                <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="2" Width="14" Height="14"
+                                         UseLayoutRounding="False" />
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="-7" Y="7" />
+                                </Grid.RenderTransform>
+                            </Grid>
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

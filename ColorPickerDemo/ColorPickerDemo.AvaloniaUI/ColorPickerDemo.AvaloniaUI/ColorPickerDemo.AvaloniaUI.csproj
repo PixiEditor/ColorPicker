@@ -21,6 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\ColorPicker.AvaloniaUI\ColorPicker.AvaloniaUI.csproj" />
+        <ProjectReference Include="..\..\..\src\ColorPicker.AvaloniaUI\ColorPicker.AvaloniaUI.csproj"/>
     </ItemGroup>
 </Project>

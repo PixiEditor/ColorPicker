@@ -1,5 +1,5 @@
-﻿using ColorPicker.Models;
-using System.Windows;
+﻿using System.Windows;
+using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -21,6 +21,11 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowFractionalPart), typeof(bool), typeof(PortableColorPicker),
                 new PropertyMetadata(true));
 
+        public PortableColorPicker()
+        {
+            InitializeComponent();
+        }
+
         public double SmallChange
         {
             get => (double)GetValue(SmallChangeProperty);
@@ -32,6 +37,7 @@ namespace ColorPicker
             get => (bool)GetValue(ShowAlphaProperty);
             set => SetValue(ShowAlphaProperty, value);
         }
+
         public PickerType PickerType
         {
             get => (PickerType)GetValue(PickerTypeProperty);
@@ -42,11 +48,6 @@ namespace ColorPicker
         {
             get => (bool)GetValue(ShowFractionalPartProperty);
             set => SetValue(ShowFractionalPartProperty, value);
-        }
-
-        public PortableColorPicker()
-        {
-            InitializeComponent();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ColorPicker
@@ -9,18 +10,18 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(HexColorTextBox),
                 new PropertyMetadata(true));
 
+        public HexColorTextBox()
+        {
+            InitializeComponent();
+        }
+
         public bool ShowAlpha
         {
             get => (bool)GetValue(ShowAlphaProperty);
             set => SetValue(ShowAlphaProperty, value);
         }
 
-        public HexColorTextBox() : base()
-        {
-            InitializeComponent();
-        }
-
-        private void ColorToHexConverter_OnShowAlphaChange(object sender, System.EventArgs e)
+        private void ColorToHexConverter_OnShowAlphaChange(object sender, EventArgs e)
         {
             textbox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             //InvalidateProperty(SelectedColorProperty);

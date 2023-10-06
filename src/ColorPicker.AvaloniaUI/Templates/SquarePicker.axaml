@@ -1,0 +1,59 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:userControls="clr-namespace:ColorPicker.UserControls">
+    <ControlTheme TargetType="colorPicker:SquarePicker" x:Key="{x:Type colorPicker:SquarePicker}">
+        <ControlTheme.Resources>
+            <converters:BoundsMinConverter x:Key="BoundsMinConverter" />
+        </ControlTheme.Resources>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="grid"
+                          Width="{Binding $parent[colorPicker:ColorSliders]. Bounds, Converter={StaticResource BoundsMinConverter}}"
+                          Height="{Binding $parent[colorPicker:ColorSliders]. Bounds, Converter={StaticResource BoundsMinConverter}}">
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <converters:BoundsMinConverter x:Key="MinConverter" />
+                            </ResourceDictionary>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.22*" />
+                            <RowDefinition Height="0.56*" />
+                            <RowDefinition Height="0.22*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.22*" />
+                            <ColumnDefinition Width="0.56*" />
+                            <ColumnDefinition Width="0.22*" />
+                        </Grid.ColumnDefinitions>
+
+                        <colorPicker:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
+                                               SmallChange="{Binding $parent[colorPicker:ColorSliders]. SmallChange}"
+                                               Value="{Binding $parent[colorPicker:ColorSliders]. BindableColor.HSV_H, Mode=TwoWay}" />
+                        <userControls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
+                                                   Hue="{Binding $parent[colorPicker:ColorSliders]. BindableColor.HSV_H}"
+                                                   PickerType="{Binding $parent[colorPicker:ColorSliders]. PickerType}">
+                            <userControls:SquareSlider.Styles>
+                                <Style Selector="userControls|SquareSlider:hsv">
+                                    <Setter Property="HeadX"
+                                            Value="{Binding ElementName=uc, Path=BindableColor.HSV_S, Mode=TwoWay}" />
+                                    <Setter Property="HeadY"
+                                            Value="{Binding ElementName=uc, Path=BindableColor.HSV_V, Mode=TwoWay}" />
+                                </Style>
+
+                                <Style Selector="userControls|SquareSlider:hsl">
+                                    <Setter Property="HeadX"
+                                            Value="{Binding $parent[colorPicker:ColorSliders]. BindableColor.HSL_S, Mode=TwoWay}" />
+                                    <Setter Property="HeadY"
+                                            Value="{Binding $parent[colorPicker:ColorSliders]. BindableColor.HSL_L, Mode=TwoWay}" />
+                                </Style>
+                            </userControls:SquareSlider.Styles>
+                        </userControls:SquareSlider>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

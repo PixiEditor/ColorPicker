@@ -2,26 +2,25 @@
 {
     public struct ColorState
     {
-        double _RGB_R;
-        double _RGB_G;
-        double _RGB_B;
+        private double _RGB_R;
+        private double _RGB_G;
+        private double _RGB_B;
 
-        double _A;
+        private double _HSV_H;
+        private double _HSV_S;
+        private double _HSV_V;
 
-        double _HSV_H;
-        double _HSV_S;
-        double _HSV_V;
+        private double _HSL_H;
+        private double _HSL_S;
+        private double _HSL_L;
 
-        double _HSL_H;
-        double _HSL_S;
-        double _HSL_L;
-
-        public ColorState(double rGB_R, double rGB_G, double rGB_B, double a, double hSV_H, double hSV_S, double hSV_V, double hSL_h, double hSL_s, double hSL_l)
+        public ColorState(double rGB_R, double rGB_G, double rGB_B, double a, double hSV_H, double hSV_S, double hSV_V,
+            double hSL_h, double hSL_s, double hSL_l)
         {
             _RGB_R = rGB_R;
             _RGB_G = rGB_G;
             _RGB_B = rGB_B;
-            _A = a;
+            A = a;
             _HSV_H = hSV_H;
             _HSV_S = hSV_S;
             _HSV_V = hSV_V;
@@ -32,21 +31,15 @@
 
         public void SetARGB(double a, double r, double g, double b)
         {
-            _A = a;
+            A = a;
             _RGB_R = r;
             _RGB_G = g;
             _RGB_B = b;
             RecalculateHSVFromRGB();
             RecalculateHSLFromRGB();
         }
-        public double A
-        {
-            get => _A;
-            set
-            {
-                _A = value;
-            }
-        }
+
+        public double A { get; set; }
 
         public double RGB_R
         {
@@ -113,6 +106,7 @@
                 RecalculateHSLFromHSV();
             }
         }
+
         public double HSL_H
         {
             get => _HSL_H;

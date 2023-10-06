@@ -19,7 +19,7 @@
                                               HorizontalAlignment="Center"
                                               Content="{TemplateBinding Header}"
                                               Margin="12,2,12,2"
-                                              RecognizesAccessKey="True"/>
+                                              RecognizesAccessKey="True" />
                         </Border>
                     </Grid>
                 </ControlTemplate>

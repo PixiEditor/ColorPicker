@@ -1,7 +1,7 @@
 ﻿<controls:ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="https://github.com/avaloniaui"
-                    xmlns:colorPicker="clr-namespace:ColorPicker">
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:controls="https://github.com/avaloniaui"
+                             xmlns:colorPicker="clr-namespace:ColorPicker">
     <Style Selector="UserControl.DefaultColorPickerStyle" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Style.Resources>
             <ResourceDictionary>
@@ -9,7 +9,7 @@
                     <MergeResourceInclude Source="DarkTabControlStyle.axaml" />
                     <MergeResourceInclude Source="DarkTextBoxStyle.axaml" />
                     <MergeResourceInclude Source="DarkComboBoxStyle.axaml" />
-                    <MergeResourceInclude Source="RoundedColorDisplayStyle.axaml"/>
+                    <MergeResourceInclude Source="RoundedColorDisplayStyle.axaml" />
                 </ResourceDictionary.MergedDictionaries>
                 <Style Selector="Label" x:Key="{x:Type Label}">
                     <Setter Property="Foreground" Value="Snow" />

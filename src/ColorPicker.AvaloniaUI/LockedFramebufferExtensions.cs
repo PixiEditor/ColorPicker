@@ -1,4 +1,3 @@
-using Avalonia.Media;
 using Avalonia.Platform;
 
 namespace ColorPicker.AvaloniaUI;
@@ -13,28 +12,29 @@ internal static class LockedFramebufferExtensions
         }
     }
 
-    public static void WritePixels(this ILockedFramebuffer framebuffer, int targetX, int targetY, int targetWidth, int targetHeight, byte[] pixelBytes)
+    public static void WritePixels(this ILockedFramebuffer framebuffer, int targetX, int targetY, int targetWidth,
+        int targetHeight, byte[] pixelBytes)
     {
         //TODO: Idk if this is correct
-        Span<byte> pixels = framebuffer.GetPixels();
-        int rowBytes = framebuffer.RowBytes;
-        int width = framebuffer.Size.Width;
+        var pixels = framebuffer.GetPixels();
+        var rowBytes = framebuffer.RowBytes;
+        var width = framebuffer.Size.Width;
 
-        int startX = Math.Max(0, targetX);
-        int endX = Math.Min(width, targetX + targetWidth);
+        var startX = Math.Max(0, targetX);
+        var endX = Math.Min(width, targetX + targetWidth);
 
-        int startY = Math.Max(0, targetY);
-        int endY = Math.Min(framebuffer.Size.Height, targetY + targetHeight);
+        var startY = Math.Max(0, targetY);
+        var endY = Math.Min(framebuffer.Size.Height, targetY + targetHeight);
 
-        int bytePerPixel = framebuffer.Format.BitsPerPixel / 8;
+        var bytePerPixel = framebuffer.Format.BitsPerPixel / 8;
 
-        for (int y = startY; y < endY; y++)
+        for (var y = startY; y < endY; y++)
         {
-            int rowIndex = y * rowBytes;
-            int startOffset = rowIndex + startX * bytePerPixel;
-            int endOffset = rowIndex + endX * bytePerPixel;
+            var rowIndex = y * rowBytes;
+            var startOffset = rowIndex + startX * bytePerPixel;
+            var endOffset = rowIndex + endX * bytePerPixel;
 
-            int srcRowStartIndex = (y - targetY) * targetWidth * bytePerPixel;
+            var srcRowStartIndex = (y - targetY) * targetWidth * bytePerPixel;
 
             pixelBytes.AsSpan(srcRowStartIndex, endOffset - startOffset).CopyTo(pixels.Slice(startOffset));
         }

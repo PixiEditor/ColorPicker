@@ -1,7 +1,7 @@
-﻿using Microsoft.Xaml.Behaviors;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Xaml.Behaviors;
 
 namespace ColorPicker.Behaviors
 {
@@ -39,6 +39,7 @@ namespace ColorPicker.Behaviors
             get => (bool)GetValue(ConfirmOnEnterProperty);
             set => SetValue(ConfirmOnEnterProperty, value);
         }
+
         public bool DeselectOnFocusLoss
         {
             get => (bool)GetValue(DeselectOnFocusLossProperty);
@@ -76,13 +77,11 @@ namespace ColorPicker.Behaviors
 
         private void RemoveFocus()
         {
-            DependencyObject scope = FocusManager.GetFocusScope(AssociatedObject);
-            FrameworkElement parent = (FrameworkElement)AssociatedObject.Parent;
+            var scope = FocusManager.GetFocusScope(AssociatedObject);
+            var parent = (FrameworkElement)AssociatedObject.Parent;
 
             while (parent != null && parent is IInputElement element && !element.Focusable)
-            {
                 parent = (FrameworkElement)parent.Parent;
-            }
 
             FocusManager.SetFocusedElement(scope, parent);
             Keyboard.ClearFocus();

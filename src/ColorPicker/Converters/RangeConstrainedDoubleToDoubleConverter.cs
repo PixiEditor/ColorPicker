@@ -1,8 +1,8 @@
-﻿using ColorPicker.Models;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using ColorPicker.Models;
 
 namespace ColorPicker.Converters
 {
@@ -36,7 +36,8 @@ namespace ColorPicker.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!double.TryParse(((string)value).Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
+            if (!double.TryParse(((string)value).Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture,
+                    out var result))
                 return DependencyProperty.UnsetValue;
             return MathHelper.Clamp(result, Min, Max);
         }

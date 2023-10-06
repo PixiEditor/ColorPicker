@@ -16,7 +16,7 @@
         </Setter>
 
         <Style Selector="^ /template/ Border#brd">
-            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="Opacity" Value="1" />
         </Style>
     </ControlTheme>
 

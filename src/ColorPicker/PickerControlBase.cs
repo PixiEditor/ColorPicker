@@ -1,8 +1,8 @@
-﻿using ColorPicker.Models;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -20,31 +20,10 @@ namespace ColorPicker
             EventManager.RegisterRoutedEvent(nameof(ColorChanged),
                 RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(PickerControlBase));
 
-        public ColorState ColorState
-        {
-            get => (ColorState)GetValue(ColorStateProperty);
-            set => SetValue(ColorStateProperty, value);
-        }
-        public Color SelectedColor
-        {
-            get => (Color)GetValue(SelectedColorProperty);
-            set => SetValue(SelectedColorProperty, value);
-        }
+        private bool ignoreColorChange;
 
-        public NotifyableColor Color
-        {
-            get;
-            set;
-        }
-
-        private bool ignoreColorPropertyChange = false;
-        private bool ignoreColorChange = false;
+        private bool ignoreColorPropertyChange;
         private Color previousColor = System.Windows.Media.Color.FromArgb(5, 5, 5, 5);
-        public event RoutedEventHandler ColorChanged
-        {
-            add => AddHandler(ColorChangedEvent, value);
-            remove => RemoveHandler(ColorChangedEvent, value);
-        }
 
         public PickerControlBase()
         {
@@ -73,6 +52,26 @@ namespace ColorPicker
             };
         }
 
+        public Color SelectedColor
+        {
+            get => (Color)GetValue(SelectedColorProperty);
+            set => SetValue(SelectedColorProperty, value);
+        }
+
+        public NotifyableColor Color { get; set; }
+
+        public ColorState ColorState
+        {
+            get => (ColorState)GetValue(ColorStateProperty);
+            set => SetValue(ColorStateProperty, value);
+        }
+
+        public event RoutedEventHandler ColorChanged
+        {
+            add => AddHandler(ColorChangedEvent, value);
+            remove => RemoveHandler(ColorChangedEvent, value);
+        }
+
         private static void OnColorStatePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             ((PickerControlBase)d).Color.UpdateEverything((ColorState)args.OldValue);
@@ -83,7 +82,7 @@ namespace ColorPicker
             var sender = (PickerControlBase)d;
             if (sender.ignoreColorPropertyChange)
                 return;
-            Color newValue = (Color)args.NewValue;
+            var newValue = (Color)args.NewValue;
             sender.ignoreColorChange = true;
             sender.Color.A = newValue.A;
             sender.Color.RGB_R = newValue.R;

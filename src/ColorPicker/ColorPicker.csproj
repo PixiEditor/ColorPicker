@@ -1,60 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net451;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
-		<UseWPF>true</UseWPF>
-		<Authors>Egor Mozgovoy, Krzysztof Krysiński</Authors>
-		<Company>PixiEditor</Company>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Copyright>PixiEditor</Copyright>
-		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-		<PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
-		<RootNamespace>ColorPicker</RootNamespace>
-		<Version>3.4.1</Version>
-		<PackageId>PixiEditor.ColorPicker</PackageId>
-		<PackageTags>color color-picker graphics wpf</PackageTags>
-		<Description>A collection of various WPF controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7
+    <PropertyGroup>
+        <TargetFrameworks>net451;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+        <UseWPF>true</UseWPF>
+        <Authors>Egor Mozgovoy, Krzysztof Krysiński</Authors>
+        <Company>PixiEditor</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Copyright>PixiEditor</Copyright>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
+        <RootNamespace>ColorPicker</RootNamespace>
+        <Version>3.4.1</Version>
+        <PackageId>PixiEditor.ColorPicker</PackageId>
+        <PackageTags>color color-picker graphics wpf</PackageTags>
+        <Description>A collection of various WPF controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7
 
-Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</Description>
-		<Title>A WPF Color Picker</Title>
-		<AssemblyVersion>3.4.1.0</AssemblyVersion>
-		<FileVersion>3.4.1.0</FileVersion>
-		<PackageIcon>icon.png</PackageIcon>
-		<RepositoryType>git</RepositoryType>
-		<SignAssembly>True</SignAssembly>
-		<AssemblyOriginatorKeyFile>sgkey.snk</AssemblyOriginatorKeyFile>
-	</PropertyGroup>
+            Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.
+        </Description>
+        <Title>A WPF Color Picker</Title>
+        <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <FileVersion>3.4.1.0</FileVersion>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>sgkey.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Remove="icon.png" />
-		<None Remove="Images\CircularHueGradient.png" />
-		<None Include="icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<Resource Include="Images\CircularHueGradient.png" />
-		<None Include="..\..\LICENSE.md">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
+    <ItemGroup>
+        <None Remove="icon.png"/>
+        <None Remove="Images\CircularHueGradient.png"/>
+        <None Include="icon.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <Resource Include="Images\CircularHueGradient.png"/>
+        <None Include="..\..\LICENSE.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Resource Include="Images\transparentbg_mini.png" />
-	</ItemGroup>
+    <ItemGroup>
+        <Resource Include="Images\transparentbg_mini.png"/>
+    </ItemGroup>
 
 
-	<ItemGroup>
-	  <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
-	</ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj"/>
+    </ItemGroup>
 
 
 </Project>
