@@ -5,12 +5,12 @@
                     xmlns:converters="clr-namespace:ColorPicker.Converters">
     <ControlTheme TargetType="colorPicker:HexColorTextBox" x:Key="{x:Type colorPicker:HexColorTextBox}">
         <Setter Property="Template">
-            <ControlTemplate>
+            <ControlTemplate TargetType="colorPicker:HexColorTextBox">
                 <Grid>
                     <Grid.Resources>
                         <ResourceDictionary>
                             <converters:ColorToHexConverter x:Key="ColorToHexConverter"
-                                                            ShowAlpha="{TemplateBinding ShowAlpha}" />
+                                                            ShowAlpha="{Binding ShowAlpha, RelativeSource={RelativeSource TemplatedParent}}" />
                         </ResourceDictionary>
                     </Grid.Resources>
                     <TextBox VerticalAlignment="Center" Width="70"

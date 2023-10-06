@@ -95,6 +95,5 @@
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />
 
         <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">Try resizing the window to see the controls stretch</Label>
-
     </Grid>
 </UserControl>

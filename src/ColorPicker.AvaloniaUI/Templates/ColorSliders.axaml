@@ -42,8 +42,7 @@
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
-                                    <RowDefinition
-                                        Height="{TemplateBinding  Property=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
+                                    <RowDefinition Height="20" />
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
@@ -51,16 +50,17 @@
                                                    SliderHsvType="H" Minimum="0" Maximum="360"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding $parent[colorPicker:ColorSliders].BindableColor.HSV_V, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="5">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSV_H"
+                                            <Binding Path="Color.HSV_H"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -73,16 +73,16 @@
                                                    SliderHsvType="S" Minimum="0" Maximum="100"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.HSV_S, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="6">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSV_S"
+                                            <Binding Path="Color.HSV_S" RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HundredChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -95,16 +95,16 @@
                                                    SliderHsvType="V" Minimum="0" Maximum="100"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.HSV_V, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="7">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSV_V"
+                                            <Binding Path="Color.HSV_V" RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HundredChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -115,11 +115,11 @@
                                 <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                                 <Grid Height="12" Grid.Row="3" Grid.Column="1">
                                     <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
-                                                       IsEnabled="{TemplateBinding  Property=ShowAlpha}"
+                                                       IsEnabled="{TemplateBinding Property=ShowAlpha}"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                       Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Mode=TwoWay}"
-                                                       CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                       Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       CurrentColorState="{TemplateBinding ColorState}" />
                                     <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                             RenderOptions.BitmapInterpolationMode="None">
                                         <Border.Background>
@@ -131,7 +131,7 @@
                                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="8"
                                          IsEnabled="{TemplateBinding  Property=ShowAlpha}"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>
@@ -149,8 +149,7 @@
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
-                                    <RowDefinition
-                                        Height="{TemplateBinding  Property=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
+                                    <RowDefinition Height="20" />
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="H" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
@@ -158,16 +157,16 @@
                                                    SliderHslType="H" Minimum="0" Maximum="360"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.HSL_H, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="5">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSL_H"
+                                            <Binding Path="Color.HSL_H" RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -180,16 +179,16 @@
                                                    SliderHslType="S" Minimum="0" Maximum="100"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.HSL_S, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="6">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSL_S"
+                                            <Binding Path="Color.HSL_S" RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HundredChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -202,16 +201,16 @@
                                                    SliderHslType="L" Minimum="0" Maximum="100"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.HSL_L, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="7">
                                     <TextBox.Text>
                                         <MultiBinding
                                             Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                            <Binding Path="$parent[colorPicker:ColorSliders].BindableColor.HSL_L"
+                                            <Binding Path="Color.HSL_L" RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HundredChannelConverter}" />
-                                            <Binding Path="$parent[colorPicker:ColorSliders].ShowFractionalPart" />
+                                            <TemplateBinding Property="ShowFractionalPart" />
                                         </MultiBinding>
                                     </TextBox.Text>
                                     <Interaction.Behaviors>
@@ -224,8 +223,8 @@
                                     <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
                                                        IsEnabled="{TemplateBinding  Property=ShowAlpha}" TabIndex="4"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                       Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Mode=TwoWay}"
-                                                       CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                       Value="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       CurrentColorState="{TemplateBinding ColorState}" />
                                     <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                             RenderOptions.BitmapInterpolationMode="None">
                                         <Border.Background>
@@ -236,8 +235,8 @@
                                 </Grid>
                                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="8"
-                                         IsEnabled="{Binding Path=$parent[colorPicker:ColorSliders].ShowAlpha}"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         IsEnabled="{TemplateBinding ShowAlpha}"
+                                         Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>
@@ -255,8 +254,7 @@
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="20" />
-                                    <RowDefinition
-                                        Height="{TemplateBinding  Property=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
+                                    <RowDefinition Height="20" />
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="R" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
@@ -264,11 +262,11 @@
                                                    SliderArgbType="R" Minimum="0" Maximum="255"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_R, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="5"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_R, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         Text="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>
@@ -279,11 +277,11 @@
                                                    SliderArgbType="G" Minimum="0" Maximum="255"
                                                    Theme="{StaticResource PreviewColorSliderTemplate}"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_G, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="6"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_G, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         Text="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>
@@ -293,24 +291,24 @@
                                 <ui:RgbColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                                    SliderArgbType="B" Minimum="0" Maximum="255"
                                                    SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                   Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_B, Mode=TwoWay}"
-                                                   CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                   Value="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CurrentColorState="{TemplateBinding ColorState}" />
                                 <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18"
                                          TabIndex="7"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.RGB_B, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         Text="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>
                                 </TextBox>
 
-                                <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                                <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Height="{TemplateBinding Property=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
                                 <Grid Height="12" Grid.Row="3" Grid.Column="1">
                                     <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
                                                        IsEnabled="{TemplateBinding  Property=ShowAlpha}"
-                                                       SmallChangeBindable="{Binding Path=$parent[colorPicker:ColorSliders].SmallChange}"
+                                                       SmallChangeBindable="{TemplateBinding SmallChange}"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       Value="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Mode=TwoWay}"
-                                                       CurrentColorState="{Binding Path=$parent[colorPicker:ColorSliders].ColorState}" />
+                                                       Value="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       CurrentColorState="{TemplateBinding ColorState}" />
                                     <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                             RenderOptions.BitmapInterpolationMode="None">
                                         <Border.Background>
@@ -321,7 +319,7 @@
                                 </Grid>
                                 <TextBox TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18"
                                          IsEnabled="{TemplateBinding  Property=ShowAlpha}" TabIndex="8"
-                                         Text="{Binding Path=$parent[colorPicker:ColorSliders].BindableColor.A, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                         Text="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                     <Interaction.Behaviors>
                                         <behaviors:TextBoxFocusBehavior />
                                     </Interaction.Behaviors>

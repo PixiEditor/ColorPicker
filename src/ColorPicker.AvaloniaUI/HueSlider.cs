@@ -18,9 +18,10 @@ internal class HueSlider : TemplatedControl
     public static readonly StyledProperty<double> ValueProperty = AvaloniaProperty.Register<HueSlider, double>(
         nameof(Value));
 
-    public HueSlider()
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        var handlerPart = this.FindControl<Path>("PART_Handle");
+        base.OnApplyTemplate(e);
+        var handlerPart = e.NameScope.Find<Path>("PART_Handle");
         handlerPart.AddHandler(PointerPressedEvent, OnMouseDown, RoutingStrategies.Tunnel);
         handlerPart.AddHandler(PointerReleasedEvent, OnMouseUp, RoutingStrategies.Tunnel);
         handlerPart.AddHandler(PointerMovedEvent, OnMouseMove, RoutingStrategies.Tunnel);

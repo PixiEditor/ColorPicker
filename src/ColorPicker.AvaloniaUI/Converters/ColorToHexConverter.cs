@@ -64,7 +64,7 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
 
     public void RaiseShowAlphaChange()
     {
-        OnShowAlphaChange(this, EventArgs.Empty);
+        OnShowAlphaChange?.Invoke(this, EventArgs.Empty);
     }
 
     private static void ShowAlphaChangedCallback(AvaloniaPropertyChangedEventArgs<bool> d)

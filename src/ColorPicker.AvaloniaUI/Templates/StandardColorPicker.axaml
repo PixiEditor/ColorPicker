@@ -35,13 +35,13 @@
                                               VerticalAlignment="Stretch"
                                               PickerType="{TemplateBinding Property=PickerType}"
                                               SmallChange="{TemplateBinding Property=SmallChange}"
-                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}" />
+                                              ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                     <colorPicker:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80"
                                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
-                                              SecondColorState="{TemplateBinding Property=SecondColorState, Mode=TwoWay}"
-                                              HintColorState="{TemplateBinding Property=HintColorState, Mode=TwoWay}"
-                                              UseHintColor="{TemplateBinding Property=UseHintColor, Mode=TwoWay}" />
+                                              ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              SecondColorState="{Binding SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              HintColorState="{Binding HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              UseHintColor="{Binding UseHintColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                     <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
                                HorizontalAlignment="Right" Margin="0,0,10,0">
                         <Label Content="Hex" />

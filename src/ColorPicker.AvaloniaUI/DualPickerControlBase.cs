@@ -60,7 +60,7 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
             if (!ignoreSecondaryColorChange)
             {
                 ignoreSecondaryColorPropertyChange = true;
-                SecondaryColor = Color.FromArgb(
+                SecondaryColor = Avalonia.Media.Color.FromArgb(
                     (byte)Math.Round(SecondColor.A),
                     (byte)Math.Round(SecondColor.RGB_R),
                     (byte)Math.Round(SecondColor.RGB_G),
@@ -75,7 +75,7 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
             if (!ignoreHintNotifyableColorChange)
             {
                 ignoreHintColorPropertyChange = true;
-                HintColor = Color.FromArgb(
+                HintColor = Avalonia.Media.Color.FromArgb(
                     (byte)Math.Round(HintNotifyableColor.A),
                     (byte)Math.Round(HintNotifyableColor.RGB_R),
                     (byte)Math.Round(HintNotifyableColor.RGB_G),

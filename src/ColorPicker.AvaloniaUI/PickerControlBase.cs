@@ -19,7 +19,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 
     public static readonly StyledProperty<NotifyableColor> ColorProperty =
         AvaloniaProperty.Register<PickerControlBase, NotifyableColor>(
-            nameof(BindableColor));
+            nameof(Color));
 
     public static readonly RoutedEvent ColorChangedEvent =
         RoutedEvent.Register<PickerControlBase, ColorRoutedEventArgs>(
@@ -28,7 +28,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     private bool ignoreColorChange;
 
     private bool ignoreColorPropertyChange;
-    private Color previousColor = Color.FromArgb(5, 5, 5, 5);
+    private Color previousColor = Avalonia.Media.Color.FromArgb(5, 5, 5, 5);
 
     static PickerControlBase()
     {
@@ -40,14 +40,14 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 
     public PickerControlBase()
     {
-        BindableColor = new NotifyableColor(this);
-        BindableColor.PropertyChanged += (sender, args) =>
+        Color = new NotifyableColor(this);
+        Color.PropertyChanged += (sender, args) =>
         {
-            var newColor = Color.FromArgb(
-                (byte)Math.Round(BindableColor.A),
-                (byte)Math.Round(BindableColor.RGB_R),
-                (byte)Math.Round(BindableColor.RGB_G),
-                (byte)Math.Round(BindableColor.RGB_B));
+            var newColor = Avalonia.Media.Color.FromArgb(
+                (byte)Math.Round(Color.A),
+                (byte)Math.Round(Color.RGB_R),
+                (byte)Math.Round(Color.RGB_G),
+                (byte)Math.Round(Color.RGB_B));
             if (newColor != previousColor)
             {
                 RaiseEvent(new ColorRoutedEventArgs(ColorChangedEvent, newColor));
@@ -65,7 +65,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
         };
     }
 
-    public NotifyableColor BindableColor
+    public NotifyableColor Color
     {
         get => GetValue(ColorProperty);
         set => SetValue(ColorProperty, value);
@@ -91,7 +91,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 
     private static void OnColorStatePropertyChange(AvaloniaPropertyChangedEventArgs<ColorState> args)
     {
-        ((PickerControlBase)args.Sender).BindableColor.UpdateEverything(args.OldValue.Value);
+        ((PickerControlBase)args.Sender).Color.UpdateEverything(args.OldValue.Value);
     }
 
     private static void OnSelectedColorPropertyChange(AvaloniaPropertyChangedEventArgs<Color> args)
@@ -101,10 +101,10 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
             return;
         var newValue = args.NewValue.Value;
         sender.ignoreColorChange = true;
-        sender.BindableColor.A = newValue.A;
-        sender.BindableColor.RGB_R = newValue.R;
-        sender.BindableColor.RGB_G = newValue.G;
-        sender.BindableColor.RGB_B = newValue.B;
+        sender.Color.A = newValue.A;
+        sender.Color.RGB_R = newValue.R;
+        sender.Color.RGB_G = newValue.G;
+        sender.Color.RGB_B = newValue.B;
         sender.ignoreColorChange = false;
     }
 }

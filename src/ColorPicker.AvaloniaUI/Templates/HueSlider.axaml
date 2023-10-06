@@ -34,7 +34,7 @@
                                            IsHitTestVisible="False" />
                                 <Grid.RenderTransform>
                                     <TransformGroup>
-                                        <RotateTransform Angle="{TemplateBinding Value}" CenterX="131" CenterY="7.5" />
+                                        <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}" CenterX="131" CenterY="7.5" />
                                         <TranslateTransform X="-119" />
                                     </TransformGroup>
                                 </Grid.RenderTransform>
