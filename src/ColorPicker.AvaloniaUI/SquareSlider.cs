@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -12,7 +13,7 @@ using ColorPicker.Models;
 namespace ColorPicker.UserControls;
 
 [PseudoClasses(":hsv", ":hsl")]
-internal class SquareSlider : UserControl, INotifyPropertyChanged
+internal class SquareSlider : TemplatedControl
 {
     public static readonly StyledProperty<double> HueProperty = AvaloniaProperty.Register<SquareSlider, double>(
         nameof(Hue));

@@ -5,7 +5,7 @@
     <ControlTheme TargetType="userControls:SquareSlider" x:Key="{x:Type userControls:SquareSlider}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="userControls:SquareSlider">
                     <Grid>
                         <Grid.Resources>
                             <ResourceDictionary>
@@ -21,16 +21,16 @@
                             <Grid x:Name="head">
                                 <Canvas.Left>
                                     <MultiBinding Converter="{StaticResource ProportionalConverter}">
-                                        <Binding Path="$parent[userControls:SquareSlider].Bounds.Width" />
-                                        <Binding Path="$parent[userControls:SquareSlider].HeadX" />
-                                        <Binding Path="$parent[userControls:SquareSlider].RangeX" />
+                                        <Binding Path="Bounds.Width" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="HeadX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="RangeX" RelativeSource="{RelativeSource TemplatedParent}" />
                                     </MultiBinding>
                                 </Canvas.Left>
                                 <Canvas.Bottom>
                                     <MultiBinding Converter="{StaticResource ProportionalConverter}">
-                                        <Binding Path="$parent[userControls:SquareSlider].Bounds.Height" />
-                                        <Binding Path="$parent[userControls:SquareSlider].HeadY" />
-                                        <Binding Path="$parent[userControls:SquareSlider].RangeY" />
+                                        <Binding Path="Bounds.Height" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="HeadY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="RangeY" RelativeSource="{RelativeSource TemplatedParent}" />
                                     </MultiBinding>
                                 </Canvas.Bottom>
                                 <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12"
