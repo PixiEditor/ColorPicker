@@ -10,8 +10,11 @@ public class TextBoxTextStringFormatMultiValueConverter : IMultiValueConverter
 
     public object Convert(IList<object?> values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values is not [double doubleVal, bool showFractionalPart])
+        if (values.Count != 2)
             throw new ArgumentException("Values array should contain 2 elements", nameof(values));
+
+        double doubleVal = values[0] is double d ? d : double.Parse(values[0].ToString());
+        bool showFractionalPart = values[1] is true;
 
         return doubleVal.ToString(showFractionalPart ? numericFormat : "N0");
     }

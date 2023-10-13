@@ -18,7 +18,15 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer Name="PART_ContentHost" />
+                        <ScrollViewer Name="PART_ScrollViewer">
+                            <TextPresenter Name="PART_TextPresenter"
+                                              TextWrapping="{TemplateBinding TextWrapping}"
+                                              TextAlignment="{TemplateBinding TextAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Text="{TemplateBinding Text}" />
+                        </ScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

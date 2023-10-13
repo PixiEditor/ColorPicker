@@ -9,7 +9,6 @@
                 <Grid>
                     <Grid.Resources>
                         <ResourceDictionary>
-                            <converters:NotifyableColorGetPropertyConverter x:Key="NotifyableColorGetAlphaConverter" />
                             <ResourceDictionary.MergedDictionaries>
                                 <MergeResourceInclude Source="/Styles/ColorSliderStyle.axaml" />
                             </ResourceDictionary.MergedDictionaries>
