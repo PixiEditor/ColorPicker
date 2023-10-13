@@ -35,11 +35,6 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
 
     public PreviewColorSlider()
     {
-        Minimum = 0;
-        Maximum = 255;
-        SmallChange = 1;
-        LargeChange = 10;
-        MinHeight = 12;
         PointerWheelChanged += OnPreviewMouseWheel;
     }
 
@@ -88,7 +83,19 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        if (Track != null) Track.IgnoreThumbDrag = false;
+        if (Track != null)
+        {
+            Track.IgnoreThumbDrag = false;
+            Track.Minimum = Minimum;
+            Track.Maximum = Maximum;
+            Track.Value = Value;
+            ValueChanged += OnValueChanged;
+        }
+    }
+
+    private void OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
+    {
+        Track.Value = e.NewValue;
     }
 
     public override void EndInit()

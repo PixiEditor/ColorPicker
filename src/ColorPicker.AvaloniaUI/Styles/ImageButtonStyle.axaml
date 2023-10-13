@@ -9,7 +9,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border BorderThickness="0" Opacity="{TemplateBinding Opacity}" Name="brd"
                             Background="{TemplateBinding Background}">
-                        <ContentPresenter />
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

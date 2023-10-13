@@ -28,13 +28,14 @@
                                      Stroke="#aa000000" StrokeThickness="2" IsHitTestVisible="False" Width="220"
                                      Height="220" />
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
-                                <Rectangle Height="15" Width="24" Stroke="#2d2d30" StrokeThickness="3"
+                                <Rectangle Height="15" Width="22" Stroke="#2d2d30" StrokeThickness="3"
                                            IsHitTestVisible="False" />
-                                <Rectangle Height="11" Width="20" Stroke="Snow" StrokeThickness="2"
+                                <Rectangle Height="11" Width="18" Stroke="Snow" StrokeThickness="2"
                                            IsHitTestVisible="False" />
                                 <Grid.RenderTransform>
                                     <TransformGroup>
-                                        <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}" CenterX="131" CenterY="7.5" />
+                                        <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                                         CenterX="119" />
                                         <TranslateTransform X="-119" />
                                     </TransformGroup>
                                 </Grid.RenderTransform>

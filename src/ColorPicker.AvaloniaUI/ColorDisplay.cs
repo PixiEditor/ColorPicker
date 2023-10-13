@@ -14,7 +14,7 @@ public class ColorDisplay : DualPickerControlBase
     {
         base.OnApplyTemplate(e);
         var button = e.NameScope.Find<Button>("PART_SwapButton");
-        button.AddHandler(Button.ClickEvent, SwapButton_Click, RoutingStrategies.Tunnel);
+        button.Click += SwapButton_Click;
 
         InputElement hintColor = e.NameScope.Find<Control>("PART_HintColor");
         hintColor.AddHandler(PointerPressedEvent, HintColor_PointerPressed, RoutingStrategies.Tunnel);

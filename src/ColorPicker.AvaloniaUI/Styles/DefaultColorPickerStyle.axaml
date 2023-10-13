@@ -4,7 +4,7 @@
                              xmlns:colorPicker="clr-namespace:ColorPicker">
     <Style Selector="UserControl.DefaultColorPickerStyle" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Style.Resources>
-            <ResourceDictionary>
+            <!--<ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <MergeResourceInclude Source="DarkTabControlStyle.axaml" />
                     <MergeResourceInclude Source="DarkTextBoxStyle.axaml" />
@@ -17,7 +17,7 @@
                 <Style Selector="Grid#MainGrid" x:Key="{x:Type Grid}">
                     <Setter Property="Background" Value="#252525" />
                 </Style>
-            </ResourceDictionary>
+            </ResourceDictionary>-->
         </Style.Resources>
     </Style>
 </controls:ResourceDictionary>
