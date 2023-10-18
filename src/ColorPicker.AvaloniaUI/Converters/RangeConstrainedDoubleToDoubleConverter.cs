@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
+using ColorPicker.Behaviors;
 using ColorPicker.Models;
 
 namespace ColorPicker.Converters;
@@ -27,9 +28,23 @@ internal class RangeConstrainedDoubleToDoubleConverter : AvaloniaObject, IValueC
         set => SetValue(MaxProperty, value);
     }
 
+    public static readonly StyledProperty<bool> ShowFractionalPartProperty = AvaloniaProperty.Register<RangeConstrainedDoubleToDoubleConverter, bool>(
+        nameof(ShowFractionalPart), true);
+
+    public bool ShowFractionalPart
+    {
+        get => GetValue(ShowFractionalPartProperty);
+        set => SetValue(ShowFractionalPartProperty, value);
+    }
+
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        if (value is double doubleValue)
+        {
+            return doubleValue.ToString(ShowFractionalPart ? "N1" : "N0");
+        }
+
         return value.ToString();
     }
 

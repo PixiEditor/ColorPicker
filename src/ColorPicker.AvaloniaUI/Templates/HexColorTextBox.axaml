@@ -13,7 +13,7 @@
                                                             ShowAlpha="{Binding ShowAlpha, RelativeSource={RelativeSource TemplatedParent}}" />
                         </ResourceDictionary>
                     </Grid.Resources>
-                    <TextBox VerticalAlignment="Center" Width="70"
+                    <TextBox VerticalAlignment="Center" Width="80"
                              Text="{TemplateBinding SelectedColor, Converter={StaticResource ColorToHexConverter}}"
                              x:Name="textbox">
                         <Interaction.Behaviors>

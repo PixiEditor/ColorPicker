@@ -30,7 +30,8 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
     {
         if (!ShowAlpha)
             return ConvertNoAlpha(value);
-        return ((Color)value).ToString();
+        Color color = (Color)value;
+        return $"#{color.R:X2}{color.G:X2}{color.B:X2}{color.A:X2}";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -75,7 +76,7 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
     public object ConvertNoAlpha(object value)
     {
         var color = (Color)value;
-        var hex = $"#{color.R}{color.G}{color.B}";
+        var hex = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
         return hex;
     }
 

@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Avalonia.Xaml.Interactivity;
 
 namespace ColorPicker.Behaviors;
@@ -48,7 +49,7 @@ internal class TextBoxFocusBehavior : Behavior<TextBox>
         AssociatedObject.GotFocus += AssociatedObjectGotKeyboardFocus;
         //AssociatedObject.GotMouseCapture += AssociatedObjectGotMouseCapture;
         AssociatedObject.LostFocus += AssociatedObject_LostFocus;
-        AssociatedObject.PointerPressed += AssociatedObjectPointerPressed;
+        AssociatedObject.AddHandler(InputElement.PointerPressedEvent, AssociatedObjectPointerPressed, RoutingStrategies.Tunnel);
         AssociatedObject.KeyUp += AssociatedObject_KeyUp;
     }
 
@@ -73,24 +74,13 @@ internal class TextBoxFocusBehavior : Behavior<TextBox>
 
     private void RemoveFocus()
     {
-        /*DependencyObject scope = FocusManager.GetFocusScope(AssociatedObject);
-        FrameworkElement parent = (FrameworkElement)AssociatedObject.Parent;
-
-        while (parent != null && parent is IInputElement element && !element.Focusable)
-        {
-            parent = (FrameworkElement)parent.Parent;
-        }
-
-        FocusManager.SetFocusedElement(scope, parent);
-        Keyboard.ClearFocus();*/
-
         var focusManager = TopLevel.GetTopLevel(AssociatedObject).FocusManager;
         var current = focusManager.GetFocusedElement();
         if (current != null)
         {
             //TODO: Find non obsolete way to do this
-            var next = KeyboardNavigationHandler.GetNext(current, NavigationDirection.Next);
-            next?.Focus(NavigationMethod.Directional);
+            var next = KeyboardNavigationHandler.GetNext(AssociatedObject, NavigationDirection.Next);
+            next?.Focus(NavigationMethod.Tab);
         }
     }
 
@@ -98,7 +88,10 @@ internal class TextBoxFocusBehavior : Behavior<TextBox>
         object sender, GotFocusEventArgs e)
     {
         if (SelectOnMouseClick || e.NavigationMethod == NavigationMethod.Tab)
+        {
+            AssociatedObject?.Focus();
             AssociatedObject?.SelectAll();
+        }
     }
 
     /*private void AssociatedObjectGotMouseCapture(

@@ -12,10 +12,13 @@
                         <TabControl.Resources>
                             <ResourceDictionary>
                                 <converters:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0"
+                                    ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
                                     Max="359" />
                                 <converters:RangeConstrainedDoubleToDoubleConverter x:Key="HundredChannelConverter"
+                                    ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
                                     Min="0" Max="100" />
                                 <converters:RangeConstrainedDoubleToDoubleConverter
+                                    ShowFractionalPart="False"
                                     x:Key="TwoFiftyFiveChannelConverter" Min="0" Max="255" />
                                 <converters:TextBoxTextStringFormatMultiValueConverter
                                     x:Key="TextBoxTextStringFormatMultiValueConverter" />
@@ -49,13 +52,17 @@
                                     <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
+                                            <Binding Path="Color.HSV_H"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     
+                                                     Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
+                                            <!--<MultiBinding Mode="TwoWay"
+                                                          Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                                                 <Binding Path="Color.HSV_H"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
                                                 <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            </MultiBinding>-->
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -78,14 +85,11 @@
                                     <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                                <Binding Path="Color.HSV_S"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay"
-                                                         Converter="{StaticResource HundredChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            <Binding Path="Color.HSV_S"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     
+                                                     Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -109,14 +113,11 @@
                                     <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                                <Binding Path="Color.HSV_V"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay"
-                                                         Converter="{StaticResource HundredChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            <Binding Path="Color.HSV_V"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     
+                                                     Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -175,13 +176,10 @@
                                     <TextBox TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                                <Binding Path="Color.HSL_H"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            <Binding Path="Color.HSL_H"
+                                                     
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -205,14 +203,11 @@
                                     <TextBox TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                                <Binding Path="Color.HSL_S"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay"
-                                                         Converter="{StaticResource HundredChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            <Binding Path="Color.HSL_S"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     
+                                                     Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -236,14 +231,11 @@
                                     <TextBox TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
-                                            <MultiBinding
-                                                Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
-                                                <Binding Path="Color.HSL_L"
-                                                         RelativeSource="{RelativeSource TemplatedParent}"
-                                                         Mode="TwoWay"
-                                                         Converter="{StaticResource HundredChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
-                                            </MultiBinding>
+                                            <Binding Path="Color.HSL_L"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     
+                                                     Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
