@@ -23,11 +23,11 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox Width="50" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    <ComboBox HorizontalAlignment="Right" VerticalAlignment="Bottom"
                               Margin="0,0,10,0"
                               Grid.Row="1" Grid.Column="1"
-                              SelectedIndex="{TemplateBinding Property=PickerType, Converter={StaticResource PickerTypeToIntConverter}}">
-                        <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+                              SelectedIndex="{TemplateBinding Property=PickerType, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
+                        <ComboBoxItem>HSV</ComboBoxItem>
                         <ComboBoxItem>HSL</ComboBoxItem>
                     </ComboBox>
 

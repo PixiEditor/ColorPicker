@@ -65,9 +65,9 @@
                                   UseHintColor="True" HintColor="CadetBlue" />
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" Width="50" Height="20" HorizontalAlignment="Left"
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" SelectedIndex="0"
                   VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
-            <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
+            <ComboBoxItem>HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>
         </ComboBox>
         <colorPicker:SquarePicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
