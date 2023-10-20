@@ -43,7 +43,7 @@
                                               HintColorState="{Binding HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               UseHintColor="{Binding UseHintColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                     <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
-                               HorizontalAlignment="Right" Margin="0,0,10,0">
+                               HorizontalAlignment="Right" Margin="0,5,10,0">
                         <Label Content="Hex" />
                         <colorPicker:HexColorTextBox ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
                                                      ShowAlpha="{TemplateBinding Property=ShowAlpha}" />

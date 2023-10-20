@@ -3,13 +3,13 @@
     <ResourceDictionary.MergedDictionaries>
         <MergeResourceInclude Source="Colors.axaml" />
     </ResourceDictionary.MergedDictionaries>
-   <ControlTheme x:Key="{x:Type TabItem}"
+   <ControlTheme x:Key="ColorPickerTabItemTheme"
                 TargetType="TabItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLowBrush}" />
     <Setter Property="HorizontalContentAlignment" Value="Right" />
-    <Setter Property="Padding" Value="2" />
+    <Setter Property="Padding" Value="4" />
     <Setter Property="Margin" Value="0" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -29,7 +29,7 @@
       <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
     </Style>
     <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}" />
     </Style>
     <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
@@ -51,7 +51,7 @@
     </Style>
   </ControlTheme>
 
-   <ControlTheme x:Key="{x:Type TabControl}"
+   <ControlTheme x:Key="ColorPickerTabControlTheme"
                 TargetType="TabControl">
      <Setter Property="Padding" Value="8" />
      <Setter Property="BorderThickness" Value="1" />

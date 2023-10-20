@@ -8,7 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="colorPicker:ColorSliders">
-                    <TabControl Margin="10" MaxHeight="130" VerticalAlignment="Top" Name="tabControl">
+                    <TabControl Theme="{DynamicResource ColorPickerTabControlTheme}" Margin="10" MaxHeight="130" VerticalAlignment="Top" Name="tabControl">
                         <TabControl.Resources>
                             <ResourceDictionary>
                                 <converters:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0"
@@ -32,6 +32,7 @@
                             <!--There was TabPanel instead of TabItem TODO: Validate if it's right-->
                             <Style Selector="TabItem">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Theme" Value="{DynamicResource ColorPickerTabItemTheme}"/>
                             </Style>
                         </TabControl.Styles>
                         <TabItem Header="HSV">
@@ -54,7 +55,7 @@
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_H"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
-                                                     
+
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
                                             <!--<MultiBinding Mode="TwoWay"
                                                           Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
@@ -88,7 +89,7 @@
                                             <Binding Path="Color.HSV_S"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-                                                     
+
                                                      Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
@@ -116,7 +117,7 @@
                                             <Binding Path="Color.HSV_V"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-                                                     
+
                                                      Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
@@ -177,7 +178,7 @@
                                              TabIndex="5">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_H"
-                                                     
+
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
                                         </TextBox.Text>
@@ -206,7 +207,7 @@
                                             <Binding Path="Color.HSL_S"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-                                                     
+
                                                      Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
@@ -234,7 +235,7 @@
                                             <Binding Path="Color.HSL_L"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-                                                     
+
                                                      Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>

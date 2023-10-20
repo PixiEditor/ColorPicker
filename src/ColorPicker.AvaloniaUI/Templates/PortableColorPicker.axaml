@@ -19,7 +19,7 @@
                         </ResourceDictionary>
                     </Grid.Resources>
                     <Border BorderThickness="1" BorderBrush="Black" ZIndex="0"
-                            CornerRadius="2.5"
+                            CornerRadius="0"
                             Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
                         <Border.Background>
                             <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
@@ -31,7 +31,7 @@
                     </Border>
                     <Popup Name="popup" IsLightDismissEnabled="True"
                            IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
-                        <Border BorderThickness="1" BorderBrush="Black" Background="White">
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}" Background="{DynamicResource ThemeBackgroundBrush}">
                             <colorPicker:StandardColorPicker ColorState="{TemplateBinding ColorState, Mode=TwoWay}"
                                                              x:Name="test"
                                                              UseHintColor="{TemplateBinding UseHintColor, Mode=TwoWay}"
