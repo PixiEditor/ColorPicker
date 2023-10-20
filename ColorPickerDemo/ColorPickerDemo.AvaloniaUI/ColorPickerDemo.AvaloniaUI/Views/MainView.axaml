@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+        <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1">
             <StackPanel>
                 <Label>Portable Color Picker, default look</Label>
                 <colorPicker:PortableColorPicker Width="40" Height="20"
@@ -39,7 +39,7 @@
         </Border>
 
         <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5" BorderBrush="Black" BorderThickness="1"
-                Background="White">
+               >
             <StackPanel>
                 <Label>
                     <TextBlock>
@@ -78,7 +78,7 @@
                                      ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                      ShowAlpha="False" />
 
-        <Border Grid.Row="4" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
+        <Border Grid.Row="4" Grid.Column="0" Margin="5" BorderThickness="1">
             <StackPanel>
                 <Label Margin="5,0">Separate alpha slider</Label>
                 <colorPicker:AlphaSlider Width="160" HorizontalAlignment="Left" Margin="12,0" VerticalAlignment="Top"

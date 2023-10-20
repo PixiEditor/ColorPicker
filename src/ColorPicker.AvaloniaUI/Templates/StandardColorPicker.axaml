@@ -48,7 +48,7 @@
                         <colorPicker:HexColorTextBox ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
                                                      ShowAlpha="{TemplateBinding Property=ShowAlpha}" />
                     </DockPanel>
-                    <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                    <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 10 0 0"
                                               ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
                                               SmallChange="{TemplateBinding Property=SmallChange}"
                                               ShowAlpha="{TemplateBinding Property=ShowAlpha}"

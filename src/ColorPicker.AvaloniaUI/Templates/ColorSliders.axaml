@@ -125,7 +125,7 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid>
+                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -243,7 +243,7 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid>
+                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -251,11 +251,11 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                                     <Grid Height="12" Grid.Row="3" Grid.Column="1">
-                                        <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
-                                                           IsEnabled="{TemplateBinding  Property=ShowAlpha}"
-                                                           TabIndex="4"
+                                       <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
+                                                           IsEnabled="{TemplateBinding Property=ShowAlpha}"
+                                                           Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
-                                                           Value="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                           Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                            CurrentColorState="{TemplateBinding ColorState}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                                 RenderOptions.BitmapInterpolationMode="None">
@@ -344,7 +344,7 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid>
+                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />

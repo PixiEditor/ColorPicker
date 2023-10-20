@@ -14,6 +14,7 @@
                 <MergeResourceInclude Source="/Templates/SquarePicker.axaml"/>
                 <MergeResourceInclude Source="/Templates/SquareSlider.axaml"/>
                 <MergeResourceInclude Source="/Templates/StandardColorPicker.axaml"/>
+                <MergeResourceInclude Source="/Styles/SimpleTabControlStyle.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
