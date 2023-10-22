@@ -56,7 +56,6 @@
 
         <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
         <colorPicker:ColorSliders Grid.Row="0" Grid.Column="1"
-                                  Classes="DefaultColorPickerStyle"
                                   ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                   ShowAlpha="False" />
 
@@ -89,7 +88,6 @@
 
         <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable, transparent hint color</Label>
         <colorPicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
-                                         Classes="DefaultColorPickerStyle"
                                          UseHintColor="True"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />

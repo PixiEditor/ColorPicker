@@ -2,11 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:templates="clr-namespace:ColorPicker.AvaloniaUI.Templates;assembly=ColorPicker.AvaloniaUI"
              x:Class="ColorPickerDemo.AvaloniaUI.App"
-             RequestedThemeVariant="Light">
+             RequestedThemeVariant="Dark">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
         <SimpleTheme />
-        <templates:ColorPickerTheme />
+        <!--<templates:SimpleColorPickerTheme />-->
+        <templates:PixiPerfectColorPickerTheme />
     </Application.Styles>
 </Application>

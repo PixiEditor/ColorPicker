@@ -48,12 +48,6 @@ internal class SquareSlider : TemplatedControl
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<PickerType>>(OnColorSpaceChanged));
     }
 
-    public SquareSlider()
-    {
-        GradientBitmap = new WriteableBitmap(new PixelSize(32, 32), new Vector(96, 96), PixelFormats.Rgb24);
-        PseudoClasses.Set(":hsv", true);
-    }
-
     public double RangeY
     {
         get => GetValue(RangeYProperty);
@@ -95,6 +89,12 @@ internal class SquareSlider : TemplatedControl
     {
         get => GetValue(GradientBitmapProperty);
         set => SetValue(GradientBitmapProperty, value);
+    }
+
+    public SquareSlider()
+    {
+        GradientBitmap = new WriteableBitmap(new PixelSize(32, 32), new Vector(96, 96), PixelFormats.Rgb24);
+        PseudoClasses.Set(":hsv", true);
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

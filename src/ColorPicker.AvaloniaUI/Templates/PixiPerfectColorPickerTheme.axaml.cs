@@ -3,9 +3,9 @@ using Avalonia.Styling;
 
 namespace ColorPicker.AvaloniaUI.Templates;
 
-public class ColorPickerTheme : Styles
+public class PixiPerfectColorPickerTheme : Styles
 {
-    public ColorPickerTheme()
+    public PixiPerfectColorPickerTheme()
     {
         AvaloniaXamlLoader.Load(this);
     }

@@ -49,6 +49,15 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<Color>>(OnHintColorPropertyChanged));
     }
 
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        ignoreHintColorPropertyChange = false;
+        ignoreSecondaryColorPropertyChange = false;
+        ignoreHintNotifyableColorChange = false;
+        ignoreSecondaryColorChange = false;
+    }
+
     public DualPickerControlBase()
     {
         secondColorDecorator = new SecondColorDecorator(this);

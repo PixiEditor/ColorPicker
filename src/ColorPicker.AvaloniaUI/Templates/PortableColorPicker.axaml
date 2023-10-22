@@ -3,6 +3,7 @@
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters">
     <ControlTheme TargetType="colorPicker:PortableColorPicker" x:Key="{x:Type colorPicker:PortableColorPicker}">
+        <Setter Property="CornerRadius" Value="{DynamicResource ColorPickerControlRadius}"/>
         <Setter Property="Template">
             <ControlTemplate TargetType="colorPicker:PortableColorPicker">
                 <Grid>
@@ -13,13 +14,10 @@
                         <ResourceDictionary>
                             <converters:BoolToInvertedBoolConverter x:Key="BoolToInvertedBoolConverter" />
                             <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-                            <ResourceDictionary.MergedDictionaries>
-                                <MergeResourceInclude Source="/Styles/Colors.axaml" />
-                            </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </Grid.Resources>
                     <Border BorderThickness="1" BorderBrush="Black" ZIndex="0"
-                            CornerRadius="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
                         <Border.Background>
                             <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8" />
@@ -32,11 +30,11 @@
                     <Popup Name="popup" IsLightDismissEnabled="True"
                            IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
                         <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}" Background="{DynamicResource ThemeBackgroundBrush}">
-                            <colorPicker:StandardColorPicker ColorState="{TemplateBinding ColorState, Mode=TwoWay}"
+                            <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              x:Name="test"
-                                                             UseHintColor="{TemplateBinding UseHintColor, Mode=TwoWay}"
-                                                             HintColorState="{TemplateBinding HintColorState, Mode=TwoWay}"
-                                                             SecondColorState="{TemplateBinding SecondColorState, Mode=TwoWay}"
+                                                             UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
+                                                             HintColorState="{Binding Path=HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             SecondColorState="{Binding Path=SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              SmallChange="{TemplateBinding SmallChange}" Width="200"
                                                              Height="380"
                                                              ShowAlpha="{TemplateBinding ShowAlpha}"
