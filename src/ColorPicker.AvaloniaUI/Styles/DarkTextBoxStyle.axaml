@@ -81,7 +81,7 @@
     </Style>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type TextBox}"
+  <ControlTheme x:Key="ColorPickerTextBox"
                 TargetType="TextBox">
     <Setter Property="CaretBrush" Value="{DynamicResource ColorPickerForegroundBrush}" />
     <Setter Property="Background" Value="{DynamicResource ColorPickerBackgroundBrush}" />

@@ -24,7 +24,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ComboBox HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                              Margin="0,0,10,0"
+                              Margin="0,0,10,0" Theme="{DynamicResource ColorPickerComboBox}"
                               Grid.Row="1" Grid.Column="1"
                               SelectedIndex="{TemplateBinding Property=PickerType, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
                         <ComboBoxItem>HSV</ComboBoxItem>

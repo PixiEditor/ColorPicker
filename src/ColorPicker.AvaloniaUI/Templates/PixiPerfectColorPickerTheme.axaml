@@ -7,6 +7,7 @@
                <MergeResourceInclude Source="/Templates/ColorPicker.Templates.axaml"/>
                <MergeResourceInclude Source="/Styles/PixiPerfectColors.axaml"/>
                <MergeResourceInclude Source="/Styles/DarkTextBoxStyle.axaml"/>
+               <MergeResourceInclude Source="/Styles/DarkComboBoxStyle.axaml"/>
                <MergeResourceInclude Source="/Styles/PixiPerfectTabControlStyle.axaml"/>
            </ResourceDictionary.MergedDictionaries>
        </ResourceDictionary>
