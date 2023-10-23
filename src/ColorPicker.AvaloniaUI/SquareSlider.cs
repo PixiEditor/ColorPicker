@@ -38,6 +38,15 @@ internal class SquareSlider : TemplatedControl
     public static readonly StyledProperty<double> RangeYProperty = AvaloniaProperty.Register<SquareSlider, double>(
         nameof(RangeY));
 
+    public static readonly StyledProperty<NotifyableColor> ColorStateProperty = AvaloniaProperty.Register<SquareSlider, NotifyableColor>(
+        nameof(ColorState));
+
+    public NotifyableColor ColorState
+    {
+        get => GetValue(ColorStateProperty);
+        set => SetValue(ColorStateProperty, value);
+    }
+
     private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod =
         ColorSpaceHelper.HsvToRgb;
 
@@ -46,6 +55,11 @@ internal class SquareSlider : TemplatedControl
         HueProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(OnHueChanged));
         PickerTypeProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<PickerType>>(OnColorSpaceChanged));
+        HeadXProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(OnHeadXChanged));
+
+        HeadYProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(OnHeadYChanged));
     }
 
     public double RangeY
@@ -155,6 +169,32 @@ internal class SquareSlider : TemplatedControl
         sender.RecalculateGradient();
         sender.PseudoClasses.Set(":hsv", args.NewValue.Value == PickerType.HSV);
         sender.PseudoClasses.Set(":hsl", args.NewValue.Value == PickerType.HSL);
+    }
+
+    private static void OnHeadXChanged(AvaloniaPropertyChangedEventArgs<double> e)
+    {
+        SquareSlider sender = (SquareSlider)e.Sender;
+        if (sender.PickerType == PickerType.HSV)
+        {
+            sender.ColorState.HSV_S = e.NewValue.Value;
+        }
+        else
+        {
+            sender.ColorState.HSL_S = e.NewValue.Value;
+        }
+    }
+
+    private static void OnHeadYChanged(AvaloniaPropertyChangedEventArgs<double> e)
+    {
+        SquareSlider sender = (SquareSlider)e.Sender;
+        if (sender.PickerType == PickerType.HSV)
+        {
+            sender.ColorState.HSV_V = e.NewValue.Value;
+        }
+        else
+        {
+            sender.ColorState.HSL_L = e.NewValue.Value;
+        }
     }
 
     private static void OnHueChanged(AvaloniaPropertyChangedEventArgs<double> args)
