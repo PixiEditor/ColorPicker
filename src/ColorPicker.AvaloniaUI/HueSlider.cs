@@ -79,7 +79,7 @@ internal class HueSlider : TemplatedControl
 
     private void OnPreviewMouseWheel(object sender, PointerWheelEventArgs args)
     {
-        Value = MathHelper.Mod(Value + SmallChange * args.Delta.Y / 120, 360);
+        Value = MathHelper.Mod(Value + SmallChange * args.Delta.Y, 360);
         args.Handled = true;
     }
 }

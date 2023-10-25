@@ -15,6 +15,7 @@
             get => storage.ColorState.A * 255;
             set
             {
+                if(isUpdating) return;
                 var state = storage.ColorState;
                 state.A = value / 255;
                 storage.ColorState = state;
@@ -26,6 +27,8 @@
             get => storage.ColorState.RGB_R * 255;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.RGB_R = value / 255;
                 storage.ColorState = state;
@@ -37,6 +40,8 @@
             get => storage.ColorState.RGB_G * 255;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.RGB_G = value / 255;
                 storage.ColorState = state;
@@ -48,6 +53,8 @@
             get => storage.ColorState.RGB_B * 255;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.RGB_B = value / 255;
                 storage.ColorState = state;
@@ -59,6 +66,8 @@
             get => storage.ColorState.HSV_H;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSV_H = value;
                 storage.ColorState = state;
@@ -70,6 +79,8 @@
             get => storage.ColorState.HSV_S * 100;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSV_S = value / 100;
                 storage.ColorState = state;
@@ -81,6 +92,8 @@
             get => storage.ColorState.HSV_V * 100;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSV_V = value / 100;
                 storage.ColorState = state;
@@ -92,6 +105,8 @@
             get => storage.ColorState.HSL_H;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSL_H = value;
                 storage.ColorState = state;
@@ -103,6 +118,8 @@
             get => storage.ColorState.HSL_S * 100;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSL_S = value / 100;
                 storage.ColorState = state;
@@ -114,6 +131,8 @@
             get => storage.ColorState.HSL_L * 100;
             set
             {
+                if(isUpdating) return;
+
                 var state = storage.ColorState;
                 state.HSL_L = value / 100;
                 storage.ColorState = state;

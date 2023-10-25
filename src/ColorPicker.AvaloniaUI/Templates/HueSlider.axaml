@@ -4,7 +4,7 @@
     <ControlTheme TargetType="colorPicker:HueSlider" x:Key="{x:Type colorPicker:HueSlider}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="colorPicker:HueSlider">
                     <Viewbox>
                         <Grid>
                             <Image Source="/Images/CircularHueGradient.png" Stretch="Fill"
