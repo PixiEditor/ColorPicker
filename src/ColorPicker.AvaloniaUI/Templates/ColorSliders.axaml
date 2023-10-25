@@ -49,13 +49,12 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding Property=SmallChange}"
                                                        Value="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_H"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
-
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
                                             <!--<MultiBinding Mode="TwoWay"
                                                           Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
@@ -82,7 +81,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
@@ -110,7 +109,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
@@ -139,7 +138,7 @@
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                            Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                           CurrentColorState="{TemplateBinding ColorState}" />
+                                                           CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                                 RenderOptions.BitmapInterpolationMode="None">
                                             <Border.Background>
@@ -173,7 +172,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
@@ -200,7 +199,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
@@ -228,7 +227,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
@@ -257,7 +256,7 @@
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                            Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                           CurrentColorState="{TemplateBinding ColorState}" />
+                                                           CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                                 RenderOptions.BitmapInterpolationMode="None">
                                             <Border.Background>
@@ -291,7 +290,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="5"
                                              Text="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
@@ -313,7 +312,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="6"
                                              Text="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
@@ -335,7 +334,7 @@
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
                                                        SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       CurrentColorState="{TemplateBinding ColorState}" />
+                                                       CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="7"
                                              Text="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
@@ -359,7 +358,7 @@
                                                            SmallChangeBindable="{TemplateBinding SmallChange}"
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            Value="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                           CurrentColorState="{TemplateBinding ColorState}" />
+                                                           CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                                 RenderOptions.BitmapInterpolationMode="None">
                                             <Border.Background>

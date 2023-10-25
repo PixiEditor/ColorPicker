@@ -34,7 +34,6 @@
                                                Value="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                         <userControls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
                                                    Hue="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}}"
-                                                   ColorState="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    PickerType="{TemplateBinding PickerType}">
                         </userControls:SquareSlider>
                     </Grid>

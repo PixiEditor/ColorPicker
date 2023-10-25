@@ -20,7 +20,7 @@
                                                      Theme="{StaticResource PreviewColorSliderTemplate}"
                                                      SmallChangeBindable="{TemplateBinding SmallChange}"
                                                      Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                     CurrentColorState="{TemplateBinding ColorState}" />
+                                                     CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
                                 RenderOptions.BitmapInterpolationMode="None">
                             <Border.Background>

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1">
+        <!--<Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1">
             <StackPanel>
                 <Label>Portable Color Picker, default look</Label>
                 <colorPicker:PortableColorPicker Width="40" Height="20"
@@ -52,7 +52,7 @@
                                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                                  SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />
             </StackPanel>
-        </Border>
+        </Border>-->
 
         <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
         <colorPicker:ColorSliders Grid.Row="0" Grid.Column="1"
@@ -63,7 +63,7 @@
         <colorPicker:ColorDisplay Grid.Row="1" Grid.Column="1" Margin="5,25,5,5" x:Name="maindisplay"
                                   UseHintColor="True" HintColor="CadetBlue" />
 
-        <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
+        <!--<Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
         <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" SelectedIndex="0"
                   VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
             <ComboBoxItem>HSV</ComboBoxItem>
@@ -92,6 +92,6 @@
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                          SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />
 
-        <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">Try resizing the window to see the controls stretch</Label>
+        <Label Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">Try resizing the window to see the controls stretch</Label>-->
     </Grid>
 </UserControl>

@@ -121,7 +121,7 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
 
     private void OnPreviewMouseWheel(object sender, PointerWheelEventArgs args)
     {
-        Value = MathHelper.Clamp(Value + SmallChange * args.Delta.Y / 120, Minimum, Maximum);
+        Value = MathHelper.Clamp(Value + SmallChange * args.Delta.Y, Minimum, Maximum);
         args.Handled = true;
     }
 }

@@ -26,14 +26,14 @@
                     <ComboBox HorizontalAlignment="Right" VerticalAlignment="Bottom"
                               Margin="0,0,10,0" Theme="{DynamicResource ColorPickerComboBox}"
                               Grid.Row="1" Grid.Column="1"
-                              SelectedIndex="{TemplateBinding Property=PickerType, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
+                              SelectedIndex="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
                         <ComboBoxItem>HSV</ComboBoxItem>
                         <ComboBoxItem>HSL</ComboBoxItem>
                     </ComboBox>
 
                     <colorPicker:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15"
                                               VerticalAlignment="Stretch"
-                                              PickerType="{TemplateBinding Property=PickerType}"
+                                              PickerType="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}}"
                                               SmallChange="{TemplateBinding Property=SmallChange}"
                                               ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                     <colorPicker:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80"
@@ -45,11 +45,11 @@
                     <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
                                HorizontalAlignment="Right" Margin="0,5,10,0">
                         <Label Content="Hex" />
-                        <colorPicker:HexColorTextBox ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
+                        <colorPicker:HexColorTextBox ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                      ShowAlpha="{TemplateBinding Property=ShowAlpha}" />
                     </DockPanel>
                     <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 10 0 0"
-                                              ColorState="{TemplateBinding Property=ColorState, Mode=TwoWay}"
+                                              ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               SmallChange="{TemplateBinding Property=SmallChange}"
                                               ShowAlpha="{TemplateBinding Property=ShowAlpha}"
                                               ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
