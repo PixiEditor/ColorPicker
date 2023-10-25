@@ -47,7 +47,7 @@
                                     <ui:HsvColorSlider Grid.Column="1" Height="12" TabIndex="1"
                                                        SliderHsvType="H" Minimum="0" Maximum="360"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -61,7 +61,7 @@
                                                 <Binding Path="Color.HSV_H"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
-                                                <TemplateBinding Property="ShowFractionalPart" />
+                                                <Binding RelativeSource={RelativeSource TemplatedParent} Path="ShowFractionalPart" />
                                             </MultiBinding>-->
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
@@ -79,7 +79,7 @@
                                     <ui:HsvColorSlider Height="12" Grid.Column="1" TabIndex="2"
                                                        SliderHsvType="S" Minimum="0" Maximum="100"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding Path=SmallChange, RelativeSource={RelativeSource TemplatedParent}}"
                                                        Value="{Binding Path=Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -88,7 +88,6 @@
                                             <Binding Path="Color.HSV_S"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-
                                                      Converter="{StaticResource HundredChannelConverter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
@@ -107,7 +106,7 @@
                                     <ui:HsvColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                                        SliderHsvType="V" Minimum="0" Maximum="100"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -125,7 +124,7 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
+                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -134,9 +133,9 @@
                                     <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                                     <Grid Height="12" Grid.Row="3" Grid.Column="1">
                                         <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
-                                                           IsEnabled="{TemplateBinding Property=ShowAlpha}"
+                                                           IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                           SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                           SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                            Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                            CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
@@ -149,7 +148,7 @@
                                     </Grid>
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="8"
-                                             IsEnabled="{TemplateBinding  Property=ShowAlpha}"
+                                             IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                              Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -170,7 +169,7 @@
                                     <ui:HslColorSlider Height="12" Grid.Row="0" Grid.Column="1" TabIndex="1"
                                                        SliderHslType="H" Minimum="0" Maximum="360"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -197,7 +196,7 @@
                                     <ui:HslColorSlider Height="12" Grid.Row="1" Grid.Column="1" TabIndex="2"
                                                        SliderHslType="S" Minimum="0" Maximum="100"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -225,7 +224,7 @@
                                     <ui:HslColorSlider Height="12" Grid.Row="2" Grid.Column="1" TabIndex="3"
                                                        SliderHslType="L" Minimum="0" Maximum="100"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -243,7 +242,7 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
+                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -252,9 +251,9 @@
                                     <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                                     <Grid Height="12" Grid.Row="3" Grid.Column="1">
                                        <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
-                                                           IsEnabled="{TemplateBinding Property=ShowAlpha}"
+                                                           IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                           SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                           SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                            Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                            CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                         <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
@@ -267,7 +266,7 @@
                                     </Grid>
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
                                              TabIndex="8"
-                                             IsEnabled="{TemplateBinding ShowAlpha}"
+                                             IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                              Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -288,7 +287,7 @@
                                     <ui:RgbColorSlider Height="12" Grid.Row="0" Grid.Column="1" TabIndex="1"
                                                        SliderArgbType="R" Minimum="0" Maximum="255"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -310,7 +309,7 @@
                                     <ui:RgbColorSlider Height="12" Grid.Row="1" Grid.Column="1" TabIndex="2"
                                                        SliderArgbType="G" Minimum="0" Maximum="255"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -332,7 +331,7 @@
                                     <ui:RgbColorSlider Height="12" Grid.Column="1" TabIndex="3"
                                                        SliderArgbType="B" Minimum="0" Maximum="255"
                                                        Theme="{StaticResource PreviewColorSliderTemplate}"
-                                                       SmallChangeBindable="{TemplateBinding  Property=SmallChange}"
+                                                       SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Column="2" Width="40" Height="18" Padding="0"
@@ -344,18 +343,18 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{TemplateBinding ShowAlpha}">
+                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="60" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0"
-                                               Height="{TemplateBinding Property=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
+                                               Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha, Converter={StaticResource VisibleToRowHeightConverter}}" />
                                     <Grid Height="12" Grid.Row="3" Grid.Column="1">
                                         <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
-                                                           IsEnabled="{TemplateBinding  Property=ShowAlpha}"
-                                                           SmallChangeBindable="{TemplateBinding SmallChange}"
+                                                           IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
+                                                           SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            Value="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                            CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -368,7 +367,7 @@
                                         </Border>
                                     </Grid>
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
-                                             IsEnabled="{TemplateBinding  Property=ShowAlpha}" TabIndex="8"
+                                             IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}" TabIndex="8"
                                              Text="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />

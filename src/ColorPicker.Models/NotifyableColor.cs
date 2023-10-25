@@ -3,6 +3,7 @@
     public class NotifyableColor : NotifyableObject
     {
         private readonly IColorStateStorage storage;
+        private bool isUpdating = false;
 
         public NotifyableColor(IColorStateStorage colorStateStorage)
         {
@@ -122,6 +123,8 @@
         public void UpdateEverything(ColorState oldValue)
         {
             var currentValue = storage.ColorState;
+            if(isUpdating) return;
+            isUpdating = true;
             if (currentValue.A != oldValue.A) RaisePropertyChanged(nameof(A));
 
             if (currentValue.RGB_R != oldValue.RGB_R) RaisePropertyChanged(nameof(RGB_R));
@@ -135,6 +138,7 @@
             if (currentValue.HSL_H != oldValue.HSL_H) RaisePropertyChanged(nameof(HSL_H));
             if (currentValue.HSL_S != oldValue.HSL_S) RaisePropertyChanged(nameof(HSL_S));
             if (currentValue.HSL_L != oldValue.HSL_L) RaisePropertyChanged(nameof(HSL_L));
+            isUpdating = false;
         }
     }
 }
