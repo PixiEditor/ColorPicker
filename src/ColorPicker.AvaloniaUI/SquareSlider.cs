@@ -3,6 +3,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
+using Avalonia.Data.Core;
 using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -38,8 +40,20 @@ internal class SquareSlider : TemplatedControl
     public static readonly StyledProperty<double> RangeYProperty = AvaloniaProperty.Register<SquareSlider, double>(
         nameof(RangeY));
 
+    public static readonly StyledProperty<NotifyableColor> ColorProperty = AvaloniaProperty.Register<SquareSlider, NotifyableColor>(
+        nameof(Color));
+
+    public NotifyableColor Color
+    {
+        get => GetValue(ColorProperty);
+        set => SetValue(ColorProperty, value);
+    }
+
     private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod =
         ColorSpaceHelper.HsvToRgb;
+
+    private IDisposable headXBinding;
+    private IDisposable headYBinding;
 
     static SquareSlider()
     {
@@ -100,6 +114,7 @@ internal class SquareSlider : TemplatedControl
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        UpdateHeadBindings(this, PickerType);
         RecalculateGradient();
     }
 
@@ -155,6 +170,32 @@ internal class SquareSlider : TemplatedControl
         sender.RecalculateGradient();
         sender.PseudoClasses.Set(":hsv", args.NewValue.Value == PickerType.HSV);
         sender.PseudoClasses.Set(":hsl", args.NewValue.Value == PickerType.HSL);
+        UpdateHeadBindings(sender, args.NewValue.Value);
+    }
+
+    private static void UpdateHeadBindings(SquareSlider squareSlider, PickerType pickerType)
+    {
+        string headXPath = pickerType == PickerType.HSV ? "HSV_S" : "HSL_S";
+        Binding headXBinding = new()
+        {
+            Path = headXPath,
+            Mode = BindingMode.TwoWay,
+            Source = squareSlider.Color
+        };
+
+        string headYPath = pickerType == PickerType.HSV ? "HSV_V" : "HSL_L";
+        Binding headYBinding = new()
+        {
+            Path = headYPath,
+            Mode = BindingMode.TwoWay,
+            Source = squareSlider.Color
+        };
+
+        squareSlider.headXBinding?.Dispose();
+        squareSlider.headYBinding?.Dispose();
+
+        squareSlider.headXBinding = squareSlider.Bind(HeadXProperty, headXBinding);
+        squareSlider.headYBinding = squareSlider.Bind(HeadYProperty, headYBinding);
     }
 
     private static void OnHueChanged(AvaloniaPropertyChangedEventArgs<double> args)
