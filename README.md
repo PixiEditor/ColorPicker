@@ -4,8 +4,8 @@
 
 # About
 
-A collection of various WPF controls used to select colors.
-Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7.
+A collection of various AvaloniaUI controls used to select colors.
+Supports .NET 6 - 7.
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/4ysN4Fe.png)
