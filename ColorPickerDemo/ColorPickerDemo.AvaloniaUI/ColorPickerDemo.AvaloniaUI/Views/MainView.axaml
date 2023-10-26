@@ -38,8 +38,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5" BorderBrush="Black" BorderThickness="1"
-               >
+        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="5" BorderBrush="Black" BorderThickness="1">
             <StackPanel>
                 <Label>
                     <TextBlock>
@@ -64,7 +63,7 @@
                                   UseHintColor="True" HintColor="CadetBlue" />
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" SelectedIndex="0"
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" SelectedIndex="0" Theme="{DynamicResource ColorPickerComboBox}"
                   VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
             <ComboBoxItem>HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>

@@ -5,8 +5,10 @@
     <Setter Property="Background" Value="{DynamicResource ColorPickerBackgroundColor}" />
     <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLowBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerBorderMidBrush}"/>
     <Setter Property="HorizontalContentAlignment" Value="Right" />
     <Setter Property="Padding" Value="4" />
+    <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
     <Setter Property="Margin" Value="0" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -18,8 +20,7 @@
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
                           Content="{TemplateBinding Header}"
-                          ContentTemplate="{TemplateBinding HeaderTemplate}"
-                          CornerRadius="{TemplateBinding CornerRadius}" />
+                          ContentTemplate="{TemplateBinding HeaderTemplate}" />
       </ControlTemplate>
     </Setter>
     <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
@@ -34,13 +35,25 @@
     <Style Selector="^[TabStripPlacement=Right]">
       <Setter Property="HorizontalContentAlignment" Value="Right" />
     </Style>
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
+    </Style>
+    <Style Selector="^:nth-child(1) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="CornerRadius" Value="5, 0, 0, 0"/>
+      <Setter Property="BorderThickness" Value="1, 1, 0, 0"/>
+    </Style>
+    <Style Selector="^:nth-last-child(1) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="CornerRadius" Value="0, 5, 0, 0"/>
+      <Setter Property="BorderThickness" Value="0, 1, 1, 0"/>
+    </Style>
   </ControlTheme>
 
    <ControlTheme x:Key="ColorPickerTabControlTheme"
                 TargetType="TabControl">
      <Setter Property="Padding" Value="8" />
      <Setter Property="BorderThickness" Value="1" />
-     <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerTabSelectedBrush}" />
+     <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerBorderMidBrush}" />
+     <Setter Property="CornerRadius" Value="0, 5, 5, 5"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Padding="{TemplateBinding Padding}"
@@ -58,6 +71,7 @@
                               BorderThickness="{TemplateBinding BorderThickness}"
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              CornerRadius="{TemplateBinding CornerRadius}"
                               Content="{TemplateBinding SelectedContent}"
                               ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
           </DockPanel>

@@ -50,7 +50,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_H"
@@ -82,7 +82,7 @@
                                                        SmallChangeBindable="{Binding Path=SmallChange, RelativeSource={RelativeSource TemplatedParent}}"
                                                        Value="{Binding Path=Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_S"
@@ -109,7 +109,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_V"
@@ -146,7 +146,7 @@
                                             </Border.Background>
                                         </Border>
                                     </Grid>
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="8"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                              Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
@@ -172,7 +172,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="5">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_H"
@@ -199,7 +199,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="6">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_S"
@@ -227,7 +227,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="7">
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_L"
@@ -264,7 +264,7 @@
                                             </Border.Background>
                                         </Border>
                                     </Grid>
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="8"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                              Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
@@ -290,7 +290,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="5"
                                              Text="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
@@ -312,7 +312,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              TabIndex="6"
                                              Text="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
@@ -334,7 +334,7 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Column="2" Width="40" Margin="0 0 0 2" Height="18" Padding="0"
                                              TabIndex="7"
                                              Text="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
@@ -366,7 +366,7 @@
                                             </Border.Background>
                                         </Border>
                                     </Grid>
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}" TabIndex="8"
                                              Text="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
                                         <Interaction.Behaviors>
