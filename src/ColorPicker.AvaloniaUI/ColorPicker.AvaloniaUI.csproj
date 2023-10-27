@@ -56,7 +56,7 @@
         <PackagePath></PackagePath>
         <Link>LICENSE.md</Link>
       </None>
-      <None Include="..\..\README.md">
+      <None Include="README.md">
         <Link>README.md</Link>
         <Pack>true</Pack>
         <PackagePath>\</PackagePath>

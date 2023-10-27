@@ -7,7 +7,7 @@
 
     <Application.Styles>
         <SimpleTheme />
-        <!--<templates:SimpleColorPickerTheme />-->
-        <templates:PixiPerfectColorPickerTheme />
+        <templates:SimpleColorPickerTheme />
+        <!--<templates:PixiPerfectColorPickerTheme />-->
     </Application.Styles>
 </Application>

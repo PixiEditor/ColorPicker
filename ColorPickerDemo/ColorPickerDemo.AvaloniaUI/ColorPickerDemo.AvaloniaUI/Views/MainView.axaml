@@ -54,7 +54,7 @@
         </Border>
 
         <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
-        <colorPicker:ColorSliders Grid.Row="0" Grid.Column="1"
+        <colorPicker:ColorSliders Margin="0 10" Grid.Row="0" Grid.Column="1"
                                   ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                   ShowAlpha="False" />
 

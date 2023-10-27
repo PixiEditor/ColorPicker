@@ -10,8 +10,6 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/4ysN4Fe.png)
 
-Check the 
-
 # Included Controls
 
 - `SquarePicker`: A HSV/HSL Color Picker, consists of a circular hue slider and HV/HL square.
@@ -22,7 +20,7 @@ Check the
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
 - `AlphaSlider`: A separate alpha slider control
 
-![demo project](https://i.imgur.com/wZkkykY.png)
+![demo project](https://github.com/PixiEditor/ColorPicker/assets/25402427/a90f441c-a8f8-4e62-8f7d-48fe1987b895)
 
 # Example Usage
 
@@ -30,8 +28,20 @@ See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/Colo
 
 **Basic usage:**
 
-[WPF Basic Usage](src/ColorPicker/README.md#example-usage)
-[AvaloniaUI Basic Usage](src/ColorPicker.AvaloniaUI/README.md#example-usage)
+Install the NuGet package, insert a reference to the ColorPicker namespace
+
+```xml
+<Window ...
+        xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI"
+...>
+```
+
+Add the controls
+
+```xml
+<colorpicker:StandardColorPicker x:Name="main" Width="200" Height="380"/>
+<colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}" Width="40" Height="40"/>
+```
 
 # Properties
 
@@ -72,15 +82,32 @@ Apart from those, some controls have unique properties:
 
 # Styling
 
-Styling differs between AvaloniaUI and WPF version. See the respective READMEs for more info.
+Out of the box, the color picker doesn't have any look.
+You must select a theme for it. There are 2 themes bundled by default:
 
-## AvaloniaUI
+- SimpleColorPickerTheme - Basic as close to Avalonia SimpleTheme as possible
+- PixiPerfectColorPickerTheme - Our custom theme used in PixiEditor
 
-See [AvaloniaUI Styling](src/ColorPicker.AvaloniaUI/README.md#styling)
+Both themes are available in Dark and Light variants.
 
-## WPF
+![SimpleColorPickerTheme](https://github.com/PixiEditor/ColorPicker/assets/25402427/7d2347ee-31af-47b4-a5dc-77477b8d980f)
 
-See [WPF Styling](src/ColorPicker/README.md#styling)
+To use a theme, go to your App.xaml and add the following:
+
+```xml
+<Application ...
+        xmlns:templates="clr-namespace:ColorPicker.AvaloniaUI.Templates;assembly=ColorPicker.AvaloniaUI">
+ <Application.Styles>
+        ...
+        <templates:SimpleColorPickerTheme /> <!-- or -->
+        <templates:PixiPerfectColorPickerTheme />
+    </Application.Styles>
+   ```
+
+You may define your own themes, AvaloniaUI version of ColorPicker is built with
+TemplatedControls, so look can be fully customized.
+
+Use [SimpleColorPickerTheme](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker.AvaloniaUI/Templates) for a reference.
 
 # Other
 
