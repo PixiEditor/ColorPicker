@@ -15,6 +15,7 @@ using ColorPicker.Models;
 namespace ColorPicker.UserControls;
 
 [PseudoClasses(":hsv", ":hsl")]
+[TemplatePart(Name = "PART_GradientImage", Type = typeof(Image))]
 internal class SquareSlider : TemplatedControl
 {
     public static readonly StyledProperty<double> HueProperty = AvaloniaProperty.Register<SquareSlider, double>(
@@ -54,6 +55,7 @@ internal class SquareSlider : TemplatedControl
 
     private IDisposable headXBinding;
     private IDisposable headYBinding;
+    private Image image;
 
     static SquareSlider()
     {
@@ -111,9 +113,11 @@ internal class SquareSlider : TemplatedControl
         PseudoClasses.Set(":hsv", true);
     }
 
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        base.OnAttachedToVisualTree(e);
+        base.OnApplyTemplate(e);
+        image = e.NameScope.Find<Image>("PART_GradientImage");
+
         UpdateHeadBindings(this, PickerType);
         RecalculateGradient();
     }
@@ -155,8 +159,12 @@ internal class SquareSlider : TemplatedControl
             pixels[pos + 2] = (byte)(b * 255);
         }
 
-        using var framebuffer = GradientBitmap.Lock();
-        framebuffer.WritePixels(0, 0, w, h, pixels);
+        using (var framebuffer = GradientBitmap.Lock())
+        {
+            framebuffer.WritePixels(0, 0, w, h, pixels);
+        }
+
+        image.InvalidateVisual();
     }
 
     private static void OnColorSpaceChanged(AvaloniaPropertyChangedEventArgs<PickerType> args)

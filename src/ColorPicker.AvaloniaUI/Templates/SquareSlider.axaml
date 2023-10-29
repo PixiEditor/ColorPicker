@@ -16,6 +16,7 @@
                             Width="{TemplateBinding Property=Width}"
                             Height="{TemplateBinding Property=Height}"
                             Source="{TemplateBinding Property=GradientBitmap}"
+                            Name="PART_GradientImage"
                             Stretch="Fill" />
                         <Canvas Background="Transparent">
                             <Grid x:Name="head">
