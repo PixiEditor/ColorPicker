@@ -14,7 +14,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
         <RootNamespace>ColorPicker</RootNamespace>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <PackageId>PixiEditor.ColorPicker.AvaloniaUI</PackageId>
         <PackageTags>color color-picker graphics avaloniaui</PackageTags>
         <Description>A collection of various AvaloniaUI controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET 6 - 7
