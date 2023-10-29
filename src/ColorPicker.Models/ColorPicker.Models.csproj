@@ -4,6 +4,30 @@
         <TargetFrameworks>net6.0-windows;net7.0-windows;net6.0;net7.0</TargetFrameworks>
         <RootNamespace>ColorPicker.Models</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>PixiEditor.ColorPicker.Models</PackageId>
+        <Title>Common logic of PixiEditor.ColorPicker</Title>
+        <Authors>Egor Mozgovoy, Krzysztof Krysiński</Authors>
+        <Description>Common logic of PixiEditor.ColorPicker, both for WPF and AvaloniaUI versions.</Description>
+        <Copyright>PixiEditor</Copyright>
+        <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>color color-picker graphics wpf avaloniaui</PackageTags>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="README.md">
+        <Link>README.md</Link>
+        <Pack>true</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+        <None Include="..\..\LICENSE.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>LICENSE.md</Link>
+        </None>
+    </ItemGroup>
 
 </Project>
