@@ -74,6 +74,7 @@ namespace ColorPicker
 
         private static void OnColorStatePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
+
             ((PickerControlBase)d).Color.UpdateEverything((ColorState)args.OldValue);
         }
 

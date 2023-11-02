@@ -22,13 +22,13 @@
 
         <Border Grid.Row="0" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1">
             <StackPanel>
-                <Label>Portable Color Picker, default look</Label>
+                <Label>Portable Color Picker</Label>
                 <colorPicker:PortableColorPicker Width="40" Height="20"
                                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                                  SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />
-                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, styled, alpha hidden, transparent hint color, hsv/hsl fractional part hidden</TextBlock>
+                <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, alpha hidden, transparent hint color, hsv/hsl fractional part hidden</TextBlock>
                 <Grid Width="40" Height="40">
-                    <colorPicker:PortableColorPicker Classes="DefaultColorPickerStyle" SmallChange="5"
+                    <colorPicker:PortableColorPicker SmallChange="5"
                                                      UseHintColor="True" HintColor="Transparent"
                                                      ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                                      SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}"
@@ -53,7 +53,7 @@
             </StackPanel>
         </Border>
 
-        <Label Grid.Column="1">Color sliders, styled, alpha hidden</Label>
+        <Label Grid.Column="1">Color sliders, alpha hidden</Label>
         <colorPicker:ColorSliders Margin="0 10" Grid.Row="0" Grid.Column="1"
                                   ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"
                                   ShowAlpha="False" />
@@ -63,7 +63,8 @@
                                   UseHintColor="True" HintColor="CadetBlue" />
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" SelectedIndex="0" Theme="{DynamicResource ColorPickerComboBox}"
+        <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"
+         SelectedIndex="{Binding ElementName=square_picker, Path=PickerType}" Theme="{DynamicResource ColorPickerComboBox}"
                   VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
             <ComboBoxItem>HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>
@@ -85,7 +86,7 @@
             </StackPanel>
         </Border>
 
-        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, styled, scalable, transparent hint color</Label>
+        <Label Grid.Row="0" Grid.Column="2">Standard Color Picker, scalable, transparent hint color</Label>
         <colorPicker:StandardColorPicker Grid.Column="2" Grid.RowSpan="4" Margin="0,25,0,0" x:Name="standard_picker"
                                          UseHintColor="True"
                                          ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay}"

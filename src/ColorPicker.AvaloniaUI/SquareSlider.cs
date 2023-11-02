@@ -164,7 +164,7 @@ internal class SquareSlider : TemplatedControl
             framebuffer.WritePixels(0, 0, w, h, pixels);
         }
 
-        image.InvalidateVisual();
+        image?.InvalidateVisual();
     }
 
     private static void OnColorSpaceChanged(AvaloniaPropertyChangedEventArgs<PickerType> args)
