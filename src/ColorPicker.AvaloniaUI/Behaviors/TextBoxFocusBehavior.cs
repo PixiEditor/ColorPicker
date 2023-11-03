@@ -44,10 +44,8 @@ internal class TextBoxFocusBehavior : Behavior<TextBox>
 
     protected override void OnAttached()
     {
-        /*TODO: Make sure GotMouseCapture equivalent is handled*/
         base.OnAttached();
         AssociatedObject.GotFocus += AssociatedObjectGotKeyboardFocus;
-        //AssociatedObject.GotMouseCapture += AssociatedObjectGotMouseCapture;
         AssociatedObject.LostFocus += AssociatedObject_LostFocus;
         AssociatedObject.AddHandler(InputElement.PointerPressedEvent, AssociatedObjectPointerPressed, RoutingStrategies.Tunnel);
         AssociatedObject.KeyUp += AssociatedObject_KeyUp;

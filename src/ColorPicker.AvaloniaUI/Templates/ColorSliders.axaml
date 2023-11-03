@@ -29,7 +29,6 @@
                             </ResourceDictionary>
                         </TabControl.Resources>
                         <TabControl.Styles>
-                            <!--There was TabPanel instead of TabItem TODO: Validate if it's right-->
                             <Style Selector="TabItem">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
                                 <Setter Property="Theme" Value="{DynamicResource ColorPickerTabItemTheme}"/>

@@ -15,7 +15,6 @@ internal static class LockedFramebufferExtensions
     public static void WritePixels(this ILockedFramebuffer framebuffer, int targetX, int targetY, int targetWidth,
         int targetHeight, byte[] pixelBytes)
     {
-        //TODO: Idk if this is correct
         var pixels = framebuffer.GetPixels();
         var rowBytes = framebuffer.RowBytes;
         var width = framebuffer.Size.Width;

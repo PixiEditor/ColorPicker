@@ -15,7 +15,6 @@
                         </ResourceDictionary>
                     </Grid.Resources>
                     <Grid Height="12">
-                        <!--TODO: IsMoveToPointEnabled="True" was here-->
                         <uiExtensions:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
                                                      Theme="{StaticResource PreviewColorSliderTemplate}"
                                                      SmallChangeBindable="{TemplateBinding SmallChange}"
