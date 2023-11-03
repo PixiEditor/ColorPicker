@@ -20,7 +20,7 @@ Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 - `PortableColorPicker`: A collapsible version of StandardColorPicker
 - `AlphaSlider`: A separate alpha slider control
 
-![demo project](https://github.com/PixiEditor/ColorPicker/assets/25402427/a90f441c-a8f8-4e62-8f7d-48fe1987b895)
+![demo project](https://imgur.com/a/uVc0tkc)
 
 # Example Usage
 
@@ -90,7 +90,7 @@ You must select a theme for it. There are 2 themes bundled by default:
 
 Both themes are available in Dark and Light variants.
 
-![SimpleColorPickerTheme](https://github.com/PixiEditor/ColorPicker/assets/25402427/7d2347ee-31af-47b4-a5dc-77477b8d980f)
+![SimpleColorPickerTheme](https://imgur.com/SF1F9ba)
 
 To use a theme, go to your App.xaml and add the following:
 

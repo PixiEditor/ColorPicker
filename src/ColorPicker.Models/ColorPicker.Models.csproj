@@ -17,6 +17,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>sgkey.snk</AssemblyOriginatorKeyFile>
+        <Version>1.0.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
