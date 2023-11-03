@@ -14,9 +14,11 @@
                         </ResourceDictionary>
                     </Grid.Resources>
                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" VerticalAlignment="Center" Width="80"
-                             Text="{TemplateBinding SelectedColor, Converter={StaticResource ColorToHexConverter}}"
                              x:Name="textbox">
                         <Interaction.Behaviors>
+                            <behaviors:HexTextBoxBindingBehavior Text="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}"
+                                                                 Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedColor, Mode=TwoWay}"
+                                                                 HexConverter="{StaticResource ColorToHexConverter}"/>
                             <behaviors:TextBoxFocusBehavior SelectOnMouseClick="False" ConfirmOnEnter="True"
                                                             DeselectOnFocusLoss="True" />
                         </Interaction.Behaviors>
