@@ -33,6 +33,8 @@
                   SelectedIndex="{Binding ElementName=uc, Path=PickerType, Converter={StaticResource PickerTypeToIntConverter}}">
             <ComboBoxItem IsSelected="True">HSV</ComboBoxItem>
             <ComboBoxItem>HSL</ComboBoxItem>
+            <ComboBoxItem>OKHSV</ComboBoxItem>
+            <ComboBoxItem>OKHSL</ComboBoxItem>
         </ComboBox>
 
         <local:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15" VerticalAlignment="Stretch"

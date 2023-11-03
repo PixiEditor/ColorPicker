@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ColorPicker.Models;
+using ColorPicker.Models.ColorSpaces;
 
 namespace ColorPicker.UserControls
 {
@@ -32,8 +34,7 @@ namespace ColorPicker.UserControls
         private double _rangeX;
         private double _rangeY;
 
-        private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod =
-            ColorSpaceHelper.HsvToRgb;
+        private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod = RgbHelper.HsvToRgb;
 
         public SquareSlider()
         {
@@ -41,7 +42,7 @@ namespace ColorPicker.UserControls
             InitializeComponent();
             RecalculateGradient();
         }
-
+        
         public double Hue
         {
             get => (double)GetValue(HueProperty);
@@ -121,10 +122,24 @@ namespace ColorPicker.UserControls
         private static void OnColorSpaceChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             var sender = (SquareSlider)d;
-            if ((PickerType)args.NewValue == PickerType.HSV)
-                sender.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
-            else
-                sender.colorSpaceConversionMethod = ColorSpaceHelper.HslToRgb;
+            switch ((PickerType)args.NewValue)
+            {
+                case PickerType.HSV:
+                    sender.colorSpaceConversionMethod = RgbHelper.HsvToRgb;
+                    break;
+                case PickerType.HSL:
+                    sender.colorSpaceConversionMethod = RgbHelper.HslToRgb;
+                    break;
+                case PickerType.OKHSV:
+                    sender.colorSpaceConversionMethod = RgbHelper.OkHsvToRgb;
+                    break;
+                case PickerType.OKHSL:
+                    sender.colorSpaceConversionMethod = RgbHelper.OkHslToRgb;
+                    break;
+                default:
+                    sender.colorSpaceConversionMethod = RgbHelper.HslToRgb;
+                    break;
+            }
 
             sender.RecalculateGradient();
         }
