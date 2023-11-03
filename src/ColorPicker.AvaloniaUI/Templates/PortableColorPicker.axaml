@@ -21,7 +21,6 @@
                             Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
                         <Grid>
                             <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0" CornerRadius="{DynamicResource ColorPickerControlRadius}"
-                                          IsEnabled="{Binding Path=IsOpen, ElementName=popup, Converter={StaticResource BoolToInvertedBoolConverter}}"
                                           x:Name="toggleButton" BorderThickness="0" ZIndex="1"
                                           Background="{TemplateBinding SelectedColor, Converter={StaticResource ColorToBrushConverter}}" />
                                 <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
