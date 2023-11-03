@@ -41,19 +41,46 @@
         </Grid.ColumnDefinitions>
 
         <controls:HueSlider Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
-                            SmallChange="{Binding ElementName=uc, Path=SmallChange}"
-                            Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}" />
+                            SmallChange="{Binding ElementName=uc, Path=SmallChange}">
+            <controls:HueSlider.Style>
+                <Style TargetType="controls:HueSlider">
+                    <Setter Property="Value" Value="{Binding ElementName=uc, Path=Color.HSV_H, Mode=TwoWay}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="HSL">
+                            <Setter Property="Value" Value="{Binding ElementName=uc, Path=Color.HSL_H, Mode=TwoWay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="OKHSV">
+                            <Setter Property="Value" Value="{Binding ElementName=uc, Path=Color.OKHSV_H, Mode=TwoWay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="OKHSL">
+                            <Setter Property="Value" Value="{Binding ElementName=uc, Path=Color.OKHSL_H, Mode=TwoWay}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:HueSlider.Style>
+        </controls:HueSlider>
         <controls:SquareSlider Grid.Row="1" Grid.Column="1" RangeX="100" RangeY="100"
-                               Hue="{Binding ElementName=uc, Path=Color.HSV_H}"
                                PickerType="{Binding ElementName=uc, Path=PickerType}">
             <controls:SquareSlider.Style>
                 <Style TargetType="controls:SquareSlider">
+                    <Setter Property="Hue" Value="{Binding ElementName=uc, Path=Color.HSV_H}" />
                     <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.HSV_S, Mode=TwoWay}" />
                     <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.HSV_V, Mode=TwoWay}" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="HSL">
+                            <Setter Property="Hue" Value="{Binding ElementName=uc, Path=Color.HSL_H}" />
                             <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.HSL_S, Mode=TwoWay}" />
                             <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.HSL_L, Mode=TwoWay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="OKHSV">
+                            <Setter Property="Hue" Value="{Binding ElementName=uc, Path=Color.OKHSV_H}" />
+                            <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.OKHSV_S, Mode=TwoWay}" />
+                            <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.OKHSV_V, Mode=TwoWay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=uc, Path=PickerType}" Value="OKHSL">
+                            <Setter Property="Hue" Value="{Binding ElementName=uc, Path=Color.OKHSL_H}" />
+                            <Setter Property="HeadX" Value="{Binding ElementName=uc, Path=Color.OKHSL_S, Mode=TwoWay}" />
+                            <Setter Property="HeadY" Value="{Binding ElementName=uc, Path=Color.OKHSL_L, Mode=TwoWay}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

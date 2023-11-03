@@ -177,6 +177,10 @@ internal class SquareSlider : TemplatedControl
     private static void OnColorSpaceChanged(AvaloniaPropertyChangedEventArgs<PickerType> args)
     {
         var sender = (SquareSlider)args.Sender;
+        if (args.NewValue.Value == PickerType.OKHSV)
+            sender.colorSpaceConversionMethod = static (h, s, v) => Models.ColorSpaces.RgbHelper.OkHsvToRgb(h, s, v);
+        if (args.NewValue.Value == PickerType.OKHSL)
+            sender.colorSpaceConversionMethod = static (h, s, l) => Models.ColorSpaces.RgbHelper.OkHslToRgb(h, s, l);
         if (args.NewValue.Value == PickerType.HSV)
             sender.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
         else
