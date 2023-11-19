@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -10,6 +11,17 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(HexColorTextBox),
                 new PropertyMetadata(true));
 
+        public static readonly DependencyProperty HexRepresentationProperty = 
+            DependencyProperty.Register(nameof(HexRepresentation), typeof(HexRepresentationType), typeof(HexColorTextBox),
+                new PropertyMetadata(HexRepresentationType.RGBA));
+
+        public HexRepresentationType HexRepresentation
+        {
+            get => (HexRepresentationType)GetValue(HexRepresentationProperty);
+            set => SetValue(HexRepresentationProperty, value);
+        }
+
+        
         public HexColorTextBox()
         {
             InitializeComponent();
@@ -21,11 +33,9 @@ namespace ColorPicker
             set => SetValue(ShowAlphaProperty, value);
         }
 
-        private void ColorToHexConverter_OnShowAlphaChange(object sender, EventArgs e)
+        private void RefreshTextbox(object sender, EventArgs e)
         {
-            textbox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            //InvalidateProperty(SelectedColorProperty);
-            //Color.RaisePropertyChanged(nameof(Color.RGB_R));
+            textbox.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
         }
     }
 }

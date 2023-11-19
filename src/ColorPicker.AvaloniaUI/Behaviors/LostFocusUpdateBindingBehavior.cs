@@ -39,7 +39,7 @@ public class LostFocusUpdateBindingBehavior : Behavior<TextBox>
         base.OnDetaching();
     }
 
-    private void OnLostFocus(object? sender, RoutedEventArgs e)
+    private void OnLostFocus(object sender, RoutedEventArgs e)
     {
         if (AssociatedObject != null)
         {

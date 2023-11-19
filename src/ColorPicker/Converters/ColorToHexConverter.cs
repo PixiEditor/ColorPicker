@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using ColorPicker.Models;
 
 namespace ColorPicker.Converters
 {
@@ -14,6 +13,16 @@ namespace ColorPicker.Converters
         public static DependencyProperty ShowAlphaProperty =
             DependencyProperty.Register(nameof(ShowAlpha), typeof(bool), typeof(ColorToHexConverter),
                 new PropertyMetadata(true, ShowAlphaChangedCallback));
+        
+        public static readonly DependencyProperty HexRepresentationProperty = 
+            DependencyProperty.Register(nameof(HexRepresentation), typeof(HexRepresentationType), typeof(ColorToHexConverter),
+                new PropertyMetadata(HexRepresentationType.RGBA, HexRepresentationChangedCallback));
+
+        public HexRepresentationType HexRepresentation
+        {
+            get => (HexRepresentationType)GetValue(HexRepresentationProperty);
+            set => SetValue(HexRepresentationProperty, value);
+        }
 
         public bool ShowAlpha
         {
@@ -23,77 +32,43 @@ namespace ColorPicker.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!ShowAlpha)
-                return ConvertNoAlpha(value);
-            return ((Color)value).ToString();
+            Color c = (Color)value;
+            return HexHelper.RgbaValuesToString(c.R, c.G, c.B, c.A, ShowAlpha, HexRepresentation) ?? DependencyProperty.UnsetValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!ShowAlpha)
-                return ConvertBackNoAlpha(value);
-            var text = (string)value;
-            text = Regex.Replace(text.ToUpperInvariant(), @"[^0-9A-F]", "");
-            var final = new StringBuilder();
-            if (text.Length == 3) //short hex with no alpha
-                final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                    .Append(text[2]);
-            else if (text.Length == 4) //short hex with alpha
-                final.Append("#").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                    .Append(text[2]).Append(text[3]).Append(text[3]);
-            else if (text.Length == 6) //hex with no alpha
-                final.Append("#FF").Append(text);
-            else
-                final.Append("#").Append(text);
-            try
-            {
-                return ColorConverter.ConvertFromString(final.ToString());
-            }
-            catch (Exception)
-            {
+            if (!(value is string))
                 return DependencyProperty.UnsetValue;
-            }
+
+            var values = HexHelper.ParseInputtedHexStringToRgbaValues((string)value, HexRepresentation);
+            if (values is null)
+                return DependencyProperty.UnsetValue;
+
+            return Color.FromArgb(values.Item4, values.Item1, values.Item2, values.Item3);
         }
 
         public event EventHandler OnShowAlphaChange;
+        public event EventHandler OnShowHexRepresentationChange;
 
-        public void RaiseShowAlphaChange()
+        private void RaiseShowAlphaChange()
         {
-            OnShowAlphaChange(this, EventArgs.Empty);
+            OnShowAlphaChange?.Invoke(this, EventArgs.Empty);
         }
 
         private static void ShowAlphaChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((ColorToHexConverter)d).RaiseShowAlphaChange();
         }
-
-        public object ConvertNoAlpha(object value)
+        
+        private void RaiseHexRepresentationChange()
         {
-            return "#" + ((Color)value).ToString().Substring(3, 6);
+            OnShowHexRepresentationChange?.Invoke(this, EventArgs.Empty);
         }
 
-        public object ConvertBackNoAlpha(object value)
+        private static void HexRepresentationChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var text = (string)value;
-            text = Regex.Replace(text.ToUpperInvariant(), @"[^0-9A-F]", "");
-            var final = new StringBuilder();
-            if (text.Length == 3) //short hex
-                final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                    .Append(text[2]);
-            else if (text.Length == 4)
-                return DependencyProperty.UnsetValue;
-            else if (text.Length > 6)
-                return DependencyProperty.UnsetValue;
-            else //regular hex
-                final.Append("#").Append(text);
-            try
-            {
-                return ColorConverter.ConvertFromString(final.ToString());
-            }
-            catch (Exception)
-            {
-                return DependencyProperty.UnsetValue;
-            }
+            ((ColorToHexConverter)d).RaiseHexRepresentationChange();
         }
     }
 }

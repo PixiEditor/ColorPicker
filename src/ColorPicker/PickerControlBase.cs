@@ -15,7 +15,7 @@ namespace ColorPicker
         public static readonly DependencyProperty SelectedColorProperty =
             DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(PickerControlBase),
                 new PropertyMetadata(Colors.Black, OnSelectedColorPropertyChange));
-
+        
         public static readonly RoutedEvent ColorChangedEvent =
             EventManager.RegisterRoutedEvent(nameof(ColorChanged),
                 RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(PickerControlBase));

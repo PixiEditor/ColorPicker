@@ -42,7 +42,8 @@
                                                              Height="380"
                                                              ShowAlpha="{TemplateBinding ShowAlpha}"
                                                              PickerType="{TemplateBinding PickerType}"
-                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}" />
+                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}" 
+                                                             HexRepresentation="{TemplateBinding HexRepresentation}"/>
                         </Border>
                     </Popup>
                 </Grid>

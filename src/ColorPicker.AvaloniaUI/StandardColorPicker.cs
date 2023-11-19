@@ -24,6 +24,16 @@ public class StandardColorPicker : DualPickerControlBase
         AvaloniaProperty.Register<StandardColorPicker, bool>(
             nameof(ShowFractionalPart),
             true);
+    
+    public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty = 
+        AvaloniaProperty.Register<StandardColorPicker, HexRepresentationType>(
+            nameof(HexRepresentation), HexRepresentationType.RGBA);
+
+    public HexRepresentationType HexRepresentation
+    {
+        get => GetValue(HexRepresentationProperty);
+        set => SetValue(HexRepresentationProperty, value);
+    }
 
     public double SmallChange
     {

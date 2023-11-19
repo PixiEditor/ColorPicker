@@ -14,7 +14,9 @@
         <ResourceDictionary>
             <conv:ColorToHexConverter x:Key="ColorToHexConverter"
                                       ShowAlpha="{Binding Source={x:Reference uc}, Path=ShowAlpha}"
-                                      OnShowAlphaChange="ColorToHexConverter_OnShowAlphaChange" />
+                                      HexRepresentation="{Binding Source={x:Reference uc}, Path=HexRepresentation}"
+                                      OnShowAlphaChange="RefreshTextbox" 
+                                      OnShowHexRepresentationChange="RefreshTextbox"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>

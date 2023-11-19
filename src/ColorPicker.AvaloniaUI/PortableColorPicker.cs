@@ -24,6 +24,16 @@ public class PortableColorPicker : DualPickerControlBase
         AvaloniaProperty.Register<PortableColorPicker, bool>(
             nameof(ShowFractionalPart),
             true);
+    
+    public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty = 
+        AvaloniaProperty.Register<PortableColorPicker, HexRepresentationType>(
+            nameof(HexRepresentation), HexRepresentationType.RGBA);
+
+    public HexRepresentationType HexRepresentation
+    {
+        get => GetValue(HexRepresentationProperty);
+        set => SetValue(HexRepresentationProperty, value);
+    }
 
     public double SmallChange
     {

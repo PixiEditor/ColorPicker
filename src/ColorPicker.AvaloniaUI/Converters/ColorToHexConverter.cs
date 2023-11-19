@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 using Avalonia.Reactive;
+using ColorPicker.Models;
 
 namespace ColorPicker.Converters;
 
@@ -13,55 +14,54 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
     public static readonly StyledProperty<bool> ShowAlphaProperty =
         AvaloniaProperty.Register<ColorToHexConverter, bool>(
             nameof(ShowAlpha), true);
-
-    static ColorToHexConverter()
-    {
-        ShowAlphaProperty.Changed.Subscribe(
-            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(ShowAlphaChangedCallback));
-    }
-
+    
     public bool ShowAlpha
     {
         get => GetValue(ShowAlphaProperty);
         set => SetValue(ShowAlphaProperty, value);
     }
 
+    
+    public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty = 
+        AvaloniaProperty.Register<PortableColorPicker, HexRepresentationType>(
+            nameof(HexRepresentation), HexRepresentationType.RGBA);
+
+    public HexRepresentationType HexRepresentation
+    {
+        get => GetValue(HexRepresentationProperty);
+        set => SetValue(HexRepresentationProperty, value);
+    }
+
+    static ColorToHexConverter()
+    {
+        ShowAlphaProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(ShowAlphaChangedCallback));
+        HexRepresentationProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<HexRepresentationType>>(HexRepresentationChangedCallback));
+    }
+
+    
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (!ShowAlpha)
-            return ConvertNoAlpha(value);
-        Color color = (Color)value;
-        return $"#{color.R:X2}{color.G:X2}{color.B:X2}{color.A:X2}";
+        Color c = (Color)value;
+        return HexHelper.RgbaValuesToString(c.R, c.G, c.B, c.A, ShowAlpha, HexRepresentation) ?? AvaloniaProperty.UnsetValue;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (!ShowAlpha)
-            return ConvertBackNoAlpha(value);
-        var text = (string)value;
-        text = Regex.Replace(text.ToUpperInvariant(), @"[^0-9A-F]", "");
-        var final = new StringBuilder();
-        if (text.Length == 3) //short hex with no alpha
-            final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                .Append(text[2]);
-        else if (text.Length == 4) //short hex with alpha
-            final.Append("#").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                .Append(text[2]).Append(text[3]).Append(text[3]);
-        else if (text.Length == 6) //hex with no alpha
-            final.Append("#FF").Append(text);
-        else
-            final.Append("#").Append(text);
-        try
-        {
-            return Color.Parse(final.ToString());
-        }
-        catch (Exception)
-        {
+        if (value is not string valueStr)
             return AvaloniaProperty.UnsetValue;
-        }
+
+        Tuple<byte, byte, byte, byte> values = HexHelper.ParseInputtedHexStringToRgbaValues(valueStr, HexRepresentation);
+        if (values is null)
+            return AvaloniaProperty.UnsetValue;
+
+        return Color.FromArgb(values.Item4, values.Item1, values.Item2, values.Item3);
     }
 
     public event EventHandler OnShowAlphaChange;
+
+    public event EventHandler OnShowHexRepresentationChange;
 
     public void RaiseShowAlphaChange()
     {
@@ -72,35 +72,14 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
     {
         ((ColorToHexConverter)d.Sender).RaiseShowAlphaChange();
     }
-
-    public object ConvertNoAlpha(object value)
+    
+    private void RaiseHexRepresentationChange()
     {
-        var color = (Color)value;
-        var hex = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-        return hex;
+        OnShowHexRepresentationChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public object ConvertBackNoAlpha(object value)
+    private static void HexRepresentationChangedCallback(AvaloniaPropertyChangedEventArgs<HexRepresentationType> d)
     {
-        var text = (string)value;
-        text = Regex.Replace(text.ToUpperInvariant(), @"[^0-9A-F]", "");
-        var final = new StringBuilder();
-        if (text.Length == 3) //short hex
-            final.Append("#FF").Append(text[0]).Append(text[0]).Append(text[1]).Append(text[1]).Append(text[2])
-                .Append(text[2]);
-        else if (text.Length == 4)
-            return AvaloniaProperty.UnsetValue;
-        else if (text.Length > 6)
-            return AvaloniaProperty.UnsetValue;
-        else //regular hex
-            final.Append("#").Append(text);
-        try
-        {
-            return Color.Parse(final.ToString());
-        }
-        catch (Exception)
-        {
-            return AvaloniaProperty.UnsetValue;
-        }
+        ((ColorToHexConverter)d.Sender).RaiseHexRepresentationChange();
     }
 }

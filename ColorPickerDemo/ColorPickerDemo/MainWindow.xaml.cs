@@ -12,5 +12,9 @@ public partial class MainWindow : Window
         {
             square_picker.PickerType = combobox.SelectedIndex == 0 ? PickerType.HSV : PickerType.HSL;
         };
+        hexcombobox.SelectionChanged += (sender, args) =>
+        {
+            hextextbox.HexRepresentation = hexcombobox.SelectedIndex == 0 ? HexRepresentationType.RGBA : HexRepresentationType.ARGB;
+        };
     }
 }

@@ -41,7 +41,8 @@
                                            Height="380"
                                            ShowAlpha="{Binding ElementName=uc, Path=ShowAlpha}"
                                            PickerType="{Binding ElementName=uc, Path=PickerType}"
-                                           ShowFractionalPart="{Binding ElementName=uc, Path=ShowFractionalPart}" />
+                                           ShowFractionalPart="{Binding ElementName=uc, Path=ShowFractionalPart}" 
+                                           HexRepresentation="{Binding ElementName=uc, Path=HexRepresentation}"/>
             </Border>
         </Popup>
     </Grid>

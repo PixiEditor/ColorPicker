@@ -54,11 +54,11 @@
                 <Label>
                     <TextBlock>
                         Standard Color Picker, default look<LineBreak />Size constrained to minimal,
-                        <LineBreak />Sliders change by 5 when scrolled over,<LineBreak />Alpha hidden
+                        <LineBreak />Sliders change by 5 when scrolled over,<LineBreak />Alpha formatted as #AARRGGBB
                     </TextBlock>
                 </Label>
                 <colorpicker:StandardColorPicker Width="200" Height="380" x:Name="portable_picker"
-                                                 SmallChange="5" ShowAlpha="False"
+                                                 SmallChange="5" ShowAlpha="True" HexRepresentation="ARGB"
                                                  ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
                                                  SecondColorState="{Binding ElementName=maindisplay, Path=SecondColorState, Mode=TwoWay}" />
             </StackPanel>
@@ -83,10 +83,18 @@
         <colorpicker:SquarePicker Grid.Row="2" Grid.Column="1" Margin="5" x:Name="square_picker"
                                   ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}" />
 
-        <Label Grid.Row="3" Grid.Column="1">Color as rgb hex (with alpha hidden)</Label>
-        <colorpicker:HexColorTextBox Grid.Row="3" Grid.Column="1"
-                                     ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
-                                     ShowAlpha="False" />
+        <Label Grid.Row="3" Grid.Column="1">Color as hex, formatted as either RGBA or ARGB</Label>
+        <StackPanel Orientation="Horizontal" Margin="5, 14, 5, 5" Grid.Row="3" Grid.Column="1">
+            <ComboBox Width="60" Height="20" DockPanel.Dock="Left" Margin="0, 0, 5, 0"
+                      VerticalAlignment="Center" x:Name="hexcombobox">
+                <ComboBoxItem IsSelected="True">RGBA</ComboBoxItem>
+                <ComboBoxItem>ARGB</ComboBoxItem>
+            </ComboBox>
+            <colorpicker:HexColorTextBox VerticalAlignment="Center"
+                                         x:Name="hextextbox"
+                                         ColorState="{Binding ElementName=maindisplay, Path=ColorState, Mode=TwoWay, Delay=10}"
+                                         ShowAlpha="True" />
+        </StackPanel>
 
         <Border Grid.Row="4" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" Background="White">
             <StackPanel>

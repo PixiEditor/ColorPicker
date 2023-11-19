@@ -20,6 +20,16 @@ namespace ColorPicker
         public static readonly DependencyProperty ShowFractionalPartProperty =
             DependencyProperty.Register(nameof(ShowFractionalPart), typeof(bool), typeof(PortableColorPicker),
                 new PropertyMetadata(true));
+        
+        public static readonly DependencyProperty HexRepresentationProperty = 
+            DependencyProperty.Register(nameof(HexRepresentation), typeof(HexRepresentationType), typeof(PortableColorPicker),
+                new PropertyMetadata(HexRepresentationType.RGBA));
+
+        public HexRepresentationType HexRepresentation
+        {
+            get => (HexRepresentationType)GetValue(HexRepresentationProperty);
+            set => SetValue(HexRepresentationProperty, value);
+        }
 
         public PortableColorPicker()
         {
