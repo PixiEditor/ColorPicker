@@ -28,14 +28,14 @@ See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/Colo
 
 **Basic usage:**
 
-[WPF Basic Usage](src/ColorPicker/README.md#example-usage)
-[AvaloniaUI Basic Usage](src/ColorPicker.AvaloniaUI/README.md#example-usage)
+- [WPF Basic Usage](src/ColorPicker/README.md#example-usage)
+- [AvaloniaUI Basic Usage](src/ColorPicker.AvaloniaUI/README.md#example-usage)
 
 # Properties
 
 All controls share these properties:
 
-- `SelectedColor` dependency property stores the current color as System.Windows.Media.Color. **Use this one if you simply want to get (or bind to) the current color.** When connecting controls together with bindings, use the `ColorState` dependency property instead.
+- `SelectedColor` dependency property stores the current color as `System.Windows.Media.Color` or `Avalonia.Media.Color`. **Use this one if you simply want to get (or bind to) the current color.** When connecting controls together with bindings, use the `ColorState` dependency property instead.
 - `ColorChanged`: An event that fires on SelectedColor change.
 - `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
   - `Color.A`: Current Alpha, a double ranging from 0 to 255
