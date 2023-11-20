@@ -19,8 +19,7 @@
         <PackageTags>color color-picker graphics avaloniaui</PackageTags>
         <Description>A collection of various AvaloniaUI controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET 6 - 7
 
-            Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.
-        </Description>
+Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</Description>
         <Title>A AvaloniaUI Color Picker</Title>
         <AssemblyVersion>1.0.3</AssemblyVersion>
         <FileVersion>1.0.3</FileVersion>
@@ -32,16 +31,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.5"/>
-        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2"/>
+        <PackageReference Include="Avalonia" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj"/>
+        <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Images\**"/>
+        <AvaloniaResource Include="Images\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -55,6 +54,10 @@
         <Pack>True</Pack>
         <PackagePath></PackagePath>
         <Link>LICENSE.md</Link>
+      </None>
+      <None Include="..\..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
       </None>
       <None Include="README.md">
         <Link>README.md</Link>

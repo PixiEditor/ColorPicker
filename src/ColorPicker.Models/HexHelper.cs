@@ -32,6 +32,7 @@ namespace ColorPicker.Models
 
         /// <summary>
         /// Magic based on https://stackoverflow.com/a/9995303
+        /// Takes two uppercase characters representing a hex string and converts them into a byte, e.g. AB -> 171
         /// </summary>
         private static byte ParseHexByte(char first, char second)
         {

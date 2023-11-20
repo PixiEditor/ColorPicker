@@ -5,7 +5,7 @@
 # About
 
 A collection of various WPF and AvaloniaUI controls used to select colors.
-Supports .NET 6 - 7.
+Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7 (WPF) and .NET 6 - 7 (AvaloniaUI).
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/4ysN4Fe.png)
@@ -28,8 +28,8 @@ See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/Colo
 
 **Basic usage:**
 
-- [WPF Basic Usage](src/ColorPicker/README.md#example-usage)
-- [AvaloniaUI Basic Usage](src/ColorPicker.AvaloniaUI/README.md#example-usage)
+- [WPF Basic Usage](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker/README.md#example-usage)
+- [AvaloniaUI Basic Usage](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker.AvaloniaUI/README.md#example-usage)
 
 # Properties
 
@@ -65,11 +65,11 @@ Styling differs between AvaloniaUI and WPF version. See the respective READMEs f
 
 ## AvaloniaUI
 
-See [AvaloniaUI Styling](src/ColorPicker.AvaloniaUI/README.md#styling)
+See [AvaloniaUI Styling](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker.AvaloniaUI/README.md#styling)
 
 ## WPF
 
-See [WPF Styling](src/ColorPicker/README.md#styling)
+See [WPF Styling](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker/README.md#styling)
 
 # Other
 

@@ -52,7 +52,7 @@ internal class ColorToHexConverter : AvaloniaObject, IValueConverter
         if (value is not string valueStr)
             return AvaloniaProperty.UnsetValue;
 
-        Tuple<byte, byte, byte, byte> values = HexHelper.ParseInputtedHexStringToRgbaValues(valueStr, HexRepresentation);
+        Tuple<byte, byte, byte, byte> values = HexHelper.ParseInputtedHexStringToRgbaValues(valueStr, ShowAlpha, HexRepresentation);
         if (values is null)
             return AvaloniaProperty.UnsetValue;
 
