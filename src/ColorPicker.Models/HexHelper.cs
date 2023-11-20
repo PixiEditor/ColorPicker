@@ -5,13 +5,13 @@ namespace ColorPicker.Models
 {
     public static class HexHelper
     {
-        public static Tuple<byte, byte, byte, byte> ParseInputtedHexStringToRgbaValues(string inputtedString, HexRepresentationType hexRepresentation)
+        public static Tuple<byte, byte, byte, byte> ParseInputtedHexStringToRgbaValues(string inputtedString, bool parseAlpha, HexRepresentationType hexRepresentation)
         {
             string text = Regex.Replace(inputtedString.ToUpperInvariant(), @"[^0-9A-F]", "");
             
             if (text.Length == 3 || text.Length == 6)
                 return ParseNoAlphaTextToRgba(text, text.Length == 3);
-            if (text.Length == 4 || text.Length == 8)
+            if (parseAlpha && (text.Length == 4 || text.Length == 8))
                 return ParseTextWithAlphaToRgba(text, text.Length == 4, hexRepresentation);
             return null;
         }

@@ -41,7 +41,7 @@ namespace ColorPicker.Converters
             if (!(value is string))
                 return DependencyProperty.UnsetValue;
 
-            var values = HexHelper.ParseInputtedHexStringToRgbaValues((string)value, HexRepresentation);
+            var values = HexHelper.ParseInputtedHexStringToRgbaValues((string)value, ShowAlpha, HexRepresentation);
             if (values is null)
                 return DependencyProperty.UnsetValue;
 
