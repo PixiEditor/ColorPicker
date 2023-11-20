@@ -1,0 +1,136 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <converters:BoundsMinConverter x:Key="BoundsMinConverter" />
+    <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+
+    <ControlTheme TargetType="colorPicker:ColorDisplay" x:Key="{x:Type colorPicker:ColorDisplay}">
+        <Setter Property="CornerRadius" Value="{DynamicResource ColorPickerControlRadius}"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="colorPicker:ColorDisplay">
+                <Border>
+                    <Grid Width="{TemplateBinding Bounds, Converter={StaticResource BoundsMinConverter}}"
+                          Height="{TemplateBinding Bounds, Converter={StaticResource BoundsMinConverter}}">
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <converters:DividedSizeConverter x:Key="DividedSizeConverter" />
+                                <ResourceDictionary.MergedDictionaries>
+                                    <MergeResourceInclude Source="/Styles/ImageButtonStyle.axaml" />
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="3*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="2" Margin="1">
+                            <Button ToolTip.Tip="Swap colors" Width="28" Height="28" x:Name="PART_SwapButton"
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent"
+                                    Theme="{StaticResource ImageButtonStyle}"
+                                    Opacity="0.5">
+                                <Path Stroke="#FF252525" Fill="#FFFEFEFE" StrokeThickness="1.5"
+                                      Data="M 9,1 L 2,8 L 6,8 L 6,22 L 20,22 L 20,26 L 27,19 L 20,12 L 20,16 L 12,16 L 12,8 L 16,8 L 9,1 Z" />
+                            </Button>
+                        </Viewbox>
+                        <Grid Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                              Margin="2.5"
+                              Design.Height="15" Design.Width="15" IsVisible="{TemplateBinding Property=UseHintColor}">
+                            <Grid.Width>
+                                <Binding ElementName="item1" Path="Bounds.Width"
+                                         Converter="{StaticResource DividedSizeConverter}">
+                                    <Binding.ConverterParameter>
+                                        <system:Double>2</system:Double>
+                                    </Binding.ConverterParameter>
+                                </Binding>
+                            </Grid.Width>
+                            <Grid.Height>
+                                <Binding ElementName="item1" Path="Bounds.Height"
+                                         Converter="{StaticResource DividedSizeConverter}">
+                                    <Binding.ConverterParameter>
+                                        <system:Double>2</system:Double>
+                                    </Binding.ConverterParameter>
+                                </Binding>
+                            </Grid.Height>
+                            <Rectangle Cursor="Hand" Stroke="Black" StrokeThickness="1" ZIndex="1"
+                                       Name="PART_HintColor"
+                                       Fill="{TemplateBinding HintColor, Converter={StaticResource ColorToBrushConverter}}">
+                                <Rectangle.RadiusX>
+                                    <Binding Path="CornerRadius.BottomLeft"
+                                             RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{StaticResource DividedSizeConverter}">
+                                        <Binding.ConverterParameter>
+                                            <system:Double>2</system:Double>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </Rectangle.RadiusX>
+                                <Rectangle.RadiusY>
+                                    <Binding Path="CornerRadius.BottomLeft"
+                                             RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{StaticResource DividedSizeConverter}">
+                                        <Binding.ConverterParameter>
+                                            <system:Double>2</system:Double>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </Rectangle.RadiusY>
+                            </Rectangle>
+                            <Border HorizontalAlignment="Stretch" Margin="1" VerticalAlignment="Stretch"
+                                    RenderOptions.BitmapInterpolationMode="None" ZIndex="0">
+                                <Border.CornerRadius>
+                                    <TemplateBinding Property="CornerRadius"
+                                                     Converter="{StaticResource DividedSizeConverter}">
+                                        <TemplateBinding.ConverterParameter>
+                                            <system:Double>2</system:Double>
+                                        </TemplateBinding.ConverterParameter>
+                                    </TemplateBinding>
+                                </Border.CornerRadius>
+                                <Border.Background>
+                                    <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile"
+                                                DestinationRect="0,0,8,8" />
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
+                            <Rectangle Name="item1" Stroke="Black" StrokeThickness="1" ZIndex="1"
+                                       RadiusX="{Binding Path=CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
+                                       RadiusY="{Binding Path=CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Fill="{TemplateBinding Property=SecondaryColor, Converter={StaticResource ColorToBrushConverter}}" />
+                            <Border HorizontalAlignment="Stretch" Margin="1"
+                                    CornerRadius="{TemplateBinding Property=CornerRadius}" VerticalAlignment="Stretch"
+                                    RenderOptions.BitmapInterpolationMode="None" ZIndex="0">
+                                <Border.Background>
+                                    <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile"
+                                                DestinationRect="0,0,8,8" />
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
+                            <Rectangle Stroke="Black" StrokeThickness="0.5" ZIndex="3"
+                                       Fill="{TemplateBinding Property=SelectedColor, Converter={StaticResource ColorToBrushConverter}}"
+                                       RadiusX="{Binding Path=CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
+                                       RadiusY="{Binding Path=CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Border HorizontalAlignment="Stretch"
+                                    CornerRadius="{TemplateBinding Property=CornerRadius}"
+                                    Margin="1" VerticalAlignment="Stretch" RenderOptions.BitmapInterpolationMode="None"
+                                    ZIndex="0">
+                                <Border.Background>
+                                    <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile"
+                                                DestinationRect="0,0,8,8" />
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

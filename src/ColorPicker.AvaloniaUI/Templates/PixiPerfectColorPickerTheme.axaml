@@ -1,0 +1,15 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        x:Class="ColorPicker.AvaloniaUI.Templates.PixiPerfectColorPickerTheme"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <Styles.Resources>
+       <ResourceDictionary>
+           <ResourceDictionary.MergedDictionaries>
+               <MergeResourceInclude Source="/Templates/ColorPicker.Templates.axaml"/>
+               <MergeResourceInclude Source="/Styles/PixiPerfectColors.axaml"/>
+               <MergeResourceInclude Source="/Styles/DarkTextBoxStyle.axaml"/>
+               <MergeResourceInclude Source="/Styles/DarkComboBoxStyle.axaml"/>
+               <MergeResourceInclude Source="/Styles/PixiPerfectTabControlStyle.axaml"/>
+           </ResourceDictionary.MergedDictionaries>
+       </ResourceDictionary>
+   </Styles.Resources>
+</Styles>

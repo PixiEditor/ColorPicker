@@ -1,0 +1,31 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:behaviors="clr-namespace:ColorPicker.Behaviors"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:HexColorTextBox" x:Key="{x:Type colorPicker:HexColorTextBox}">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="colorPicker:HexColorTextBox">
+                <Grid Name="PART_ResourcesContainer">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <converters:ColorToHexConverter x:Key="ColorToHexConverter"
+                                                            ShowAlpha="{Binding ShowAlpha, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            HexRepresentation="{Binding HexRepresentation, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" VerticalAlignment="Center" Width="80"
+                             Name="PART_TextBox">
+                        <Interaction.Behaviors>
+                            <behaviors:HexTextBoxBindingBehavior Text="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorToHexConverter}, Mode=OneWay}"
+                                                                 Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedColor, Mode=TwoWay}"
+                                                                 HexConverter="{StaticResource ColorToHexConverter}"/>
+                            <behaviors:TextBoxFocusBehavior SelectOnMouseClick="False" ConfirmOnEnter="True"
+                                                            DeselectOnFocusLoss="True" />
+                        </Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

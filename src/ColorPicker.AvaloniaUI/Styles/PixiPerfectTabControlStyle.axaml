@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <ControlTheme x:Key="ColorPickerTabItemTheme"
+                TargetType="TabItem">
+    <Setter Property="Background" Value="{DynamicResource ColorPickerBackgroundColor}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLowBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerBorderMidBrush}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Right" />
+    <Setter Property="Padding" Value="4" />
+    <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Padding="{TemplateBinding Padding}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Content="{TemplateBinding Header}"
+                          ContentTemplate="{TemplateBinding HeaderTemplate}" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource ColorPickerTabSelectedBrush}" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]">
+      <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style>
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
+    </Style>
+    <Style Selector="^:nth-child(1) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="CornerRadius" Value="5, 0, 0, 0"/>
+      <Setter Property="BorderThickness" Value="1, 1, 0, 0"/>
+    </Style>
+    <Style Selector="^:nth-last-child(1) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="CornerRadius" Value="0, 5, 0, 0"/>
+      <Setter Property="BorderThickness" Value="0, 1, 1, 0"/>
+    </Style>
+  </ControlTheme>
+
+   <ControlTheme x:Key="ColorPickerTabControlTheme"
+                TargetType="TabControl">
+     <Setter Property="Padding" Value="8" />
+     <Setter Property="BorderThickness" Value="1" />
+     <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerBorderMidBrush}" />
+     <Setter Property="CornerRadius" Value="0, 5, 5, 5"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Padding="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+          <DockPanel>
+            <ItemsPresenter Name="PART_ItemsPresenter"
+                            ItemsPanel="{TemplateBinding ItemsPanel}" />
+            <ContentPresenter Name="PART_SelectedContentHost"
+                              Margin="0"
+                              Background="{DynamicResource ColorPickerTabSelectedBrush}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              CornerRadius="{TemplateBinding CornerRadius}"
+                              Content="{TemplateBinding SelectedContent}"
+                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^[TabStripPlacement=Top]">
+      <Setter Property="Padding" Value="0 4 0 0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Top" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Bottom" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Bottom]">
+      <Setter Property="Padding" Value="0 0 0 4" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Left" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+      <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Left]">
+      <Setter Property="Padding" Value="4 0 0 0" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="DockPanel.Dock" Value="Right" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter > WrapPanel">
+      <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="^[TabStripPlacement=Right]">
+      <Setter Property="Padding" Value="0 0 4 0" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,5 +1,5 @@
-﻿using ColorPicker.Models;
-using System.Windows;
+﻿using System.Windows;
+using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -20,6 +20,21 @@ namespace ColorPicker
         public static readonly DependencyProperty ShowFractionalPartProperty =
             DependencyProperty.Register(nameof(ShowFractionalPart), typeof(bool), typeof(StandardColorPicker),
                 new PropertyMetadata(true));
+        
+        public static readonly DependencyProperty HexRepresentationProperty = 
+            DependencyProperty.Register(nameof(HexRepresentation), typeof(HexRepresentationType), typeof(StandardColorPicker),
+                new PropertyMetadata(HexRepresentationType.RGBA));
+
+        public HexRepresentationType HexRepresentation
+        {
+            get => (HexRepresentationType)GetValue(HexRepresentationProperty);
+            set => SetValue(HexRepresentationProperty, value);
+        }
+
+        public StandardColorPicker()
+        {
+            InitializeComponent();
+        }
 
         public double SmallChange
         {
@@ -43,11 +58,6 @@ namespace ColorPicker
         {
             get => (bool)GetValue(ShowFractionalPartProperty);
             set => SetValue(ShowFractionalPartProperty, value);
-        }
-
-        public StandardColorPicker() : base()
-        {
-            InitializeComponent();
         }
     }
 }

@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <MergeResourceInclude Source="/Templates/ColorDisplay.axaml" />
+        <MergeResourceInclude Source="/Templates/AlphaSlider.axaml"/>
+        <MergeResourceInclude Source="/Templates/ColorSliders.axaml"/>
+        <MergeResourceInclude Source="/Templates/HexColorTextBox.axaml"/>
+        <MergeResourceInclude Source="/Templates/HueSlider.axaml"/>
+        <MergeResourceInclude Source="/Templates/PortableColorPicker.axaml"/>
+        <MergeResourceInclude Source="/Templates/SquarePicker.axaml"/>
+        <MergeResourceInclude Source="/Templates/SquareSlider.axaml"/>
+        <MergeResourceInclude Source="/Templates/StandardColorPicker.axaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

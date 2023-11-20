@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:ColorPicker.UserControls"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="userControls:SquareSlider" x:Key="{x:Type userControls:SquareSlider}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="userControls:SquareSlider">
+                    <Grid>
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <converters:ProportialConverter x:Key="ProportionalConverter" />
+                            </ResourceDictionary>
+                        </Grid.Resources>
+                        <Image
+                            Width="{TemplateBinding Property=Width}"
+                            Height="{TemplateBinding Property=Height}"
+                            Source="{TemplateBinding Property=GradientBitmap}"
+                            Name="PART_GradientImage"
+                            Stretch="Fill" />
+                        <Canvas Background="Transparent">
+                            <Grid x:Name="head">
+                                <Canvas.Left>
+                                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                                        <Binding Path="Bounds.Width" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="HeadX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="RangeX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </Canvas.Left>
+                                <Canvas.Bottom>
+                                    <MultiBinding Converter="{StaticResource ProportionalConverter}">
+                                        <Binding Path="Bounds.Height" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="HeadY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="RangeY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </Canvas.Bottom>
+                                <Ellipse Fill="Transparent" Stroke="White" StrokeThickness="2" Width="12" Height="12"
+                                         UseLayoutRounding="False" />
+                                <Ellipse Fill="Transparent" Stroke="Black" StrokeThickness="2" Width="14" Height="14"
+                                         UseLayoutRounding="False" />
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="-7" Y="7" />
+                                </Grid.RenderTransform>
+                            </Grid>
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

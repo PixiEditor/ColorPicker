@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace ColorPicker.Converters
 {
-    class ProportialConverter : IMultiValueConverter
+    internal class ProportialConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <Color x:Key="ColorPickerForegroundColor">White</Color>
+            <Color x:Key="ColorPickerBackgroundColor">#202020</Color>
+            <Color x:Key="ColorPickerBorderMidColor">#4F4F4F</Color>
+            <Color x:Key="ColorPickerControlHighlightColor">#999</Color>
+            <Color x:Key="ColorPickerTabSelectedColor">#2d2d2d</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="ColorPickerForegroundColor">Black</Color>
+            <Color x:Key="ColorPickerBackgroundColor">#FFF</Color>
+            <Color x:Key="ColorPickerBorderMidColor">#aaa</Color>
+            <Color x:Key="ColorPickerControlHighlightColor">#999</Color>
+            <Color x:Key="ColorPickerTabSelectedColor">#EBEBEB</Color>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <Thickness x:Key="ColorPickerBorderThickness">1</Thickness>
+    <CornerRadius x:Key="ColorPickerControlRadius">5</CornerRadius>
+    <SolidColorBrush x:Key="ColorPickerForegroundBrush" Color="{DynamicResource ColorPickerForegroundColor}"/>
+    <SolidColorBrush x:Key="ColorPickerBackgroundBrush" Color="{DynamicResource ColorPickerBackgroundColor}"/>
+    <SolidColorBrush x:Key="ColorPickerBorderMidBrush" Color="{DynamicResource ColorPickerBorderMidColor}"/>
+    <SolidColorBrush x:Key="ColorPickerControlHighlightBrush" Color="{DynamicResource ColorPickerControlHighlightColor}"/>
+    <SolidColorBrush x:Key="ColorPickerTabSelectedBrush" Color="{DynamicResource ColorPickerTabSelectedColor}"/>
+</ResourceDictionary>

@@ -9,13 +9,12 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register(nameof(SliderArgbType), typeof(string), typeof(RgbColorSlider),
                 new PropertyMetadata(""));
 
-        public RgbColorSlider() : base() { }
-
         public string SliderArgbType
         {
             get => (string)GetValue(SliderArgbTypeProperty);
             set => SetValue(SliderArgbTypeProperty, value);
         }
+
         protected override void GenerateBackground()
         {
             var colorStart = GetColorForSelectedArgb(0);
@@ -31,10 +30,10 @@ namespace ColorPicker.UIExtensions
 
         private Color GetColorForSelectedArgb(int value)
         {
-            byte a = (byte)(CurrentColorState.A * 255);
-            byte r = (byte)(CurrentColorState.RGB_R * 255);
-            byte g = (byte)(CurrentColorState.RGB_G * 255);
-            byte b = (byte)(CurrentColorState.RGB_B * 255);
+            var a = (byte)(CurrentColorState.A * 255);
+            var r = (byte)(CurrentColorState.RGB_R * 255);
+            var g = (byte)(CurrentColorState.RGB_G * 255);
+            var b = (byte)(CurrentColorState.RGB_B * 255);
             switch (SliderArgbType)
             {
                 case "A": return Color.FromArgb((byte)value, r, g, b);
@@ -42,7 +41,9 @@ namespace ColorPicker.UIExtensions
                 case "G": return Color.FromArgb(255, r, (byte)value, b);
                 case "B": return Color.FromArgb(255, r, g, (byte)value);
                 default: return Color.FromArgb(a, r, g, b);
-            };
+            }
+
+            ;
         }
     }
 }

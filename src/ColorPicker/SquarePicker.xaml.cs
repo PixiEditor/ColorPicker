@@ -1,5 +1,5 @@
-﻿using ColorPicker.Models;
-using System.Windows;
+﻿using System.Windows;
+using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -13,6 +13,11 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(SquarePicker),
                 new PropertyMetadata(1.0));
 
+        public SquarePicker()
+        {
+            InitializeComponent();
+        }
+
         public PickerType PickerType
         {
             get => (PickerType)GetValue(PickerTypeProperty);
@@ -23,11 +28,6 @@ namespace ColorPicker
         {
             get => (double)GetValue(SmallChangeProperty);
             set => SetValue(SmallChangeProperty, value);
-        }
-
-        public SquarePicker() : base()
-        {
-            InitializeComponent();
         }
     }
 }

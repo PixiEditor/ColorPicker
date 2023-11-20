@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Authors>Egor Mozgovoy, Krzysztof Krysiński</Authors>
+        <Company>PixiEditor</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Copyright>PixiEditor</Copyright>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/PixiEditor/ColorPicker</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
+        <RootNamespace>ColorPicker</RootNamespace>
+        <Version>1.0.3</Version>
+        <PackageId>PixiEditor.ColorPicker.AvaloniaUI</PackageId>
+        <PackageTags>color color-picker graphics avaloniaui</PackageTags>
+        <Description>A collection of various AvaloniaUI controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET 6 - 7
+
+Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</Description>
+        <Title>A AvaloniaUI Color Picker</Title>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <FileVersion>1.0.3</FileVersion>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>sgkey.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>false</PublicSign>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.5" />
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Images\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Templates\SimpleColorPickerTheme.axaml.cs">
+            <DependentUpon>ColorPickerTheme.axaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\LICENSE.md">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>LICENSE.md</Link>
+      </None>
+      <None Include="..\..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="README.md">
+        <Link>README.md</Link>
+        <Pack>true</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+</Project>

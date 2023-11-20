@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace ColorPicker.Converters
 {
-    class MinConverter : IMultiValueConverter
+    internal class MinConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

@@ -9,16 +9,16 @@ namespace ColorPicker
             DependencyProperty.Register(nameof(CornerRadius), typeof(double), typeof(ColorDisplay)
                 , new PropertyMetadata(0d));
 
-        public double CornerRadius
-        {
-            get { return (double)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
-        }
 
-
-        public ColorDisplay() : base()
+        public ColorDisplay()
         {
             InitializeComponent();
+        }
+
+        public double CornerRadius
+        {
+            get => (double)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
         }
 
         private void SwapButton_Click(object sender, RoutedEventArgs e)

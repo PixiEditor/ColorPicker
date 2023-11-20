@@ -1,0 +1,35 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:uiExtensions="clr-namespace:ColorPicker.UIExtensions"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:AlphaSlider" x:Key="{x:Type colorPicker:AlphaSlider}">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <MergeResourceInclude Source="/Styles/ColorSliderStyle.axaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid Height="12">
+                        <uiExtensions:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255"
+                                                     Theme="{StaticResource PreviewColorSliderTemplate}"
+                                                     SmallChangeBindable="{TemplateBinding SmallChange}"
+                                                     Value="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                     CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Border BorderThickness="0" CornerRadius="5" ZIndex="-1"
+                                RenderOptions.BitmapInterpolationMode="None">
+                            <Border.Background>
+                                <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile"
+                                            DestinationRect="0,0,8,8" />
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

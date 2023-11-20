@@ -1,0 +1,63 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker">
+    <ControlTheme TargetType="colorPicker:HueSlider" x:Key="{x:Type colorPicker:HueSlider}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="colorPicker:HueSlider">
+                    <Viewbox>
+                        <Grid>
+                            <Image Source="/Images/CircularHueGradient.png" Stretch="Fill"
+                                   IsHitTestVisible="False">
+                                <Image.OpacityMask>
+                                    <RadialGradientBrush GradientOrigin="50%,50%" Center="50%, 50%" Radius="0.5">
+                                        <RadialGradientBrush.GradientStops>
+                                            <GradientStop Color="Transparent" Offset="0" />
+                                            <GradientStop Color="Transparent" Offset="0.839" />
+                                            <GradientStop Color="#2d2d30" Offset="0.84" />
+                                            <GradientStop Color="#2d2d30" Offset="0.992" />
+                                            <GradientStop Color="Transparent" Offset="0.993" />
+                                        </RadialGradientBrush.GradientStops>
+                                    </RadialGradientBrush>
+                                </Image.OpacityMask>
+                            </Image>
+                            <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                     Stroke="#aa000000" StrokeThickness="2" Width="260" Height="260"
+                                     IsHitTestVisible="False" />
+                            <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                     Stroke="#aa000000" StrokeThickness="2" IsHitTestVisible="False" Width="220"
+                                     Height="220" />
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
+                                <Rectangle Height="15" Width="22" Stroke="#2d2d30" StrokeThickness="3"
+                                           IsHitTestVisible="False" />
+                                <Rectangle Height="11" Width="18" Stroke="Snow" StrokeThickness="2"
+                                           IsHitTestVisible="False" />
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"
+                                                         CenterX="119" />
+                                        <TranslateTransform X="-119" />
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+                            </Grid>
+                            <Path Fill="Transparent" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                  Margin="0.8"
+                                  Name="PART_Handle">
+                                <Path.Data>
+                                    <CombinedGeometry GeometryCombineMode="Exclude">
+                                        <CombinedGeometry.Geometry1>
+                                            <EllipseGeometry RadiusX="129.2" RadiusY="129.2" />
+                                        </CombinedGeometry.Geometry1>
+                                        <CombinedGeometry.Geometry2>
+                                            <EllipseGeometry RadiusX="109" RadiusY="109" />
+                                        </CombinedGeometry.Geometry2>
+                                    </CombinedGeometry>
+                                </Path.Data>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

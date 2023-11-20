@@ -1,9 +1,9 @@
-﻿using ColorPicker.Models;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using ColorPicker.Models;
 
 namespace ColorPicker.UserControls
 {
@@ -17,6 +17,11 @@ namespace ColorPicker.UserControls
             DependencyProperty.Register(nameof(SmallChange), typeof(double), typeof(HueSlider),
                 new PropertyMetadata(1.0));
 
+        public HueSlider()
+        {
+            InitializeComponent();
+        }
+
         public double Value
         {
             get => (double)GetValue(ValueProperty);
@@ -28,16 +33,12 @@ namespace ColorPicker.UserControls
             get => (double)GetValue(SmallChangeProperty);
             set => SetValue(SmallChangeProperty, value);
         }
-        public HueSlider()
-        {
-            InitializeComponent();
-        }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             ((UIElement)sender).CaptureMouse();
-            Path circle = (Path)sender;
-            Point mousePos = e.GetPosition(circle);
+            var circle = (Path)sender;
+            var mousePos = e.GetPosition(circle);
             UpdateValue(mousePos, circle.ActualWidth, circle.ActualHeight);
         }
 
@@ -50,20 +51,20 @@ namespace ColorPicker.UserControls
         {
             if (!((UIElement)sender).IsMouseCaptured)
                 return;
-            Path circle = (Path)sender;
-            Point mousePos = e.GetPosition(circle);
+            var circle = (Path)sender;
+            var mousePos = e.GetPosition(circle);
             UpdateValue(mousePos, circle.ActualWidth, circle.ActualHeight);
         }
 
         private void UpdateValue(Point mousePos, double width, double height)
         {
-            double x = mousePos.X / (width * 2);
-            double y = mousePos.Y / (height * 2);
+            var x = mousePos.X / (width * 2);
+            var y = mousePos.Y / (height * 2);
 
-            double length = Math.Sqrt(x * x + y * y);
+            var length = Math.Sqrt(x * x + y * y);
             if (length == 0)
                 return;
-            double angle = Math.Acos(x / length);
+            var angle = Math.Acos(x / length);
             if (y < 0)
                 angle = -angle;
             angle = angle * 360 / (Math.PI * 2) + 180;

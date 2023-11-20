@@ -1,0 +1,13 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        x:Class="ColorPicker.AvaloniaUI.Templates.SimpleColorPickerTheme"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="/Templates/ColorPicker.Templates.axaml"/>
+                <MergeResourceInclude Source="/Styles/SimpleTabControlStyle.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+</Styles>

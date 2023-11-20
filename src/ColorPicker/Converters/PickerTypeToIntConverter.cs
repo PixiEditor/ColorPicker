@@ -1,12 +1,12 @@
-﻿using ColorPicker.Models;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using ColorPicker.Models;
 
 namespace ColorPicker.Converters
 {
     [ValueConversion(typeof(PickerType), typeof(int))]
-    class PickerTypeToIntConverter
+    internal class PickerTypeToIntConverter
         : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -4,8 +4,8 @@
 
 # About
 
-A collection of various WPF controls used to select colors.
-Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7.
+A collection of various WPF and AvaloniaUI controls used to select colors.
+Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7 (WPF) and .NET 6 - 7 (AvaloniaUI).
 Originally developed for [PixiEditor](https://github.com/PixiEditor/PixiEditor).
 
 ![screenshot](https://i.imgur.com/4ysN4Fe.png)
@@ -28,30 +28,15 @@ See [ColorPickerDemo](https://github.com/PixiEditor/ColorPicker/tree/master/Colo
 
 **Basic usage:**
 
-Install the NuGet package, insert a reference to the ColorPicker namespace
-
-```xml
-<Window ...
-xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
-...>
-```
-
-Add the controls
-
-```xml
-<colorpicker:StandardColorPicker x:Name="main" Width="200" Height="380"/>
-<colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}" Width="40" Height="40"/>
-```
-
-Note: in some configurations such as using the package in .NET Framework 4.7 the XAML designer tends to break and not show the control.
+- [WPF Basic Usage](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker/README.md#example-usage)
+- [AvaloniaUI Basic Usage](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker.AvaloniaUI/README.md#example-usage)
 
 # Properties
 
 All controls share these properties:
 
-- `SelectedColor` dependency property stores the current color as System.Windows.Media.Color
+- `SelectedColor` dependency property stores the current color as `System.Windows.Media.Color` or `Avalonia.Media.Color`. **Use this one if you simply want to get (or bind to) the current color.** When connecting controls together with bindings, use the `ColorState` dependency property instead.
 - `ColorChanged`: An event that fires on SelectedColor change.
-- `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together.
 - `Color` property contains nested properties you may bind to or use to retrieve the color in code-behind:
   - `Color.A`: Current Alpha, a double ranging from 0 to 255
   - `Color.RGB_R`, `Color.RGB_G`, `Color.RGB_B`: Dimensions of the RGB color space, each is a 0-255 double
@@ -61,64 +46,32 @@ All controls share these properties:
   - `Color.HSL_H`: Hue in the HSL color space, a 0-360 double
   - `Color.HSL_S`: Saturation in the HSL color space, a 0-100 double
   - `Color.HSL_L`: Lightness in the HSL color space, a 0-100 double
+- `ColorState` dependency property contains all info about the current state of the control. Use this property to bind controls together. **Do not use it for any other purpose, use the other properties listed above.**
 
 Apart from those, some controls have unique properties:
 
-- `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively.
-These are present on controls that have a secondary color.
-- `HintColorState`, `HintNotifyableColor`, and `HintColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively.
-These are present on controls that have a hint color. The hint color is a color field that can be used to obtain the primary color from an external source when the user clicks a button.
+- `SecondColorState`, `SecondColor`, and `SecondaryColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. These are present on controls that have a secondary color.
+- `HintColorState`, `HintNotifyableColor`, and `HintColor` are functionally identical to `ColorState`, `Color`, and `SelectedColor` respectively. These are present on controls that have a hint color. The hint color is a color field that can be used to obtain the primary color from an external source when the user clicks a button.
 - `UseHintColor` enables the hint color or disables it (disabled by default).
-- `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user
-turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
-- `ShowAlpha` lets you hide the alpha channel on various controls. 
-Present on all controls containing either an alpha slider (apart from the `AlphaSlider` control itself) or a hex color textbox.
-- `ShowFractionalPart` lets you hide the digits after the "." in the textboxes showing HSV and HSL values.
-Present on `ColorSliders` and on other controls containing `ColorSliders`.
-- `PickerType`: HSV or HSL, present on `SquarePicker` or controls that contain `SquarePicker`.
+- `SmallChange` lets you change `SmallChange` of sliders, which is used as sensitivity for when the user turns the scroll wheel with the cursor over the sliders. Present on controls with sliders.
+- `ShowAlpha` lets you hide the alpha channel on various controls. Present on all controls containing either an alpha slider or a hex color textbox.
+- `ShowFractionalPart` lets you hide the digits after the "." in the textboxes showing HSV and HSL values. Present on `ColorSliders` and on other controls containing `ColorSliders`.
+- `PickerType`: HSV or HSL, present on `SquarePicker` and on controls that contain `SquarePicker`.
+- `HexRepresentation`: RGBA or ARGB, present on `HexColorTextBox` and on controls that contain `HexColorTextBox`.
 
 # Styling
 
-Out of the box, the color picker uses the default WPF look:
+Styling differs between AvaloniaUI and WPF version. See the respective READMEs for more info.
 
-![Default ColorPicker look](https://i.imgur.com/AyweTmS.png)
+## AvaloniaUI
 
-You may use the included PixiEditor's dark theme by loading a resource dictionary in XAML:
+See [AvaloniaUI Styling](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker.AvaloniaUI/README.md#styling)
 
-```xml
-<Window.Resources>
-    <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-</Window.Resources>
-```
+## WPF
 
-and referencing DefaultColorPickerStyle in the style attribute of a control:
-
-```xml
-<colorpicker:StandardColorPicker Style="{StaticResource DefaultColorPickerStyle}" />
-```
-
-As an alternative, the same can be achieved programmatically:
-
-```csharp
-var resourceDictionary = new ResourceDictionary();
-resourceDictionary.Source = new System.Uri(
-    "pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml",
-    System.UriKind.RelativeOrAbsolute);
-
-StandardColorPicker picker = new StandardColorPicker()
-{
-    Style = (Style)resourceDictionary["DefaultColorPickerStyle"]
-};
-```
-
-You may define your own styles, see
-[DefaultColorPickerStyle](https://github.com/PixiEditor/ColorPicker/blob/master/src/ColorPicker/Styles/DefaultColorPickerStyle.xaml)
-for reference.
+See [WPF Styling](https://github.com/PixiEditor/ColorPicker/tree/master/src/ColorPicker/README.md#styling)
 
 # Other
 
-Read flabbet's article on the theory behind the first version of this project on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)
+Read flabbet's article on the theory behind the first version of this project
+on [dev.to](https://dev.to/flabbet/how-does-color-pickers-work-1275)

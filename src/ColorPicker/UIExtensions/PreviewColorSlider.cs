@@ -1,15 +1,14 @@
-﻿using ColorPicker.Models;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ColorPicker.Models;
 
 namespace ColorPicker.UIExtensions
 {
     internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
     {
-
         public static readonly DependencyProperty CurrentColorStateProperty =
             DependencyProperty.Register(nameof(CurrentColorState), typeof(ColorState), typeof(PreviewColorSlider),
                 new PropertyMetadata(ColorStateChangedCallback));
@@ -18,9 +17,11 @@ namespace ColorPicker.UIExtensions
             DependencyProperty.Register(nameof(SmallChangeBindable), typeof(double), typeof(PreviewColorSlider),
                 new PropertyMetadata(1.0, SmallChangeBindableChangedCallback));
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly LinearGradientBrush backgroundBrush = new LinearGradientBrush();
 
-        protected virtual bool RefreshGradient => true;
+        private SolidColorBrush _leftCapColor = new SolidColorBrush();
+
+        private SolidColorBrush _rightCapColor = new SolidColorBrush();
 
         public PreviewColorSlider()
         {
@@ -31,6 +32,8 @@ namespace ColorPicker.UIExtensions
             MinHeight = 12;
             PreviewMouseWheel += OnPreviewMouseWheel;
         }
+
+        protected virtual bool RefreshGradient => true;
 
         public double SmallChangeBindable
         {
@@ -44,14 +47,12 @@ namespace ColorPicker.UIExtensions
             set => SetValue(CurrentColorStateProperty, value);
         }
 
-        private readonly LinearGradientBrush backgroundBrush = new LinearGradientBrush();
         public GradientStopCollection BackgroundGradient
         {
             get => backgroundBrush.GradientStops;
             set => backgroundBrush.GradientStops = value;
         }
 
-        private SolidColorBrush _leftCapColor = new SolidColorBrush();
         public SolidColorBrush LeftCapColor
         {
             get => _leftCapColor;
@@ -62,7 +63,6 @@ namespace ColorPicker.UIExtensions
             }
         }
 
-        private SolidColorBrush _rightCapColor = new SolidColorBrush();
         public SolidColorBrush RightCapColor
         {
             get => _rightCapColor;
@@ -73,6 +73,8 @@ namespace ColorPicker.UIExtensions
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override void EndInit()
         {
             base.EndInit();
@@ -81,9 +83,10 @@ namespace ColorPicker.UIExtensions
         }
 
         protected abstract void GenerateBackground();
+
         protected static void ColorStateChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            PreviewColorSlider slider = (PreviewColorSlider)d;
+            var slider = (PreviewColorSlider)d;
             if (slider.RefreshGradient)
                 slider.GenerateBackground();
         }

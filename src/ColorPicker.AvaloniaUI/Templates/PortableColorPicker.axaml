@@ -1,0 +1,53 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:PortableColorPicker" x:Key="{x:Type colorPicker:PortableColorPicker}">
+        <Setter Property="CornerRadius" Value="{DynamicResource ColorPickerControlRadius}"/>
+        <Setter Property="Template">
+            <ControlTemplate TargetType="colorPicker:PortableColorPicker">
+                <Grid>
+                    <Grid.Styles>
+                        <StyleInclude Source="/Styles/ColorToggleButtonStyle.axaml" />
+                    </Grid.Styles>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <converters:BoolToInvertedBoolConverter x:Key="BoolToInvertedBoolConverter" />
+                            <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Border BorderThickness="1" BorderBrush="Black" ZIndex="0"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
+                        <Grid>
+                            <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0" CornerRadius="{DynamicResource ColorPickerControlRadius}"
+                                          x:Name="toggleButton" BorderThickness="0" ZIndex="1"
+                                          Background="{TemplateBinding SelectedColor, Converter={StaticResource ColorToBrushConverter}}" />
+                                <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
+                                    <Border.Background>
+                                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                    </Border>
+                    <Popup Name="popup" IsLightDismissEnabled="True"
+                           IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}" Background="{DynamicResource ThemeBackgroundBrush}">
+                            <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             x:Name="test"
+                                                             UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
+                                                             HintColorState="{Binding Path=HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             SecondColorState="{Binding Path=SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             SmallChange="{TemplateBinding SmallChange}" Width="200"
+                                                             Height="380"
+                                                             ShowAlpha="{TemplateBinding ShowAlpha}"
+                                                             PickerType="{TemplateBinding PickerType}"
+                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}" 
+                                                             HexRepresentation="{TemplateBinding HexRepresentation}"/>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
