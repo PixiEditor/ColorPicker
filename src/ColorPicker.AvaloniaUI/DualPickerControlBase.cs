@@ -9,11 +9,11 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
 {
     public static readonly StyledProperty<ColorState> SecondColorStateProperty =
         AvaloniaProperty.Register<DualPickerControlBase, ColorState>(
-            nameof(SecondColorState), new ColorState(1, 1, 1, 1, 0, 0, 1, 0, 0, 1));
+            nameof(SecondColorState), new ColorState(1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1));
 
     public static readonly StyledProperty<ColorState> HintColorStateProperty =
         AvaloniaProperty.Register<DualPickerControlBase, ColorState>(
-            nameof(HintColorState), new ColorState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+            nameof(HintColorState), new ColorState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
     public static readonly StyledProperty<Color> SecondaryColorProperty =
         AvaloniaProperty.Register<DualPickerControlBase, Color>(

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ColorPicker.Models;
+using ColorPicker.Models.ColorSpaces;
 
 namespace ColorPicker.UserControls
 {
@@ -32,16 +34,16 @@ namespace ColorPicker.UserControls
         private double _rangeX;
         private double _rangeY;
 
-        private Func<double, double, double, Tuple<double, double, double>> colorSpaceConversionMethod =
-            ColorSpaceHelper.HsvToRgb;
-
+        private Action recalculateGradientMethod;
+        
         public SquareSlider()
         {
             GradientBitmap = new WriteableBitmap(32, 32, 96, 96, PixelFormats.Rgb24, null);
             InitializeComponent();
-            RecalculateGradient();
+            recalculateGradientMethod = RecalculateGradientHsv;
+            recalculateGradientMethod();
         }
-
+        
         public double Hue
         {
             get => (double)GetValue(HueProperty);
@@ -98,7 +100,7 @@ namespace ColorPicker.UserControls
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void RecalculateGradient()
+        private void RecalculateGradientHsv()
         {
             var w = GradientBitmap.PixelWidth;
             var h = GradientBitmap.PixelHeight;
@@ -107,12 +109,68 @@ namespace ColorPicker.UserControls
             for (var j = 0; j < h; j++)
             for (var i = 0; i < w; i++)
             {
-                var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
-                double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
+                var rgb = RgbHelper.HslToRgb(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
                 var pos = (j * h + i) * 3;
-                pixels[pos] = (byte)(r * 255);
-                pixels[pos + 1] = (byte)(g * 255);
-                pixels[pos + 2] = (byte)(b * 255);
+                pixels[pos] = (byte)(rgb.R * 255);
+                pixels[pos + 1] = (byte)(rgb.G * 255);
+                pixels[pos + 2] = (byte)(rgb.B * 255);
+            }
+
+            GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
+        }
+
+        private void RecalculateGradientHsl()
+        {
+            var w = GradientBitmap.PixelWidth;
+            var h = GradientBitmap.PixelHeight;
+            var hue = Hue;
+            var pixels = new byte[w * h * 3];
+            for (var j = 0; j < h; j++)
+            for (var i = 0; i < w; i++)
+            {
+                var rgb = RgbHelper.HslToRgb(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
+                var pos = (j * h + i) * 3;
+                pixels[pos] = (byte)(rgb.R * 255);
+                pixels[pos + 1] = (byte)(rgb.G * 255);
+                pixels[pos + 2] = (byte)(rgb.B * 255);
+            }
+
+            GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
+        }
+
+        private void RecalculateGradientOkHsv()
+        {
+            var w = GradientBitmap.PixelWidth;
+            var h = GradientBitmap.PixelHeight;
+            var hue = Hue;
+            var pixels = new byte[w * h * 3];
+            for (var j = 0; j < h; j++)
+            for (var i = 0; i < w; i++)
+            {
+                var rgb = RgbHelper.OkHsvToRgb(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
+                var pos = (j * h + i) * 3;
+                pixels[pos] = (byte)(rgb.R * 255);
+                pixels[pos + 1] = (byte)(rgb.G * 255);
+                pixels[pos + 2] = (byte)(rgb.B * 255);
+            }
+
+            GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
+        }
+
+        private void RecalculateGradientOkHsl()
+        {
+            var w = GradientBitmap.PixelWidth;
+            var h = GradientBitmap.PixelHeight;
+            var hue = Hue;
+            var pixels = new byte[w * h * 3];
+            for (var j = 0; j < h; j++)
+            for (var i = 0; i < w; i++)
+            {
+                var rgb = RgbHelper.OkHslToRgb(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
+                var pos = (j * h + i) * 3;
+                pixels[pos] = (byte)(rgb.R * 255);
+                pixels[pos + 1] = (byte)(rgb.G * 255);
+                pixels[pos + 2] = (byte)(rgb.B * 255);
             }
 
             GradientBitmap.WritePixels(new Int32Rect(0, 0, w, h), pixels, w * 3, 0);
@@ -121,17 +179,31 @@ namespace ColorPicker.UserControls
         private static void OnColorSpaceChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             var sender = (SquareSlider)d;
-            if ((PickerType)args.NewValue == PickerType.HSV)
-                sender.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
-            else
-                sender.colorSpaceConversionMethod = ColorSpaceHelper.HslToRgb;
+            switch ((PickerType)args.NewValue)
+            {
+                case PickerType.HSV:
+                    sender.recalculateGradientMethod = sender.RecalculateGradientHsv;
+                    break;
+                case PickerType.HSL:
+                    sender.recalculateGradientMethod = sender.RecalculateGradientHsl;
+                    break;
+                case PickerType.OKHSV:
+                    sender.recalculateGradientMethod = sender.RecalculateGradientOkHsv;
+                    break;
+                case PickerType.OKHSL:
+                    sender.recalculateGradientMethod = sender.RecalculateGradientOkHsl;
+                    break;
+                default:
+                    sender.recalculateGradientMethod = sender.RecalculateGradientHsl;
+                    break;
+            }
 
-            sender.RecalculateGradient();
+            sender.recalculateGradientMethod();
         }
 
         private static void OnHueChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
-            ((SquareSlider)d).RecalculateGradient();
+            ((SquareSlider)d).recalculateGradientMethod();
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)

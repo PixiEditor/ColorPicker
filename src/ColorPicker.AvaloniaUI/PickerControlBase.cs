@@ -11,7 +11,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 {
     public static readonly StyledProperty<ColorState> ColorStateProperty =
         AvaloniaProperty.Register<PickerControlBase, ColorState>(
-            nameof(ColorState), new ColorState(0, 0, 0, 1, 0, 0, 0, 0, 0, 0));
+            nameof(ColorState), new ColorState(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 
     public static readonly StyledProperty<Color> SelectedColorProperty =
         AvaloniaProperty.Register<PickerControlBase, Color>(
