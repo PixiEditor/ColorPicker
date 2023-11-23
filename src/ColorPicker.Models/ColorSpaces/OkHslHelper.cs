@@ -1,4 +1,5 @@
 ﻿using System;
+using ColorPicker.Models.Colors;
 
 namespace ColorPicker.Models.ColorSpaces;
 
@@ -11,10 +12,10 @@ public static class OkHslHelper
     /// <param name="b">Blue channel</param>
     /// <param name="g">Green channel</param>
     /// <returns>Values in order: Hue (0-360 or -1), Saturation (0-1 or -1), Lightness (0-1)</returns>
-    public static Tuple<double, double, double> RgbToOkHsl(double r, double g, double b)
+    public static Hsl RgbToOkHsl(double r, double g, double b)
     {
-        var tuple = OkHelper.SrgbToOkHsl(r, g, b);
-        return new Tuple<double, double, double>(tuple.Item1 * 360, tuple.Item2, tuple.Item3);
+        var hsl = OkHelper.SrgbToOkHsl(r, g, b);
+        return new Hsl(hsl.H * 360, hsl.S, hsl.L);
     } 
     
     /// <summary>
@@ -24,10 +25,10 @@ public static class OkHslHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="l">Lightness, 0-1</param>
     /// <returns>Values in order: Hue (0-360), Saturation (0-1), Lightness (0-1)</returns>
-    public static Tuple<double, double, double> HslToOkHsl(double h, double s, double l)
+    public static Hsl HslToOkHsl(double h, double s, double l)
     {
         var rgb = RgbHelper.HslToRgb(h, s, l);
-        return OkHslHelper.RgbToOkHsl(rgb.Item1, rgb.Item2, rgb.Item3);
+        return OkHslHelper.RgbToOkHsl(rgb.R, rgb.G, rgb.B);
     }
     
     /// <summary>
@@ -37,10 +38,10 @@ public static class OkHslHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="v">Value, 0-1</param>
     /// <returns>Values in order: Hue (0-360), Saturation (0-1), Lightness (0-1)</returns>
-    public static Tuple<double, double, double> HsvToOkHsl(double h, double s, double v)
+    public static Hsl HsvToOkHsl(double h, double s, double v)
     {
         var rgb = RgbHelper.HsvToRgb(h, s, v);
-        return OkHslHelper.RgbToOkHsl(rgb.Item1, rgb.Item2, rgb.Item3);
+        return OkHslHelper.RgbToOkHsl(rgb.R, rgb.G, rgb.B);
     }
     
     /// <summary>
@@ -50,9 +51,9 @@ public static class OkHslHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="v">Value, 0-1</param>
     /// <returns>Values in order: Hue (0-360), Saturation (0-1), Lightness (0-1)</returns>
-    public static Tuple<double, double, double> OkHsvToOkHsl(double h, double s, double v)
+    public static Hsl OkHsvToOkHsl(double h, double s, double v)
     {
         var rgb = RgbHelper.OkHsvToRgb(h, s, v);
-        return OkHslHelper.RgbToOkHsl(rgb.Item1, rgb.Item2, rgb.Item3);
+        return OkHslHelper.RgbToOkHsl(rgb.R, rgb.G, rgb.B);
     }
 }

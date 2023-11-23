@@ -1,4 +1,5 @@
 ﻿using System;
+using ColorPicker.Models.Colors;
 
 namespace ColorPicker.Models.ColorSliders;
 
@@ -18,11 +19,11 @@ public struct ColorSliderGradientPoint
         Position = position;
     }
     
-    public ColorSliderGradientPoint(Tuple<double, double, double> rgb, double position)
+    public ColorSliderGradientPoint(Rgb rgb, double position)
     {
-        R = rgb.Item1;
-        G = rgb.Item2;
-        B = rgb.Item3;
+        R = rgb.R;
+        G = rgb.G;
+        B = rgb.B;
         Position = position;
     }
 }

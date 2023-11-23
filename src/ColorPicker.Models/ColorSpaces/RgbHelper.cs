@@ -1,4 +1,5 @@
 ﻿using System;
+using ColorPicker.Models.Colors;
 
 namespace ColorPicker.Models.ColorSpaces;
 
@@ -11,11 +12,11 @@ public static class RgbHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="v">Value, 0-1</param>
     /// <returns>Values (0-1) in order: R, G, B</returns>
-    public static Tuple<double, double, double> HsvToRgb(double h, double s, double v)
+    public static Rgb HsvToRgb(double h, double s, double v)
     {
         if (s == 0)
             // achromatic (grey)
-            return new Tuple<double, double, double>(v, v, v);
+            return new Rgb(v, v, v);
         if (h >= 360.0)
             h = 0;
         h /= 60;
@@ -27,12 +28,12 @@ public static class RgbHelper
 
         switch (i)
         {
-            case 0: return new Tuple<double, double, double>(v, t, p);
-            case 1: return new Tuple<double, double, double>(q, v, p);
-            case 2: return new Tuple<double, double, double>(p, v, t);
-            case 3: return new Tuple<double, double, double>(p, q, v);
-            case 4: return new Tuple<double, double, double>(t, p, v);
-            default: return new Tuple<double, double, double>(v, p, q);
+            case 0: return new Rgb(v, t, p);
+            case 1: return new Rgb(q, v, p);
+            case 2: return new Rgb(p, v, t);
+            case 3: return new Rgb(p, q, v);
+            case 4: return new Rgb(t, p, v);
+            default: return new Rgb(v, p, q);
         }
     }
     
@@ -43,7 +44,7 @@ public static class RgbHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="l">Lightness, 0-1</param>
     /// <returns>Values (0-1) in order: R, G, B</returns>
-    public static Tuple<double, double, double> HslToRgb(double h, double s, double l)
+    public static Rgb HslToRgb(double h, double s, double l)
     {
         var hueCircleSegment = (int)(h / 60);
         var circleSegmentFraction = (h - 60 * hueCircleSegment) / 60;
@@ -55,22 +56,22 @@ public static class RgbHelper
         switch (hueCircleSegment)
         {
             case 0:
-                return new Tuple<double, double, double>(maxRGB, delta * circleSegmentFraction + minRGB,
+                return new Rgb(maxRGB, delta * circleSegmentFraction + minRGB,
                     minRGB); //red-yellow
             case 1:
-                return new Tuple<double, double, double>(delta * (1 - circleSegmentFraction) + minRGB, maxRGB,
+                return new Rgb(delta * (1 - circleSegmentFraction) + minRGB, maxRGB,
                     minRGB); //yellow-green
             case 2:
-                return new Tuple<double, double, double>(minRGB, maxRGB,
+                return new Rgb(minRGB, maxRGB,
                     delta * circleSegmentFraction + minRGB); //green-cyan
             case 3:
-                return new Tuple<double, double, double>(minRGB, delta * (1 - circleSegmentFraction) + minRGB,
+                return new Rgb(minRGB, delta * (1 - circleSegmentFraction) + minRGB,
                     maxRGB); //cyan-blue
             case 4:
-                return new Tuple<double, double, double>(delta * circleSegmentFraction + minRGB, minRGB,
+                return new Rgb(delta * circleSegmentFraction + minRGB, minRGB,
                     maxRGB); //blue-purple
             default:
-                return new Tuple<double, double, double>(maxRGB, minRGB,
+                return new Rgb(maxRGB, minRGB,
                     delta * (1 - circleSegmentFraction) + minRGB); //purple-red and invalid values
         }
     }
@@ -82,10 +83,10 @@ public static class RgbHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="v">Value, 0-1</param>
     /// <returns>Values (0-1) in order: R, G, B</returns>
-    public static Tuple<double, double, double> OkHsvToRgb(double h, double s, double v)
+    public static Rgb OkHsvToRgb(double h, double s, double v)
     {
-        var tuple = OkHelper.OkHsvToSrgb(h / 360, s, v);
-        return new Tuple<double, double, double>(tuple.Item1, tuple.Item2, tuple.Item3);
+        var rgb = OkHelper.OkHsvToSrgb(h / 360, s, v);
+        return new Rgb(rgb.R, rgb.G, rgb.B);
     }
     
     /// <summary>
@@ -95,9 +96,9 @@ public static class RgbHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="l">Lightness, 0-1</param>
     /// <returns>Values (0-1) in order: R, G, B</returns>
-    public static Tuple<double, double, double> OkHslToRgb(double h, double s, double l)
+    public static Rgb OkHslToRgb(double h, double s, double l)
     {
-        var tuple = OkHelper.OkHslToSrgb(h / 360.0, s, l);
-        return new Tuple<double, double, double>(tuple.Item1, tuple.Item2, tuple.Item3);
+        var rgb = OkHelper.OkHslToSrgb(h / 360.0, s, l);
+        return new Rgb(rgb.R, rgb.G, rgb.B);
     }
 }

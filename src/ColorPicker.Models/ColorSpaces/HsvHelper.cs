@@ -1,4 +1,5 @@
 ﻿using System;
+using ColorPicker.Models.Colors;
 
 namespace ColorPicker.Models.ColorSpaces;
 
@@ -11,7 +12,7 @@ public static class HsvHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="l">Lightness, 0-1</param>
     /// <returns>Values in order: Hue (same), Saturation (0-1 or -1), Value (0-1)</returns>
-    public static Tuple<double, double, double> HslToHsv(double h, double s, double l)
+    public static Hsv HslToHsv(double h, double s, double l)
     {
         var hsv_v = l + s * Math.Min(l, 1 - l);
         double hsv_s;
@@ -19,7 +20,7 @@ public static class HsvHelper
             hsv_s = -1;
         else
             hsv_s = 2 * (1 - l / hsv_v);
-        return new Tuple<double, double, double>(h, hsv_s, hsv_v);
+        return new Hsv(h, hsv_s, hsv_v);
     }
     
     /// <summary>
@@ -29,7 +30,7 @@ public static class HsvHelper
     /// <param name="g">Green channel</param>
     /// <param name="b">Blue channel</param>
     /// <returns>Values in order: Hue (0-360 or -1), Saturation (0-1 or -1), Value (0-1)</returns>
-    public static Tuple<double, double, double> RgbToHsv(double r, double g, double b)
+    public static Hsv RgbToHsv(double r, double g, double b)
     {
         double min, max, delta;
         double h, s, v;
@@ -47,7 +48,7 @@ public static class HsvHelper
             //pure black
             s = -1;
             h = -1;
-            return new Tuple<double, double, double>(h, s, v);
+            return new Hsv(h, s, v);
         }
 
         if (r == max)
@@ -62,7 +63,7 @@ public static class HsvHelper
         if (double.IsNaN(h)) //delta == 0, case of pure gray
             h = -1;
 
-        return new Tuple<double, double, double>(h, s, v);
+        return new Hsv(h, s, v);
     }
 
     /// <summary>
@@ -72,10 +73,10 @@ public static class HsvHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="l">Lightness, 0-1</param>
     /// <returns>Values in order: Hue (0-360), Saturation (0-1), Value (0-1)</returns>
-    public static Tuple<double, double, double> OkHslToHsv(double h, double s, double l)
+    public static Hsv OkHslToHsv(double h, double s, double l)
     {
         var rgb = RgbHelper.OkHslToRgb(h, s, l);
-        return HsvHelper.RgbToHsv(rgb.Item1, rgb.Item2, rgb.Item3);
+        return HsvHelper.RgbToHsv(rgb.R, rgb.G, rgb.B);
     }
     
     /// <summary>
@@ -85,9 +86,9 @@ public static class HsvHelper
     /// <param name="s">Saturation, 0-1</param>
     /// <param name="v">Value, 0-1</param>
     /// <returns>Values in order: Hue (0-360), Saturation (0-1), Value (0-1)</returns>
-    public static Tuple<double, double, double> OkHsvToHsv(double h, double s, double v)
+    public static Hsv OkHsvToHsv(double h, double s, double v)
     {
         var rgb = RgbHelper.OkHsvToRgb(h, s, v);
-        return HsvHelper.RgbToHsv(rgb.Item1, rgb.Item2, rgb.Item3);
+        return HsvHelper.RgbToHsv(rgb.R, rgb.G, rgb.B);
     }
 }
