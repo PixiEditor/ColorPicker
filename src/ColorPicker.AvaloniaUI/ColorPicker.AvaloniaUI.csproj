@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -14,15 +14,15 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
         <RootNamespace>ColorPicker</RootNamespace>
-        <Version>1.0.5</Version>
+        <Version>1.0.6</Version>
         <PackageId>PixiEditor.ColorPicker.AvaloniaUI</PackageId>
         <PackageTags>color color-picker graphics avaloniaui</PackageTags>
         <Description>A collection of various AvaloniaUI controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET 6 - 7
 
 Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</Description>
         <Title>A AvaloniaUI Color Picker</Title>
-        <AssemblyVersion>1.0.5</AssemblyVersion>
-        <FileVersion>1.0.5</FileVersion>
+        <AssemblyVersion>1.0.6</AssemblyVersion>
+        <FileVersion>1.0.6</FileVersion>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
         <SignAssembly>true</SignAssembly>

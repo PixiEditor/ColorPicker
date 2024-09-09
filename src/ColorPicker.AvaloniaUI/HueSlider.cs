@@ -46,6 +46,8 @@ internal class HueSlider : TemplatedControl
         e.Pointer.Capture(circle);
         var mousePos = e.GetPosition(circle);
         UpdateValue(mousePos, circle.Bounds.Width, circle.Bounds.Height);
+        
+        e.Handled = true;
     }
 
     private void OnMouseUp(object sender, PointerReleasedEventArgs e)
@@ -60,6 +62,8 @@ internal class HueSlider : TemplatedControl
         var circle = (Path)sender;
         var mousePos = e.GetPosition(circle);
         UpdateValue(mousePos, circle.Bounds.Width, circle.Bounds.Height);
+        
+        e.Handled = true;
     }
 
     private void UpdateValue(Point mousePos, double width, double height)
