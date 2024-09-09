@@ -127,6 +127,8 @@ internal class SquareSlider : TemplatedControl
         base.OnPointerPressed(e);
         e.Pointer.Capture(this);
         UpdatePos(e.GetPosition(this));
+        
+        e.Handled = true;
     }
 
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
@@ -139,7 +141,11 @@ internal class SquareSlider : TemplatedControl
     {
         base.OnPointerMoved(e);
         if (Equals(e.Pointer.Captured, this))
+        {
             UpdatePos(e.GetPosition(this));
+            
+            e.Handled = true;
+        }
     }
 
     private void RecalculateGradient()

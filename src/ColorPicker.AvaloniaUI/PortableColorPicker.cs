@@ -1,4 +1,7 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using ColorPicker.Models;
 
 namespace ColorPicker;
@@ -57,5 +60,18 @@ public class PortableColorPicker : DualPickerControlBase
     {
         get => GetValue(ShowFractionalPartProperty);
         set => SetValue(ShowFractionalPartProperty, value);
+    }
+
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        base.OnApplyTemplate(e);
+        var popupPart = e.NameScope.Find<Popup>("popup");
+        if (popupPart != null)
+        {
+            popupPart.PointerPressed += (sender, args) =>
+            {
+                args.Handled = true;
+            };
+        }
     }
 }

@@ -32,7 +32,9 @@
                     </Border>
                     <Popup Name="popup" IsLightDismissEnabled="True"
                            IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}" Background="{DynamicResource ThemeBackgroundBrush}">
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+                                IsHitTestVisible="True"
+                                Background="{DynamicResource ThemeBackgroundBrush}">
                             <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              x:Name="test"
                                                              UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
