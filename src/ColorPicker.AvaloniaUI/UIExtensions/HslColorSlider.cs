@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Media;
 using ColorPicker.Models;
+using ColorPicker.Models.ColorSpaces;
 
 namespace ColorPicker.UIExtensions;
 
@@ -73,23 +74,20 @@ internal class HslColorSlider : PreviewColorSlider
         {
             case "H":
             {
-                var rgbtuple = ColorSpaceHelper.HslToRgb(value, 1.0, 0.5);
-                double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
-                return Color.FromArgb(255, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
+                var rgb = RgbHelper.HslToRgb(value, 1.0, 0.5);
+                return Color.FromArgb(255, (byte)(rgb.R * 255), (byte)(rgb.G * 255), (byte)(rgb.B * 255));
             }
             case "S":
             {
-                var rgbtuple =
-                    ColorSpaceHelper.HslToRgb(CurrentColorState.HSL_H, value / 255.0, CurrentColorState.HSL_L);
-                double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
-                return Color.FromArgb(255, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
+                var rgb =
+                    RgbHelper.HslToRgb(CurrentColorState.HSL_H, value / 255.0, CurrentColorState.HSL_L);
+                return Color.FromArgb(255, (byte)(rgb.R * 255), (byte)(rgb.G * 255), (byte)(rgb.B * 255));
             }
             case "L":
             {
-                var rgbtuple =
-                    ColorSpaceHelper.HslToRgb(CurrentColorState.HSL_H, CurrentColorState.HSL_S, value / 255.0);
-                double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
-                return Color.FromArgb(255, (byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
+                var rgb =
+                    RgbHelper.HslToRgb(CurrentColorState.HSL_H, CurrentColorState.HSL_S, value / 255.0);
+                return Color.FromArgb(255, (byte)(rgb.R * 255), (byte)(rgb.G * 255), (byte)(rgb.B * 255));
             }
             default:
                 return Color.FromArgb(255, (byte)(CurrentColorState.RGB_R * 255), (byte)(CurrentColorState.RGB_G * 255),
