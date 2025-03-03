@@ -5,56 +5,77 @@
     <ControlTheme TargetType="colorPicker:StandardColorPicker" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid Name="MainGrid">
-                    <Grid.Resources>
-                        <ResourceDictionary>
-                            <converters:PickerTypeToIntConverter x:Key="PickerTypeToIntConverter" />
-                        </ResourceDictionary>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6*" />
-                        <RowDefinition Height="1.4*" />
-                        <RowDefinition Height="0.5*" />
-                        <RowDefinition Height="1.1*" MaxHeight="35" />
-                        <RowDefinition Height="4*" MaxHeight="120" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" MaxWidth="100" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
+                <TabControl Theme="{DynamicResource ColorPickerTabControlTheme}">
+                    <TabControl.Styles>
+                        <Style Selector="TabItem">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Theme" Value="{DynamicResource ColorPickerTabItemTheme}" />
+                        </Style>
+                    </TabControl.Styles>
+                    <TabControl.Items>
+                        <TabItem Header="Color">
+                            <Grid Name="MainGrid">
+                                <Grid.Resources>
+                                    <ResourceDictionary>
+                                        <converters:PickerTypeToIntConverter x:Key="PickerTypeToIntConverter" />
+                                    </ResourceDictionary>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="6*" />
+                                    <RowDefinition Height="1.4*" />
+                                    <RowDefinition Height="0.5*" />
+                                    <RowDefinition Height="1.1*" MaxHeight="35" />
+                                    <RowDefinition Height="5*" MaxHeight="120" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" MaxWidth="100" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
 
-                    <ComboBox HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                              Margin="0,0,10,0" Theme="{DynamicResource ColorPickerComboBox}"
-                              Grid.Row="1" Grid.Column="1"
-                              SelectedIndex="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
-                        <ComboBoxItem>HSV</ComboBoxItem>
-                        <ComboBoxItem>HSL</ComboBoxItem>
-                    </ComboBox>
+                                <ComboBox HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                          Margin="0,0,10,0" Theme="{DynamicResource ColorPickerComboBox}"
+                                          Grid.Row="1" Grid.Column="1"
+                                          SelectedIndex="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PickerTypeToIntConverter}, Mode=TwoWay}">
+                                    <ComboBoxItem>HSV</ComboBoxItem>
+                                    <ComboBoxItem>HSL</ComboBoxItem>
+                                </ComboBox>
 
-                    <colorPicker:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15"
-                                              VerticalAlignment="Stretch"
-                                              PickerType="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}}"
-                                              SmallChange="{TemplateBinding Property=SmallChange}"
-                                              ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
-                    <colorPicker:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80"
-                                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                              ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              SecondColorState="{Binding SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              HintColorState="{Binding HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              UseHintColor="{Binding UseHintColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
-                    <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
-                               HorizontalAlignment="Right" Margin="0,5,10,0">
-                        <Label Content="Hex" />
-                        <colorPicker:HexColorTextBox ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                     HexRepresentation="{TemplateBinding Property=HexRepresentation}"
-                                                     ShowAlpha="{TemplateBinding Property=ShowAlpha}" />
-                    </DockPanel>
-                    <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 10 0 0"
-                                              ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              SmallChange="{TemplateBinding Property=SmallChange}"
-                                              ShowAlpha="{TemplateBinding Property=ShowAlpha}"
-                                              ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
-                </Grid>
+                                <colorPicker:SquarePicker Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="5 5 5 15"
+                                                          VerticalAlignment="Stretch"
+                                                          PickerType="{Binding Path=PickerType, RelativeSource={RelativeSource TemplatedParent}}"
+                                                          SmallChange="{TemplateBinding Property=SmallChange}"
+                                                          ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                <colorPicker:ColorDisplay Grid.RowSpan="3" Grid.Row="1" Margin="5" MaxWidth="80"
+                                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                          ColorState="{Binding ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                          SecondColorState="{Binding SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                          HintColorState="{Binding HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                          UseHintColor="{Binding UseHintColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                <DockPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
+                                           HorizontalAlignment="Right" Margin="0,5,10,0">
+                                    <Label Content="Hex" />
+                                    <colorPicker:HexColorTextBox
+                                        ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                        HexRepresentation="{TemplateBinding Property=HexRepresentation}"
+                                        ShowAlpha="{TemplateBinding Property=ShowAlpha}" />
+                                </DockPanel>
+                                <colorPicker:ColorSliders Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                                                          Margin="0 10 0 0"
+                                                          ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                          SmallChange="{TemplateBinding Property=SmallChange}"
+                                                          ShowAlpha="{TemplateBinding Property=ShowAlpha}"
+                                                          ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Gradient">
+                            <StackPanel Orientation="Vertical">
+                                <colorPicker:GradientBar Name="GradientBar" />
+                                <colorPicker:PortableColorPicker Height="30"
+                                    ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl.Items>
+                </TabControl>
             </ControlTemplate>
         </Setter>
     </ControlTheme>

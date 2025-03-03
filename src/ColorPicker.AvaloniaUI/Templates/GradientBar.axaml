@@ -1,0 +1,72 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
+        <Setter Property="Height" Value="100"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <converters:OffsetToMarginConverter x:Key="OffsetToMarginConverter" />
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Border Background="{TemplateBinding Brush}">
+                        <ItemsControl ItemsSource="{TemplateBinding GradientStops}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerTheme>
+                                <ControlTheme TargetType="ContentPresenter">
+                                    <Setter Property="Margin">
+                                        <MultiBinding Converter="{StaticResource OffsetToMarginConverter}">
+                                            <Binding Path="Offset" />
+                                            <Binding Path="Bounds.Width"
+                                                     RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                            <MultiBinding.ConverterParameter>
+                                                <system:Double>15</system:Double>
+                                            </MultiBinding.ConverterParameter>
+                                        </MultiBinding>
+                                    </Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Width" Value="15" />
+                                    <Setter Property="Height" Value="15" />
+                                </ControlTheme>
+                            </ItemsControl.ItemContainerTheme>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="GradientStop">
+                                    <Border IsHitTestVisible="True" Name="ElementBorder">
+                                        <Interaction.Behaviors>
+                                            <ExecuteCommandOnPointerPressedBehavior
+                                                Command="{Binding SelectColorStopCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=colorPicker:GradientBar}}"
+                                                CommandParameter="{Binding}">
+                                            </ExecuteCommandOnPointerPressedBehavior>
+                                        </Interaction.Behaviors>
+                                        <Border.Background>
+                                            <VisualBrush>
+                                                <VisualBrush.Visual>
+                                                    <Grid>
+                                                        <Ellipse Width="15" Height="15" Stroke="White"
+                                                                 StrokeThickness="1" />
+                                                        <Ellipse Fill="Transparent" Width="16.5" Height="16.5"
+                                                                 Stroke="Black"
+                                                                 StrokeThickness="1" />
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
