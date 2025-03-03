@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters"
-                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
     <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
         <Setter Property="Height" Value="100"></Setter>
         <Setter Property="Template">
@@ -11,13 +12,29 @@
                     <Grid.Resources>
                         <ResourceDictionary>
                             <converters:OffsetToMarginConverter x:Key="OffsetToMarginConverter" />
+                            <converters:EqualsConverter x:Key="EqualsConverter" />
                         </ResourceDictionary>
                     </Grid.Resources>
-                    <Border Background="{TemplateBinding Brush}">
-                        <ItemsControl ItemsSource="{TemplateBinding GradientStops}">
+                    <Border Background="{TemplateBinding Brush}" Name="PART_Bar" Padding="7.5, 0">
+                        <ItemsControl
+                            Name="PART_GradientStops" ClipToBounds="False"
+                            ItemsSource="{Binding GradientStops, RelativeSource={RelativeSource TemplatedParent}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <Grid />
+                                    <Grid>
+                                        <Grid.Background>
+                                            <VisualBrush Stretch="UniformToFill" SourceRect="0,0,100,100">
+                                                <VisualBrush.Visual>
+                                                    <Grid>
+                                                        <Line StartPoint="0,50" EndPoint="100,50" Stroke="Black"
+                                                              StrokeThickness="1" />
+                                                        <Line StartPoint="0,50" EndPoint="100,50" Stroke="White"
+                                                              StrokeThickness="0.5" />
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+                                    </Grid>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemContainerTheme>
@@ -27,39 +44,54 @@
                                             <Binding Path="Offset" />
                                             <Binding Path="Bounds.Width"
                                                      RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                            <MultiBinding.ConverterParameter>
+                                            <!--<MultiBinding.ConverterParameter>
                                                 <system:Double>15</system:Double>
-                                            </MultiBinding.ConverterParameter>
+                                            </MultiBinding.ConverterParameter>-->
                                         </MultiBinding>
                                     </Setter>
                                     <Setter Property="HorizontalAlignment" Value="Left" />
                                     <Setter Property="Width" Value="15" />
                                     <Setter Property="Height" Value="15" />
+                                    <Setter Property="RenderTransform" Value="translateX(-7.5px)"/>
                                 </ControlTheme>
                             </ItemsControl.ItemContainerTheme>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="GradientStop">
-                                    <Border IsHitTestVisible="True" Name="ElementBorder">
-                                        <Interaction.Behaviors>
-                                            <ExecuteCommandOnPointerPressedBehavior
-                                                Command="{Binding SelectColorStopCommand,
-                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=colorPicker:GradientBar}}"
-                                                CommandParameter="{Binding}">
-                                            </ExecuteCommandOnPointerPressedBehavior>
-                                        </Interaction.Behaviors>
+                                    <Border IsHitTestVisible="True" Name="ElementBorder"
+                                            BorderBrush="White" BorderThickness="2"
+                                            CornerRadius="50" BoxShadow="0 0 5 1.5 #000">
+                                        <Border.Transitions>
+                                            <Transitions>
+                                                <TransformOperationsTransition Property="RenderTransform"
+                                                                               Duration="0:0:0.1">
+                                                    <TransformOperationsTransition.Easing>
+                                                        <QuadraticEaseInOut />
+                                                    </TransformOperationsTransition.Easing>
+                                                </TransformOperationsTransition>
+                                            </Transitions>
+                                        </Border.Transitions>
                                         <Border.Background>
-                                            <VisualBrush>
-                                                <VisualBrush.Visual>
-                                                    <Grid>
-                                                        <Ellipse Width="15" Height="15" Stroke="White"
-                                                                 StrokeThickness="1" />
-                                                        <Ellipse Fill="Transparent" Width="16.5" Height="16.5"
-                                                                 Stroke="Black"
-                                                                 StrokeThickness="1" />
-                                                    </Grid>
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
+                                            <SolidColorBrush Color="{Binding Color}" />
                                         </Border.Background>
+                                        <Classes.selected>
+                                            <MultiBinding
+                                                Converter="{StaticResource EqualsConverter}">
+                                                <Binding />
+                                                <Binding
+                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType=colorPicker:GradientBar}"
+                                                    Path="SelectedStop" />
+                                            </MultiBinding>
+                                        </Classes.selected>
+                                        <Border.Styles>
+                                            <Style Selector="Border">
+                                                <Setter Property="RenderTransform"
+                                                        Value="scale(0.8)" />
+                                            </Style>
+                                            <Style Selector="Border.selected">
+                                                <Setter Property="RenderTransform"
+                                                        Value="scale(1)" />
+                                            </Style>
+                                        </Border.Styles>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
