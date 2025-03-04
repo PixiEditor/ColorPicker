@@ -24,10 +24,6 @@ public class GradientBar : TemplatedControl, IGradientStorage
         AvaloniaProperty.Register<GradientBar, GradientState>(
             nameof(GradientState));
 
-    public static readonly StyledProperty<GradientBrush> BrushProperty =
-        AvaloniaProperty.Register<GradientBar, GradientBrush>(
-            nameof(Brush));
-
     public static readonly StyledProperty<int> SelectedStopIndexProperty = AvaloniaProperty.Register<GradientBar, int>(
         nameof(SelectedStopIndex));
 
@@ -39,8 +35,8 @@ public class GradientBar : TemplatedControl, IGradientStorage
         AvaloniaProperty.Register<GradientBar, ColorState>(
             nameof(SelectedStopState));
 
-    public static readonly StyledProperty<ObservableCollection<Avalonia.Media.GradientStop>> GradientStopsProperty =
-        AvaloniaProperty.Register<GradientBar, ObservableCollection<Avalonia.Media.GradientStop>>(
+    public static readonly StyledProperty<GradientStops> GradientStopsProperty =
+        AvaloniaProperty.Register<GradientBar, GradientStops>(
             nameof(GradientStops));
 
     public static readonly StyledProperty<ICommand> SelectColorStopCommandProperty =
@@ -53,7 +49,7 @@ public class GradientBar : TemplatedControl, IGradientStorage
         set => SetValue(SelectColorStopCommandProperty, value);
     }
 
-    public ObservableCollection<Avalonia.Media.GradientStop> GradientStops
+    public GradientStops GradientStops
     {
         get => GetValue(GradientStopsProperty);
         set => SetValue(GradientStopsProperty, value);
@@ -69,12 +65,6 @@ public class GradientBar : TemplatedControl, IGradientStorage
     {
         get => GetValue(SelectedStopIndexProperty);
         set => SetValue(SelectedStopIndexProperty, value);
-    }
-
-    public GradientBrush Brush
-    {
-        get => GetValue(BrushProperty);
-        set => SetValue(BrushProperty, value);
     }
 
     public GradientState GradientState
@@ -113,13 +103,11 @@ public class GradientBar : TemplatedControl, IGradientStorage
             new GradientStop() { ColorState = stop1, Offset = 1 }
         });
 
-        GradientStops = new ObservableCollection<Avalonia.Media.GradientStop>(new[]
+        GradientStops = new GradientStops
         {
             new Avalonia.Media.GradientStop(ToColor(stop0), 0),
             new Avalonia.Media.GradientStop(ToColor(stop1), 1)
-        });
-
-        GenerateBrush();
+        };
 
         SelectedStopIndex = 0;
         SelectedStopState = stop0;
@@ -229,20 +217,6 @@ public class GradientBar : TemplatedControl, IGradientStorage
             1);
     }
 
-    private void GenerateBrush()
-    {
-        GradientStops stops = new GradientStops();
-        foreach (var stop in GradientStops)
-        {
-            stops.Add(stop);
-        }
-
-        Brush = new LinearGradientBrush()
-        {
-            GradientStops = stops
-        };
-    }
-
     private static Color ToColor(ColorState colorState)
     {
         return Color.FromArgb((byte)(colorState.A * 255), (byte)(colorState.RGB_R * 255),
@@ -255,17 +229,15 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
         if (GradientState.Stops == null)
         {
-            GradientStops = new ObservableCollection<Avalonia.Media.GradientStop>();
+            GradientStops = new GradientStops();
             SelectedStopIndex = 0;
-
-            GenerateBrush();
             return;
         }
         SelectedStopIndex = Math.Clamp(SelectedStopIndex, 0, GradientState.Stops.Count - 1);
 
         if (GradientStops == null)
         {
-            GradientStops = new ObservableCollection<Avalonia.Media.GradientStop>();
+            GradientStops = new GradientStops();
         }
         else
         {
@@ -279,8 +251,6 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
         SelectedStopState = GradientState.Stops[SelectedStopIndex].ColorState;
         SelectedStop = GradientStops[SelectedStopIndex];
-
-        GenerateBrush();
     }
 
     private void RemoveStopButtonOnClick(object sender, RoutedEventArgs e)

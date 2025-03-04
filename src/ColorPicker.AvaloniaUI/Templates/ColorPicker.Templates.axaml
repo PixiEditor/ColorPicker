@@ -11,5 +11,7 @@
         <MergeResourceInclude Source="/Templates/SquareSlider.axaml"/>
         <MergeResourceInclude Source="/Templates/StandardColorPicker.axaml"/>
         <MergeResourceInclude Source="/Templates/GradientBar.axaml"/>
+        <MergeResourceInclude Source="/Templates/GradientStopHandle.axaml"/>
+        <MergeResourceInclude Source="/Templates/LinearGradientPointPad.axaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -53,6 +53,15 @@ public class StandardColorPicker : DualPickerControlBase
         AvaloniaProperty.Register<StandardColorPicker, int>(
             nameof(SelectedTabIndex));
 
+    public static readonly StyledProperty<GradientType> GradientTypeProperty = AvaloniaProperty.Register<StandardColorPicker, GradientType>(
+        nameof(GradientType));
+
+    public GradientType GradientType
+    {
+        get => GetValue(GradientTypeProperty);
+        set => SetValue(GradientTypeProperty, value);
+    }
+
     public int SelectedTabIndex
     {
         get => GetValue(SelectedTabIndexProperty);
@@ -113,6 +122,7 @@ public class StandardColorPicker : DualPickerControlBase
     {
         GradientBrushProperty.Changed.Subscribe(OnGradientChanged);
         SelectedTabIndexProperty.Changed.Subscribe(SelectedTabChanged);
+        GradientTypeProperty.Changed.Subscribe(GradientTypeChanged);
     }
 
     public StandardColorPicker()
@@ -165,6 +175,19 @@ public class StandardColorPicker : DualPickerControlBase
         }
     }
 
+    private void UpdateGradientType()
+    {
+        var stops = GradientBrush.GradientStops;
+
+        GradientBrush = GradientType switch
+        {
+            GradientType.Linear => new LinearGradientBrush { GradientStops = stops },
+            GradientType.Radial => new RadialGradientBrush { GradientStops = stops },
+            GradientType.Conic => new ConicGradientBrush { GradientStops = stops },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
     private static void OnGradientChanged(AvaloniaPropertyChangedEventArgs<GradientBrush> args)
     {
         if (args.Sender is StandardColorPicker picker)
@@ -177,6 +200,15 @@ public class StandardColorPicker : DualPickerControlBase
     {
         if (args.Sender is StandardColorPicker picker)
         {
+            picker.UpdateSelectedBrush();
+        }
+    }
+
+    private static void GradientTypeChanged(AvaloniaPropertyChangedEventArgs<GradientType> args)
+    {
+        if (args.Sender is StandardColorPicker picker)
+        {
+            picker.UpdateGradientType();
             picker.UpdateSelectedBrush();
         }
     }

@@ -4,7 +4,7 @@ using ColorPicker.Models;
 
 namespace ColorPicker.Converters;
 
-internal class PickerTypeToIntConverter
+internal class EnumTypeToIntConverter
     : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -14,6 +14,11 @@ internal class PickerTypeToIntConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (PickerType)value;
+        if (parameter is Type targetEnumType)
+        {
+            return Enum.ToObject(targetEnumType, value);
+        }
+
+        return value;
     }
 }

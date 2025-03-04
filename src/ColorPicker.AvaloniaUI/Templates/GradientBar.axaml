@@ -16,7 +16,11 @@
                         </ResourceDictionary>
                     </Grid.Resources>
 
-                    <Border Background="{TemplateBinding Brush}" Name="PART_Bar" Padding="7.5, 0">
+                    <Border Name="PART_Bar" Padding="7.5, 0">
+                        <Border.Background>
+                            <LinearGradientBrush
+                                GradientStops="{Binding GradientStops, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Border.Background>
                         <ItemsControl
                             Name="PART_GradientStops" ClipToBounds="False"
                             ItemsSource="{Binding GradientStops, RelativeSource={RelativeSource TemplatedParent}}">
@@ -55,23 +59,8 @@
                             </ItemsControl.ItemContainerTheme>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="GradientStop">
-                                    <Border IsHitTestVisible="True" Name="ElementBorder"
-                                            BorderBrush="White" BorderThickness="2"
-                                            CornerRadius="50" BoxShadow="0 0 5 1.5 #000">
-                                        <Border.Transitions>
-                                            <Transitions>
-                                                <TransformOperationsTransition Property="RenderTransform"
-                                                                               Duration="0:0:0.1">
-                                                    <TransformOperationsTransition.Easing>
-                                                        <QuadraticEaseInOut />
-                                                    </TransformOperationsTransition.Easing>
-                                                </TransformOperationsTransition>
-                                            </Transitions>
-                                        </Border.Transitions>
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{Binding Color}" />
-                                        </Border.Background>
-                                        <Classes.selected>
+                                    <colorPicker:GradientStopHandle GradientStop="{Binding}">
+                                        <colorPicker:GradientStopHandle.IsActive>
                                             <MultiBinding
                                                 Converter="{StaticResource EqualsConverter}">
                                                 <Binding />
@@ -79,24 +68,15 @@
                                                     RelativeSource="{RelativeSource FindAncestor, AncestorType=colorPicker:GradientBar}"
                                                     Path="SelectedStop" />
                                             </MultiBinding>
-                                        </Classes.selected>
-                                        <Border.Styles>
-                                            <Style Selector="Border">
-                                                <Setter Property="RenderTransform"
-                                                        Value="scale(0.8)" />
-                                            </Style>
-                                            <Style Selector="Border.selected">
-                                                <Setter Property="RenderTransform"
-                                                        Value="scale(1)" />
-                                            </Style>
-                                        </Border.Styles>
-                                    </Border>
+                                        </colorPicker:GradientStopHandle.IsActive>
+                                    </colorPicker:GradientStopHandle>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Border>
-                    <Button Name="PART_RemoveStopButton" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            FontSize="12" Margin="2.5" Content="-" Height="20" Width="20" CornerRadius="5"/>
+                    <Button Name="PART_RemoveStopButton" Padding="0" HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontSize="12" Margin="2.5" Content="-" Height="20" Width="20" CornerRadius="5" />
                 </Grid>
             </ControlTemplate>
         </Setter>

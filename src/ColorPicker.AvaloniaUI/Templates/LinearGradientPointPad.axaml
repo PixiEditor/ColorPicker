@@ -1,0 +1,27 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker">
+
+    <ControlTheme TargetType="colorPicker:LinearGradientPointPad" x:Key="{x:Type colorPicker:LinearGradientPointPad}">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <colorPicker:UniformPanel>
+                    <colorPicker:UniformPanel.Background>
+                        <VisualBrush AlignmentX="Right" AlignmentY="Bottom" TileMode="Tile"
+                                     SourceRect="0,0,24,24" DestinationRect="0, 0, 12, 12"
+                                     Stretch="Uniform">
+                            <VisualBrush.Visual>
+                                <Border Padding="16" Background="#4F4F4F">
+                                    <!--<Ellipse Width="8" Height="8" Fill="#999" />-->
+                                </Border>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </colorPicker:UniformPanel.Background>
+                    <colorPicker:GradientStopHandle VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                    Width="20" Height="20" />
+                    <colorPicker:GradientStopHandle VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" Height="20" />
+                </colorPicker:UniformPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
