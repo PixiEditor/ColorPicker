@@ -25,6 +25,10 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
         RoutedEvent.Register<PickerControlBase, ColorRoutedEventArgs>(
             nameof(ColorChanged), RoutingStrategies.Bubble);
 
+    public static readonly StyledProperty<IBrush> SelectedBrushProperty =
+        AvaloniaProperty.Register<DualPickerControlBase, IBrush>(
+            nameof(SelectedBrush));
+
     private bool ignoreColorChange;
 
     private bool ignoreColorPropertyChange;
@@ -41,6 +45,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     public PickerControlBase()
     {
         Color = new NotifyableColor(this);
+        SelectedBrush = new SolidColorBrush(Colors.Black);
         Color.PropertyChanged += (sender, args) =>
         {
             var newColor = Avalonia.Media.Color.FromArgb(
@@ -83,15 +88,28 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
         set => SetValue(ColorStateProperty, value);
     }
 
+    public IBrush SelectedBrush
+    {
+        get => GetValue(SelectedBrushProperty);
+        set => SetValue(SelectedBrushProperty, value);
+    }
+
     public event EventHandler<RoutedEventArgs> ColorChanged
     {
         add => AddHandler(ColorChangedEvent, value);
         remove => RemoveHandler(ColorChangedEvent, value);
     }
 
+    protected virtual void UpdateSelectedBrush()
+    {
+        SelectedBrush = new SolidColorBrush(SelectedColor);
+    }
+
     private static void OnColorStatePropertyChange(AvaloniaPropertyChangedEventArgs<ColorState> args)
     {
-        ((PickerControlBase)args.Sender).Color.UpdateEverything(args.OldValue.Value);
+        PickerControlBase picker = args.Sender as PickerControlBase;
+        picker.Color.UpdateEverything(args.OldValue.Value);
+        picker.UpdateSelectedBrush();
     }
 
     private static void OnSelectedColorPropertyChange(AvaloniaPropertyChangedEventArgs<Color> args)

@@ -200,9 +200,28 @@ namespace ColorPicker.Models
             _RGB_B = rgbtuple.Item3;
         }
 
+        public static ColorState Lerp(ColorState from, ColorState to, double t)
+        {
+            return new ColorState(
+                from.RGB_R + (to.RGB_R - from.RGB_R) * t,
+                from.RGB_G + (to.RGB_G - from.RGB_G) * t,
+                from.RGB_B + (to.RGB_B - from.RGB_B) * t,
+                from.A + (to.A - from.A) * t,
+                from.HSV_H + (to.HSV_H - from.HSV_H) * t,
+                from.HSV_S + (to.HSV_S - from.HSV_S) * t,
+                from.HSV_V + (to.HSV_V - from.HSV_V) * t,
+                from.HSL_H + (to.HSL_H - from.HSL_H) * t,
+                from.HSL_S + (to.HSL_S - from.HSL_S) * t,
+                from.HSL_L + (to.HSL_L - from.HSL_L) * t
+            );
+        }
+
         public bool Equals(ColorState other)
         {
-            return _RGB_R.Equals(other._RGB_R) && _RGB_G.Equals(other._RGB_G) && _RGB_B.Equals(other._RGB_B) && _HSV_H.Equals(other._HSV_H) && _HSV_S.Equals(other._HSV_S) && _HSV_V.Equals(other._HSV_V) && _HSL_H.Equals(other._HSL_H) && _HSL_S.Equals(other._HSL_S) && _HSL_L.Equals(other._HSL_L) && A.Equals(other.A);
+            return _RGB_R.Equals(other._RGB_R) && _RGB_G.Equals(other._RGB_G) && _RGB_B.Equals(other._RGB_B) &&
+                   _HSV_H.Equals(other._HSV_H) && _HSV_S.Equals(other._HSV_S) && _HSV_V.Equals(other._HSV_V) &&
+                   _HSL_H.Equals(other._HSL_H) && _HSL_S.Equals(other._HSL_S) && _HSL_L.Equals(other._HSL_L) &&
+                   A.Equals(other.A);
         }
 
         public override bool Equals(object obj)

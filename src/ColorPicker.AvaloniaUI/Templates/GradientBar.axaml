@@ -5,7 +5,7 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
     <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
-        <Setter Property="Height" Value="100"></Setter>
+        <Setter Property="Height" Value="60"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid>
@@ -15,6 +15,7 @@
                             <converters:EqualsConverter x:Key="EqualsConverter" />
                         </ResourceDictionary>
                     </Grid.Resources>
+
                     <Border Background="{TemplateBinding Brush}" Name="PART_Bar" Padding="7.5, 0">
                         <ItemsControl
                             Name="PART_GradientStops" ClipToBounds="False"
@@ -23,12 +24,12 @@
                                 <ItemsPanelTemplate>
                                     <Grid>
                                         <Grid.Background>
-                                            <VisualBrush Stretch="UniformToFill" SourceRect="0,0,100,100">
+                                            <VisualBrush Stretch="UniformToFill" SourceRect="0,0,100,60">
                                                 <VisualBrush.Visual>
                                                     <Grid>
-                                                        <Line StartPoint="0,50" EndPoint="100,50" Stroke="Black"
+                                                        <Line StartPoint="0,30" EndPoint="100,30" Stroke="Black"
                                                               StrokeThickness="1" />
-                                                        <Line StartPoint="0,50" EndPoint="100,50" Stroke="White"
+                                                        <Line StartPoint="0,30" EndPoint="100,30" Stroke="White"
                                                               StrokeThickness="0.5" />
                                                     </Grid>
                                                 </VisualBrush.Visual>
@@ -44,15 +45,12 @@
                                             <Binding Path="Offset" />
                                             <Binding Path="Bounds.Width"
                                                      RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                            <!--<MultiBinding.ConverterParameter>
-                                                <system:Double>15</system:Double>
-                                            </MultiBinding.ConverterParameter>-->
                                         </MultiBinding>
                                     </Setter>
                                     <Setter Property="HorizontalAlignment" Value="Left" />
                                     <Setter Property="Width" Value="15" />
                                     <Setter Property="Height" Value="15" />
-                                    <Setter Property="RenderTransform" Value="translateX(-7.5px)"/>
+                                    <Setter Property="RenderTransform" Value="translateX(-7.5px)" />
                                 </ControlTheme>
                             </ItemsControl.ItemContainerTheme>
                             <ItemsControl.ItemTemplate>
@@ -97,6 +95,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Border>
+                    <Button Name="PART_RemoveStopButton" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            FontSize="12" Margin="2.5" Content="-" Height="20" Width="20" CornerRadius="5"/>
                 </Grid>
             </ControlTemplate>
         </Setter>

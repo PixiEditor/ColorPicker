@@ -22,7 +22,7 @@
                         <Grid>
                             <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0" CornerRadius="{DynamicResource ColorPickerControlRadius}"
                                           x:Name="toggleButton" BorderThickness="0" ZIndex="1"
-                                          Background="{TemplateBinding SelectedColor, Converter={StaticResource ColorToBrushConverter}}" />
+                                          Background="{Binding SelectedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
                                     <Border.Background>
                                         <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
@@ -37,6 +37,8 @@
                                 Background="{DynamicResource ThemeBackgroundBrush}">
                             <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              x:Name="test"
+                                                             SelectedBrush="{Binding SelectedBrush, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                             GradientState="{Binding Path=GradientState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
                                                              HintColorState="{Binding Path=HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              SecondColorState="{Binding Path=SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
@@ -44,7 +46,8 @@
                                                              Height="380"
                                                              ShowAlpha="{TemplateBinding ShowAlpha}"
                                                              PickerType="{TemplateBinding PickerType}"
-                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}" 
+                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}"
+                                                             EnableGradientsTab="{TemplateBinding EnableGradientsTab}"
                                                              HexRepresentation="{TemplateBinding HexRepresentation}"/>
                         </Border>
                     </Popup>

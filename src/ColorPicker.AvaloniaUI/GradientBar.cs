@@ -7,6 +7,7 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using ColorPicker.Models;
 using ColorPicker.Utilities;
@@ -16,6 +17,7 @@ namespace ColorPicker;
 
 [TemplatePart("PART_Bar", typeof(Border))]
 [TemplatePart("PART_GradientStops", typeof(ItemsControl))]
+[TemplatePart("PART_RemoveStopButton", typeof(Button))]
 public class GradientBar : TemplatedControl, IGradientStorage
 {
     public static readonly StyledProperty<GradientState> GradientStateProperty =
@@ -96,6 +98,7 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
     private Border bar;
     private ItemsControl stops;
+    private Button removeStopButton;
 
     public GradientBar()
     {
@@ -134,6 +137,18 @@ public class GradientBar : TemplatedControl, IGradientStorage
         });
     }
 
+    public void AddStop(double offset)
+    {
+        ColorState colorOnOffset = GradientState.Evaluate(offset);
+        GradientState newGradientState = GradientState.WithAddedStop(new GradientStop
+        {
+            ColorState = colorOnOffset,
+            Offset = offset
+        });
+
+        UpdateInternalState(newGradientState);
+    }
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -142,6 +157,12 @@ public class GradientBar : TemplatedControl, IGradientStorage
         bar.PointerMoved += BarMoved;
 
         stops = e.NameScope.Find<ItemsControl>("PART_GradientStops");
+
+        removeStopButton = e.NameScope.Find<Button>("PART_RemoveStopButton");
+        if (removeStopButton != null)
+        {
+            removeStopButton.Click += RemoveStopButtonOnClick;
+        }
     }
 
     private void BarMoved(object sender, PointerEventArgs e)
@@ -163,6 +184,15 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
     private void BarOnPointerPressed(object sender, PointerPressedEventArgs e)
     {
+        bool pressedOnBar = e.Source != null && e.Source.Equals(stops.ItemsPanelRoot);
+
+        double offset = GetNormalizedOffset(e);
+
+        if (pressedOnBar)
+        {
+            AddStop(offset);
+        }
+
         double normalizedClosestOffset = GetNormalizedOffset(e);
 
         int closestStopIndex = 0;
@@ -182,10 +212,8 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
         e.Pointer.Capture(bar);
 
-        if (e.Source != null && e.Source.Equals(stops.ItemsPanelRoot))
+        if (pressedOnBar)
         {
-            double offset = GetNormalizedOffset(e);
-
             GradientState newGradientState = GradientState.WithUpdatedStop(SelectedStopIndex,
                 new GradientStop
                     { ColorState = GradientState.Stops[SelectedStopIndex].ColorState, Offset = offset });
@@ -225,6 +253,16 @@ public class GradientBar : TemplatedControl, IGradientStorage
     {
         GradientState = newGradientState;
 
+        if (GradientState.Stops == null)
+        {
+            GradientStops = new ObservableCollection<Avalonia.Media.GradientStop>();
+            SelectedStopIndex = 0;
+
+            GenerateBrush();
+            return;
+        }
+        SelectedStopIndex = Math.Clamp(SelectedStopIndex, 0, GradientState.Stops.Count - 1);
+
         if (GradientStops == null)
         {
             GradientStops = new ObservableCollection<Avalonia.Media.GradientStop>();
@@ -243,6 +281,15 @@ public class GradientBar : TemplatedControl, IGradientStorage
         SelectedStop = GradientStops[SelectedStopIndex];
 
         GenerateBrush();
+    }
+
+    private void RemoveStopButtonOnClick(object sender, RoutedEventArgs e)
+    {
+        if (GradientState.Stops.Count > 2)
+        {
+            GradientState newGradientState = GradientState.WitRemovedStop(SelectedStopIndex);
+            UpdateInternalState(newGradientState);
+        }
     }
 
     private static void StopChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<ColorState> e)

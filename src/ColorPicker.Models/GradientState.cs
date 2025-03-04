@@ -22,6 +22,51 @@ namespace ColorPicker.Models
             newStopState.stops[stopIndex] = newStop;
             return newStopState;
         }
+
+        public ColorState Evaluate(double offset)
+        {
+            GradientStop stop0 = stops[0];
+            GradientStop stop1 = stops[stops.Count - 1];
+
+            if (offset <= stop0.Offset)
+            {
+                return stop0.ColorState;
+            }
+
+            if (offset >= stop1.Offset)
+            {
+                return stop1.ColorState;
+            }
+
+            for (int i = 0; i < stops.Count - 1; i++)
+            {
+                GradientStop current = stops[i];
+                GradientStop next = stops[i + 1];
+
+                if (offset >= current.Offset && offset <= next.Offset)
+                {
+                    double t = (offset - current.Offset) / (next.Offset - current.Offset);
+                    return ColorState.Lerp(current.ColorState, next.ColorState, t);
+                }
+            }
+
+            return stops[0].ColorState;
+        }
+
+        public GradientState WithAddedStop(GradientStop gradientStop)
+        {
+            List<GradientStop> newStops = new List<GradientStop>(stops);
+            newStops.Add(gradientStop);
+            newStops.Sort((a, b) => a.Offset.CompareTo(b.Offset));
+            return new GradientState(newStops);
+        }
+
+        public GradientState WitRemovedStop(int index)
+        {
+            List<GradientStop> newStops = new List<GradientStop>(stops);
+            newStops.RemoveAt(index);
+            return new GradientState(newStops);
+        }
     }
 
     public struct GradientStop : IEquatable<GradientStop>

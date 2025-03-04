@@ -5,7 +5,9 @@
     <ControlTheme TargetType="colorPicker:StandardColorPicker" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Setter Property="Template">
             <ControlTemplate>
-                <TabControl Theme="{DynamicResource ColorPickerTabControlTheme}">
+                <TabControl Name="PART_TabControl"
+                            SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            Theme="{DynamicResource ColorPickerTabControlTheme}">
                     <TabControl.Styles>
                         <Style Selector="TabItem">
                             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -67,10 +69,13 @@
                                                           ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Gradient">
+                        <TabItem Header="Gradient" IsVisible="{TemplateBinding EnableGradientsTab}">
                             <StackPanel Orientation="Vertical">
-                                <colorPicker:GradientBar Name="GradientBar" />
-                                <colorPicker:PortableColorPicker Height="30"
+                                <colorPicker:GradientBar Name="GradientBar"
+                                                         GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                         Brush="{Binding GradientBrush, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                         />
+                                <colorPicker:PortableColorPicker Height="30" EnableGradientsTab="False"
                                     ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
                             </StackPanel>
                         </TabItem>
