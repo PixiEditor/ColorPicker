@@ -3,6 +3,9 @@
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters">
     <ControlTheme TargetType="colorPicker:GradientStopHandle" x:Key="{x:Type colorPicker:GradientStopHandle}">
+        <ControlTheme.Resources>
+            <converters:GradientStopToColorConverter x:Key="GradientStopToColorConverter"/>
+        </ControlTheme.Resources>
         <Setter Property="ClipToBounds" Value="False"/>
         <Setter Property="Template">
             <ControlTemplate>
@@ -23,7 +26,7 @@
                     </Border.Transitions>
                     <Border.Background>
                         <SolidColorBrush
-                            Color="{Binding GradientStop.Color, RelativeSource={RelativeSource TemplatedParent}}" />
+                            Color="{Binding GradientStop, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GradientStopToColorConverter}}" />
                     </Border.Background>
                 </Border>
             </ControlTemplate>

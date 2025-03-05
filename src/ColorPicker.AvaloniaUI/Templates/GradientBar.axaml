@@ -5,6 +5,9 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
     <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
+        <ControlTheme.Resources>
+            <GradientStop x:Key="FallbackGradientStop" Offset="0" Color="Transparent"></GradientStop>
+        </ControlTheme.Resources>
         <Setter Property="Height" Value="60"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
@@ -59,7 +62,7 @@
                             </ItemsControl.ItemContainerTheme>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="GradientStop">
-                                    <colorPicker:GradientStopHandle GradientStop="{Binding}">
+                                    <colorPicker:GradientStopHandle GradientStop="{Binding Path=., FallbackValue={StaticResource FallbackGradientStop}}">
                                         <colorPicker:GradientStopHandle.IsActive>
                                             <MultiBinding
                                                 Converter="{StaticResource EqualsConverter}">

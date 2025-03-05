@@ -1,4 +1,6 @@
-﻿using Avalonia;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -53,8 +55,9 @@ public class StandardColorPicker : DualPickerControlBase
         AvaloniaProperty.Register<StandardColorPicker, int>(
             nameof(SelectedTabIndex));
 
-    public static readonly StyledProperty<GradientType> GradientTypeProperty = AvaloniaProperty.Register<StandardColorPicker, GradientType>(
-        nameof(GradientType));
+    public static readonly StyledProperty<GradientType> GradientTypeProperty =
+        AvaloniaProperty.Register<StandardColorPicker, GradientType>(
+            nameof(GradientType));
 
     public GradientType GradientType
     {
