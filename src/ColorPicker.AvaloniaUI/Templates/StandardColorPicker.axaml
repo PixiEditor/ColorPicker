@@ -85,7 +85,9 @@
                                                          GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <colorPicker:PortableColorPicker Height="30" EnableGradientsTab="False"
                                                                  ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
-                                <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150"/>
+                                <!--
+                                <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150" />
+                            -->
                             </StackPanel>
                         </TabItem>
                     </TabControl.Items>

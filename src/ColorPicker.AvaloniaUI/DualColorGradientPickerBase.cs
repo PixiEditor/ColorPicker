@@ -138,6 +138,65 @@ public class DualColorGradientPickerBase : DualPickerControlBase
             stops.Add(new GradientStop { ColorState = colorState, Offset = stop.Offset });
         }
 
+        return StateFromBrush(stops, brush, GradientState);
+    }
+
+    private static GradientState StateFromBrush(List<GradientStop> stops, GradientBrush brush, GradientState oldState)
+    {
+        if (brush is LinearGradientBrush linearBrush)
+        {
+            return new GradientState(stops)
+            {
+                LinearStartPointX = linearBrush.StartPoint.Point.X,
+                LinearStartPointY = linearBrush.StartPoint.Point.Y,
+                LinearEndPointX = linearBrush.EndPoint.Point.X,
+                LinearEndPointY = linearBrush.EndPoint.Point.Y,
+                ConicAngle = oldState.ConicAngle,
+                ConicCenterX = oldState.ConicCenterX,
+                ConicCenterY = oldState.ConicCenterY,
+                RadialCenterX = oldState.RadialCenterX,
+                RadialCenterY = oldState.RadialCenterY,
+                RadialRadiusX = oldState.RadialRadiusX,
+                RadialRadiusY = oldState.RadialRadiusY
+            };
+        }
+
+        if (brush is RadialGradientBrush radialBrush)
+        {
+            return new GradientState(stops)
+            {
+                RadialCenterX = radialBrush.Center.Point.X,
+                RadialCenterY = radialBrush.Center.Point.Y,
+                RadialRadiusX = radialBrush.RadiusX.Scalar,
+                RadialRadiusY = radialBrush.RadiusY.Scalar,
+                ConicAngle = oldState.ConicAngle,
+                ConicCenterX = oldState.ConicCenterX,
+                ConicCenterY = oldState.ConicCenterY,
+                LinearStartPointX = oldState.LinearStartPointX,
+                LinearStartPointY = oldState.LinearStartPointY,
+                LinearEndPointX = oldState.LinearEndPointX,
+                LinearEndPointY = oldState.LinearEndPointY
+            };
+        }
+
+        if (brush is ConicGradientBrush conicBrush)
+        {
+            return new GradientState(stops)
+            {
+                ConicCenterX = conicBrush.Center.Point.X,
+                ConicCenterY = conicBrush.Center.Point.Y,
+                ConicAngle = conicBrush.Angle,
+                RadialCenterX = oldState.RadialCenterX,
+                RadialCenterY = oldState.RadialCenterY,
+                RadialRadiusX = oldState.RadialRadiusX,
+                RadialRadiusY = oldState.RadialRadiusY,
+                LinearStartPointX = oldState.LinearStartPointX,
+                LinearStartPointY = oldState.LinearStartPointY,
+                LinearEndPointX = oldState.LinearEndPointX,
+                LinearEndPointY = oldState.LinearEndPointY
+            };
+        }
+
         return new GradientState(stops);
     }
 
@@ -145,13 +204,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase
     {
         var stops = GradientBrush?.GradientStops ?? new GradientStops();
 
-        GradientBrush = GradientType switch
-        {
-            GradientType.Linear => new LinearGradientBrush { GradientStops = stops },
-            GradientType.Radial => new RadialGradientBrush { GradientStops = stops },
-            GradientType.Conic => new ConicGradientBrush { GradientStops = stops },
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        UpdateGradientBrush(stops);
     }
 
     private void UpdateGradientBrushFromState()
@@ -180,11 +233,37 @@ public class DualColorGradientPickerBase : DualPickerControlBase
                     (byte)(stop.ColorState.RGB_B * 255f)), stop.Offset));
         }
 
+        UpdateGradientBrush(stops);
+    }
+
+    private void UpdateGradientBrush(GradientStops stops)
+    {
         GradientBrush = GradientType switch
         {
-            GradientType.Linear => new LinearGradientBrush { GradientStops = stops },
-            GradientType.Radial => new RadialGradientBrush { GradientStops = stops },
-            GradientType.Conic => new ConicGradientBrush { GradientStops = stops },
+            GradientType.Linear => new LinearGradientBrush
+            {
+                GradientStops = stops,
+                StartPoint =
+                    new RelativePoint(GradientState.LinearStartPointX, GradientState.LinearStartPointY,
+                        RelativeUnit.Relative),
+                EndPoint = new RelativePoint(GradientState.LinearEndPointX, GradientState.LinearEndPointY,
+                    RelativeUnit.Relative)
+            },
+            GradientType.Radial => new RadialGradientBrush
+            {
+                GradientStops = stops,
+                Center =
+                    new RelativePoint(GradientState.RadialCenterX, GradientState.RadialCenterY, RelativeUnit.Relative),
+                RadiusX = new RelativeScalar(GradientState.RadialRadiusX, RelativeUnit.Relative),
+                RadiusY = new RelativeScalar(GradientState.RadialRadiusY, RelativeUnit.Relative),
+            },
+            GradientType.Conic => new ConicGradientBrush
+            {
+                GradientStops = stops,
+                Center = new RelativePoint(GradientState.ConicCenterX, GradientState.ConicCenterY,
+                    RelativeUnit.Relative),
+                Angle = GradientState.ConicAngle
+            },
             _ => throw new ArgumentOutOfRangeException()
         };
     }
