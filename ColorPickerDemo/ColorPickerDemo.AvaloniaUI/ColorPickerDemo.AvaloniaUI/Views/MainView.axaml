@@ -25,11 +25,13 @@
                 <Label>Portable Color Picker</Label>
                 <colorPicker:PortableColorPicker Width="40" Height="20"
                                                  ColorState="{Binding #maindisplay.ColorState, Mode=TwoWay}"
+                                                 GradientState="{Binding #standard_picker.GradientState, Mode=TwoWay}"
                                                  SecondColorState="{Binding #maindisplay.SecondColorState, Mode=TwoWay}" />
                 <TextBlock TextWrapping="Wrap" Margin="5">Portable Color Picker, alpha hidden, transparent hint color, hsv/hsl fractional part hidden</TextBlock>
                 <Grid Width="40" Height="40">
                     <colorPicker:PortableColorPicker SmallChange="5"
                                                      UseHintColor="True" HintColor="Transparent"
+                                                     GradientState="{Binding #standard_picker.GradientState, Mode=TwoWay}"
                                                      ColorState="{Binding #maindisplay.ColorState, Mode=TwoWay}"
                                                      SecondColorState="{Binding #maindisplay.SecondColorState, Mode=TwoWay}"
                                                      ShowFractionalPart="False"
@@ -47,6 +49,7 @@
                     </TextBlock>
                 </Label>
                 <colorPicker:StandardColorPicker Width="200" Height="380" x:Name="portable_picker"
+                                                 GradientState="{Binding #standard_picker.GradientState, Mode=TwoWay}"
                                                  SmallChange="5" ShowAlpha="True" HexRepresentation="ARGB"
                                                  ColorState="{Binding #maindisplay.ColorState, Mode=TwoWay}"
                                                  SecondColorState="{Binding #maindisplay.SecondColorState, Mode=TwoWay}" />
@@ -64,7 +67,7 @@
 
         <Label Grid.Row="2" Grid.Column="1">Color Picker</Label>
         <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"
-                  SelectedIndex="{Binding #square_picker.PickerType}" 
+                  SelectedIndex="{Binding #square_picker.PickerType}"
                   Theme="{DynamicResource ColorPickerComboBox}"
                   VerticalAlignment="Top" Margin="5,25,5,5" x:Name="combobox">
             <ComboBoxItem>HSV</ComboBoxItem>
@@ -76,7 +79,7 @@
         <Label Grid.Row="3" Grid.Column="1">Color as hex, formatted as either RGBA or ARGB</Label>
         <StackPanel Orientation="Horizontal" Margin="5, 14, 5, 5" Grid.Row="3" Grid.Column="1">
             <ComboBox DockPanel.Dock="Left" Margin="0, 0, 5, 0"
-                      SelectedIndex="{Binding #hextextbox.HexRepresentation}" 
+                      SelectedIndex="{Binding #hextextbox.HexRepresentation}"
                       Theme="{DynamicResource ColorPickerComboBox}"
                       VerticalAlignment="Center" x:Name="hexcombobox">
                 <ComboBoxItem>RGBA</ComboBoxItem>

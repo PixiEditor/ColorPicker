@@ -90,6 +90,8 @@ public class GradientBar : TemplatedControl, IGradientStorage
     private ItemsControl stops;
     private Button removeStopButton;
 
+    private bool pauseStateUpdate;
+
     public GradientBar()
     {
         ColorState stop0 = new();
@@ -105,8 +107,7 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
         GradientStops = new GradientStops
         {
-            new Avalonia.Media.GradientStop(ToColor(stop0), 0),
-            new Avalonia.Media.GradientStop(ToColor(stop1), 1)
+            new Avalonia.Media.GradientStop(ToColor(stop0), 0), new Avalonia.Media.GradientStop(ToColor(stop1), 1)
         };
 
         SelectedStopIndex = 0;
@@ -130,8 +131,7 @@ public class GradientBar : TemplatedControl, IGradientStorage
         ColorState colorOnOffset = GradientState.Evaluate(offset);
         GradientState newGradientState = GradientState.WithAddedStop(new GradientStop
         {
-            ColorState = colorOnOffset,
-            Offset = offset
+            ColorState = colorOnOffset, Offset = offset
         });
 
         UpdateInternalState(newGradientState);
@@ -163,7 +163,9 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
                 GradientState newGradientState = GradientState.WithUpdatedStop(SelectedStopIndex,
                     new GradientStop
-                        { ColorState = GradientState.Stops[SelectedStopIndex].ColorState, Offset = offset });
+                    {
+                        ColorState = GradientState.Stops[SelectedStopIndex].ColorState, Offset = offset
+                    });
 
                 UpdateInternalState(newGradientState);
             }
@@ -203,8 +205,7 @@ public class GradientBar : TemplatedControl, IGradientStorage
         if (pressedOnBar)
         {
             GradientState newGradientState = GradientState.WithUpdatedStop(SelectedStopIndex,
-                new GradientStop
-                    { ColorState = GradientState.Stops[SelectedStopIndex].ColorState, Offset = offset });
+                new GradientStop { ColorState = GradientState.Stops[SelectedStopIndex].ColorState, Offset = offset });
 
             UpdateInternalState(newGradientState);
         }
@@ -227,12 +228,13 @@ public class GradientBar : TemplatedControl, IGradientStorage
     {
         GradientState = newGradientState;
 
-        if (GradientState.Stops == null)
+        if (GradientState.Stops == null || GradientState.Stops.Count == 0)
         {
             GradientStops = new GradientStops();
             SelectedStopIndex = 0;
             return;
         }
+
         SelectedStopIndex = Math.Clamp(SelectedStopIndex, 0, GradientState.Stops.Count - 1);
 
         if (GradientStops == null)
@@ -269,7 +271,8 @@ public class GradientBar : TemplatedControl, IGradientStorage
             ColorState = e.NewValue.Value, Offset = sender.GradientState.Stops[sender.SelectedStopIndex].Offset
         };
 
-        sender.UpdateInternalState(sender.GradientState.WithUpdatedStop(sender.SelectedStopIndex, newStop));
+        var updated = sender.GradientState.WithUpdatedStop(sender.SelectedStopIndex, newStop);
+        sender.UpdateInternalState(updated);
     }
 
     private static void IndexChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<int> e)
@@ -280,6 +283,13 @@ public class GradientBar : TemplatedControl, IGradientStorage
 
     private static void GradientStateChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<GradientState> e)
     {
+        if (sender.pauseStateUpdate)
+        {
+            return;
+        }
+
+        sender.pauseStateUpdate = true;
         sender.UpdateInternalState(e.NewValue.Value);
+        sender.pauseStateUpdate = false;
     }
 }

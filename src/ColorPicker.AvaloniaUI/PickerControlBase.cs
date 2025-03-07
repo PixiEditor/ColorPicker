@@ -32,6 +32,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     private bool ignoreColorChange;
 
     private bool ignoreColorPropertyChange;
+    private bool ignoreSelectedBrushChange;
     private Color previousColor = Avalonia.Media.Color.FromArgb(5, 5, 5, 5);
 
     static PickerControlBase()
@@ -40,6 +41,8 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(OnColorStatePropertyChange));
         SelectedColorProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<Color>>(OnSelectedColorPropertyChange));
+        SelectedBrushProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<IBrush>>(OnSelectedBrushPropertyChange));
     }
 
     public PickerControlBase()
@@ -102,7 +105,17 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 
     protected virtual void UpdateSelectedBrush()
     {
+        ignoreSelectedBrushChange = true;
         SelectedBrush = new SolidColorBrush(SelectedColor);
+        ignoreSelectedBrushChange = false;
+    }
+
+    protected virtual void UpdateFromBrush(IBrush brush)
+    {
+        if (brush is SolidColorBrush solidColorBrush)
+        {
+            SelectedColor = solidColorBrush.Color;
+        }
     }
 
     private static void OnColorStatePropertyChange(AvaloniaPropertyChangedEventArgs<ColorState> args)
@@ -123,6 +136,17 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
         sender.Color.RGB_R = newValue.R;
         sender.Color.RGB_G = newValue.G;
         sender.Color.RGB_B = newValue.B;
+        sender.ignoreColorChange = false;
+    }
+
+    private static void OnSelectedBrushPropertyChange(AvaloniaPropertyChangedEventArgs<IBrush> args)
+    {
+        var sender = (PickerControlBase)args.Sender;
+        if (sender.ignoreSelectedBrushChange)
+            return;
+
+        sender.ignoreColorChange = true;
+        sender.UpdateFromBrush(args.NewValue.Value);
         sender.ignoreColorChange = false;
     }
 }

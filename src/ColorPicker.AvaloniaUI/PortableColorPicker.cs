@@ -1,12 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using ColorPicker.Models;
 
 namespace ColorPicker;
 
-public class PortableColorPicker : DualPickerControlBase, IGradientStorage
+public class PortableColorPicker : DualColorGradientPickerBase
 {
     public static readonly StyledProperty<double> SmallChangeProperty =
         AvaloniaProperty.Register<PortableColorPicker, double>(
@@ -31,26 +30,6 @@ public class PortableColorPicker : DualPickerControlBase, IGradientStorage
     public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty =
         AvaloniaProperty.Register<PortableColorPicker, HexRepresentationType>(
             nameof(HexRepresentation), HexRepresentationType.RGBA);
-
-    public static readonly StyledProperty<bool> EnableGradientsTabProperty =
-        AvaloniaProperty.Register<PortableColorPicker, bool>(
-            nameof(EnableGradientsTab), true);
-
-    public static readonly StyledProperty<GradientState> GradientStateProperty =
-        AvaloniaProperty.Register<PortableColorPicker, GradientState>(
-            nameof(GradientState));
-
-    public GradientState GradientState
-    {
-        get => GetValue(GradientStateProperty);
-        set => SetValue(GradientStateProperty, value);
-    }
-
-    public bool EnableGradientsTab
-    {
-        get => GetValue(EnableGradientsTabProperty);
-        set => SetValue(EnableGradientsTabProperty, value);
-    }
 
     public HexRepresentationType HexRepresentation
     {
@@ -80,20 +59,6 @@ public class PortableColorPicker : DualPickerControlBase, IGradientStorage
     {
         get => GetValue(ShowFractionalPartProperty);
         set => SetValue(ShowFractionalPartProperty, value);
-    }
-
-    public PortableColorPicker()
-    {
-        ColorState stop0 = new();
-        stop0.SetARGB(1, 0, 0, 0);
-        ColorState stop1 = new();
-        stop1.SetARGB(1, 1, 1, 1);
-
-        GradientState = new GradientState(new List<GradientStop>
-        {
-            new GradientStop() { ColorState = stop0, Offset = 0 },
-            new GradientStop() { ColorState = stop1, Offset = 1 }
-        });
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

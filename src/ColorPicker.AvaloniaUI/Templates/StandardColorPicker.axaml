@@ -81,8 +81,8 @@
                                     <ComboBoxItem Content="Conical" />
                                 </ComboBox>
                                 <colorPicker:GradientBar Name="GradientBar"
-                                                         GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                         GradientStops="{Binding GradientBrush.GradientStops, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                         GradientStops="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                         GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <colorPicker:PortableColorPicker Height="30" EnableGradientsTab="False"
                                                                  ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
                                 <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150"/>

@@ -44,12 +44,9 @@ namespace ColorPicker.Models
 
         public GradientState WithUpdatedStop(int stopIndex, GradientStop newStop)
         {
-            GradientState newStopState = new GradientState(stops)
+            GradientState newStopState = new GradientState(new List<GradientStop>(stops))
             {
-                stops =
-                {
-                    [stopIndex] = newStop
-                },
+                stops = { [stopIndex] = newStop },
                 LinearStartPointX = LinearStartPointX,
                 LinearStartPointY = LinearStartPointY,
                 LinearEndPointX = LinearEndPointX,
@@ -143,27 +140,9 @@ namespace ColorPicker.Models
         }
     }
 
-    public struct GradientStop : IEquatable<GradientStop>
+    public struct GradientStop
     {
         public ColorState ColorState { get; set; }
         public double Offset { get; set; }
-
-        public bool Equals(GradientStop other)
-        {
-            return ColorState.Equals(other.ColorState) && Offset.Equals(other.Offset);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is GradientStop other && Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (ColorState.GetHashCode() * 397) ^ Offset.GetHashCode();
-            }
-        }
     }
 }
