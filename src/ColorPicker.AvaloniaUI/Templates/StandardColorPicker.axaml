@@ -12,6 +12,8 @@
                     <TabControl.Resources>
                             <ResourceDictionary>
                                 <converters:EnumTypeToIntConverter x:Key="EnumTypeToIntConverter" />
+                                <converters:LastItemOfConverter x:Key="LastItemOfConverter" />
+                                <converters:IsEnumValueConverter x:Key="IsEnumValueConverter" />
                             </ResourceDictionary>
                     </TabControl.Resources>
                     <TabControl.Styles>
@@ -85,9 +87,15 @@
                                                          GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <colorPicker:PortableColorPicker Height="30" EnableGradientsTab="False"
                                                                  ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
-                                <!--
-                                <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150" />
-                            -->
+                                <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150" IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Linear}"
+                                                                    Margin="10"
+                                                                    Background="{TemplateBinding GradientBrush}"
+                                                                    StartPointX="{Binding NotifyableGradient.LinearStartPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                    StartPointY="{Binding NotifyableGradient.LinearStartPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                    EndPointX="{Binding NotifyableGradient.LinearEndPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                    EndPointY="{Binding NotifyableGradient.LinearEndPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                    StartGradientStop="{Binding GradientBrush.GradientStops[0], RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    EndGradientStop="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource LastItemOfConverter}}" />
                             </StackPanel>
                         </TabItem>
                     </TabControl.Items>

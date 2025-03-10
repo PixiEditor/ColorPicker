@@ -5,7 +5,7 @@ using GradientStop = ColorPicker.Models.GradientStop;
 
 namespace ColorPicker;
 
-public class DualColorGradientPickerBase : DualPickerControlBase
+public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStorage
 {
     public static readonly StyledProperty<bool> EnableGradientsTabProperty =
         AvaloniaProperty.Register<DualColorGradientPickerBase, bool>(
@@ -26,6 +26,15 @@ public class DualColorGradientPickerBase : DualPickerControlBase
     public static readonly StyledProperty<GradientType> GradientTypeProperty =
         AvaloniaProperty.Register<DualColorGradientPickerBase, GradientType>(
             nameof(GradientType));
+
+    public static readonly StyledProperty<NotifyableGradient> NotifyableGradientProperty = AvaloniaProperty.Register<DualColorGradientPickerBase, NotifyableGradient>(
+        nameof(NotifyableGradient));
+
+    public NotifyableGradient NotifyableGradient
+    {
+        get => GetValue(NotifyableGradientProperty);
+        set => SetValue(NotifyableGradientProperty, value);
+    }
 
     public GradientType GradientType
     {
@@ -88,6 +97,8 @@ public class DualColorGradientPickerBase : DualPickerControlBase
                 new Avalonia.Media.GradientStop(Colors.White, 1)
             }
         };
+
+        NotifyableGradient = new NotifyableGradient(this);
     }
 
     protected override void UpdateFromBrush(IBrush brush)
@@ -156,8 +167,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase
                 ConicCenterY = oldState.ConicCenterY,
                 RadialCenterX = oldState.RadialCenterX,
                 RadialCenterY = oldState.RadialCenterY,
-                RadialRadiusX = oldState.RadialRadiusX,
-                RadialRadiusY = oldState.RadialRadiusY
+                RadialRadius = oldState.RadialRadius,
             };
         }
 
@@ -167,8 +177,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase
             {
                 RadialCenterX = radialBrush.Center.Point.X,
                 RadialCenterY = radialBrush.Center.Point.Y,
-                RadialRadiusX = radialBrush.RadiusX.Scalar,
-                RadialRadiusY = radialBrush.RadiusY.Scalar,
+                RadialRadius = radialBrush.RadiusX.Scalar,
                 ConicAngle = oldState.ConicAngle,
                 ConicCenterX = oldState.ConicCenterX,
                 ConicCenterY = oldState.ConicCenterY,
@@ -188,8 +197,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase
                 ConicAngle = conicBrush.Angle,
                 RadialCenterX = oldState.RadialCenterX,
                 RadialCenterY = oldState.RadialCenterY,
-                RadialRadiusX = oldState.RadialRadiusX,
-                RadialRadiusY = oldState.RadialRadiusY,
+                RadialRadius = oldState.RadialRadius,
                 LinearStartPointX = oldState.LinearStartPointX,
                 LinearStartPointY = oldState.LinearStartPointY,
                 LinearEndPointX = oldState.LinearEndPointX,
@@ -254,8 +262,8 @@ public class DualColorGradientPickerBase : DualPickerControlBase
                 GradientStops = stops,
                 Center =
                     new RelativePoint(GradientState.RadialCenterX, GradientState.RadialCenterY, RelativeUnit.Relative),
-                RadiusX = new RelativeScalar(GradientState.RadialRadiusX, RelativeUnit.Relative),
-                RadiusY = new RelativeScalar(GradientState.RadialRadiusY, RelativeUnit.Relative),
+                RadiusX = new RelativeScalar(GradientState.RadialRadius, RelativeUnit.Relative),
+                RadiusY = new RelativeScalar(GradientState.RadialRadius, RelativeUnit.Relative),
             },
             GradientType.Conic => new ConicGradientBrush
             {
@@ -306,6 +314,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase
 
             picker.UpdateGradientBrushFromState();
             picker.UpdateSelectedBrush();
+            picker.NotifyableGradient?.UpdateEverything(args.OldValue.Value);
         }
     }
 }

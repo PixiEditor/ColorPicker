@@ -17,8 +17,7 @@ namespace ColorPicker.Models
         public double RadialCenterY { get; set; }
         public double RadialOriginX { get; set; }
         public double RadialOriginY { get; set; }
-        public double RadialRadiusX { get; set; }
-        public double RadialRadiusY { get; set; }
+        public double RadialRadius { get; set; }
 
         public double ConicAngle { get; set; }
         public double ConicCenterX { get; set; }
@@ -35,8 +34,7 @@ namespace ColorPicker.Models
             RadialCenterY = 0.5;
             RadialOriginX = 0.5;
             RadialOriginY = 0.5;
-            RadialRadiusX = 0.5;
-            RadialRadiusY = 0.5;
+            RadialRadius = 0.5;
             ConicAngle = 0;
             ConicCenterX = 0.5;
             ConicCenterY = 0.5;
@@ -55,8 +53,7 @@ namespace ColorPicker.Models
                 RadialCenterY = RadialCenterY,
                 RadialOriginX = RadialOriginX,
                 RadialOriginY = RadialOriginY,
-                RadialRadiusX = RadialRadiusX,
-                RadialRadiusY = RadialRadiusY,
+                RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
                 ConicCenterY = ConicCenterY
@@ -109,8 +106,7 @@ namespace ColorPicker.Models
                 RadialCenterY = RadialCenterY,
                 RadialOriginX = RadialOriginX,
                 RadialOriginY = RadialOriginY,
-                RadialRadiusX = RadialRadiusX,
-                RadialRadiusY = RadialRadiusY,
+                RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
                 ConicCenterY = ConicCenterY
@@ -131,8 +127,7 @@ namespace ColorPicker.Models
                 RadialCenterY = RadialCenterY,
                 RadialOriginX = RadialOriginX,
                 RadialOriginY = RadialOriginY,
-                RadialRadiusX = RadialRadiusX,
-                RadialRadiusY = RadialRadiusY,
+                RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
                 ConicCenterY = ConicCenterY
