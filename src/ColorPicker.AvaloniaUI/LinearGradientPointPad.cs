@@ -9,7 +9,7 @@ namespace ColorPicker;
 
 [TemplatePart("PART_StartHandle", typeof(Control))]
 [TemplatePart("PART_EndHandle", typeof(Control))]
-public class LinearGradientPointPad : TemplatedControl
+public class LinearGradientPointPad : GradientPad
 {
     public static readonly StyledProperty<double> StartPointXProperty =
         AvaloniaProperty.Register<LinearGradientPointPad, double>(
@@ -27,11 +27,13 @@ public class LinearGradientPointPad : TemplatedControl
         AvaloniaProperty.Register<LinearGradientPointPad, double>(
             nameof(EndPointY));
 
-    public static readonly StyledProperty<GradientStop> StartGradientStopProperty = AvaloniaProperty.Register<LinearGradientPointPad, GradientStop>(
-        nameof(StartGradientStop));
+    public static readonly StyledProperty<GradientStop> StartGradientStopProperty =
+        AvaloniaProperty.Register<LinearGradientPointPad, GradientStop>(
+            nameof(StartGradientStop));
 
-    public static readonly StyledProperty<GradientStop> EndGradientStopProperty = AvaloniaProperty.Register<LinearGradientPointPad, GradientStop>(
-        nameof(EndGradientStop));
+    public static readonly StyledProperty<GradientStop> EndGradientStopProperty =
+        AvaloniaProperty.Register<LinearGradientPointPad, GradientStop>(
+            nameof(EndGradientStop));
 
     public GradientStop EndGradientStop
     {
@@ -85,43 +87,16 @@ public class LinearGradientPointPad : TemplatedControl
         startHandle = e.NameScope.Find<Control>("PART_StartHandle");
         endHandle = e.NameScope.Find<Control>("PART_EndHandle");
 
-        startHandle.PointerPressed += StartHandlePressed;
-        startHandle.PointerMoved += StartHandleOnPointerMoved;
-        endHandle.PointerPressed += EndHandlePressed;
-        endHandle.PointerMoved += EndHandleOnPointerMoved;
-    }
-
-    private void StartHandlePressed(object sender, PointerPressedEventArgs e)
-    {
-        e.Pointer.Capture(startHandle);
-    }
-
-    private void EndHandlePressed(object sender, PointerPressedEventArgs e)
-    {
-        e.Pointer.Capture(endHandle);
-    }
-
-    private void StartHandleOnPointerMoved(object sender, PointerEventArgs e)
-    {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        AddHandle(startHandle, (x, y) =>
         {
-            var pos = e.GetPosition(this);
-            var parent = startHandle.Parent as Control;
-            var bounds = parent.Bounds.Size;
-            StartPointX = Math.Clamp(pos.X / bounds.Width, 0, 1);
-            StartPointY = Math.Clamp(pos.Y / bounds.Height, 0, 1);
-        }
-    }
+            StartPointX = x;
+            StartPointY = y;
+        });
 
-    private void EndHandleOnPointerMoved(object sender, PointerEventArgs e)
-    {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        AddHandle(endHandle, (x, y) =>
         {
-            var parent = endHandle.Parent as Control;
-            var bounds = parent.Bounds.Size;
-            var pos = e.GetPosition(this);
-            EndPointX = Math.Clamp(pos.X / bounds.Width, 0, 1);
-            EndPointY = Math.Clamp(pos.Y / bounds.Height, 0, 1);
-        }
+            EndPointX = x;
+            EndPointY = y;
+        });
     }
 }
