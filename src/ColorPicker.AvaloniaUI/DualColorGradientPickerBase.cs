@@ -1,4 +1,6 @@
-﻿using Avalonia;
+﻿using System.ComponentModel;
+using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Media;
 using ColorPicker.Models;
 using GradientStop = ColorPicker.Models.GradientStop;

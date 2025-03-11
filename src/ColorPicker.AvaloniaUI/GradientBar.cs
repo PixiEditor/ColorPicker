@@ -39,6 +39,16 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         AvaloniaProperty.Register<GradientBar, NotifyableColor>(
             nameof(SelectedStopBindable));
 
+    public static readonly StyledProperty<double> SelectedStopOffsetProperty =
+        AvaloniaProperty.Register<GradientBar, double>(
+            nameof(SelectedStopOffset));
+
+    public double SelectedStopOffset
+    {
+        get => GetValue(SelectedStopOffsetProperty);
+        set => SetValue(SelectedStopOffsetProperty, value);
+    }
+
     public NotifyableColor SelectedStopBindable
     {
         get => GetValue(SelectedStopBindableProperty);
@@ -98,6 +108,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
     static GradientBar()
     {
         SelectedStopStateProperty.Changed.AddClassHandler<GradientBar, ColorState>(StopChanged);
+        SelectedStopOffsetProperty.Changed.AddClassHandler<GradientBar, double>(StopOffsetChanged);
         SelectedStopIndexProperty.Changed.AddClassHandler<GradientBar, int>(IndexChanged);
         GradientStateProperty.Changed.AddClassHandler<GradientBar, GradientState>(GradientStateChanged);
     }
@@ -128,6 +139,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
 
         SelectedStopIndex = 0;
         SelectedStopState = stop0;
+        SelectedStopOffset = 0;
 
         SelectColorStopCommand = new RelayCommand<Avalonia.Media.GradientStop>(stop =>
         {
@@ -137,6 +149,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
             {
                 SelectedStopIndex = foundIndex;
                 SelectedStopState = GradientState.Stops[foundIndex].ColorState;
+                SelectedStopOffset = GradientStops[foundIndex].Offset;
                 SelectedStop = GradientStops[foundIndex];
             }
         });
@@ -270,6 +283,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         }
 
         SelectedStopState = GradientState.Stops[SelectedStopIndex].ColorState;
+        SelectedStopOffset = GradientStops[SelectedStopIndex].Offset;
         SelectedStop = GradientStops[SelectedStopIndex];
     }
 
@@ -293,9 +307,21 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         sender.UpdateInternalState(updated);
     }
 
+    private static void StopOffsetChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<double> e)
+    {
+        var newStop = new GradientStop
+        {
+            ColorState = sender.GradientState.Stops[sender.SelectedStopIndex].ColorState, Offset = e.NewValue.Value
+        };
+
+        var updated = sender.GradientState.WithUpdatedStop(sender.SelectedStopIndex, newStop);
+        sender.UpdateInternalState(updated);
+    }
+
     private static void IndexChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<int> e)
     {
         sender.SelectedStopState = sender.GradientState.Stops[e.NewValue.Value].ColorState;
+        sender.SelectedStopOffset = sender.GradientStops[e.NewValue.Value].Offset;
         sender.SelectedStop = sender.GradientStops[e.NewValue.Value];
     }
 

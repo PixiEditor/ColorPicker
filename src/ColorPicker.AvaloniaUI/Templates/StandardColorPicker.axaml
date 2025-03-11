@@ -96,7 +96,7 @@
                                     <TextBox Grid.Row="1" Grid.Column="1"
                                              Theme="{DynamicResource ColorPickerTextBox}"
                                              VerticalAlignment="Center" Width="50"
-                                             Text="{Binding Path=SelectedStop.Offset, ElementName=GradientBar, Mode=TwoWay}">
+                                             Text="{Binding Path=SelectedStopOffset, ElementName=GradientBar, Mode=TwoWay}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
