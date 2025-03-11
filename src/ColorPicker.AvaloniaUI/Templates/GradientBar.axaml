@@ -8,7 +8,7 @@
         <ControlTheme.Resources>
             <GradientStop x:Key="FallbackGradientStop" Offset="0" Color="Transparent"></GradientStop>
         </ControlTheme.Resources>
-        <Setter Property="Height" Value="60"></Setter>
+        <Setter Property="Height" Value="65"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid>
