@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters"
-                    xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
+                    xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models"
+                    xmlns:behaviors="clr-namespace:ColorPicker.Behaviors">
     <ControlTheme TargetType="colorPicker:StandardColorPicker" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Setter Property="Template">
             <ControlTemplate>
@@ -74,7 +75,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Gradient" IsVisible="{TemplateBinding EnableGradientsTab}">
-                            <StackPanel Orientation="Vertical">
+                            <StackPanel Spacing="5" Orientation="Vertical">
                                 <ComboBox Theme="{DynamicResource ColorPickerComboBox}"
                                           SelectedIndex="{Binding Path=GradientType, RelativeSource={RelativeSource TemplatedParent},
                                            Converter={StaticResource EnumTypeToIntConverter}, ConverterParameter={x:Type models:GradientType}, Mode=TwoWay}">
@@ -85,26 +86,179 @@
                                 <colorPicker:GradientBar Name="GradientBar"
                                                          GradientStops="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                          GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                <colorPicker:PortableColorPicker Height="30" EnableGradientsTab="False"
-                                                                 ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
-                                <colorPicker:LinearGradientPointPad MaxWidth="150" MaxHeight="150"
-                                                                    IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Linear}"
-                                                                    Margin="10"
-                                                                    Background="{TemplateBinding GradientBrush}"
-                                                                    StartPointX="{Binding NotifyableGradient.LinearStartPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                                    StartPointY="{Binding NotifyableGradient.LinearStartPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                                    EndPointX="{Binding NotifyableGradient.LinearEndPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                                    EndPointY="{Binding NotifyableGradient.LinearEndPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                                    StartGradientStop="{Binding GradientBrush.GradientStops[0], RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    EndGradientStop="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource LastItemOfConverter}}" />
-                                <StackPanel
-                                    IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Radial}">
-                                    <colorPicker:RadialGradientPointPad MaxWidth="150" MaxHeight="150"
+
+                                <StackPanel Spacing="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Color" VerticalAlignment="Center" />
+                                    <colorPicker:PortableColorPicker Grid.Row="0" Grid.Column="1" Width="50"
+                                                                     Height="20" EnableGradientsTab="False"
+                                                                     ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Offset" VerticalAlignment="Center" />
+                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                             Theme="{DynamicResource ColorPickerTextBox}"
+                                             VerticalAlignment="Center" Width="50"
+                                             Text="{Binding Path=SelectedStop.Offset, ElementName=GradientBar, Mode=TwoWay}">
+                                        <Interaction.Behaviors>
+                                            <behaviors:TextBoxFocusBehavior />
+                                        </Interaction.Behaviors>
+                                    </TextBox>
+                                </StackPanel>
+
+                                <StackPanel Spacing="5"
+                                            IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Linear}">
+                                    <colorPicker:LinearGradientPointPad MaxWidth="100" MaxHeight="100"
+                                                                        Margin="10"
+                                                                        Background="{TemplateBinding GradientBrush}"
+                                                                        StartPointX="{Binding NotifyableGradient.LinearStartPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                        StartPointY="{Binding NotifyableGradient.LinearStartPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                        EndPointX="{Binding NotifyableGradient.LinearEndPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                        EndPointY="{Binding NotifyableGradient.LinearEndPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                        StartGradientStop="{Binding GradientBrush.GradientStops[0], RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        EndGradientStop="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource LastItemOfConverter}}" />
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label Content="Start X:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.LinearStartPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="0" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="3"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 Width="50"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Path=NotifyableGradient.LinearStartPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="End X:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="1" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.LinearEndPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="1" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="1" Grid.Column="3"
+                                                 Theme="{DynamicResource ColorPickerTextBox}" Width="50"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Path=NotifyableGradient.LinearEndPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Spacing="5"
+                                            IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Radial}">
+                                    <colorPicker:RadialGradientPointPad MaxWidth="100" MaxHeight="100"
                                                                         Background="{TemplateBinding GradientBrush}"
                                                                         CenterX="{Binding NotifyableGradient.RadialCenterX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                                         CenterY="{Binding NotifyableGradient.RadialCenterY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                                         Radius="{Binding NotifyableGradient.RadialRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
-
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label Content="Center X:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.RadialCenterX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="0" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="3"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 Width="50"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Path=NotifyableGradient.RadialCenterY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="Radius" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="1" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.RadialRadius, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Spacing="5"
+                                            IsVisible="{TemplateBinding GradientType, Converter={StaticResource IsEnumValueConverter}, ConverterParameter=Conic}">
+                                    <colorPicker:ConicGradientPad MaxWidth="100" MaxHeight="100"
+                                                                  Background="{TemplateBinding GradientBrush}"
+                                                                  CenterX="{Binding NotifyableGradient.ConicCenterX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                  CenterY="{Binding NotifyableGradient.ConicCenterY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                                  Angle="{Binding NotifyableGradient.ConicAngle, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label Content="Center X:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.ConicCenterX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="0" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="0" Grid.Column="3"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 Width="50"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Path=NotifyableGradient.ConicCenterY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="Angle" VerticalAlignment="Center" />
+                                        <TextBox Grid.Row="1" Grid.Column="1"
+                                                 Theme="{DynamicResource ColorPickerTextBox}"
+                                                 VerticalAlignment="Center" Width="50"
+                                                 Text="{Binding Path=NotifyableGradient.ConicAngle, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <Interaction.Behaviors>
+                                                <behaviors:TextBoxFocusBehavior />
+                                            </Interaction.Behaviors>
+                                        </TextBox>
+                                    </Grid>
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>

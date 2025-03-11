@@ -90,6 +90,42 @@
             }
         }
 
+        public double ConicCenterX
+        {
+            get => gradientStorage.GradientState.ConicCenterX;
+            set
+            {
+                if (isUpdating) return;
+                var state = gradientStorage.GradientState;
+                state.ConicCenterX = value;
+                gradientStorage.GradientState = state;
+            }
+        }
+
+        public double ConicCenterY
+        {
+            get => gradientStorage.GradientState.ConicCenterY;
+            set
+            {
+                if (isUpdating) return;
+                var state = gradientStorage.GradientState;
+                state.ConicCenterY = value;
+                gradientStorage.GradientState = state;
+            }
+        }
+
+        public double ConicAngle
+        {
+            get => gradientStorage.GradientState.ConicAngle;
+            set
+            {
+                if (isUpdating) return;
+                var state = gradientStorage.GradientState;
+                state.ConicAngle = value;
+                gradientStorage.GradientState = state;
+            }
+        }
+
         public NotifyableGradient(IGradientStorage gradientStorage)
         {
             this.gradientStorage = gradientStorage;
@@ -109,6 +145,18 @@
                 RaisePropertyChanged(nameof(LinearEndPointX));
             if (LinearEndPointY != old.LinearEndPointY)
                 RaisePropertyChanged(nameof(LinearEndPointY));
+            if (RadialCenterX != old.RadialCenterX)
+                RaisePropertyChanged(nameof(RadialCenterX));
+            if (RadialCenterY != old.RadialCenterY)
+                RaisePropertyChanged(nameof(RadialCenterY));
+            if (RadialRadius != old.RadialRadius)
+                RaisePropertyChanged(nameof(RadialRadius));
+            if (ConicCenterX != old.ConicCenterX)
+                RaisePropertyChanged(nameof(ConicCenterX));
+            if (ConicCenterY != old.ConicCenterY)
+                RaisePropertyChanged(nameof(ConicCenterY));
+            if (ConicAngle != old.ConicAngle)
+                RaisePropertyChanged(nameof(ConicAngle));
 
             isUpdating = false;
         }

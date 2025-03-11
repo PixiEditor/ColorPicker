@@ -16,7 +16,8 @@
             <ControlTemplate>
                 <colorPicker:UniformPanel Background="{TemplateBinding Background}">
                     <Panel ClipToBounds="True">
-                        <Ellipse Name="PART_MainHandle" Stroke="Black" Fill="Transparent" StrokeThickness="4"
+                        <Ellipse Name="PART_MainHandle" Cursor="{Binding CurrentAngleCursor, RelativeSource={RelativeSource TemplatedParent}}"
+                                 Stroke="Black" Fill="Transparent" StrokeThickness="4"
                                  ZIndex="-1">
                             <Ellipse.Width>
                                 <MultiBinding Converter="{StaticResource MultiplyConverter}">

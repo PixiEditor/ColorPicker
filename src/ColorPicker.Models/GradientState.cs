@@ -15,8 +15,6 @@ namespace ColorPicker.Models
 
         public double RadialCenterX { get; set; }
         public double RadialCenterY { get; set; }
-        public double RadialOriginX { get; set; }
-        public double RadialOriginY { get; set; }
         public double RadialRadius { get; set; }
 
         public double ConicAngle { get; set; }
@@ -32,8 +30,6 @@ namespace ColorPicker.Models
             LinearEndPointY = 0;
             RadialCenterX = 0.5;
             RadialCenterY = 0.5;
-            RadialOriginX = 0.5;
-            RadialOriginY = 0.5;
             RadialRadius = 0.5;
             ConicAngle = 0;
             ConicCenterX = 0.5;
@@ -51,8 +47,6 @@ namespace ColorPicker.Models
                 LinearEndPointY = LinearEndPointY,
                 RadialCenterX = RadialCenterX,
                 RadialCenterY = RadialCenterY,
-                RadialOriginX = RadialOriginX,
-                RadialOriginY = RadialOriginY,
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
@@ -104,8 +98,6 @@ namespace ColorPicker.Models
                 LinearEndPointY = LinearEndPointY,
                 RadialCenterX = RadialCenterX,
                 RadialCenterY = RadialCenterY,
-                RadialOriginX = RadialOriginX,
-                RadialOriginY = RadialOriginY,
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
@@ -125,8 +117,6 @@ namespace ColorPicker.Models
                 LinearEndPointY = LinearEndPointY,
                 RadialCenterX = RadialCenterX,
                 RadialCenterY = RadialCenterY,
-                RadialOriginX = RadialOriginX,
-                RadialOriginY = RadialOriginY,
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,

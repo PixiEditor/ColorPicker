@@ -18,7 +18,7 @@ namespace ColorPicker;
 [TemplatePart("PART_Bar", typeof(Border))]
 [TemplatePart("PART_GradientStops", typeof(ItemsControl))]
 [TemplatePart("PART_RemoveStopButton", typeof(Button))]
-public class GradientBar : TemplatedControl, IGradientStorage
+public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorage
 {
     public static readonly StyledProperty<GradientState> GradientStateProperty =
         AvaloniaProperty.Register<GradientBar, GradientState>(
@@ -34,6 +34,16 @@ public class GradientBar : TemplatedControl, IGradientStorage
     public static readonly StyledProperty<ColorState> SelectedStopStateProperty =
         AvaloniaProperty.Register<GradientBar, ColorState>(
             nameof(SelectedStopState));
+
+    public static readonly StyledProperty<NotifyableColor> SelectedStopBindableProperty =
+        AvaloniaProperty.Register<GradientBar, NotifyableColor>(
+            nameof(SelectedStopBindable));
+
+    public NotifyableColor SelectedStopBindable
+    {
+        get => GetValue(SelectedStopBindableProperty);
+        set => SetValue(SelectedStopBindableProperty, value);
+    }
 
     public static readonly StyledProperty<GradientStops> GradientStopsProperty =
         AvaloniaProperty.Register<GradientBar, GradientStops>(
@@ -77,6 +87,12 @@ public class GradientBar : TemplatedControl, IGradientStorage
     {
         get => GetValue(SelectedStopProperty);
         set => SetValue(SelectedStopProperty, value);
+    }
+
+    ColorState IColorStateStorage.ColorState
+    {
+        get => SelectedStopState;
+        set => SelectedStopState = value;
     }
 
     static GradientBar()
@@ -124,6 +140,8 @@ public class GradientBar : TemplatedControl, IGradientStorage
                 SelectedStop = GradientStops[foundIndex];
             }
         });
+
+        SelectedStopBindable = new NotifyableColor(this);
     }
 
     public void AddStop(double offset)
