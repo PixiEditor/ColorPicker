@@ -41,7 +41,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     public PickerControlBase()
     {
         Color = new NotifyableColor(this);
-        Color.PropertyChanged += (sender, args) =>
+        Color.UpdateAllCompleted += (sender, args) =>
         {
             var newColor = Avalonia.Media.Color.FromArgb(
                 (byte)Math.Round(Color.A),

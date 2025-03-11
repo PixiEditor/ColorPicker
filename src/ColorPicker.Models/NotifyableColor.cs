@@ -1,9 +1,17 @@
-﻿namespace ColorPicker.Models
+﻿using System;
+
+namespace ColorPicker.Models
 {
     public class NotifyableColor : NotifyableObject
     {
         private readonly IColorStateStorage storage;
         private bool isUpdating = false;
+
+        [field: NonSerialized] public event EventHandler UpdateAllCompleted = delegate { };
+        public void RaiseUpdateAllCompleted()
+        {
+            UpdateAllCompleted?.Invoke(this, EventArgs.Empty);
+        }
 
         public NotifyableColor(IColorStateStorage colorStateStorage)
         {
@@ -157,6 +165,7 @@
             if (currentValue.HSL_H != oldValue.HSL_H) RaisePropertyChanged(nameof(HSL_H));
             if (currentValue.HSL_S != oldValue.HSL_S) RaisePropertyChanged(nameof(HSL_S));
             if (currentValue.HSL_L != oldValue.HSL_L) RaisePropertyChanged(nameof(HSL_L));
+            RaiseUpdateAllCompleted();
             isUpdating = false;
         }
     }
