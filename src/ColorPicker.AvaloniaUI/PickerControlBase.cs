@@ -49,7 +49,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     {
         Color = new NotifyableColor(this);
         SelectedBrush = new SolidColorBrush(Colors.Black);
-        Color.PropertyChanged += (sender, args) =>
+        Color.UpdateAllCompleted += (sender, args) =>
         {
             var newColor = Avalonia.Media.Color.FromArgb(
                 (byte)Math.Round(Color.A),
