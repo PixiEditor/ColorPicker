@@ -1,0 +1,95 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <ControlTheme TargetType="colorPicker:RadialGradientPointPad" x:Key="{x:Type colorPicker:RadialGradientPointPad}">
+        <ControlTheme.Resources>
+            <ResourceDictionary>
+                <converters:PointsToMarginConverter x:Key="PointToMarginConverter" />
+                <converters:MultiplyConverter x:Key="MultiplyConverter" />
+            </ResourceDictionary>
+        </ControlTheme.Resources>
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <colorPicker:UniformPanel Background="{TemplateBinding Background}">
+                    <Panel ClipToBounds="True">
+                        <Ellipse Name="PART_MainHandle" Cursor="{Binding CurrentAngleCursor, RelativeSource={RelativeSource TemplatedParent}}"
+                                 Stroke="Black" Fill="Transparent" StrokeThickness="4"
+                                 ZIndex="-1">
+                            <Ellipse.Width>
+                                <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                    <Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Bounds.Width" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Ellipse.Width>
+                            <Ellipse.Height>
+                                <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                    <Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Ellipse.Height>
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform>
+                                    <TranslateTransform.X>
+                                        <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                            <Binding Path="TopLeftX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="Bounds.Width"
+                                                     RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </TranslateTransform.X>
+                                    <TranslateTransform.Y>
+                                        <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                            <Binding Path="TopLeftY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="Bounds.Height"
+                                                     RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </TranslateTransform.Y>
+                                </TranslateTransform>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse IsHitTestVisible="False" Stroke="White" Fill="{x:Null}" StrokeThickness="2">
+                            <Ellipse.Width>
+                                <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                    <Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Bounds.Width" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Ellipse.Width>
+                            <Ellipse.Height>
+                                <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                    <Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </Ellipse.Height>
+                            <Ellipse.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform>
+                                        <TranslateTransform.X>
+                                            <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                                <Binding Path="TopLeftX"
+                                                         RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="Bounds.Width"
+                                                         RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </TranslateTransform.X>
+                                        <TranslateTransform.Y>
+                                            <MultiBinding Converter="{StaticResource MultiplyConverter}">
+                                                <Binding Path="TopLeftY"
+                                                         RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="Bounds.Height"
+                                                         RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </TranslateTransform.Y>
+                                    </TranslateTransform>
+                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                </TransformGroup>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                    </Panel>
+                </colorPicker:UniformPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

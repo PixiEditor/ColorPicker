@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using ColorPicker.Models;
+using GradientStop = System.Windows.Media.GradientStop;
 
 namespace ColorPicker.UIExtensions
 {

@@ -10,7 +10,7 @@ using Path = Avalonia.Controls.Shapes.Path;
 namespace ColorPicker;
 
 [TemplatePart(Name = "PART_Handle", Type = typeof(Path))]
-internal class HueSlider : TemplatedControl
+public class HueSlider : TemplatedControl
 {
     public static readonly StyledProperty<double> SmallChangeProperty = AvaloniaProperty.Register<HueSlider, double>(
         nameof(SmallChange), 1);
