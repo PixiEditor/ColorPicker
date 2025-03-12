@@ -5,7 +5,6 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <ControlTheme TargetType="colorPicker:RecentBrushes" x:Key="{x:Type colorPicker:RecentBrushes}">
-        <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel VerticalAlignment="Center" Spacing="5" Orientation="Vertical">

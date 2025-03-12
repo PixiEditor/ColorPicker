@@ -73,7 +73,7 @@
                                                           SmallChange="{TemplateBinding Property=SmallChange}"
                                                           ShowAlpha="{TemplateBinding Property=ShowAlpha}"
                                                           ShowFractionalPart="{TemplateBinding Property=ShowFractionalPart}" />
-                                <colorPicker:RecentBrushes Margin="2" Grid.Row="5" Grid.ColumnSpan="3"
+                                <colorPicker:RecentBrushes Margin="10 2" Grid.Row="5" Grid.ColumnSpan="3"
                                                            IsVisible="{TemplateBinding EnableRecentColors}"
                                                            SelectBrushCommand="{Binding SelectRecentBrushCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                                            Brushes="{Binding GlobalRecentsStore.RecentColors, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -266,7 +266,7 @@
                                     </Grid>
                                 </StackPanel>
 
-                                <colorPicker:RecentBrushes Margin="2"
+                                <colorPicker:RecentBrushes Margin="10 2"
                                                            IsVisible="{TemplateBinding EnableRecentGradients}"
                                                            SelectBrushCommand="{Binding SelectRecentBrushCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                                            Brushes="{Binding GlobalRecentsStore.RecentGradients, RelativeSource={RelativeSource TemplatedParent}}" />
