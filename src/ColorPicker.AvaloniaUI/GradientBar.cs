@@ -190,7 +190,21 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         {
             if (e.GetCurrentPoint(bar).Properties.IsLeftButtonPressed)
             {
+                double min = 0;
+                double max = 1;
+
+                if (SelectedStopIndex - 1 >= 0)
+                {
+                    min = GradientState.Stops[SelectedStopIndex - 1].Offset;
+                }
+
+                if (SelectedStopIndex + 1 < GradientState.Stops.Count)
+                {
+                    max = GradientState.Stops[SelectedStopIndex + 1].Offset;
+                }
+
                 double offset = GetNormalizedOffset(e);
+                offset = Math.Clamp(offset, min, max);
 
                 GradientState newGradientState = GradientState.WithUpdatedStop(SelectedStopIndex,
                     new GradientStop
