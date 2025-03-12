@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Media;
+using Avalonia.Media.Immutable;
 using ColorPicker.Models;
 
 namespace ColorPicker;
@@ -30,6 +32,26 @@ public class PortableColorPicker : DualColorGradientPickerBase
     public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty =
         AvaloniaProperty.Register<PortableColorPicker, HexRepresentationType>(
             nameof(HexRepresentation), HexRepresentationType.RGBA);
+
+    public static readonly StyledProperty<bool> ShowRecentColorsProperty =
+        AvaloniaProperty.Register<PortableColorPicker, bool>(
+            nameof(ShowRecentColors), true);
+
+    public static readonly StyledProperty<bool> ShowRecentGradientsProperty =
+        AvaloniaProperty.Register<PortableColorPicker, bool>(
+            nameof(ShowRecentGradients), true);
+
+    public bool ShowRecentGradients
+    {
+        get => GetValue(ShowRecentGradientsProperty);
+        set => SetValue(ShowRecentGradientsProperty, value);
+    }
+
+    public bool ShowRecentColors
+    {
+        get => GetValue(ShowRecentColorsProperty);
+        set => SetValue(ShowRecentColorsProperty, value);
+    }
 
     public HexRepresentationType HexRepresentation
     {
@@ -65,9 +87,22 @@ public class PortableColorPicker : DualColorGradientPickerBase
     {
         base.OnApplyTemplate(e);
         var popupPart = e.NameScope.Find<Popup>("popup");
+        popupPart.Closed += PopupPartOnClosed;
         if (popupPart != null)
         {
             popupPart.PointerPressed += (sender, args) => { args.Handled = true; };
+        }
+    }
+
+    private void PopupPartOnClosed(object sender, EventArgs e)
+    {
+        if (ShowRecentColors && SelectedBrush is ISolidColorBrush solidColorBrush)
+        {
+            RecentsStore.Global.TryAddRecentColor(SelectedColor);
+        }
+        else if (ShowRecentGradients && SelectedBrush is IGradientBrush gradientBrush)
+        {
+            RecentsStore.Global.TryAddRecentGradient(gradientBrush);
         }
     }
 }

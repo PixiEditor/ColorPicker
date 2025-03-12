@@ -15,5 +15,7 @@
         <MergeResourceInclude Source="/Templates/LinearGradientPointPad.axaml"/>
         <MergeResourceInclude Source="/Templates/RadialGradientPointPad.axaml"/>
         <MergeResourceInclude Source="/Templates/ConicGradientPad.axaml"/>
+        <MergeResourceInclude Source="/Templates/RecentBrushes.axaml"/>
+        <MergeResourceInclude Source="/Templates/RecentBrush.axaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

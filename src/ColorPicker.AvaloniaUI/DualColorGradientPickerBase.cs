@@ -110,9 +110,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         {
             GradientType = gradientBrush switch
             {
-                LinearGradientBrush => GradientType.Linear,
-                RadialGradientBrush => GradientType.Radial,
-                ConicGradientBrush => GradientType.Conic,
+                ILinearGradientBrush => GradientType.Linear,
+                IRadialGradientBrush => GradientType.Radial,
+                IConicGradientBrush => GradientType.Conic,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -141,7 +141,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         }
     }
 
-    private GradientState StateFromBrush(GradientBrush brush)
+    private GradientState StateFromBrush(IGradientBrush brush)
     {
         List<GradientStop> stops = new List<GradientStop>();
         foreach (var stop in brush.GradientStops)
@@ -154,9 +154,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         return StateFromBrush(stops, brush, GradientState);
     }
 
-    private static GradientState StateFromBrush(List<GradientStop> stops, GradientBrush brush, GradientState oldState)
+    private static GradientState StateFromBrush(List<GradientStop> stops, IGradientBrush brush, GradientState oldState)
     {
-        if (brush is LinearGradientBrush linearBrush)
+        if (brush is ILinearGradientBrush linearBrush)
         {
             return new GradientState(stops)
             {
@@ -173,7 +173,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
             };
         }
 
-        if (brush is RadialGradientBrush radialBrush)
+        if (brush is IRadialGradientBrush radialBrush)
         {
             return new GradientState(stops)
             {
@@ -190,7 +190,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
             };
         }
 
-        if (brush is ConicGradientBrush conicBrush)
+        if (brush is IConicGradientBrush conicBrush)
         {
             return new GradientState(stops)
             {

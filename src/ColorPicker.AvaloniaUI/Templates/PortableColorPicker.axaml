@@ -36,6 +36,8 @@
                                 IsHitTestVisible="True"
                                 Background="{DynamicResource ThemeBackgroundBrush}">
                             <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             EnableRecentColors="{TemplateBinding ShowRecentColors}"
+                                                             EnableRecentGradients="{TemplateBinding ShowRecentGradients}"
                                                              GradientState="{Binding Path=GradientState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              SelectedTabIndex="{Binding Path=SelectedTabIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              GradientType="{Binding Path=GradientType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"

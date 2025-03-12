@@ -112,7 +112,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
 
     protected virtual void UpdateFromBrush(IBrush brush)
     {
-        if (brush is SolidColorBrush solidColorBrush)
+        if (brush is ISolidColorBrush solidColorBrush)
         {
             SelectedColor = solidColorBrush.Color;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -8,6 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.VisualTree;
 using ColorPicker.Models;
+using ColorPicker.Utilities;
 using GradientStop = ColorPicker.Models.GradientStop;
 
 namespace ColorPicker;
@@ -39,6 +41,35 @@ public class StandardColorPicker : DualColorGradientPickerBase
         AvaloniaProperty.Register<StandardColorPicker, HexRepresentationType>(
             nameof(HexRepresentation), HexRepresentationType.RGBA);
 
+    public static readonly StyledProperty<bool> EnableRecentColorsProperty =
+        AvaloniaProperty.Register<StandardColorPicker, bool>(
+            nameof(EnableRecentColors), true);
+
+    public static readonly StyledProperty<bool> EnableRecentGradientsProperty =
+        AvaloniaProperty.Register<StandardColorPicker, bool>(
+            nameof(EnableRecentGradients), true);
+
+    public static readonly StyledProperty<ICommand> SelectRecentBrushCommandProperty = AvaloniaProperty.Register<StandardColorPicker, ICommand>(
+        nameof(SelectRecentBrushCommand));
+
+    public ICommand SelectRecentBrushCommand
+    {
+        get => GetValue(SelectRecentBrushCommandProperty);
+        set => SetValue(SelectRecentBrushCommandProperty, value);
+    }
+
+    public bool EnableRecentGradients
+    {
+        get => GetValue(EnableRecentGradientsProperty);
+        set => SetValue(EnableRecentGradientsProperty, value);
+    }
+
+    public bool EnableRecentColors
+    {
+        get => GetValue(EnableRecentColorsProperty);
+        set => SetValue(EnableRecentColorsProperty, value);
+    }
+
     public HexRepresentationType HexRepresentation
     {
         get => GetValue(HexRepresentationProperty);
@@ -69,7 +100,14 @@ public class StandardColorPicker : DualColorGradientPickerBase
         set => SetValue(ShowFractionalPartProperty, value);
     }
 
+    public RecentsStore GlobalRecentsStore => RecentsStore.Global;
+
     private TabControl tabControl;
+
+    public StandardColorPicker()
+    {
+        SelectRecentBrushCommand = new RelayCommand<IBrush>(SelectBrush);
+    }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -84,5 +122,10 @@ public class StandardColorPicker : DualColorGradientPickerBase
         {
             tabControl.FindDescendantOfType<TabItem>().IsVisible = false;
         }
+    }
+
+    private void SelectBrush(IBrush brush)
+    {
+        SelectedBrush = brush;
     }
 }
