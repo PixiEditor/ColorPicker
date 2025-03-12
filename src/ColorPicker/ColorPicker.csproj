@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net451;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+        <TargetFrameworks>net451;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
         <UseWPF>true</UseWPF>
         <Authors>Egor Mozgovoy, Krzysztof Krysiński</Authors>
         <Company>PixiEditor</Company>
@@ -12,15 +12,15 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/PixiEditor/ColorPicker</RepositoryUrl>
         <RootNamespace>ColorPicker</RootNamespace>
-        <Version>3.4.1</Version>
+        <Version>3.4.2</Version>
         <PackageId>PixiEditor.ColorPicker</PackageId>
         <PackageTags>color color-picker graphics wpf</PackageTags>
         <Description>A collection of various WPF controls used to select colors. See documentation and usage examples in the project repository, https://github.com/PixiEditor/ColorPicker. Supports .NET Framework 4.5.1+, .NET Core 3.1+, .NET 5 - 7.
 
 Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</Description>
         <Title>A WPF Color Picker</Title>
-        <AssemblyVersion>3.4.1.0</AssemblyVersion>
-        <FileVersion>3.4.1.0</FileVersion>
+        <AssemblyVersion>3.4.2.0</AssemblyVersion>
+        <FileVersion>3.4.2.0</FileVersion>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
         <SignAssembly>True</SignAssembly>
