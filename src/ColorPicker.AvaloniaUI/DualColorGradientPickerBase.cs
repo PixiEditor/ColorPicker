@@ -29,8 +29,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         AvaloniaProperty.Register<DualColorGradientPickerBase, GradientType>(
             nameof(GradientType));
 
-    public static readonly StyledProperty<NotifyableGradient> NotifyableGradientProperty = AvaloniaProperty.Register<DualColorGradientPickerBase, NotifyableGradient>(
-        nameof(NotifyableGradient));
+    public static readonly StyledProperty<NotifyableGradient> NotifyableGradientProperty =
+        AvaloniaProperty.Register<DualColorGradientPickerBase, NotifyableGradient>(
+            nameof(NotifyableGradient));
 
     public NotifyableGradient NotifyableGradient
     {
@@ -116,7 +117,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
                 _ => throw new ArgumentOutOfRangeException()
             };
 
+            var oldState = GradientState;
             GradientState = StateFromBrush(gradientBrush);
+            NotifyableGradient?.UpdateEverything(oldState);
             GradientBrush = gradientBrush;
             SelectedTabIndex = EnableGradientsTab ? 1 : 0;
         }

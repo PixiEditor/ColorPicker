@@ -9,7 +9,6 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel VerticalAlignment="Center" Spacing="5" Orientation="Vertical">
-                    <Separator Margin="10 0" Padding="0" />
                     <ScrollViewer VerticalContentAlignment="Center" HorizontalScrollBarVisibility="Auto"
                                   VerticalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{TemplateBinding Brushes}">
