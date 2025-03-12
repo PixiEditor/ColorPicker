@@ -28,14 +28,14 @@ namespace ColorPicker
         public PickerControlBase()
         {
             Color = new NotifyableColor(this);
-            Color.PropertyChanged += (sender, args) =>
+            Color.UpdateAllCompleted += (sender, args) =>
             {
                 var newColor = System.Windows.Media.Color.FromArgb(
                     (byte)Math.Round(Color.A),
                     (byte)Math.Round(Color.RGB_R),
                     (byte)Math.Round(Color.RGB_G),
                     (byte)Math.Round(Color.RGB_B));
-                if (newColor != previousColor)
+                if(newColor != previousColor)
                 {
                     RaiseEvent(new ColorRoutedEventArgs(ColorChangedEvent, newColor));
                     previousColor = newColor;
