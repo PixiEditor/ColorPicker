@@ -46,7 +46,7 @@ public class RecentsStore
             RecentGradients.RemoveAt(RecentGradients.Count - 1);
         }
 
-        RecentGradients.Insert(0, selectedGradient);
+        RecentGradients.Insert(0, selectedGradient.ToImmutable());
     }
 
     private static bool GradientEquals(IGradientBrush gradient1, IGradientBrush gradient2)

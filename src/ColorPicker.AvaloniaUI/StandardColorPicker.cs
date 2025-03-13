@@ -126,6 +126,71 @@ public class StandardColorPicker : DualColorGradientPickerBase
 
     private void SelectBrush(IBrush brush)
     {
-        SelectedBrush = brush;
+        SelectedBrush = Copy(brush);
+    }
+
+    private IBrush Copy(IBrush brush)
+    {
+        if (brush is ILinearGradientBrush linearGradientBrush)
+        {
+            return new LinearGradientBrush
+            {
+                GradientStops = ToStops(linearGradientBrush.GradientStops.Select(x => new Avalonia.Media.GradientStop(x.Color, x.Offset))),
+                StartPoint = linearGradientBrush.StartPoint,
+                EndPoint = linearGradientBrush.EndPoint,
+                Opacity = linearGradientBrush.Opacity,
+                Transform = linearGradientBrush.Transform,
+                SpreadMethod = linearGradientBrush.SpreadMethod,
+                TransformOrigin = linearGradientBrush.TransformOrigin,
+            };
+        }
+
+        if (brush is IRadialGradientBrush radialGradientBrush)
+        {
+            return new RadialGradientBrush
+            {
+                GradientStops = ToStops(radialGradientBrush.GradientStops.Select(x => new Avalonia.Media.GradientStop(x.Color, x.Offset))),
+                Center = radialGradientBrush.Center,
+                RadiusX = radialGradientBrush.RadiusX,
+                RadiusY = radialGradientBrush.RadiusY,
+                GradientOrigin = radialGradientBrush.GradientOrigin,
+                Opacity = radialGradientBrush.Opacity,
+                Transform = radialGradientBrush.Transform,
+                SpreadMethod = radialGradientBrush.SpreadMethod,
+                TransformOrigin = radialGradientBrush.TransformOrigin,
+            };
+        }
+
+        if (brush is IConicGradientBrush conicGradientBrush)
+        {
+            return new ConicGradientBrush
+            {
+                GradientStops = ToStops(conicGradientBrush.GradientStops.Select(x => new Avalonia.Media.GradientStop(x.Color, x.Offset))),
+                Center = conicGradientBrush.Center,
+                Angle = conicGradientBrush.Angle,
+                Opacity = conicGradientBrush.Opacity,
+                Transform = conicGradientBrush.Transform,
+                SpreadMethod = conicGradientBrush.SpreadMethod,
+                TransformOrigin = conicGradientBrush.TransformOrigin,
+            };
+        }
+
+        if (brush is ISolidColorBrush solidColorBrush)
+        {
+            return new SolidColorBrush(solidColorBrush.Color);
+        }
+
+        return null;
+    }
+
+    private static GradientStops ToStops(IEnumerable<Avalonia.Media.GradientStop> gradientStops)
+    {
+        var stops = new GradientStops();
+        foreach (var gradientStop in gradientStops)
+        {
+            stops.Add(new Avalonia.Media.GradientStop(gradientStop.Color, gradientStop.Offset));
+        }
+
+        return stops;
     }
 }
