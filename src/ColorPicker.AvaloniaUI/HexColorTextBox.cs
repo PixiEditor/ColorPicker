@@ -22,8 +22,8 @@ public class HexColorTextBox : PickerControlBase
         get => GetValue(ShowAlphaProperty);
         set => SetValue(ShowAlphaProperty, value);
     }
-    
-    public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty = 
+
+    public static readonly StyledProperty<HexRepresentationType> HexRepresentationProperty =
         AvaloniaProperty.Register<HexColorTextBox, HexRepresentationType>(
             nameof(HexRepresentation), HexRepresentationType.RGBA);
 
@@ -36,23 +36,25 @@ public class HexColorTextBox : PickerControlBase
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        
+
         // I feel like I'm terribly abusing the PART_ functionality and that I'm creating insanely non-obvious code
         // But I can't think of any other way of updating the text of the text box when ShowAlpha and HexRepresentation change
-        
-        if (!e.NameScope.Find<Control>("PART_ResourcesContainer").Resources.TryGetValue("ColorToHexConverter", out object converter) || converter is not ColorToHexConverter colorToHexConverter)
+
+        if (!e.NameScope.Find<Control>("PART_ResourcesContainer").Resources
+                .TryGetValue("ColorToHexConverter", out object converter) ||
+            converter is not ColorToHexConverter colorToHexConverter)
             return;
         if (e.NameScope.Find<TextBox>("PART_TextBox") is not TextBox textbox)
             return;
-        
+
         EventHandler onChange = (sender, args) =>
         {
             var converted = colorToHexConverter.Convert(SelectedColor, null, null, null) as string;
             if (converted is not null)
                 textbox.Text = converted;
         };
-        
+
         colorToHexConverter.OnShowAlphaChange += onChange;
-        colorToHexConverter.OnShowHexRepresentationChange += onChange;        
+        colorToHexConverter.OnShowHexRepresentationChange += onChange;
     }
 }

@@ -30,6 +30,7 @@ public class LostFocusUpdateBindingBehavior : Behavior<TextBox>
     protected override void OnAttached()
     {
         AssociatedObject.LostFocus += OnLostFocus;
+        OnBindingValueChanged();
         base.OnAttached();
     }
 
@@ -49,7 +50,7 @@ public class LostFocusUpdateBindingBehavior : Behavior<TextBox>
         }
     }
 
-    private void OnBindingValueChanged()
+    protected void OnBindingValueChanged()
     {
         if (AssociatedObject != null)
         {
