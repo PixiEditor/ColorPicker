@@ -20,6 +20,8 @@ namespace ColorPicker.Models
         public double ConicAngle { get; set; }
         public double ConicCenterX { get; set; }
         public double ConicCenterY { get; set; }
+        public bool AbsoluteUnits { get; set; }
+        public Matrix Transform { get; set; } = Matrix.Identity;
 
         public GradientState(List<GradientStop> stops)
         {
@@ -34,6 +36,8 @@ namespace ColorPicker.Models
             ConicAngle = 0;
             ConicCenterX = 0.5;
             ConicCenterY = 0.5;
+            AbsoluteUnits = false;
+            Transform = Matrix.Identity;
         }
 
         public GradientState WithUpdatedStop(int stopIndex, GradientStop newStop)
@@ -50,7 +54,9 @@ namespace ColorPicker.Models
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
-                ConicCenterY = ConicCenterY
+                ConicCenterY = ConicCenterY,
+                AbsoluteUnits = AbsoluteUnits,
+                Transform = Transform
             };
 
             return newStopState;
@@ -101,7 +107,9 @@ namespace ColorPicker.Models
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
-                ConicCenterY = ConicCenterY
+                ConicCenterY = ConicCenterY,
+                AbsoluteUnits = AbsoluteUnits,
+                Transform = Transform
             };
         }
 
@@ -120,7 +128,9 @@ namespace ColorPicker.Models
                 RadialRadius = RadialRadius,
                 ConicAngle = ConicAngle,
                 ConicCenterX = ConicCenterX,
-                ConicCenterY = ConicCenterY
+                ConicCenterY = ConicCenterY,
+                AbsoluteUnits = AbsoluteUnits,
+                Transform = Transform
             };
         }
     }
@@ -129,5 +139,46 @@ namespace ColorPicker.Models
     {
         public ColorState ColorState { get; set; }
         public double Offset { get; set; }
+    }
+
+    public struct Matrix
+    {
+        public static readonly Matrix Identity = new() { ScaleX = 1f, ScaleY = 1f };
+
+        /// <summary>Gets or sets the scaling in the x-direction.</summary>
+        /// <value />
+        public double ScaleX { get; set; }
+
+        /// <summary>Gets or sets the skew in the x-direction.</summary>
+        /// <value />
+        public double SkewX { get; set; }
+
+        /// <summary>Get or sets the translation in the x-direction.</summary>
+        /// <value />
+        public double TransX { get; set; }
+
+        /// <summary>Gets or sets the skew in the y-direction.</summary>
+        /// <value />
+        public double SkewY { get; set; }
+
+        /// <summary>Gets or sets the scaling in the y-direction.</summary>
+        /// <value />
+        public double ScaleY { get; set; }
+
+        /// <summary>Get or sets the translation in the y-direction.</summary>
+        /// <value />
+        public double TransY { get; set; }
+
+
+        public Matrix(double scaleX, double skewX, double transX,
+            double skewY, double scaleY, double transY)
+        {
+            ScaleX = scaleX;
+            SkewX = skewX;
+            TransX = transX;
+            SkewY = skewY;
+            ScaleY = scaleY;
+            TransY = transY;
+        }
     }
 }
