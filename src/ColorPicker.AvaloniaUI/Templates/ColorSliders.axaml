@@ -8,18 +8,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="colorPicker:ColorSliders">
-                    <TabControl Theme="{DynamicResource ColorPickerTabControlTheme}" Margin="10" MaxHeight="130" VerticalAlignment="Top" Name="tabControl">
+                    <TabControl Theme="{DynamicResource ColorPickerTabControlTheme}" Margin="10" MaxHeight="130"
+                                VerticalAlignment="Top" Name="tabControl">
                         <TabControl.Resources>
                             <ResourceDictionary>
-                                <converters:RangeConstrainedDoubleToDoubleConverter x:Key="HueChannelConverter" Min="0"
-                                    ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Max="359" />
-                                <converters:RangeConstrainedDoubleToDoubleConverter x:Key="HundredChannelConverter"
-                                    ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Min="0" Max="100" />
                                 <converters:RangeConstrainedDoubleToDoubleConverter
+                                    x:Key="AlphaConverter"
                                     ShowFractionalPart="False"
-                                    x:Key="TwoFiftyFiveChannelConverter" Min="0" Max="255" />
+                                    OriginalValue="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Min="0" Max="255" />
                                 <converters:TextBoxTextStringFormatMultiValueConverter
                                     x:Key="TextBoxTextStringFormatMultiValueConverter" />
                                 <converters:VisibleToRowHeightConverter x:Key="VisibleToRowHeightConverter" />
@@ -31,7 +28,7 @@
                         <TabControl.Styles>
                             <Style Selector="TabItem">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Theme" Value="{DynamicResource ColorPickerTabItemTheme}"/>
+                                <Setter Property="Theme" Value="{DynamicResource ColorPickerTabItemTheme}" />
                             </Style>
                         </TabControl.Styles>
                         <TabItem Header="HSV">
@@ -49,12 +46,21 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="0" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2"
+                                             Padding="0"
                                              TabIndex="5">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSV_H_Converter" Min="0"
+                                                OriginalValue="{Binding Color.HSV_H, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Max="359" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_H"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
-                                                     Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
+                                                     Mode="TwoWay" Converter="{StaticResource HSV_H_Converter}" />
                                             <!--<MultiBinding Mode="TwoWay"
                                                           Converter="{StaticResource TextBoxTextStringFormatMultiValueConverter}">
                                                 <Binding Path="Color.HSV_H"
@@ -81,13 +87,22 @@
                                                        SmallChangeBindable="{Binding Path=SmallChange, RelativeSource={RelativeSource TemplatedParent}}"
                                                        Value="{Binding Path=Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="1" Grid.Column="2" Width="40" Height="18" Margin="0 0 0 2"
+                                             Padding="0"
                                              TabIndex="6">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSV_S_Converter"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                OriginalValue="{Binding Color.HSV_S, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="100" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_S"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-                                                     Converter="{StaticResource HundredChannelConverter}" />
+                                                     Converter="{StaticResource HSV_S_Converter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -108,14 +123,22 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="7">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSV_V_Converter"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                OriginalValue="{Binding Color.HSV_V, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="100" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSV_V"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-
-                                                     Converter="{StaticResource HundredChannelConverter}" />
+                                                     Converter="{StaticResource HSV_V_Converter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -123,7 +146,8 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
+                                <Grid
+                                    IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -145,10 +169,13 @@
                                             </Border.Background>
                                         </Border>
                                     </Grid>
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="8"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
-                                             Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                             Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent},
+                                             Converter={StaticResource AlphaConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
@@ -171,13 +198,23 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}"
+                                             TextAlignment="Center"
+                                             Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="5">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSL_H_Converter" Min="0"
+                                                OriginalValue="{Binding Color.HSL_H, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Max="359" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_H"
-
                                                      RelativeSource="{RelativeSource TemplatedParent}"
-                                                     Mode="TwoWay" Converter="{StaticResource HueChannelConverter}" />
+                                                     Converter="{StaticResource HSL_H_Converter}"
+                                                     Mode="TwoWay" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -198,14 +235,22 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="6">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSL_S_Converter"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                OriginalValue="{Binding Color.HSL_S, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="100" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_S"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-
-                                                     Converter="{StaticResource HundredChannelConverter}" />
+                                                     Converter="{StaticResource HSL_S_Converter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -226,14 +271,22 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="2" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="7">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="HSL_L_Converter"
+                                                ShowFractionalPart="{Binding ShowFractionalPart, RelativeSource={RelativeSource TemplatedParent}}"
+                                                OriginalValue="{Binding Color.HSL_L, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="100" />
+                                        </TextBox.Resources>
                                         <TextBox.Text>
                                             <Binding Path="Color.HSL_L"
                                                      RelativeSource="{RelativeSource TemplatedParent}"
                                                      Mode="TwoWay"
-
-                                                     Converter="{StaticResource HundredChannelConverter}" />
+                                                     Converter="{StaticResource HSL_L_Converter}" />
                                         </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
@@ -241,7 +294,8 @@
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
+                                <Grid
+                                    IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -249,7 +303,7 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="A" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
                                     <Grid Height="12" Grid.Row="3" Grid.Column="1">
-                                       <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
+                                        <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" TabIndex="4"
                                                            IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
                                                            Theme="{StaticResource PreviewColorSliderTemplate}"
                                                            SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
@@ -263,10 +317,12 @@
                                             </Border.Background>
                                         </Border>
                                     </Grid>
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
                                              TabIndex="8"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}"
-                                             Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                             Text="{Binding Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AlphaConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
@@ -289,12 +345,25 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
-                                             TabIndex="5"
-                                             Text="{Binding Path=Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="0" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
+                                             TabIndex="5">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="RGB_R_Converter" Min="0"
+                                                OriginalValue="{Binding Color.RGB_R, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ShowFractionalPart="False"
+                                                Max="255" />
+                                        </TextBox.Resources>
+                                        <TextBox.Text>
+                                            <Binding Path="Color.RGB_R"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay" Converter="{StaticResource RGB_R_Converter}" />
+                                        </TextBox.Text>
                                     </TextBox>
                                 </Grid>
 
@@ -311,9 +380,23 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
-                                             TabIndex="6"
-                                             Text="{Binding Path=Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Row="1" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18"
+                                             Padding="0"
+                                             TabIndex="6">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="RGB_G_Converter"
+                                                ShowFractionalPart="False"
+                                                OriginalValue="{Binding Color.RGB_G, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="255" />
+                                        </TextBox.Resources>
+                                        <TextBox.Text>
+                                            <Binding Path="Color.RGB_G"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     Converter="{StaticResource RGB_G_Converter}" />
+                                        </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
@@ -333,16 +416,30 @@
                                                        SmallChangeBindable="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SmallChange}"
                                                        Value="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        CurrentColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Column="2" Width="40" Margin="0 0 0 2" Height="18" Padding="0"
-                                             TabIndex="7"
-                                             Text="{Binding Path=Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                    <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center"
+                                             Grid.Column="2" Width="40" Margin="0 0 0 2" Height="18" Padding="0"
+                                             TabIndex="7">
+                                        <TextBox.Resources>
+                                            <converters:RangeConstrainedDoubleToDoubleConverter
+                                                x:Key="RGB_B_Converter"
+                                                ShowFractionalPart="False"
+                                                OriginalValue="{Binding Color.RGB_B, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Min="0" Max="255" />
+                                        </TextBox.Resources>
+                                        <TextBox.Text>
+                                            <Binding Path="Color.RGB_B"
+                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                     Mode="TwoWay"
+                                                     Converter="{StaticResource RGB_B_Converter}" />
+                                        </TextBox.Text>
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>
                                     </TextBox>
                                 </Grid>
 
-                                <Grid IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
+                                <Grid
+                                    IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition />
@@ -367,7 +464,7 @@
                                     </Grid>
                                     <TextBox Theme="{DynamicResource ColorPickerTextBox}" TextAlignment="Center" Grid.Row="3" Grid.Column="2" Margin="0 0 0 2" Width="40" Height="18" Padding="0"
                                              IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ShowAlpha}" TabIndex="8"
-                                             Text="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TwoFiftyFiveChannelConverter}}">
+                                             Text="{Binding Path=Color.A, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AlphaConverter}}">
                                         <Interaction.Behaviors>
                                             <behaviors:TextBoxFocusBehavior />
                                         </Interaction.Behaviors>

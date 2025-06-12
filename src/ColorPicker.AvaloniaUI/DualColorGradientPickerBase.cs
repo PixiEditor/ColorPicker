@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using Avalonia;
-using Avalonia.Collections;
+﻿using Avalonia;
 using Avalonia.Media;
 using ColorPicker.Models;
 using GradientStop = ColorPicker.Models.GradientStop;
@@ -151,14 +149,14 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         foreach (var stop in brush.GradientStops)
         {
             ColorState colorState = new ColorState();
-            colorState.SetARGB(stop.Color.A / 255f, stop.Color.R / 255f, stop.Color.G / 255f, stop.Color.B / 255f);
+            colorState.SetARGB(stop.Color.A / 255d, stop.Color.R / 255d, stop.Color.G / 255d, stop.Color.B / 255d);
             stops.Add(new GradientStop { ColorState = colorState, Offset = stop.Offset });
         }
 
         return StateFromBrush(stops, brush, GradientState);
     }
 
-    private static GradientState StateFromBrush(List<GradientStop> stops, IGradientBrush brush, GradientState oldState)
+    private GradientState StateFromBrush(List<GradientStop> stops, IGradientBrush brush, GradientState oldState)
     {
         if (brush is ILinearGradientBrush linearBrush)
         {
@@ -249,10 +247,10 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         {
             stops.Add(new Avalonia.Media.GradientStop(
                 new Color(
-                    (byte)(stop.ColorState.A * 255f),
-                    (byte)(stop.ColorState.RGB_R * 255f),
-                    (byte)(stop.ColorState.RGB_G * 255f),
-                    (byte)(stop.ColorState.RGB_B * 255f)), stop.Offset));
+                    (byte)(stop.ColorState.A * 255d),
+                    (byte)(stop.ColorState.RGB_R * 255d),
+                    (byte)(stop.ColorState.RGB_G * 255d),
+                    (byte)(stop.ColorState.RGB_B * 255d)), stop.Offset));
         }
 
         UpdateGradientBrush(stops,
@@ -308,7 +306,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
     {
         if (args.Sender is DualColorGradientPickerBase picker)
         {
-            if (picker.isUpdating) return;
+            if (picker.isUpdating || picker.SelectedTabIndex == args.NewValue) return;
 
             picker.UpdateSelectedBrush();
         }
