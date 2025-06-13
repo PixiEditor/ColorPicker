@@ -50,7 +50,7 @@
 
    <ControlTheme x:Key="ColorPickerTabControlTheme"
                 TargetType="TabControl">
-     <Setter Property="Padding" Value="8" />
+     <Setter Property="Padding" Value="0" />
      <Setter Property="BorderThickness" Value="1" />
      <Setter Property="BorderBrush" Value="{DynamicResource ColorPickerBorderMidBrush}" />
      <Setter Property="CornerRadius" Value="0, 5, 5, 5"/>
@@ -66,7 +66,6 @@
                             ItemsPanel="{TemplateBinding ItemsPanel}" />
             <ContentPresenter Name="PART_SelectedContentHost"
                               Margin="0"
-                              Background="{DynamicResource ColorPickerTabSelectedBrush}"
                               BorderBrush="{TemplateBinding BorderBrush}"
                               BorderThickness="{TemplateBinding BorderThickness}"
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -79,7 +78,7 @@
       </ControlTemplate>
     </Setter>
     <Style Selector="^[TabStripPlacement=Top]">
-      <Setter Property="Padding" Value="0 4 0 0" />
+      <!--<Setter Property="Padding" Value="0 4 0 0" />-->
     </Style>
     <Style Selector="^[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
       <Setter Property="DockPanel.Dock" Value="Top" />

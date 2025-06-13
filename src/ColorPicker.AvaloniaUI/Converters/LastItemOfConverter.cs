@@ -1,19 +1,23 @@
-﻿using System.Globalization;
+using System.Collections;
+using System.Globalization;
 using Avalonia.Data.Converters;
-using ColorPicker.Models;
 
 namespace ColorPicker.Converters;
 
-internal class PickerTypeToIntConverter
-    : IValueConverter
+public class LastItemOfConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (int)value;
+        if (value is not IList list || list.Count == 0)
+        {
+            return null;
+        }
+
+        return list[^1];
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (PickerType)value;
+        throw new NotImplementedException();
     }
 }

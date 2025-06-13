@@ -1,0 +1,87 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
+    <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
+        <ControlTheme.Resources>
+            <GradientStop x:Key="FallbackGradientStop" Offset="0" Color="Transparent"></GradientStop>
+        </ControlTheme.Resources>
+        <Setter Property="Height" Value="65"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <converters:OffsetToMarginConverter x:Key="OffsetToMarginConverter" />
+                            <converters:EqualsConverter x:Key="EqualsConverter" />
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <Border Name="PART_Bar" Padding="7.5, 0">
+                        <Border.Background>
+                            <LinearGradientBrush
+                                GradientStops="{Binding GradientStops, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Border.Background>
+                        <ItemsControl
+                            Name="PART_GradientStops" ClipToBounds="False"
+                            ItemsSource="{Binding GradientStops, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid>
+                                        <Grid.Background>
+                                            <VisualBrush Stretch="UniformToFill" SourceRect="0,0,100,60">
+                                                <VisualBrush.Visual>
+                                                    <Grid>
+                                                        <Line StartPoint="0,30" EndPoint="100,30" Stroke="Black"
+                                                              StrokeThickness="1" />
+                                                        <Line StartPoint="0,30" EndPoint="100,30" Stroke="White"
+                                                              StrokeThickness="0.5" />
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+                                    </Grid>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemContainerTheme>
+                                <ControlTheme TargetType="ContentPresenter">
+                                    <Setter Property="Margin">
+                                        <MultiBinding Converter="{StaticResource OffsetToMarginConverter}">
+                                            <Binding Path="Offset" />
+                                            <Binding Path="Bounds.Width"
+                                                     RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                        </MultiBinding>
+                                    </Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="Width" Value="15" />
+                                    <Setter Property="Height" Value="15" />
+                                    <Setter Property="RenderTransform" Value="translateX(-7.5px)" />
+                                </ControlTheme>
+                            </ItemsControl.ItemContainerTheme>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="GradientStop">
+                                    <colorPicker:GradientStopHandle GradientStop="{Binding Path=., FallbackValue={StaticResource FallbackGradientStop}}">
+                                        <colorPicker:GradientStopHandle.IsActive>
+                                            <MultiBinding
+                                                Converter="{StaticResource EqualsConverter}">
+                                                <Binding />
+                                                <Binding
+                                                    RelativeSource="{RelativeSource FindAncestor, AncestorType=colorPicker:GradientBar}"
+                                                    Path="SelectedStop" />
+                                            </MultiBinding>
+                                        </colorPicker:GradientStopHandle.IsActive>
+                                    </colorPicker:GradientStopHandle>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                    <Button Name="PART_RemoveStopButton" Padding="0" HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontSize="12" Margin="2.5" Content="-" Height="20" Width="20" CornerRadius="5" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

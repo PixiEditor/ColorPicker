@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <ControlTheme TargetType="colorPicker:RecentBrushes" x:Key="{x:Type colorPicker:RecentBrushes}">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel VerticalAlignment="Center" Spacing="5" Orientation="Vertical">
+                    <ScrollViewer VerticalContentAlignment="Center" HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{TemplateBinding Brushes}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="2.5" Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="IBrush">
+                                    <colorPicker:RecentBrush Cursor="Hand" Name="Recent"
+                                                             PressCommand="{Binding SelectBrushCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=colorPicker:RecentBrushes}}"
+                                                             Brush="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

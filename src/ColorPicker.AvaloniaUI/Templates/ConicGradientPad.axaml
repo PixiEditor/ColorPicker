@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <ControlTheme TargetType="colorPicker:ConicGradientPad" x:Key="{x:Type colorPicker:ConicGradientPad}">
+        <ControlTheme.Resources>
+            <ResourceDictionary>
+                <converters:PointComponentsToPointConverter x:Key="PointComponentsToPointConverter" />
+                <converters:PointsToMarginConverter x:Key="PointToMarginConverter" />
+            </ResourceDictionary>
+        </ControlTheme.Resources>
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <colorPicker:UniformPanel Background="{TemplateBinding Background}">
+                    <Line ClipToBounds="True" Cursor="{Binding CurrentAngleCursor, RelativeSource={RelativeSource TemplatedParent}}"
+                          Stroke="Black" StrokeThickness="4" Name="PART_AngleHandle">
+                        <Line.StartPoint>
+                            <MultiBinding Converter="{StaticResource PointComponentsToPointConverter}">
+                                <Binding Path="CenterX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="Bounds" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Line.StartPoint>
+                        <Line.EndPoint>
+                            <MultiBinding Converter="{StaticResource PointComponentsToPointConverter}">
+                                <Binding Path="EndPointX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="EndPointY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="Bounds" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Line.EndPoint>
+                    </Line>
+                    <Line ClipToBounds="True" IsHitTestVisible="False" Stroke="White" StrokeThickness="2">
+                        <Line.StartPoint>
+                            <MultiBinding Converter="{StaticResource PointComponentsToPointConverter}">
+                                <Binding Path="CenterX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="Bounds" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Line.StartPoint>
+                        <Line.EndPoint>
+                            <MultiBinding Converter="{StaticResource PointComponentsToPointConverter}">
+                                <Binding Path="EndPointX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="EndPointY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="Bounds" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Line.EndPoint>
+                    </Line>
+                    <colorPicker:GradientStopHandle ClipToBounds="False" VerticalAlignment="Top"
+                                                    HorizontalAlignment="Left"
+                                                    Name="PART_CenterHandle"
+                                                    Width="20" Height="20">
+                        <colorPicker:GradientStopHandle.RenderTransform>
+                            <TranslateTransform X="-10" Y="-10" />
+                        </colorPicker:GradientStopHandle.RenderTransform>
+                        <colorPicker:GradientStopHandle.Margin>
+                            <MultiBinding Converter="{StaticResource PointToMarginConverter}">
+                                <Binding Path="CenterX" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="Bounds" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </colorPicker:GradientStopHandle.Margin>
+                    </colorPicker:GradientStopHandle>
+                </colorPicker:UniformPanel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

@@ -7,7 +7,7 @@ using Avalonia.Xaml.Interactivity;
 
 namespace ColorPicker.Behaviors;
 
-internal class TextBoxFocusBehavior : Behavior<TextBox>
+public class TextBoxFocusBehavior : Behavior<TextBox>
 {
     public static readonly StyledProperty<bool> SelectOnMouseClickProperty =
         AvaloniaProperty.Register<TextBoxFocusBehavior, bool>(

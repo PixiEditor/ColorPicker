@@ -7,8 +7,9 @@ namespace ColorPicker.Behaviors;
 
 internal class HexTextBoxBindingBehavior : LostFocusUpdateBindingBehavior
 {
-    public static readonly StyledProperty<Color> ColorProperty = AvaloniaProperty.Register<HexTextBoxBindingBehavior, Color>(
-        "Color");
+    public static readonly StyledProperty<Color> ColorProperty =
+        AvaloniaProperty.Register<HexTextBoxBindingBehavior, Color>(
+            "Color");
 
     public Color Color
     {
@@ -16,8 +17,9 @@ internal class HexTextBoxBindingBehavior : LostFocusUpdateBindingBehavior
         set => SetValue(ColorProperty, value);
     }
 
-    public static readonly StyledProperty<ColorToHexConverter> HexConverterProperty = AvaloniaProperty.Register<HexTextBoxBindingBehavior, ColorToHexConverter>(
-        "HexConverter");
+    public static readonly StyledProperty<ColorToHexConverter> HexConverterProperty =
+        AvaloniaProperty.Register<HexTextBoxBindingBehavior, ColorToHexConverter>(
+            "HexConverter");
 
     public ColorToHexConverter HexConverter
     {

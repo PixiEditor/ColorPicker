@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -31,8 +31,9 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.2.5" />
-        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.5" />
+        <PackageReference Include="Avalonia" Version="11.3.0" />
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.0.14" />
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.2.0.14" />
     </ItemGroup>
 
     <ItemGroup>
@@ -68,5 +69,11 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Avalonia.Base">
+        <HintPath>..\..\..\..\.nuget\packages\avalonia\11.0.5\ref\net6.0\Avalonia.Base.dll</HintPath>
+      </Reference>
     </ItemGroup>
 </Project>

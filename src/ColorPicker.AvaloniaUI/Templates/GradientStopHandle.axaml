@@ -1,0 +1,45 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:colorPicker="clr-namespace:ColorPicker"
+                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+    <ControlTheme TargetType="colorPicker:GradientStopHandle" x:Key="{x:Type colorPicker:GradientStopHandle}">
+        <ControlTheme.Resources>
+            <converters:GradientStopToColorConverter x:Key="GradientStopToColorConverter"/>
+        </ControlTheme.Resources>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border IsHitTestVisible="True" Name="ElementBorder"
+                        BorderBrush="White" BorderThickness="2"
+                        CornerRadius="50" BoxShadow="0 0 5 1.5 #000">
+                    <Border.Resources>
+                    </Border.Resources>
+                    <Border.Transitions>
+                        <Transitions>
+                            <TransformOperationsTransition Property="RenderTransform"
+                                                           Duration="0:0:0.1">
+                                <TransformOperationsTransition.Easing>
+                                    <QuadraticEaseInOut />
+                                </TransformOperationsTransition.Easing>
+                            </TransformOperationsTransition>
+                        </Transitions>
+                    </Border.Transitions>
+                    <Border.Background>
+                        <SolidColorBrush
+                            Color="{Binding GradientStop, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GradientStopToColorConverter}}" />
+                    </Border.Background>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Border">
+            <Setter Property="RenderTransform"
+                    Value="scale(0.8)" />
+        </Style>
+
+        <Style Selector="^:active /template/ Border">
+            <Setter Property="RenderTransform"
+                    Value="scale(1)" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>
