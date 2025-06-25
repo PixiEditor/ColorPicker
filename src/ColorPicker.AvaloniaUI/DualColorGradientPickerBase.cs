@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using Avalonia;
-using Avalonia.Collections;
+﻿using Avalonia;
 using Avalonia.Media;
 using ColorPicker.Models;
 using GradientStop = ColorPicker.Models.GradientStop;
+using Matrix = ColorPicker.Models.Matrix;
 
 namespace ColorPicker;
 
@@ -150,14 +149,14 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         foreach (var stop in brush.GradientStops)
         {
             ColorState colorState = new ColorState();
-            colorState.SetARGB(stop.Color.A / 255f, stop.Color.R / 255f, stop.Color.G / 255f, stop.Color.B / 255f);
+            colorState.SetARGB(stop.Color.A / 255d, stop.Color.R / 255d, stop.Color.G / 255d, stop.Color.B / 255d);
             stops.Add(new GradientStop { ColorState = colorState, Offset = stop.Offset });
         }
 
         return StateFromBrush(stops, brush, GradientState);
     }
 
-    private static GradientState StateFromBrush(List<GradientStop> stops, IGradientBrush brush, GradientState oldState)
+    private GradientState StateFromBrush(List<GradientStop> stops, IGradientBrush brush, GradientState oldState)
     {
         if (brush is ILinearGradientBrush linearBrush)
         {
@@ -173,6 +172,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
                 RadialCenterX = oldState.RadialCenterX,
                 RadialCenterY = oldState.RadialCenterY,
                 RadialRadius = oldState.RadialRadius,
+                AbsoluteUnits = linearBrush.StartPoint.Unit == RelativeUnit.Absolute ||
+                                linearBrush.EndPoint.Unit == RelativeUnit.Absolute,
+                Transform = linearBrush.Transform != null ? ToMatrix(linearBrush.Transform.Value) : Matrix.Identity
             };
         }
 
@@ -189,7 +191,10 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
                 LinearStartPointX = oldState.LinearStartPointX,
                 LinearStartPointY = oldState.LinearStartPointY,
                 LinearEndPointX = oldState.LinearEndPointX,
-                LinearEndPointY = oldState.LinearEndPointY
+                LinearEndPointY = oldState.LinearEndPointY,
+                AbsoluteUnits = radialBrush.Center.Unit == RelativeUnit.Absolute ||
+                                radialBrush.RadiusX.Unit == RelativeUnit.Absolute,
+                Transform = radialBrush.Transform != null ? ToMatrix(radialBrush.Transform.Value) : Matrix.Identity
             };
         }
 
@@ -206,7 +211,9 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
                 LinearStartPointX = oldState.LinearStartPointX,
                 LinearStartPointY = oldState.LinearStartPointY,
                 LinearEndPointX = oldState.LinearEndPointX,
-                LinearEndPointY = oldState.LinearEndPointY
+                LinearEndPointY = oldState.LinearEndPointY,
+                AbsoluteUnits = conicBrush.Center.Unit == RelativeUnit.Absolute,
+                Transform = conicBrush.Transform != null ? ToMatrix(conicBrush.Transform.Value) : Matrix.Identity
             };
         }
 
@@ -217,7 +224,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
     {
         var stops = GradientBrush?.GradientStops ?? new GradientStops();
 
-        UpdateGradientBrush(stops);
+        UpdateGradientBrush(stops, RelativeUnit.Relative);
     }
 
     private void UpdateGradientBrushFromState()
@@ -240,16 +247,17 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         {
             stops.Add(new Avalonia.Media.GradientStop(
                 new Color(
-                    (byte)(stop.ColorState.A * 255f),
-                    (byte)(stop.ColorState.RGB_R * 255f),
-                    (byte)(stop.ColorState.RGB_G * 255f),
-                    (byte)(stop.ColorState.RGB_B * 255f)), stop.Offset));
+                    (byte)(stop.ColorState.A * 255d),
+                    (byte)(stop.ColorState.RGB_R * 255d),
+                    (byte)(stop.ColorState.RGB_G * 255d),
+                    (byte)(stop.ColorState.RGB_B * 255d)), stop.Offset));
         }
 
-        UpdateGradientBrush(stops);
+        UpdateGradientBrush(stops,
+            GradientState.AbsoluteUnits ? RelativeUnit.Absolute : RelativeUnit.Relative);
     }
 
-    private void UpdateGradientBrush(GradientStops stops)
+    private void UpdateGradientBrush(GradientStops stops, RelativeUnit unit)
     {
         GradientBrush = GradientType switch
         {
@@ -258,24 +266,27 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
                 GradientStops = stops,
                 StartPoint =
                     new RelativePoint(GradientState.LinearStartPointX, GradientState.LinearStartPointY,
-                        RelativeUnit.Relative),
+                        unit),
                 EndPoint = new RelativePoint(GradientState.LinearEndPointX, GradientState.LinearEndPointY,
-                    RelativeUnit.Relative)
+                    unit),
+                Transform = new MatrixTransform(ToAvMatrix(GradientState.Transform))
             },
             GradientType.Radial => new RadialGradientBrush
             {
                 GradientStops = stops,
                 Center =
-                    new RelativePoint(GradientState.RadialCenterX, GradientState.RadialCenterY, RelativeUnit.Relative),
+                    new RelativePoint(GradientState.RadialCenterX, GradientState.RadialCenterY, unit),
                 RadiusX = new RelativeScalar(GradientState.RadialRadius, RelativeUnit.Relative),
                 RadiusY = new RelativeScalar(GradientState.RadialRadius, RelativeUnit.Relative),
+                Transform = new MatrixTransform(ToAvMatrix(GradientState.Transform))
             },
             GradientType.Conic => new ConicGradientBrush
             {
                 GradientStops = stops,
                 Center = new RelativePoint(GradientState.ConicCenterX, GradientState.ConicCenterY,
-                    RelativeUnit.Relative),
-                Angle = GradientState.ConicAngle
+                    unit),
+                Angle = GradientState.ConicAngle,
+                Transform = new MatrixTransform(ToAvMatrix(GradientState.Transform))
             },
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -295,7 +306,7 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
     {
         if (args.Sender is DualColorGradientPickerBase picker)
         {
-            if (picker.isUpdating) return;
+            if (picker.isUpdating || picker.SelectedTabIndex == args.NewValue) return;
 
             picker.UpdateSelectedBrush();
         }
@@ -321,5 +332,22 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
             picker.UpdateSelectedBrush();
             picker.NotifyableGradient?.UpdateEverything(args.OldValue.Value);
         }
+    }
+
+    private static Avalonia.Matrix ToAvMatrix(Matrix matrix)
+    {
+        return new Avalonia.Matrix(matrix.ScaleX, matrix.SkewY, matrix.SkewX, matrix.ScaleY, matrix.TransX,
+            matrix.TransY);
+    }
+
+    private static Matrix ToMatrix(Avalonia.Matrix matrix)
+    {
+        double scaleX = matrix.M11;
+        double skewY = matrix.M12;
+        double skewX = matrix.M21;
+        double scaleY = matrix.M22;
+        double offsetX = matrix.M31;
+        double offsetY = matrix.M32;
+        return new Matrix(scaleX, skewX, offsetX, skewY, scaleY, offsetY);
     }
 }

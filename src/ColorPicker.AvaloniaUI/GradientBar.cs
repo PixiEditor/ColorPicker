@@ -105,6 +105,8 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         set => SelectedStopState = value;
     }
 
+    private bool isUpdating;
+
     static GradientBar()
     {
         SelectedStopStateProperty.Changed.AddClassHandler<GradientBar, ColorState>(StopChanged);
@@ -271,6 +273,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
 
     private void UpdateInternalState(GradientState newGradientState)
     {
+        isUpdating = true;
         GradientState = newGradientState;
 
         if (GradientState.Stops == null || GradientState.Stops.Count == 0)
@@ -299,6 +302,7 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
         SelectedStopState = GradientState.Stops[SelectedStopIndex].ColorState;
         SelectedStopOffset = GradientStops[SelectedStopIndex].Offset;
         SelectedStop = GradientStops[SelectedStopIndex];
+        isUpdating = false;
     }
 
     private void RemoveStopButtonOnClick(object sender, RoutedEventArgs e)
@@ -312,6 +316,11 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
 
     private static void StopChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<ColorState> e)
     {
+        if (sender.isUpdating)
+        {
+            return;
+        }
+
         var newStop = new GradientStop
         {
             ColorState = e.NewValue.Value, Offset = sender.GradientState.Stops[sender.SelectedStopIndex].Offset
@@ -323,6 +332,11 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
 
     private static void StopOffsetChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<double> e)
     {
+        if (sender.isUpdating)
+        {
+            return;
+        }
+
         var newStop = new GradientStop
         {
             ColorState = sender.GradientState.Stops[sender.SelectedStopIndex].ColorState, Offset = e.NewValue.Value
@@ -334,6 +348,8 @@ public class GradientBar : TemplatedControl, IGradientStorage, IColorStateStorag
 
     private static void IndexChanged(GradientBar sender, AvaloniaPropertyChangedEventArgs<int> e)
     {
+        if (sender.isUpdating) return;
+
         sender.SelectedStopState = sender.GradientState.Stops[e.NewValue.Value].ColorState;
         sender.SelectedStopOffset = sender.GradientStops[e.NewValue.Value].Offset;
         sender.SelectedStop = sender.GradientStops[e.NewValue.Value];

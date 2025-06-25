@@ -8,6 +8,9 @@ namespace ColorPicker.Converters;
 
 internal class RangeConstrainedDoubleToDoubleConverter : AvaloniaObject, IValueConverter
 {
+    public static readonly StyledProperty<double> OriginalValueProperty =
+        AvaloniaProperty.Register<RangeConstrainedDoubleToDoubleConverter, double>("OriginalValue");
+
     public static readonly StyledProperty<double> MinProperty =
         AvaloniaProperty.Register<RangeConstrainedDoubleToDoubleConverter, double>(
             nameof(Min));
@@ -28,13 +31,20 @@ internal class RangeConstrainedDoubleToDoubleConverter : AvaloniaObject, IValueC
         set => SetValue(MaxProperty, value);
     }
 
-    public static readonly StyledProperty<bool> ShowFractionalPartProperty = AvaloniaProperty.Register<RangeConstrainedDoubleToDoubleConverter, bool>(
-        nameof(ShowFractionalPart), true);
+    public static readonly StyledProperty<bool> ShowFractionalPartProperty =
+        AvaloniaProperty.Register<RangeConstrainedDoubleToDoubleConverter, bool>(
+            nameof(ShowFractionalPart), true);
 
     public bool ShowFractionalPart
     {
         get => GetValue(ShowFractionalPartProperty);
         set => SetValue(ShowFractionalPartProperty, value);
+    }
+
+    public double OriginalValue
+    {
+        get { return (double)GetValue(OriginalValueProperty); }
+        set { SetValue(OriginalValueProperty, value); }
     }
 
 
@@ -54,6 +64,14 @@ internal class RangeConstrainedDoubleToDoubleConverter : AvaloniaObject, IValueC
         if (!double.TryParse(((string)value).Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture,
                 out var result))
             return AvaloniaProperty.UnsetValue;
-        return MathHelper.Clamp(result, Min, Max);
+
+        var clampedValue = MathHelper.Clamp(result, Min, Max);
+
+        if (Math.Abs(clampedValue - OriginalValue) < 0.1)
+        {
+            return OriginalValue;
+        }
+
+        return clampedValue;
     }
 }
