@@ -32,7 +32,7 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
     private bool ignoreColorChange;
 
     private bool ignoreColorPropertyChange;
-    private bool ignoreSelectedBrushChange;
+    protected bool ignoreSelectedBrushChange;
     private Color previousColor = Avalonia.Media.Color.FromArgb(5, 5, 5, 5);
 
     static PickerControlBase()

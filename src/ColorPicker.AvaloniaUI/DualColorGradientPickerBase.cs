@@ -327,10 +327,11 @@ public class DualColorGradientPickerBase : DualPickerControlBase, IGradientStora
         if (args.Sender is DualColorGradientPickerBase picker)
         {
             if (picker.isUpdating) return;
-
+            picker.ignoreSelectedBrushChange = true;
             picker.UpdateGradientBrushFromState();
             picker.UpdateSelectedBrush();
             picker.NotifyableGradient?.UpdateEverything(args.OldValue.Value);
+            picker.ignoreSelectedBrushChange = false;
         }
     }
 
