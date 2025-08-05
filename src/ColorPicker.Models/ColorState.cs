@@ -29,6 +29,47 @@
             _HSL_L = hSL_l;
         }
 
+        public enum ColorSpace
+        {
+            RGB,
+            HSV,
+            HSL
+        }
+
+        public ColorState(double x, double y, double z, ColorSpace colorSpace) : this(x, y, z, 1, colorSpace)
+        {
+
+        }
+
+        public ColorState(double x, double y, double z, double a, ColorSpace colorSpace): this()
+        {
+            A = a;
+            switch (colorSpace)
+            {
+                case ColorSpace.RGB:
+                    _RGB_R = x;
+                    _RGB_G = y;
+                    _RGB_B = z;
+                    RecalculateHSVFromRGB();
+                    RecalculateHSLFromRGB();
+                    break;
+                case ColorSpace.HSV:
+                    _HSV_H = x;
+                    _HSV_S = y;
+                    _HSV_V = z;
+                    RecalculateRGBFromHSV();
+                    RecalculateHSLFromHSV();
+                    break;
+                case ColorSpace.HSL:
+                    _HSL_H = x;
+                    _HSL_S = y;
+                    _HSL_L = z;
+                    RecalculateRGBFromHSL();
+                    RecalculateHSVFromHSL();
+                    break;
+            }
+        }
+
         public void SetARGB(double a, double r, double g, double b)
         {
             A = a;
@@ -37,6 +78,26 @@
             _RGB_B = b;
             RecalculateHSVFromRGB();
             RecalculateHSLFromRGB();
+        }
+
+        public void SetAHSV(double a, double h, double s, double v)
+        {
+            A = a;
+            _HSV_H = h;
+            _HSV_S = s;
+            _HSV_V = v;
+            RecalculateRGBFromHSV();
+            RecalculateHSLFromHSV();
+        }
+
+        public void SetAHSL(double a, double h, double s, double l)
+        {
+            A = a;
+            _HSL_H = h;
+            _HSL_S = s;
+            _HSL_L = l;
+            RecalculateRGBFromHSL();
+            RecalculateHSVFromHSL();
         }
 
         public double A { get; set; }
