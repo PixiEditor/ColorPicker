@@ -14,6 +14,7 @@
                         <ResourceDictionary>
                             <converters:BoolToInvertedBoolConverter x:Key="BoolToInvertedBoolConverter" />
                             <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+                            <converters:NullToTransparentConverter x:Key="NullToTransparentConverter" />
                         </ResourceDictionary>
                     </Grid.Resources>
                     <Border BorderThickness="1" BorderBrush="Black" ZIndex="0"
@@ -22,7 +23,7 @@
                         <Grid>
                             <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0" CornerRadius="{DynamicResource ColorPickerControlRadius}"
                                           x:Name="toggleButton" BorderThickness="0" ZIndex="1"
-                                          Background="{Binding SelectedBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                          Background="{Binding SelectedBrush, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}}"/>
                                 <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
                                     <Border.Background>
                                         <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
