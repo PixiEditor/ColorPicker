@@ -31,7 +31,7 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.3.0" />
+        <PackageReference Include="Avalonia" Version="11.3.5" />
         <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.0.14" />
         <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.2.0.14" />
     </ItemGroup>
