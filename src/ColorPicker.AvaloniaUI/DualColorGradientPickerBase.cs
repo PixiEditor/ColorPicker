@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Media;
 using ColorPicker.Models;
+using ColorPicker.UIExtensions;
 using GradientStop = ColorPicker.Models.GradientStop;
 using Matrix = ColorPicker.Models.Matrix;
 
