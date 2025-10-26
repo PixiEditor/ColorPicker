@@ -41,14 +41,40 @@ namespace ColorPicker
                     previousColor = newColor;
                 }
             };
-            ColorChanged += (sender, newColor) =>
+
+            var updateColorAction = new Action<object, RoutedEventArgs>
+                ((sender, newColor) =>
             {
                 if (!ignoreColorChange)
                 {
                     ignoreColorPropertyChange = true;
-                    SelectedColor = ((ColorRoutedEventArgs)newColor).Color;
+                    if (IsEnabled)
+                        SelectedColor = ((ColorRoutedEventArgs)newColor).Color;
+                    else
+                    {
+                        var grayColor = ((ColorRoutedEventArgs)newColor).Color.R * 0.21
+                                        + ((ColorRoutedEventArgs)newColor).Color.G * 0.72
+                                        + ((ColorRoutedEventArgs)newColor).Color.B * 0.07;
+                        SelectedColor = System.Windows.Media.Color.FromArgb(
+                            ((ColorRoutedEventArgs)newColor).Color.A,
+                            (byte)grayColor,
+                            (byte)grayColor,
+                            (byte)grayColor);
+                    }
                     ignoreColorPropertyChange = false;
                 }
+            });
+
+            ColorChanged += (sender, args) => updateColorAction(sender, args);
+            IsEnabledChanged += (sender, args) =>
+            {
+                var color = System.Windows.Media.Color.FromArgb(
+                    (byte)Math.Round(Color.A),
+                    (byte)Math.Round(Color.RGB_R),
+                    (byte)Math.Round(Color.RGB_G),
+                    (byte)Math.Round(Color.RGB_B));
+
+                updateColorAction(sender, new ColorRoutedEventArgs(ColorChangedEvent, color));
             };
         }
 

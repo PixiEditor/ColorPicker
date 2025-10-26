@@ -92,6 +92,34 @@ namespace ColorPicker.Models
         }
 
         /// <summary>
+        ///     Converts RGB to Grayscale Tuple
+        /// </summary>
+        /// <remarks>This method uses the luminosity method to calculate the grayscale</remarks>
+        /// <param name="r">Red channel</param>
+        /// <param name="g">Green channel</param>
+        /// <param name="b">Blue channel</param>
+        /// <returns>Values (0-1) in order: R, G, B (all same)</returns>
+        public static Tuple<double, double, double> RgbToGrayTuple(double r, double g, double b)
+        {
+            // Using the luminosity method
+            var gray = RgbToGray(r, g, b);
+            return new Tuple<double, double, double>(gray, gray, gray);
+        }
+
+        /// <summary>
+        ///     Converts RGB to Grayscale
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns>Grayscale value (0-1)</returns>
+        public static double RgbToGray(double r, double g, double b)
+        {
+            // Using the luminosity method
+            return 0.21 * r + 0.72 * g + 0.07 * b;
+        }
+
+        /// <summary>
         ///     Converts HSV to RGB
         /// </summary>
         /// <param name="h">Hue, 0-360</param>
@@ -141,6 +169,23 @@ namespace ColorPicker.Models
             else
                 hsl_s = (v - hsl_l) / Math.Min(hsl_l, 1 - hsl_l);
             return new Tuple<double, double, double>(h, hsl_s, hsl_l);
+        }
+
+        /// <summary>
+        ///     Converts HSV to Grayscale
+        /// </summary>
+        /// <param name="h">Hue, 0-360</param>
+        /// <param name="s">Saturation, 0-1</param>
+        /// <param name="v">Value, 0-1</param>
+        /// <returns>Values (0-1) in order: R, G, B (all same)</returns>
+        public static Tuple<double, double, double> HsvToGray(double h, double s, double v)
+        {
+            //Converting HSV to RGB first to not only use the value component
+            var rgb = HsvToRgb(h, s, v);
+            // Using the luminosity method
+            var grey = RgbToGray(rgb.Item1, rgb.Item2, rgb.Item3);
+
+            return new Tuple<double, double, double>(grey, grey, grey);
         }
 
         /// <summary>
@@ -198,6 +243,25 @@ namespace ColorPicker.Models
             else
                 hsv_s = 2 * (1 - l / hsv_v);
             return new Tuple<double, double, double>(h, hsv_s, hsv_v);
+        }
+
+        /// <summary>
+        ///     Converts HSL to Grayscale
+        /// </summary>
+        /// <remarks>This method uses the lightness component of the HSL color to calculate the grayscale
+        /// value, effectively ignoring the hue and saturation components.</remarks>
+        /// <param name="h">Hue, 0-360</param>
+        /// <param name="s">Saturation, 0-1</param>
+        /// <param name="l">Lightness, 0-1</param>
+        /// <returns>Values (0-1) in order: R, G, B (all same)</returns>
+        public static Tuple<double, double, double> HslToGray(double h, double s, double l)
+        {
+            // Converting HSL to RGB first to not only use the lightness component
+            var rgb = HslToRgb(h, s, l);
+            // Using the luminosity method
+            var gray = RgbToGray(rgb.Item1, rgb.Item2, rgb.Item3);
+
+            return new Tuple<double, double, double>(gray, gray, gray);
         }
     }
 }

@@ -34,13 +34,14 @@ namespace ColorPicker.UIExtensions
             var r = (byte)(CurrentColorState.RGB_R * 255);
             var g = (byte)(CurrentColorState.RGB_G * 255);
             var b = (byte)(CurrentColorState.RGB_B * 255);
+            var gray = (byte)(0.21 * r + 0.72 * g + 0.07 * b);
             switch (SliderArgbType)
             {
-                case "A": return Color.FromArgb((byte)value, r, g, b);
-                case "R": return Color.FromArgb(255, (byte)value, g, b);
-                case "G": return Color.FromArgb(255, r, (byte)value, b);
-                case "B": return Color.FromArgb(255, r, g, (byte)value);
-                default: return Color.FromArgb(a, r, g, b);
+                case "A": return IsEnabled ? Color.FromArgb((byte)value, r, g, b) : Color.FromArgb((byte)value, gray, gray, gray);
+                case "R": return IsEnabled ? Color.FromArgb(255, (byte)value, g, b) : Color.FromArgb(255, (byte)value, (byte)value, (byte)value);
+                case "G": return IsEnabled ? Color.FromArgb(255, r, (byte)value, b) : Color.FromArgb(255, (byte)value, (byte)value, (byte)value);
+                case "B": return IsEnabled ? Color.FromArgb(255, r, g, (byte)value) : Color.FromArgb(255, (byte)value, (byte)value, (byte)value);
+                default: return IsEnabled ? Color.FromArgb(a, r, g, b) : Color.FromArgb(a, gray, gray, gray);
             }
 
             ;

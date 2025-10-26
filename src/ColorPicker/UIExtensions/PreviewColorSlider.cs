@@ -31,6 +31,10 @@ namespace ColorPicker.UIExtensions
             LargeChange = 10;
             MinHeight = 12;
             PreviewMouseWheel += OnPreviewMouseWheel;
+            IsEnabledChanged += (s, e) =>
+            {
+                GenerateBackground();
+            };
         }
 
         protected virtual bool RefreshGradient => true;

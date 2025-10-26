@@ -1,7 +1,8 @@
-﻿using System;
+﻿using ColorPicker.Models;
+using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
-using ColorPicker.Models;
 
 namespace ColorPicker
 {
@@ -45,34 +46,69 @@ namespace ColorPicker
             hintColorDecorator = new HintColorDecorator(this);
 
             SecondColor = new NotifyableColor(secondColorDecorator);
-            SecondColor.PropertyChanged += (sender, args) =>
+            SecondColor.PropertyChanged += SecondColor_PropertyChanged;
+
+            HintNotifyableColor = new NotifyableColor(hintColorDecorator);
+            HintNotifyableColor.PropertyChanged += HintNotifyableColor_PropertyChanged;
+
+            IsEnabledChanged += (s, e) =>
             {
-                if (!ignoreSecondaryColorChange)
-                {
-                    ignoreSecondaryColorPropertyChange = true;
+                // Force update colors when IsEnabled changes
+                SecondColor_PropertyChanged(this, new PropertyChangedEventArgs(nameof(SecondColor)));
+                HintNotifyableColor_PropertyChanged(this, new PropertyChangedEventArgs(nameof(HintNotifyableColor)));
+            };
+        }
+
+        private void SecondColor_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!ignoreSecondaryColorChange)
+            {
+                ignoreSecondaryColorPropertyChange = true;
+                if (IsEnabled)
                     SecondaryColor = System.Windows.Media.Color.FromArgb(
                         (byte)Math.Round(SecondColor.A),
                         (byte)Math.Round(SecondColor.RGB_R),
                         (byte)Math.Round(SecondColor.RGB_G),
                         (byte)Math.Round(SecondColor.RGB_B));
-                    ignoreSecondaryColorPropertyChange = false;
-                }
-            };
-
-            HintNotifyableColor = new NotifyableColor(hintColorDecorator);
-            HintNotifyableColor.PropertyChanged += (sender, args) =>
-            {
-                if (!ignoreHintNotifyableColorChange)
+                else
                 {
-                    ignoreHintColorPropertyChange = true;
+                    var grayColor = SecondColor.RGB_R * 0.21
+                                    + SecondColor.RGB_G * 0.72
+                                    + SecondColor.RGB_B * 0.07;
+                    SecondaryColor = System.Windows.Media.Color.FromArgb(
+                        (byte)Math.Round(SecondColor.A),
+                        (byte)grayColor,
+                        (byte)grayColor,
+                        (byte)grayColor);
+                }
+                ignoreSecondaryColorPropertyChange = false;
+            }
+        }
+
+        private void HintNotifyableColor_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!ignoreHintNotifyableColorChange)
+            {
+                ignoreHintColorPropertyChange = true;
+                if (IsEnabled)
                     HintColor = System.Windows.Media.Color.FromArgb(
                         (byte)Math.Round(HintNotifyableColor.A),
                         (byte)Math.Round(HintNotifyableColor.RGB_R),
                         (byte)Math.Round(HintNotifyableColor.RGB_G),
                         (byte)Math.Round(HintNotifyableColor.RGB_B));
-                    ignoreHintColorPropertyChange = false;
+                else
+                {
+                    var grayColor = HintNotifyableColor.RGB_R * 0.21
+                                    + HintNotifyableColor.RGB_G * 0.72
+                                    + HintNotifyableColor.RGB_B * 0.07;
+                    HintColor = System.Windows.Media.Color.FromArgb(
+                        (byte)Math.Round(HintNotifyableColor.A),
+                        (byte)grayColor,
+                        (byte)grayColor,
+                        (byte)grayColor);
                 }
-            };
+                ignoreHintColorPropertyChange = false;
+            }
         }
 
         public NotifyableColor SecondColor { get; set; }
