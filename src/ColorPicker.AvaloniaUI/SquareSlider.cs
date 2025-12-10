@@ -62,6 +62,7 @@ internal class SquareSlider : TemplatedControl
         HueProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(OnHueChanged));
         PickerTypeProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<PickerType>>(OnColorSpaceChanged));
+        IsEffectivelyEnabledProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(OnIsEffectivelyEnabledChanged));
     }
 
     public double RangeY
@@ -127,7 +128,7 @@ internal class SquareSlider : TemplatedControl
         base.OnPointerPressed(e);
         e.Pointer.Capture(this);
         UpdatePos(e.GetPosition(this));
-        
+
         e.Handled = true;
     }
 
@@ -143,7 +144,7 @@ internal class SquareSlider : TemplatedControl
         if (Equals(e.Pointer.Captured, this))
         {
             UpdatePos(e.GetPosition(this));
-            
+
             e.Handled = true;
         }
     }
@@ -155,15 +156,15 @@ internal class SquareSlider : TemplatedControl
         var hue = Hue;
         var pixels = new byte[w * h * 3];
         for (var j = 0; j < h; j++)
-        for (var i = 0; i < w; i++)
-        {
-            var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
-            double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
-            var pos = (j * h + i) * 3;
-            pixels[pos] = (byte)(r * 255);
-            pixels[pos + 1] = (byte)(g * 255);
-            pixels[pos + 2] = (byte)(b * 255);
-        }
+            for (var i = 0; i < w; i++)
+            {
+                var rgbtuple = colorSpaceConversionMethod(hue, i / (double)(w - 1), (h - 1 - j) / (double)(h - 1));
+                double r = rgbtuple.Item1, g = rgbtuple.Item2, b = rgbtuple.Item3;
+                var pos = (j * h + i) * 3;
+                pixels[pos] = (byte)(r * 255);
+                pixels[pos + 1] = (byte)(g * 255);
+                pixels[pos + 2] = (byte)(b * 255);
+            }
 
         using (var framebuffer = GradientBitmap.Lock())
         {
@@ -215,6 +216,25 @@ internal class SquareSlider : TemplatedControl
     private static void OnHueChanged(AvaloniaPropertyChangedEventArgs<double> args)
     {
         ((SquareSlider)args.Sender).RecalculateGradient();
+    }
+
+    private static void OnIsEffectivelyEnabledChanged(AvaloniaPropertyChangedEventArgs<bool> args)
+    {
+        if (args.Sender is not SquareSlider sqs)
+            return;
+
+        if (args.NewValue.Value)
+            if (sqs.PickerType == PickerType.HSV)
+                sqs.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
+            else
+                sqs.colorSpaceConversionMethod = ColorSpaceHelper.HslToRgb;
+        else
+            if (sqs.PickerType == PickerType.HSV)
+                sqs.colorSpaceConversionMethod = ColorSpaceHelper.HsvToGray;
+            else
+                sqs.colorSpaceConversionMethod = ColorSpaceHelper.HslToGray;
+
+        sqs.RecalculateGradient();
     }
 
     private void UpdatePos(Point pos)

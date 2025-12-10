@@ -2,6 +2,7 @@
 using Avalonia.Media;
 using Avalonia.Reactive;
 using ColorPicker.Models;
+using System.ComponentModel;
 
 namespace ColorPicker;
 
@@ -47,6 +48,8 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(OnHintColorStatePropertyChange));
         HintColorProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<Color>>(OnHintColorPropertyChanged));
+
+        IsEffectivelyEnabledProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(OnIsEffectivelyEnabledChanged));
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -64,34 +67,62 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
         hintColorDecorator = new HintColorDecorator(this);
 
         SecondColor = new NotifyableColor(secondColorDecorator);
-        SecondColor.PropertyChanged += (sender, args) =>
+        SecondColor.PropertyChanged += SecondColor_PropertyChanged;
+
+        HintNotifyableColor = new NotifyableColor(hintColorDecorator);
+        HintNotifyableColor.PropertyChanged += HintNotifyableColor_PropertyChanged;
+    }
+
+    private void SecondColor_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (!ignoreSecondaryColorChange)
         {
-            if (!ignoreSecondaryColorChange)
-            {
-                ignoreSecondaryColorPropertyChange = true;
+            ignoreSecondaryColorPropertyChange = true;
+            if (IsEffectivelyEnabled)
                 SecondaryColor = Avalonia.Media.Color.FromArgb(
                     (byte)Math.Round(SecondColor.A),
                     (byte)Math.Round(SecondColor.RGB_R),
                     (byte)Math.Round(SecondColor.RGB_G),
                     (byte)Math.Round(SecondColor.RGB_B));
-                ignoreSecondaryColorPropertyChange = false;
-            }
-        };
-
-        HintNotifyableColor = new NotifyableColor(hintColorDecorator);
-        HintNotifyableColor.PropertyChanged += (sender, args) =>
-        {
-            if (!ignoreHintNotifyableColorChange)
+            else
             {
-                ignoreHintColorPropertyChange = true;
+                var grayColor = SecondColor.RGB_R * 0.21
+                                + SecondColor.RGB_G * 0.72
+                                + SecondColor.RGB_B * 0.07;
+                SecondaryColor = Avalonia.Media.Color.FromArgb(
+                    (byte)Math.Round(SecondColor.A),
+                    (byte)grayColor,
+                    (byte)grayColor,
+                    (byte)grayColor);
+            }
+            ignoreSecondaryColorPropertyChange = false;
+        }
+    }
+
+    private void HintNotifyableColor_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (!ignoreHintNotifyableColorChange)
+        {
+            ignoreHintColorPropertyChange = true;
+            if (IsEffectivelyEnabled)
                 HintColor = Avalonia.Media.Color.FromArgb(
                     (byte)Math.Round(HintNotifyableColor.A),
                     (byte)Math.Round(HintNotifyableColor.RGB_R),
                     (byte)Math.Round(HintNotifyableColor.RGB_G),
                     (byte)Math.Round(HintNotifyableColor.RGB_B));
-                ignoreHintColorPropertyChange = false;
+            else
+            {
+                var grayColor = HintNotifyableColor.RGB_R * 0.21
+                                + HintNotifyableColor.RGB_G * 0.72
+                                + HintNotifyableColor.RGB_B * 0.07;
+                HintColor = Avalonia.Media.Color.FromArgb(
+                    (byte)Math.Round(HintNotifyableColor.A),
+                    (byte)grayColor,
+                    (byte)grayColor,
+                    (byte)grayColor);
             }
-        };
+            ignoreHintColorPropertyChange = false;
+        }
     }
 
     public bool UseHintColor
@@ -176,5 +207,14 @@ public class DualPickerControlBase : PickerControlBase, ISecondColorStorage, IHi
         sender.SecondColor.RGB_G = newValue.G;
         sender.SecondColor.RGB_B = newValue.B;
         sender.ignoreSecondaryColorChange = false;
+    }
+
+    private static void OnIsEffectivelyEnabledChanged(AvaloniaPropertyChangedEventArgs<bool> args)
+    {
+        if (args.Sender is DualPickerControlBase control)
+        {
+            control.SecondColor_PropertyChanged(control, new PropertyChangedEventArgs(nameof(SecondColor)));
+            control.HintNotifyableColor_PropertyChanged(control, new PropertyChangedEventArgs(nameof(HintNotifyableColor)));
+        }
     }
 }
