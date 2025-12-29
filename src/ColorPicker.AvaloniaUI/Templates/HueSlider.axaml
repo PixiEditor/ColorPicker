@@ -66,7 +66,6 @@
             </Setter.Value>
         </Setter>
 		
-		<!-- Style für disabled State: Graustufen-Bild verwenden -->
 		<Style Selector="^:disabled /template/ Image#HueImage">
 			<Setter Property="Source" Value="{StaticResource grayscaleImage}" />
 		</Style>
