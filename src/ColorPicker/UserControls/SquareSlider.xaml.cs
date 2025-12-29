@@ -40,6 +40,7 @@ namespace ColorPicker.UserControls
             GradientBitmap = new WriteableBitmap(32, 32, 96, 96, PixelFormats.Rgb24, null);
             InitializeComponent();
             RecalculateGradient();
+            IsEnabledChanged += OnIsEnabledChanged;
         }
 
         public double Hue
@@ -132,6 +133,24 @@ namespace ColorPicker.UserControls
         private static void OnHueChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             ((SquareSlider)d).RecalculateGradient();
+        }
+
+        private void OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var sqs = (SquareSlider)sender;
+
+            if (IsEnabled)
+                if (sqs.PickerType == PickerType.HSV)
+                    sqs.colorSpaceConversionMethod = ColorSpaceHelper.HsvToRgb;
+                else
+                    sqs.colorSpaceConversionMethod = ColorSpaceHelper.HslToRgb;
+            else
+                if (sqs.PickerType == PickerType.HSV)
+                    sqs.colorSpaceConversionMethod = ColorSpaceHelper.HsvToGray;
+                else
+                    sqs.colorSpaceConversionMethod = ColorSpaceHelper.HslToGray;
+
+            sqs.RecalculateGradient();
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)

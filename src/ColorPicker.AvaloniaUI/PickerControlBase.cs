@@ -36,6 +36,19 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(OnColorStatePropertyChange));
         SelectedColorProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<Color>>(OnSelectedColorPropertyChange));
+
+        IsEffectivelyEnabledProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(e =>
+        {
+            if (e.Sender is PickerControlBase sender)
+            {
+                var color = Avalonia.Media.Color.FromArgb(
+                (byte)Math.Round(sender.Color.A),
+                (byte)Math.Round(sender.Color.RGB_R),
+                (byte)Math.Round(sender.Color.RGB_G),
+                (byte)Math.Round(sender.Color.RGB_B));
+                sender.updateColorAction(sender, new ColorRoutedEventArgs(ColorChangedEvent, color));
+            }
+        }));
     }
 
     public PickerControlBase()
@@ -54,16 +67,35 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
                 previousColor = newColor;
             }
         };
-        ColorChanged += (sender, newColor) =>
-        {
-            if (!ignoreColorChange)
-            {
-                ignoreColorPropertyChange = true;
-                SelectedColor = ((ColorRoutedEventArgs)newColor).Color;
-                ignoreColorPropertyChange = false;
-            }
-        };
+
+        
+
+        ColorChanged += (sender, args) => updateColorAction(sender, args);
+        
     }
+
+    private Action<object, RoutedEventArgs>  updateColorAction => new Action<object, RoutedEventArgs>
+    ((sender, newColor) =>
+    {
+        if (!ignoreColorChange)
+        {
+            ignoreColorPropertyChange = true;
+            if (IsEffectivelyEnabled)
+                SelectedColor = ((ColorRoutedEventArgs)newColor).Color;
+            else
+            {
+                var grayColor = ((ColorRoutedEventArgs)newColor).Color.R * 0.21
+                                + ((ColorRoutedEventArgs)newColor).Color.G * 0.72
+                                + ((ColorRoutedEventArgs)newColor).Color.B * 0.07;
+                SelectedColor = Avalonia.Media.Color.FromArgb(
+                    ((ColorRoutedEventArgs)newColor).Color.A,
+                    (byte)grayColor,
+                    (byte)grayColor,
+                    (byte)grayColor);
+            }
+            ignoreColorPropertyChange = false;
+        }
+    });
 
     public NotifyableColor Color
     {

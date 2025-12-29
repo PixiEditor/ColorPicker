@@ -31,6 +31,13 @@ internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<ColorState>>(ColorStateChangedCallback));
         SmallChangeBindableProperty.Changed.Subscribe(
             new AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>>(SmallChangeBindableChangedCallback));
+
+        IsEffectivelyEnabledProperty.Changed.Subscribe(
+            new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(e =>
+            {
+                var slider = e.Sender as PreviewColorSlider;
+                slider?.GenerateBackground();
+            }));
     }
 
     public PreviewColorSlider()
