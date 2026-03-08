@@ -1,21 +1,22 @@
 ﻿using System;
 
-namespace ColorPicker.Models.Colors;
-
-public struct Hsl
+namespace ColorPicker.Models.Colors
 {
-    public double H { get; }
-        
-    public double S { get; }
-        
-    public double L { get; }
-
-    public Hsl(double h, double s, double l)
+    public struct Hsl
     {
-        H = h;
-        S = s;
-        L = l;
-    }
+        public double H { get; }
 
-    public static implicit operator Tuple<double, double, double>(Hsl rgb) => Tuple.Create(rgb.H, rgb.S, rgb.L);
+        public double S { get; }
+
+        public double L { get; }
+
+        public Hsl(double h, double s, double l)
+        {
+            H = h;
+            S = s;
+            L = l;
+        }
+
+        public static implicit operator Tuple<double, double, double>(Hsl rgb) => Tuple.Create(rgb.H, rgb.S, rgb.L);
+    }
 }

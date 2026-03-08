@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using ColorPicker.Models.ColorSpaces;
 
-namespace ColorPicker.Models.ColorSliders.Types;
-
-internal class HsvValueColorSliderType : IColorSliderType
+namespace ColorPicker.Models.ColorSliders.Types
 {
-    public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+    internal class HsvValueColorSliderType : IColorSliderType
     {
-        return new List<ColorSliderGradientPoint>()
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
         {
-            new ColorSliderGradientPoint(RgbHelper.HsvToRgb(state.HSV_H, state.HSV_S, 0), 0),
-            new ColorSliderGradientPoint(RgbHelper.HsvToRgb(state.HSV_H, state.HSV_S, 1), 1)
-        };
-    }
+            return new List<ColorSliderGradientPoint>()
+            {
+                new ColorSliderGradientPoint(RgbHelper.HsvToRgb(state.HSV_H, state.HSV_S, 0), 0),
+                new ColorSliderGradientPoint(RgbHelper.HsvToRgb(state.HSV_H, state.HSV_S, 1), 1)
+            };
+        }
 
-    public bool RefreshGradient => true;
+        public bool RefreshGradient => true;
+    }
 }

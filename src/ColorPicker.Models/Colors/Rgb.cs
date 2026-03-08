@@ -1,21 +1,22 @@
 ﻿using System;
 
-namespace ColorPicker.Models.Colors;
-
-public struct Rgb
+namespace ColorPicker.Models.Colors
 {
-    public double R { get; }
-        
-    public double G { get; }
-        
-    public double B { get; }
-
-    public Rgb(double r, double g, double b)
+    public struct Rgb
     {
-        R = r;
-        G = g;
-        B = b;
-    }
+        public double R { get; }
 
-    public static implicit operator Tuple<double, double, double>(Rgb rgb) => Tuple.Create(rgb.R, rgb.G, rgb.B);
+        public double G { get; }
+
+        public double B { get; }
+
+        public Rgb(double r, double g, double b)
+        {
+            R = r;
+            G = g;
+            B = b;
+        }
+
+        public static implicit operator Tuple<double, double, double>(Rgb rgb) => Tuple.Create(rgb.R, rgb.G, rgb.B);
+    }
 }

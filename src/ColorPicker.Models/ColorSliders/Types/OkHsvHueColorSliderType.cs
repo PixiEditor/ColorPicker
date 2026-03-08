@@ -1,30 +1,31 @@
 ﻿using System.Collections.Generic;
 using ColorPicker.Models.ColorSpaces;
 
-namespace ColorPicker.Models.ColorSliders.Types;
-
-internal class OkHsvHueColorSliderType : IColorSliderType
+namespace ColorPicker.Models.ColorSliders.Types
 {
-    public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+    internal class OkHsvHueColorSliderType : IColorSliderType
     {
-        return new List<ColorSliderGradientPoint>()
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
         {
-            GetPointAtHue(0, 0),
-            GetPointAtHue(22, 22 / 360.0),
-            GetPointAtHue(51, 51 / 360.00),
-            GetPointAtHue(139, 139 / 360.0),
-            GetPointAtHue(199, 199 / 360.0),
-            GetPointAtHue(245, 245 / 360.0),
-            GetPointAtHue(280, 280 / 360.0),
-            GetPointAtHue(0, 1)
-        };
-    }
-    
-    private ColorSliderGradientPoint GetPointAtHue(int value, double position)
-    {
-        var rgbTuple = RgbHelper.OkHsvToRgb(value, 1.0, 1.0);
-        return new ColorSliderGradientPoint(rgbTuple, position);
-    }
+            return new List<ColorSliderGradientPoint>()
+            {
+                GetPointAtHue(0, 0),
+                GetPointAtHue(22, 22 / 360.0),
+                GetPointAtHue(51, 51 / 360.00),
+                GetPointAtHue(139, 139 / 360.0),
+                GetPointAtHue(199, 199 / 360.0),
+                GetPointAtHue(245, 245 / 360.0),
+                GetPointAtHue(280, 280 / 360.0),
+                GetPointAtHue(0, 1)
+            };
+        }
 
-    public bool RefreshGradient => false;
+        private ColorSliderGradientPoint GetPointAtHue(int value, double position)
+        {
+            var rgbTuple = RgbHelper.OkHsvToRgb(value, 1.0, 1.0);
+            return new ColorSliderGradientPoint(rgbTuple, position);
+        }
+
+        public bool RefreshGradient => false;
+    }
 }

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace ColorPicker.Models.ColorSliders.Types;
-
-internal class RgbBlueColorSliderType : IColorSliderType
+namespace ColorPicker.Models.ColorSliders.Types
 {
-    public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+    internal class RgbBlueColorSliderType : IColorSliderType
     {
-        return new List<ColorSliderGradientPoint>()
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
         {
-            new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, 0, 0.0),
-            new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, 1, 1.0)
-        };
-    }
+            return new List<ColorSliderGradientPoint>()
+            {
+                new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, 0, 0.0),
+                new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, 1, 1.0)
+            };
+        }
 
-    public bool RefreshGradient => true;
+        public bool RefreshGradient => true;
+    }
 }

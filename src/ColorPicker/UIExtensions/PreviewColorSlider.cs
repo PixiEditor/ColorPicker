@@ -109,10 +109,10 @@ namespace ColorPicker.ColorSlider
             LeftCapColor.Color = Color.FromArgb((byte)(points[0].A * 255), (byte)(points[0].R * 255), (byte)(points[0].G * 255), (byte)(points[0].B * 255));
             RightCapColor.Color = Color.FromArgb((byte)(points[lastIndex].A * 255), (byte)(points[lastIndex].R * 255), (byte)(points[lastIndex].G * 255), (byte)(points[lastIndex].B * 255));
             
-            GradientStopCollection collection = new(points.Count);
+            GradientStopCollection collection = new GradientStopCollection(points.Count);
             foreach (ColorSliderGradientPoint point in points)
             {
-                GradientStop stop = new(Color.FromArgb((byte)(point.A * 255), (byte)(point.R * 255), (byte)(point.G * 255), (byte)(point.B * 255)), point.Position);
+                GradientStop stop = new GradientStop(Color.FromArgb((byte)(point.A * 255), (byte)(point.R * 255), (byte)(point.G * 255), (byte)(point.B * 255)), point.Position);
                 collection.Add(stop);
             }
 
