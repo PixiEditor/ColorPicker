@@ -1,9 +1,10 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:colorPicker="clr-namespace:ColorPicker"
-                    xmlns:converters="clr-namespace:ColorPicker.Converters">
+                    xmlns:converters="clr-namespace:ColorPicker.Converters"
+                    xmlns:behaviors="clr-namespace:ColorPicker.Behaviors">
     <ControlTheme TargetType="colorPicker:PortableColorPicker" x:Key="{x:Type colorPicker:PortableColorPicker}">
-        <Setter Property="CornerRadius" Value="{DynamicResource ColorPickerControlRadius}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource ColorPickerControlRadius}" />
         <Setter Property="Template">
             <ControlTemplate TargetType="colorPicker:PortableColorPicker">
                 <Grid>
@@ -21,38 +22,46 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="0" Margin="0" RenderOptions.BitmapInterpolationMode="None">
                         <Grid>
-                            <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0" CornerRadius="{DynamicResource ColorPickerControlRadius}"
+                            <ToggleButton Classes="ColorToggleButtonStyle" Padding="0" Margin="0"
+                                          CornerRadius="{DynamicResource ColorPickerControlRadius}"
                                           x:Name="toggleButton" BorderThickness="0" ZIndex="1"
-                                          Background="{Binding SelectedBrush, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}}"/>
-                                <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
-                                    <Border.Background>
-                                        <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile" DestinationRect="0,0,8,8"/>
-                                    </Border.Background>
-                                </Border>
-                            </Grid>
+                                          Background="{Binding SelectedBrush, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}}" />
+                            <Border CornerRadius="{TemplateBinding CornerRadius}" Margin="1">
+                                <Border.Background>
+                                    <ImageBrush Source="/Images/transparentbg_mini.png" TileMode="Tile"
+                                                DestinationRect="0,0,8,8" />
+                                </Border.Background>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Popup Name="popup" IsLightDismissEnabled="True"
                            IsOpen="{Binding Path=IsChecked, ElementName=toggleButton, Mode=TwoWay}">
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}"
-                                IsHitTestVisible="True"
-                                Background="{DynamicResource ThemeBackgroundBrush}">
-                            <colorPicker:StandardColorPicker ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             EnableRecentColors="{TemplateBinding ShowRecentColors}"
-                                                             EnableRecentGradients="{TemplateBinding ShowRecentGradients}"
-                                                             GradientState="{Binding Path=GradientState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             SelectedTabIndex="{Binding Path=SelectedTabIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             GradientType="{Binding Path=GradientType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
-                                                             HintColorState="{Binding Path=HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             SecondColorState="{Binding Path=SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             SmallChange="{TemplateBinding SmallChange}" Width="200"
-                                                             Height="380"
-                                                             ShowAlpha="{TemplateBinding ShowAlpha}"
-                                                             PickerType="{TemplateBinding PickerType}"
-                                                             ShowFractionalPart="{TemplateBinding ShowFractionalPart}"
-                                                             EnableGradientsTab="{TemplateBinding EnableGradientsTab}"
-                                                             HexRepresentation="{TemplateBinding HexRepresentation}"/>
-                        </Border>
+                        <LayoutTransformControl>
+                            <Interaction.Behaviors>
+                                <behaviors:LayoutTransformScalerBehavior />
+                            </Interaction.Behaviors>
+                            <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+                                    IsHitTestVisible="True"
+                                    Background="{DynamicResource ThemeBackgroundBrush}">
+                                <colorPicker:StandardColorPicker
+                                    ColorState="{Binding Path=ColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    EnableRecentColors="{TemplateBinding ShowRecentColors}"
+                                    EnableRecentGradients="{TemplateBinding ShowRecentGradients}"
+                                    GradientState="{Binding Path=GradientState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    SelectedTabIndex="{Binding Path=SelectedTabIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    GradientType="{Binding Path=GradientType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=TwoWay}"
+                                    HintColorState="{Binding Path=HintColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    SecondColorState="{Binding Path=SecondColorState, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    SmallChange="{TemplateBinding SmallChange}" Width="200"
+                                    Height="380"
+                                    ShowAlpha="{TemplateBinding ShowAlpha}"
+                                    PickerType="{TemplateBinding PickerType}"
+                                    ShowFractionalPart="{TemplateBinding ShowFractionalPart}"
+                                    EnableGradientsTab="{TemplateBinding EnableGradientsTab}"
+                                    HexRepresentation="{TemplateBinding HexRepresentation}" />
+                            </Border>
+                        </LayoutTransformControl>
                     </Popup>
                 </Grid>
             </ControlTemplate>
