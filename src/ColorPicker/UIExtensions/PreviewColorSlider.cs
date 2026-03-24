@@ -103,7 +103,7 @@ namespace ColorPicker.ColorSlider
             if (colorSliderTypeImpl is null)
                 return;
 
-            List<ColorSliderGradientPoint> points = colorSliderTypeImpl.CalculateRgbGradient(CurrentColorState);
+            List<ColorSliderGradientPoint> points = colorSliderTypeImpl.CalculateRgbGradient(CurrentColorState, IsEnabled);
 
             int lastIndex = points.Count - 1;
             LeftCapColor.Color = Color.FromArgb((byte)(points[0].A * 255), (byte)(points[0].R * 255), (byte)(points[0].G * 255), (byte)(points[0].B * 255));

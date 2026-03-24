@@ -5,7 +5,7 @@ namespace ColorPicker.Models.ColorSliders
 {
     public interface IColorSliderType
     {
-        List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState currentColorState);
+        List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState currentColorState, bool enabled);
         bool RefreshGradient { get; }
     }
 }

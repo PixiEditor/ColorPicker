@@ -4,13 +4,21 @@ namespace ColorPicker.Models.ColorSliders.Types
 {
     internal class AlphaColorSliderType : IColorSliderType
     {
-        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state, bool enabled)
         {
             return new List<ColorSliderGradientPoint>()
             {
-                new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, state.RGB_B, 0.0) { A = 0 },
-                new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, state.RGB_B, 1.0) { A = 1 }
+                GetPointAt(0),
+                GetPointAt(1)
             };
+
+            ColorSliderGradientPoint GetPointAt(double value)
+            {
+                if (enabled)
+                    return new ColorSliderGradientPoint(state.RGB_R, state.RGB_G, state.RGB_B, value) { A = value };
+                else
+                    return new ColorSliderGradientPoint((Colors.Rgb)ColorSpaceHelper.RgbToGrayTuple(state.RGB_R, state.RGB_G, state.RGB_B), value) { A = value };
+            }
         }
 
         public bool RefreshGradient => true;

@@ -5,13 +5,23 @@ namespace ColorPicker.Models.ColorSliders.Types
 {
     internal class OkHsvSaturationColorSliderType : IColorSliderType
     {
-        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state, bool enabled)
         {
             return new List<ColorSliderGradientPoint>()
             {
-                new ColorSliderGradientPoint(RgbHelper.OkHsvToRgb(state.OKHSV_H, 0, state.OKHSV_V), 0),
-                new ColorSliderGradientPoint(RgbHelper.OkHsvToRgb(state.OKHSV_H, 1, state.OKHSV_V), 1)
+                GetPointAt(0),
+                GetPointAt(1)
             };
+
+            ColorSliderGradientPoint GetPointAt(double value)
+            {
+                var rgb = RgbHelper.OkHsvToRgb(state.OKHSV_H, value, state.OKHSV_V);
+
+                if (!enabled)
+                    rgb = (Colors.Rgb)ColorSpaceHelper.RgbToGrayTuple(rgb.R, rgb.G, rgb.B);
+
+                return new ColorSliderGradientPoint(rgb, value);
+            }
         }
 
         public bool RefreshGradient => true;

@@ -17,6 +17,7 @@ namespace ColorPicker.Models.Colors
             B = b;
         }
 
+        public static explicit operator Rgb(Tuple<double, double, double> rgb) => new Rgb(rgb.Item1, rgb.Item2, rgb.Item3);
         public static implicit operator Tuple<double, double, double>(Rgb rgb) => Tuple.Create(rgb.R, rgb.G, rgb.B);
     }
 }

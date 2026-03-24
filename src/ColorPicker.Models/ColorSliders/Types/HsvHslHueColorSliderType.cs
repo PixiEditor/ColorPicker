@@ -5,7 +5,7 @@ namespace ColorPicker.Models.ColorSliders.Types
 {
     internal class HsvHslHueColorSliderType : IColorSliderType
     {
-        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state, bool enabled)
         {
             return new List<ColorSliderGradientPoint>()
             {
@@ -17,12 +17,14 @@ namespace ColorPicker.Models.ColorSliders.Types
                 GetPointAtHue(300, 5 / 6.0),
                 GetPointAtHue(0, 1)
             };
-        }
 
-        private ColorSliderGradientPoint GetPointAtHue(int value, double position)
-        {
-            var rgbTuple = RgbHelper.HsvToRgb(value, 1.0, 1.0);
-            return new ColorSliderGradientPoint(rgbTuple, position);
+            ColorSliderGradientPoint GetPointAtHue(int value, double position)
+            {
+                if (enabled)
+                    return new ColorSliderGradientPoint(RgbHelper.HsvToRgb(value, 1.0, 1.0), position);
+                else
+                    return new ColorSliderGradientPoint((Colors.Rgb)ColorSpaceHelper.HsvToGray(value, 1.0, 1.0), position);
+            }
         }
 
         public bool RefreshGradient => false;

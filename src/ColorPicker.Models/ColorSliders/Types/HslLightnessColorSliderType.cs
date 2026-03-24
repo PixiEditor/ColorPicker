@@ -5,16 +5,24 @@ namespace ColorPicker.Models.ColorSliders.Types
 {
     internal class HslLightnessColorSliderType : IColorSliderType
     {
-        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state)
+        public List<ColorSliderGradientPoint> CalculateRgbGradient(ColorState state, bool enabled)
         {
             return new List<ColorSliderGradientPoint>()
             {
-                new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, 0), 0),
-                new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, 0.25), 0.25),
-                new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, 0.5), 0.5),
-                new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, 0.75), 0.75),
-                new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, 1), 1)
+                GetPointAt(0),
+                GetPointAt(0.25),
+                GetPointAt(0.5),
+                GetPointAt(0.75),
+                GetPointAt(1)
             };
+
+            ColorSliderGradientPoint GetPointAt(double value)
+            {
+                if (enabled)
+                    return new ColorSliderGradientPoint(RgbHelper.HslToRgb(state.HSL_H, state.HSL_S, value), value);
+                else
+                    return new ColorSliderGradientPoint((Colors.Rgb)ColorSpaceHelper.HslToGray(state.HSL_H, state.HSL_S, value), value);
+            }
         }
 
         public bool RefreshGradient => true;
