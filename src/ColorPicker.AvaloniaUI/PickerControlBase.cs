@@ -132,10 +132,9 @@ public class PickerControlBase : TemplatedControl, IColorStateStorage
             return;
         var newValue = args.NewValue.Value;
         sender.ignoreColorChange = true;
-        sender.Color.A = newValue.A;
-        sender.Color.RGB_R = newValue.R;
-        sender.Color.RGB_G = newValue.G;
-        sender.Color.RGB_B = newValue.B;
+        var state = sender.ColorState;
+        state.SetARGB(newValue.A / 255.0, newValue.R / 255.0, newValue.G / 255.0, newValue.B / 255.0);
+        sender.ColorState = state;
         sender.ignoreColorChange = false;
     }
 
