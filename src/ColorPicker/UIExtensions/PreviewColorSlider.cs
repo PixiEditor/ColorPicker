@@ -1,13 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ColorPicker.Models;
+using ColorPicker.Models.ColorSliders;
 
-namespace ColorPicker.UIExtensions
+namespace ColorPicker.ColorSlider
 {
-    internal abstract class PreviewColorSlider : Slider, INotifyPropertyChanged
+    internal sealed class PreviewColorSlider : Slider, INotifyPropertyChanged
     {
         public static readonly DependencyProperty CurrentColorStateProperty =
             DependencyProperty.Register(nameof(CurrentColorState), typeof(ColorState), typeof(PreviewColorSlider),
@@ -23,6 +25,18 @@ namespace ColorPicker.UIExtensions
 
         private SolidColorBrush _rightCapColor = new SolidColorBrush();
 
+        public static readonly DependencyProperty SliderTypeProperty =
+            DependencyProperty.Register(nameof(SliderTypeProperty), typeof(ColorSliderType), typeof(PreviewColorSlider),
+                new PropertyMetadata(ColorSliderType.RgbRed, ColorSliderTypeChangedCallback));
+
+        public ColorSliderType SliderType
+        {
+            get => (ColorSliderType)GetValue(SliderTypeProperty);
+            set => SetValue(SliderTypeProperty, value);
+        }
+
+        private IColorSliderType colorSliderTypeImpl;
+
         public PreviewColorSlider()
         {
             Minimum = 0;
@@ -36,8 +50,6 @@ namespace ColorPicker.UIExtensions
                 GenerateBackground();
             };
         }
-
-        protected virtual bool RefreshGradient => true;
 
         public double SmallChangeBindable
         {
@@ -86,18 +98,44 @@ namespace ColorPicker.UIExtensions
             GenerateBackground();
         }
 
-        protected abstract void GenerateBackground();
+        private void GenerateBackground()
+        {
+            if (colorSliderTypeImpl is null)
+                return;
 
-        protected static void ColorStateChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+            List<ColorSliderGradientPoint> points = colorSliderTypeImpl.CalculateRgbGradient(CurrentColorState, IsEnabled);
+
+            int lastIndex = points.Count - 1;
+            LeftCapColor.Color = Color.FromArgb((byte)(points[0].A * 255), (byte)(points[0].R * 255), (byte)(points[0].G * 255), (byte)(points[0].B * 255));
+            RightCapColor.Color = Color.FromArgb((byte)(points[lastIndex].A * 255), (byte)(points[lastIndex].R * 255), (byte)(points[lastIndex].G * 255), (byte)(points[lastIndex].B * 255));
+            
+            GradientStopCollection collection = new GradientStopCollection(points.Count);
+            foreach (ColorSliderGradientPoint point in points)
+            {
+                GradientStop stop = new GradientStop(Color.FromArgb((byte)(point.A * 255), (byte)(point.R * 255), (byte)(point.G * 255), (byte)(point.B * 255)), point.Position);
+                collection.Add(stop);
+            }
+
+            BackgroundGradient = collection;
+        }
+
+        private static void ColorStateChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var slider = (PreviewColorSlider)d;
-            if (slider.RefreshGradient)
+            if (slider.colorSliderTypeImpl?.RefreshGradient ?? false)
                 slider.GenerateBackground();
         }
 
         private static void SmallChangeBindableChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((PreviewColorSlider)d).SmallChange = (double)e.NewValue;
+        }
+        
+        private static void ColorSliderTypeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = (PreviewColorSlider)d;
+            self.colorSliderTypeImpl = ColorSliderTypeFactory.Get((ColorSliderType)e.NewValue);
+            self.GenerateBackground();
         }
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)

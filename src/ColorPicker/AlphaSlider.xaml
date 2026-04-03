@@ -4,7 +4,8 @@
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                          xmlns:local="clr-namespace:ColorPicker"
-                         xmlns:ui="clr-namespace:ColorPicker.UIExtensions"
+                         xmlns:ui="clr-namespace:ColorPicker.ColorSlider"
+                         xmlns:mcs="clr-namespace:ColorPicker.Models.ColorSliders;assembly=ColorPicker.Models"
                          mc:Ignorable="d"
                          x:Name="uc"
                          d:DesignHeight="450" d:DesignWidth="800">
@@ -17,7 +18,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid Height="12">
-            <ui:RgbColorSlider SliderArgbType="A" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
+            <ui:PreviewColorSlider SliderType="{x:Static mcs:ColorSliderType.Alpha}" Minimum="0" Maximum="255" IsMoveToPointEnabled="True"
                                SmallChangeBindable="{Binding ElementName=uc, Path=SmallChange}"
                                Value="{Binding Path=Color.A, Mode=TwoWay, ElementName=uc}"
                                CurrentColorState="{Binding Path=ColorState, ElementName=uc}" />
