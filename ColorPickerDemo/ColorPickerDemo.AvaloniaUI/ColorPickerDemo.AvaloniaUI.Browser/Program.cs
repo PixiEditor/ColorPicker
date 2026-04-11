@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using ColorPickerDemo.AvaloniaUI;
 
 [assembly: SupportedOSPlatform("browser")]
@@ -13,7 +13,7 @@ internal class Program
     {
         await BuildAvaloniaApp()
             .WithInterFont()
-            .UseReactiveUI()
+            .UseReactiveUI(_ => { })
             .StartBrowserAppAsync("out");
     }
 
