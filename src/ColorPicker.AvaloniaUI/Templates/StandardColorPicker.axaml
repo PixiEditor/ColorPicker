@@ -3,7 +3,8 @@
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters"
                     xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models"
-                    xmlns:behaviors="clr-namespace:ColorPicker.Behaviors">
+                    xmlns:behaviors="clr-namespace:ColorPicker.Behaviors"
+                    xmlns:localization="clr-namespace:PixiEditor.UI.Common.Localization;assembly=PixiEditor.UI.Common">
     <ControlTheme TargetType="colorPicker:StandardColorPicker" x:Key="{x:Type colorPicker:StandardColorPicker}">
         <Setter Property="Template">
             <ControlTemplate>
@@ -24,7 +25,7 @@
                         </Style>
                     </TabControl.Styles>
                     <TabControl.Items>
-                        <TabItem Header="Color">
+                        <TabItem localization:Translator.Key="COLOR_PICKER_COLOR">
                             <Grid Name="MainGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="6*" />
@@ -79,27 +80,27 @@
                                                            Brushes="{Binding GlobalRecentsStore.RecentColors, RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Gradient" IsVisible="{TemplateBinding EnableGradientsTab}">
+                        <TabItem localization:Translator.Key="COLOR_PICKER_GRADIENT" IsVisible="{TemplateBinding EnableGradientsTab}">
                             <StackPanel Spacing="5" Orientation="Vertical">
                                 <ComboBox Theme="{DynamicResource ColorPickerComboBox}"
                                           SelectedIndex="{Binding Path=GradientType, RelativeSource={RelativeSource TemplatedParent},
                                            Converter={StaticResource EnumTypeToIntConverter}, ConverterParameter={x:Type models:GradientType}, Mode=TwoWay}">
-                                    <ComboBoxItem Content="Linear " />
-                                    <ComboBoxItem Content="Radial" />
-                                    <ComboBoxItem Content="Conical" />
+                                    <ComboBoxItem localization:Translator.Key="COLOR_PICKER_GRADIENT_LINEAR" />
+                                    <ComboBoxItem localization:Translator.Key="COLOR_PICKER_GRADIENT_RADIAL"  />
+                                    <ComboBoxItem localization:Translator.Key="COLOR_PICKER_GRADIENT_CONICAL"  />
                                 </ComboBox>
                                 <colorPicker:GradientBar Name="GradientBar"
                                                          GradientStops="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                          GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
                                 <StackPanel Spacing="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Label Grid.Row="0" Grid.Column="0" Content="Color" VerticalAlignment="Center" />
+                                    <Label Grid.Row="0" Grid.Column="0" localization:Translator.Key="COLOR_PICKER_COLOR" VerticalAlignment="Center" />
                                     <colorPicker:PortableColorPicker Grid.Row="0" Grid.Column="1" Width="50"
                                                                      Height="20" EnableGradientsTab="False"
                                                                      UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=OneWay}"
                                                                      HintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintColor, Mode=OneWay}"
                                                                      ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
-                                    <Label Grid.Row="1" Grid.Column="0" Content="Offset" VerticalAlignment="Center" />
+                                    <Label Grid.Row="1" Grid.Column="0" localization:Translator.Key="COLOR_PICKER_OFFSET" VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
                                              Theme="{DynamicResource ColorPickerTextBox}"
                                              VerticalAlignment="Center" Width="50"
@@ -132,7 +133,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Label Content="Start X:" VerticalAlignment="Center" />
+                                        <Label localization:Translator.Key="COLOR_PICKER_START_X" VerticalAlignment="Center" />
                                         <TextBox Grid.Row="0" Grid.Column="1"
                                                  Theme="{DynamicResource ColorPickerTextBox}"
                                                  VerticalAlignment="Center" Width="50"
@@ -141,7 +142,7 @@
                                                 <behaviors:TextBoxFocusBehavior />
                                             </Interaction.Behaviors>
                                         </TextBox>
-                                        <Label Grid.Row="0" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <Label Grid.Row="0" Grid.Column="2" localization:Translator.Key="COLOR_PICKER_START_Y" VerticalAlignment="Center" />
                                         <TextBox Grid.Row="0" Grid.Column="3"
                                                  Theme="{DynamicResource ColorPickerTextBox}"
                                                  Width="50"
@@ -151,7 +152,7 @@
                                                 <behaviors:TextBoxFocusBehavior />
                                             </Interaction.Behaviors>
                                         </TextBox>
-                                        <Label Grid.Row="1" Grid.Column="0" Content="End X:" VerticalAlignment="Center" />
+                                        <Label Grid.Row="1" Grid.Column="0" localization:Translator.Key="COLOR_PICKER_END_X" VerticalAlignment="Center" />
                                         <TextBox Grid.Row="1" Grid.Column="1"
                                                  Theme="{DynamicResource ColorPickerTextBox}"
                                                  VerticalAlignment="Center" Width="50"
@@ -160,7 +161,7 @@
                                                 <behaviors:TextBoxFocusBehavior />
                                             </Interaction.Behaviors>
                                         </TextBox>
-                                        <Label Grid.Row="1" Grid.Column="2" Content="Y:" VerticalAlignment="Center" />
+                                        <Label Grid.Row="1" Grid.Column="2" localization:Translator.Key="COLOR_PICKER_END_Y" VerticalAlignment="Center" />
                                         <TextBox Grid.Row="1" Grid.Column="3"
                                                  Theme="{DynamicResource ColorPickerTextBox}" Width="50"
                                                  VerticalAlignment="Center"

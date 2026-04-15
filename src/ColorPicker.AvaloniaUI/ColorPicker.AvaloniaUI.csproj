@@ -36,6 +36,7 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\PixiEditor.UI.Common\PixiEditor.UI.Common.csproj" />
         <ProjectReference Include="..\ColorPicker.Models\ColorPicker.Models.csproj" />
     </ItemGroup>
 
