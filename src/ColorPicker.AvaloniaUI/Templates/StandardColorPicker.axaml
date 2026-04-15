@@ -96,6 +96,8 @@
                                     <Label Grid.Row="0" Grid.Column="0" Content="Color" VerticalAlignment="Center" />
                                     <colorPicker:PortableColorPicker Grid.Row="0" Grid.Column="1" Width="50"
                                                                      Height="20" EnableGradientsTab="False"
+                                                                     UseHintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UseHintColor, Mode=OneWay}"
+                                                                     HintColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintColor, Mode=OneWay}"
                                                                      ColorState="{Binding ElementName=GradientBar, Path=SelectedStopState, Mode=TwoWay}" />
                                     <Label Grid.Row="1" Grid.Column="0" Content="Offset" VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
