@@ -10,7 +10,7 @@
                             <Image Source="/Images/CircularHueGradient.png" Stretch="Fill"
                                    IsHitTestVisible="False">
                                 <Image.OpacityMask>
-                                    <RadialGradientBrush GradientOrigin="50%,50%" Center="50%, 50%" Radius="0.5">
+                                    <RadialGradientBrush GradientOrigin="50%,50%" Center="50%, 50%" RadiusX="0.5" RadiusY="0.5">
                                         <RadialGradientBrush.GradientStops>
                                             <GradientStop Color="Transparent" Offset="0" />
                                             <GradientStop Color="Transparent" Offset="0.839" />

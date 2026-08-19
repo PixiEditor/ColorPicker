@@ -89,7 +89,7 @@
                                     <ComboBoxItem localization:Translator.Key="COLOR_PICKER_GRADIENT_RADIAL"  />
                                     <ComboBoxItem localization:Translator.Key="COLOR_PICKER_GRADIENT_CONICAL"  />
                                 </ComboBox>
-                                <colorPicker:GradientBar Name="GradientBar"
+                                <colorPicker:GradientBar x:Name="GradientBar"
                                                          GradientStops="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                          GradientState="{Binding GradientState, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
@@ -120,7 +120,7 @@
                                                                         StartPointY="{Binding NotifyableGradient.LinearStartPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                                         EndPointX="{Binding NotifyableGradient.LinearEndPointX, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                                         EndPointY="{Binding NotifyableGradient.LinearEndPointY, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                                        StartGradientStop="{Binding GradientBrush.GradientStops[0], RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        StartGradientStop="{ReflectionBinding GradientBrush.GradientStops[0], RelativeSource={RelativeSource TemplatedParent}}"
                                                                         EndGradientStop="{Binding GradientBrush.GradientStops, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource LastItemOfConverter}}" />
                                     <Grid HorizontalAlignment="Center">
                                         <Grid.ColumnDefinitions>

@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:colorPicker="clr-namespace:ColorPicker"
                     xmlns:converters="clr-namespace:ColorPicker.Converters"
-                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:models="clr-namespace:ColorPicker.Models;assembly=ColorPicker.Models">
     <ControlTheme TargetType="colorPicker:GradientBar" x:Key="{x:Type colorPicker:GradientBar}">
         <ControlTheme.Resources>
@@ -49,7 +48,7 @@
                                 <ControlTheme TargetType="ContentPresenter">
                                     <Setter Property="Margin">
                                         <MultiBinding Converter="{StaticResource OffsetToMarginConverter}">
-                                            <Binding Path="Offset" />
+                                            <Binding Path="Offset" RelativeSource="{RelativeSource AncestorType=GradientStop}" />
                                             <Binding Path="Bounds.Width"
                                                      RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
                                         </MultiBinding>

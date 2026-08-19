@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0</TargetFrameworks>
+        <TargetFrameworks>net10.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -32,7 +32,7 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="12.1.1-cibuild0004425-alpha" />
-      <PackageReference Include="Xaml.Behaviors" Version="11.3.6.5" />
+      <PackageReference Include="Xaml.Behaviors" Version="12.0.5" />
     </ItemGroup>
 
     <ItemGroup>
@@ -42,12 +42,6 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
 
     <ItemGroup>
         <AvaloniaResource Include="Images\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="Templates\SimpleColorPickerTheme.axaml.cs">
-            <DependentUpon>ColorPickerTheme.axaml</DependentUpon>
-        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -69,11 +63,5 @@ Originally developed for PixiEditor: https://github.com/PixiEditor/PixiEditor.</
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Avalonia.Base">
-        <HintPath>..\..\..\..\.nuget\packages\avalonia\11.0.5\ref\net6.0\Avalonia.Base.dll</HintPath>
-      </Reference>
     </ItemGroup>
 </Project>
