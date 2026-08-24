@@ -47,8 +47,8 @@
                             <ItemsControl.ItemContainerTheme>
                                 <ControlTheme TargetType="ContentPresenter">
                                     <Setter Property="Margin">
-                                        <MultiBinding Converter="{StaticResource OffsetToMarginConverter}">
-                                            <Binding Path="Offset" RelativeSource="{RelativeSource AncestorType=GradientStop}" />
+                                        <MultiBinding Converter="{StaticResource OffsetToMarginConverter}" x:DataType="GradientStop">
+                                            <Binding Path="Offset" />
                                             <Binding Path="Bounds.Width"
                                                      RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
                                         </MultiBinding>
