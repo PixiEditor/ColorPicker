@@ -72,18 +72,17 @@ public class TextBoxFocusBehavior : Behavior<TextBox>
 
     private void RemoveFocus()
     {
-        var focusManager = TopLevel.GetTopLevel(AssociatedObject).FocusManager;
+        var focusManager = TopLevel.GetTopLevel(AssociatedObject)?.FocusManager;
+        if (focusManager == null) return;
+
         var current = focusManager.GetFocusedElement();
         if (current != null)
         {
-            //TODO: Find non obsolete way to do this
-            var next = KeyboardNavigationHandler.GetNext(AssociatedObject, NavigationDirection.Next);
-            next?.Focus(NavigationMethod.Tab);
+            focusManager.TryMoveFocus(NavigationDirection.Next);
         }
     }
 
-    private void AssociatedObjectGotKeyboardFocus(
-        object sender, GotFocusEventArgs e)
+    private void AssociatedObjectGotKeyboardFocus(object sender, FocusChangedEventArgs e)
     {
         if (SelectOnMouseClick || e.NavigationMethod == NavigationMethod.Tab)
         {
